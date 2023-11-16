@@ -1,9 +1,10 @@
 import './App.css';
+import Quiz from './components/Quiz';
 
 export default function App() {
   return (
     <div className="App">
-      Hello :-)
+      <Quiz></Quiz>
     </div>
   );
 }
