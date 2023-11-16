@@ -1,1 +1,3 @@
-# quiz_uxfuerki_ba
+# Bachelorarbeit
+
+## Quiz-Anwendung im Kontext gemeinwohlorientier KI
