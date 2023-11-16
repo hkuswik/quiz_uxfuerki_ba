@@ -1,3 +1,3 @@
 # Bachelorarbeit
 
-## Quiz-Anwendung im Kontext gemeinwohlorientier KI
+### Quiz-Anwendung im Kontext gemeinwohlorientierter KI
