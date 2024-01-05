@@ -14,11 +14,12 @@ const pathGraph = {
 
 function Quiz() {
     const [currentCircle, setCurrentCircle] = useState('start');
+    const [completedCircles, setCompletedCircles] = useState([]);
+    const [selectedQuestion, setSelectedQuestion] = useState(null);
     const [completedQuestionsIDs, setCompletedQuestionsIDs] = useState([]);
     const [easyQuestions, setEasyQuestions] = useState([]);
     const [mediumQuestions, setMediumQuestions] = useState([]);
     const [hardQuestions, setHardQuestions] = useState([]);
-    const [selectedQuestion, setSelectedQuestion] = useState(null);
 
     useEffect(() => {
 
@@ -50,6 +51,7 @@ function Quiz() {
         // is the quiz quiz finished?
         if (circle === 'goal') {
             // TODO: what happens when you win
+            setCurrentCircle(circle);
             console.log('Congratulations, you won !!! :)');
             return;
         }
@@ -69,31 +71,84 @@ function Quiz() {
             switch (pathGraph[circle].difficulty) {
                 case 'easy':
                     setEasyQuestions(questions);
+                    break;
                 case 'medium':
                     setMediumQuestions(questions);
+                    break;
                 case 'hard':
                     setHardQuestions(questions);
+                    break;
+                default:
+                    console.log('some mistake by setting difficulty questions');
             }
 
             // TODO: what happens in question depending on type
             switch (selected.type) {
                 case 'question':
                     console.log('question: ' + selected.question);
-                case 'matching':
-                    console.log('matching: ' + selected.question);
-                case 'sorting':
-                    console.log('sorting: ' + selected.question);
+                    break;
+                case 'match':
+                    console.log('match: ' + selected.question);
+                    break;
+                case 'sort':
+                    console.log('sort: ' + selected.question);
+                    break;
+                default:
+                    console.log('some mistake by selecting question type');
             }
+
+            /* // TODO: what happens in question depending on type
+            if (selected.type === 'question') {
+                console.log('question: ' + selected.question);
+            } else if (selected.type === 'matching')
+                console.log('matching: ' + selected.question);
+            else {
+                console.log('sorting: ' + selected.question);
+            } */
+
         } else {
             // TODO: what happens when question pool of one difficult is empty
             console.log('No more questions of difficulty: ', pathGraph[circle].difficulty);
         }
 
+        setCompletedCircles([...completedCircles, currentCircle]); // save which circle was walked
         setCurrentCircle(circle);
     }
 
+    function isCirclePossible(circle, current) {
+        // check if circle has already been completed
+        if (completedCircles.includes(circle)) {
+            console.log('already completed');
+            return false;
+        }
+
+        console.log('current: ', current);
+        console.log('circle: ', circle);
+
+        // if step is current step, it shall also remain coloured
+        if(circle === current) {
+            console.log('circle = current');
+            return true;
+        }
+
+        // if step is reachable from current step, it is directly reachable
+        if(pathGraph[current].reachable.includes(circle)) {
+            console.log('directly reachable');
+            return true;
+        }
+        
+        // check recursively if circle is still reachable from other reachable steps
+        for(const nextCircle of pathGraph[current].reachable) {
+            if(isCirclePossible(circle, nextCircle)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     const renderBoard = () => {
-        const circleColors = { easy: '#77d1cb', medium: '#8377d1', hard: '#d177b3', goal: 'gold', completed: '#817c9c', unreachable: '#d4d2dd' };
+        const circleColors = { easy: '#77d1cb', medium: '#8377d1', hard: '#d177b3', goal: 'gold', unreachable: '#b7b4c7' };
 
         const handleCircleHover = (event) => {
             event.target.parentNode.querySelector('circle').style.opacity = '80%';
@@ -107,19 +162,20 @@ function Quiz() {
 
         return circles.map((circle) => {
             const isReachable = pathGraph[currentCircle].reachable.includes(circle);
-            const fillColor = isReachable ? circleColors[pathGraph[circle].difficulty] : circleColors.unreachable;
+            const isStillPossible = isCirclePossible(circle, currentCircle);
+            const fillColor = isStillPossible ? circleColors[pathGraph[circle].difficulty] : circleColors.unreachable;
 
             return (
                 <g key={circle} onClick={() => handleCircleClick(circle)}>
                     <circle
-                        key={circle}
                         cx={pathGraph[circle].x}
                         cy={pathGraph[circle].y}
                         r={circle === 'start' || circle === 'goal' ? '6%' : '3.5%'}
                         fill={fillColor}
-                        stroke={circle === currentCircle ? 'white' : 'none'}
-                        strokeWidth={circle === currentCircle ? '6px' : 'none'}
-                        style={{ cursor: 'pointer' }}
+                        stroke={circle === currentCircle ? '#EE7B30' : 'none'}
+                        strokeWidth={circle === currentCircle ? '4px' : 'none'}
+                        style={{ cursor: isReachable ? 'pointer' : 'default' }}
+                        className='circle'
                         onMouseOver={handleCircleHover}
                         onMouseLeave={handleCircleLeave}
                     />
@@ -128,9 +184,9 @@ function Quiz() {
                         y={pathGraph[circle].y}
                         dy="5px"
                         textAnchor="middle" // text horizontally
-                        fill="black"
+                        fill="#21202b"
                         fontSize="12px"
-                        style={{ cursor: 'pointer' }}
+                        style={{ cursor: isReachable ? 'pointer' : 'default' }}
                         onMouseOver={handleCircleHover}
                         onMouseLeave={handleCircleLeave}
                     >
@@ -144,7 +200,7 @@ function Quiz() {
     return (
         <div className='Quiz'>
             <Header></Header>
-            <svg style={svgBoard} width="1300px" height="800px">
+            <svg style={svgBoard} width="800px" height="800px">
                 {renderBoard()}
             </svg>
             <p>maybe Footer later</p>
