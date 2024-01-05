@@ -1,20 +1,52 @@
+import logo from '../data/images/wegweiser_flat.png';
+import allQuestionsBtn from '../data/images/AlleFragen.png';
+
 function Header() {
 
     return (
-        <div className='Header'>
-            <p>Header space</p>
+        <div style={header_style}>
+            <div className='flex row justify-around'>
+                <h1 className='text-white text-6xl font-normal self-center'>Das</h1>
+                <div className='img-container h-24 cursor-pointer'>
+                    <img src={logo} alt="Wegweiser.UX-für-KI Logo" />
+                </div>
+                <h1 className='text-white text-6xl font-normal self-center'>Quiz</h1>
+            </div>
+            <div className='flex row justify-around'>
+                <h3 className='text-white pr-2'>Fortschritt:</h3>
+                <h3>long progressbar</h3>
+            </div>
+            <div className='img-container h-20 border-dashed border-white border-2 rounded-lg hover:border-solid hover:cursor-pointer'>
+                <img src={allQuestionsBtn} alt="Alle Fragen Button" />
+            </div>
+            {/* <p>Header space</p>
             <div style={joker_group}>
                 <p>Joker:</p>
                 <div style={joker}></div>
                 <div style={joker}></div>
                 <div style={joker}></div>
                 <div style={joker}></div>
-            </div>
+            </div> */}
         </div>
     )
 }
 
-const joker_group = {
+const header_style = {
+    position: 'fixed',
+    top: '0',
+    right: '0',
+    width: '100%',
+    maxWidth: '1490px',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: '125px',
+    padding: '10px',
+    backgroundColor: '#2D2C36',
+    alignItems: 'center'
+}
+
+/* const joker_group = {
     display: 'flex',
     flexDirection: 'row'
 }
@@ -26,6 +58,6 @@ const joker = {
     height: '30px',
     marginLeft: '10px',
     marginTop: '15px'
-}
+} */
 
 export default Header;

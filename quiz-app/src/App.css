@@ -1,48 +1,30 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,,600,700,800&subset=latin-ext,vietnamese');
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.App {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #21202b;
+/* Typo */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,,600,700,800&subset=latin-ext,vietnamese');
+@import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates:400,500,600,700,800&subset=latin-ext,vietnamese');
+
+* {
   font-size: calc(10px + 1vmin);
   font-family: 'Montserrat';
   font-weight: 300;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  font-family: 'Montserrat Alternates';
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* General */
+.App {
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  width: 100%;
+  height: 100%;
+  background-color: #21202b;
+  justify-content: right;
 }

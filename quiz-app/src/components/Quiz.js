@@ -48,7 +48,7 @@ function Quiz() {
             return;
         }
 
-        // is the quiz quiz finished?
+        // is the quiz finished?
         if (circle === 'goal') {
             // TODO: what happens when you win
             setCurrentCircle(circle);
@@ -203,7 +203,6 @@ function Quiz() {
             <svg style={svgBoard} width="800px" height="800px">
                 {renderBoard()}
             </svg>
-            <p>maybe Footer later</p>
         </div>
     )
 }
