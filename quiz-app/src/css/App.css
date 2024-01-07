@@ -1,7 +1,7 @@
 /* Tailwind */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 /* Typo */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,,600,700,800&subset=latin-ext,vietnamese');

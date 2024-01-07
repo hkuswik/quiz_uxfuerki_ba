@@ -2,7 +2,7 @@ import QuestionExercise from "./QuestionExercise";
 import MatchingExercise from "./MatchingExercise";
 import SortingExercise from "./SortingExercise";
 
-const Popup = ({ onClose, exercise }) => {
+const Popup = ({ onClose, exercise, completedTopics }) => {
 
     const renderPopupContent = (exercise) => {
         switch (exercise.type) {
@@ -17,11 +17,27 @@ const Popup = ({ onClose, exercise }) => {
         };
     };
 
+    const whichTopic = (completed) => {
+        switch (completed) {
+            case 0:
+                return 'Topic 1';
+            case 1:
+                return 'Topic 2';
+            case 2:
+                return 'Topic 3';
+            case 3:
+                return 'all done! :)';
+            default:
+                return 'Error wrong Topic completed number...';
+        }
+    }
+
     return (
         <div style={style} onClick={onClose}>
             <div style={popupContentStyle}>
                 {renderPopupContent(exercise)}
                 <button className="bg-pink-500" onClick={onClose}>Close</button>
+                <p>{completedTopics} so {whichTopic(completedTopics)}</p>
             </div>
         </div>
     )

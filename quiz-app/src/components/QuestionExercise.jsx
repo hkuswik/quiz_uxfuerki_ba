@@ -3,6 +3,7 @@ const QuestionExercise = ({ exercise }) => {
     return (
         <div className='Question'>
             <p>{exercise.question}</p>
+            <p>{exercise.difficulty}</p>
             <div className='Answer'></div>
             <div className='Answer'></div>
             <div className='Answer'></div>
