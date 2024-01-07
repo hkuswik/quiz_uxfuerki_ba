@@ -1,22 +1,36 @@
+import {useState} from 'react';
 import logo from '../data/images/wegweiser_flat.png';
 import allQuestionsBtn from '../data/images/AlleFragen.png';
+import Popup from './Popup';
 
 function Header() {
+    const [showPopup, setShowPopup] = useState(false);
+
+    const handleBtnClick = () => {
+
+        console.log('Alle Fragen Button wurde geklickt!');
+        setShowPopup(true);
+    };
+
+    const handleClosePopup = () => {
+        setShowPopup(false);
+    };
 
     return (
         <div style={header_style}>
             <div className='flex row justify-around'>
-                <h1 className='text-white text-6xl font-normal self-center'>Das</h1>
+                <h1>Das</h1>
                 <div className='img-container h-24 cursor-pointer'>
                     <img src={logo} alt="Wegweiser.UX-für-KI Logo" />
                 </div>
-                <h1 className='text-white text-6xl font-normal self-center'>Quiz</h1>
+                <h1>Quiz</h1>
             </div>
             <div className='flex row justify-around'>
-                <h3 className='text-white pr-2'>Fortschritt:</h3>
-                <h3>long progressbar</h3>
+                <p className='text-white pr-2'>Fortschritt:</p>
+                <p>long progressbar</p>
             </div>
-            <div className='img-container h-20 border-dashed border-white border-2 rounded-lg hover:border-solid hover:cursor-pointer'>
+            <div onClick={handleBtnClick}
+                className='img-container h-20 border-dashed border-white border-2 rounded-lg hover:border-solid hover:cursor-pointer'>
                 <img src={allQuestionsBtn} alt="Alle Fragen Button" />
             </div>
             {/* <p>Header space</p>
@@ -27,6 +41,8 @@ function Header() {
                 <div style={joker}></div>
                 <div style={joker}></div>
             </div> */}
+
+            {showPopup && <Popup onClose={handleClosePopup}/>}
         </div>
     )
 }

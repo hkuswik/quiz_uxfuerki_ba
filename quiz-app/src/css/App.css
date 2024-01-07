@@ -15,6 +15,15 @@
 
 h1 {
   font-family: 'Montserrat Alternates';
+  color: white;
+  font-size: calc(60px + 1vmin);
+  font-weight: 400;
+  align-self: center;
+}
+
+text {
+  font-size: calc(4px + 1vmin);
+  font-weight: 600;
 }
 
 /* General */

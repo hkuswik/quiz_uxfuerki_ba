@@ -1,7 +1,8 @@
-function Question() {
+const QuestionExercise = ({ exercise }) => {
 
-    return(
+    return (
         <div className='Question'>
+            <p>{exercise.question}</p>
             <div className='Answer'></div>
             <div className='Answer'></div>
             <div className='Answer'></div>
@@ -35,4 +36,4 @@ function Question() {
     }
 } */
 
-export default Question;
+export default QuestionExercise;
