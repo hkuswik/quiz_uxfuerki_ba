@@ -21,11 +21,13 @@ const Popup = ({ onClose, content, completedTopics }) => {
                 case 'feedback':
                     return <div> feedback, real topic: {completedTopics}</div>;
                 case 'goal':
-                    return <div>goal, real topic: {completedTopics+1}</div>;
+                    return <div>goal, real topic: {completedTopics + 1}</div>;
                 case 'start':
                     return <div>start</div>;
-                case 'szenario':
-                    return <div>szenarioo, numero {completedTopics+1}</div>;
+                case 'szenario1':
+                case 'szenario2':
+                case 'szenario3':
+                    return <div>szenarioo, numero {completedTopics + 1}</div>;
                 default:
                     return <div> error non-exercise type </div>;
             }
