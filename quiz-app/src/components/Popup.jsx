@@ -2,19 +2,34 @@ import QuestionExercise from "./QuestionExercise";
 import MatchingExercise from "./MatchingExercise";
 import SortingExercise from "./SortingExercise";
 
-const Popup = ({ onClose, exercise, completedTopics }) => {
+const Popup = ({ onClose, content, completedTopics }) => {
 
-    const renderPopupContent = (exercise) => {
-        switch (exercise.type) {
-            case 'question':
-                return <QuestionExercise exercise={exercise} />;
-            case 'match':
-                return <MatchingExercise exercise={exercise} />;
-            case 'sort':
-                return <SortingExercise exercise={exercise} />;
-            default:
-                return <div> something else </div>;
-        };
+    const renderPopupContent = (content) => {
+        if (content.type === 'question' || content.type === 'match' || content.type === 'sort') {
+            switch (content.type) {
+                case 'question':
+                    return <QuestionExercise exercise={content} />;
+                case 'match':
+                    return <MatchingExercise exercise={content} />;
+                case 'sort':
+                    return <SortingExercise exercise={content} />;
+                default:
+                    return <div> error exercise type </div>;
+            };
+        } else {
+            switch (content) {
+                case 'feedback':
+                    return <div> feedback, real topic: {completedTopics}</div>;
+                case 'goal':
+                    return <div>goal, real topic: {completedTopics+1}</div>;
+                case 'start':
+                    return <div>start</div>;
+                case 'szenario':
+                    return <div>szenarioo, numero {completedTopics+1}</div>;
+                default:
+                    return <div> error non-exercise type </div>;
+            }
+        }
     };
 
     const whichTopic = (completed) => {
@@ -35,9 +50,9 @@ const Popup = ({ onClose, exercise, completedTopics }) => {
     return (
         <div style={style} onClick={onClose}>
             <div style={popupContentStyle}>
-                {renderPopupContent(exercise)}
+                {renderPopupContent(content)}
                 <button className="bg-pink-500" onClick={onClose}>Close</button>
-                <p>{completedTopics} so {whichTopic(completedTopics)}</p>
+                <p>{completedTopics} also {whichTopic(completedTopics)}</p>
             </div>
         </div>
     )
