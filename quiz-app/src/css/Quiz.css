@@ -16,9 +16,17 @@ img {
     height: auto;
 }
 
-.img-container  {
+.img-container {
     width: auto;
     overflow: hidden;
+}
+
+.circle-active-hover {
+    stroke-dasharray: none;
+}
+
+.circle-completed-hover {
+    opacity: 80%;
 }
 
 .close-btn {

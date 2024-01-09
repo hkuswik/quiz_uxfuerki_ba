@@ -42,12 +42,12 @@ const Header = ({ onReset }) => {
 const header_style = {
     position: 'fixed',
     top: '0',
-    right: '0',
     width: '100%',
     maxWidth: '1490px',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    justifySelf: 'center',
     height: '125px',
     padding: '10px',
     backgroundColor: '#2D2C36',

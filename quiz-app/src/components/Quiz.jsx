@@ -1,5 +1,5 @@
 import '../css/Quiz.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import quizData from '../data/questions_onlyUX';
 import feedbackImg from '../data/images/feedback.png';
 import goalImg from '../data/images/feedback_ende.png';
@@ -33,6 +33,7 @@ const Quiz = () => {
     const [lastClicked, setLastClicked] = useState(null);
     const [possibleCircles, setPossibleCircles] = useState([]);
     const [completedCircles, setCompletedCircles] = useState([]);
+    const [hoveredCircle, setHoveredCircle] = useState(null);
 
     const [completedTopics, setCompletedTopics] = useState(0);
     const [szenariosDone, setSzenariosDone] = useState(0);
@@ -66,8 +67,6 @@ const Quiz = () => {
     const handleCircleClick = (circle) => {
         console.log('circle clicked: ', circle);
         console.log('active: ', activeCircle);
-        console.log('possibleCircles: ', possibleCircles);
-        console.log('completedCircles', completedCircles);
 
         // check if clicked circle is currently possible
         if (!isCircleReachable(circle)) {
@@ -134,7 +133,7 @@ const Quiz = () => {
     const handleUpdate = () => {
         // TODO: change appearance depending on true/false answer
         console.log('was answer correct?: ', correctAnswer);
-        
+
         switch (state) {
             case 'DEFAULT':
                 // check what type of circle was clicked
@@ -176,8 +175,8 @@ const Quiz = () => {
         }
 
         // update completed circles
-        !(completedCircles.includes(lastClicked)) && setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
-    
+        setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
+
         setShowPopup(false);
     }
 
@@ -201,20 +200,13 @@ const Quiz = () => {
             szenario1: 'Vertrauen', szenario2: 'Diskriminierung', szenario3: 'Autonomie', start: 'Start'
         }
 
-        const handleCircleHover = (event, circle) => {
-            if (circle === activeCircle) {
-                event.target.parentNode.querySelector('ellipse').style.strokeDasharray = 'none';
-            } else if (completedCircles.includes(circle)) {
-                event.target.parentNode.querySelector('ellipse').style.opacity = '80%';
-            }
+        const handleCircleHover = (circle) => {
+            console.log('hover: ', circle);
+            setHoveredCircle(circle);
         };
 
-        const handleCircleLeave = (event, circle) => {
-            if (circle === activeCircle) {
-                event.target.parentNode.querySelector('ellipse').style.strokeDasharray = '6';
-            } else if (completedCircles.includes(circle)) {
-                event.target.parentNode.querySelector('ellipse').style.opacity = '100%';
-            }
+        const handleCircleLeave = () => {
+            setHoveredCircle(null);
         };
 
         const circles = Object.keys(pathGraph);
@@ -222,6 +214,8 @@ const Quiz = () => {
         return circles.map((circle) => {
             const isReachable = isCircleReachable(circle);
             const isCompleted = completedCircles.includes(circle);
+            const isActiveHovered = circle === activeCircle && circle === hoveredCircle;
+            const isCompletedHovered = isCompleted && circle === hoveredCircle;
 
             const topic = pathGraph[circle].topic;
             const isExerciseOrSzenario = topic !== 'start' && topic !== 'goal' && topic !== 'feedback';
@@ -233,20 +227,19 @@ const Quiz = () => {
             const text = circleTexts[topic];
 
             return (
-                <g key={circle} onClick={() => handleCircleClick(circle)}>
-                    <ellipse
+                <g key={circle} onClick={() => handleCircleClick(circle)}
+                    onMouseOver={() => handleCircleHover(circle)} onMouseLeave={handleCircleLeave}
+                >
+                    <circle
                         cx={pathGraph[circle].x}
                         cy={pathGraph[circle].y}
-                        rx={isSzenario ? '8%' : '4%'}
-                        ry={isSzenario ? '5%' : '4%'}
+                        r={isSzenario ? '69' : '35'}
                         fill={isExerciseOrSzenario ? isCompleted ? color : '#21202b' : '#21202b'}
                         stroke={isReachable ? 'white' : color}
+                        className={`${isActiveHovered ? 'circle-active-hover' : ''} ${isCompletedHovered ? 'circle-completed-hover' : ''}`}
                         strokeWidth='2px'
                         strokeDasharray={isCompleted ? 'none' : '6'}
                         style={{ cursor: isReachable ? 'pointer' : 'default' }}
-                        className='circle'
-                        onMouseOver={(event) => handleCircleHover(event, circle)}
-                        onMouseLeave={(event) => handleCircleLeave(event, circle)}
                     />
                     <text
                         x={pathGraph[circle].x}
@@ -254,10 +247,8 @@ const Quiz = () => {
                         dy="5px"
                         textAnchor="middle" // text horizontally
                         fill="white"
-                        fontWeight={'400'}
+                        fontWeight='400'
                         style={{ cursor: isReachable ? 'pointer' : 'default' }}
-                        onMouseOver={(event) => handleCircleHover(event, circle)}
-                        onMouseLeave={(event) => handleCircleLeave(event, circle)}
                     >
                         {text}
                     </text>
@@ -270,8 +261,6 @@ const Quiz = () => {
                             fill='white'
                             className='sm'
                             style={{ cursor: isReachable ? 'pointer' : 'default' }}
-                            onMouseOver={(event) => handleCircleHover(event, circle)}
-                            onMouseLeave={(event) => handleCircleLeave(event, circle)}
                         >
                             Szenario:
                         </text>
@@ -283,8 +272,6 @@ const Quiz = () => {
                             href={feedbackImg}
                             height='100'
                             style={{ cursor: isReachable ? 'pointer' : 'default' }}
-                            onMouseOver={(event) => handleCircleHover(event, circle)}
-                            onMouseLeave={(event) => handleCircleLeave(event, circle)}
                         />
                     }
                     {isGoal &&
@@ -294,8 +281,6 @@ const Quiz = () => {
                             href={goalImg}
                             height='120'
                             style={{ cursor: isReachable ? 'pointer' : 'default' }}
-                            onMouseOver={(event) => handleCircleHover(event, circle)}
-                            onMouseLeave={(event) => handleCircleLeave(event, circle)}
                         />
                     }
                 </g>
@@ -306,7 +291,7 @@ const Quiz = () => {
     return (
         <div className='Quiz'>
             <Header onReset={handleReset}></Header>
-            <svg className='flex justify-self-center' width="800px" height="800px">
+            <svg className='flex justify-self-center' width="1000px" height="800px">
                 {renderBoard()}
             </svg>
             {showPopup &&
