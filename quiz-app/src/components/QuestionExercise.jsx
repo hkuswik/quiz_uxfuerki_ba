@@ -1,9 +1,14 @@
-const QuestionExercise = ({ exercise }) => {
+const QuestionExercise = ({ exercise, onAnswer }) => {
+
+    const handleAnswerClick = (selected) => {
+        const isCorrect = false;
+        onAnswer(isCorrect);
+    }
 
     return (
         <div className='Question'>
             <p>{exercise.question}</p>
-            <p>{exercise.difficulty}</p>
+            <p onClick={handleAnswerClick}>{exercise.difficulty}</p>
             <div className='Answer'></div>
             <div className='Answer'></div>
             <div className='Answer'></div>

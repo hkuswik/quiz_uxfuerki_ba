@@ -1,14 +1,40 @@
+import { useState, useEffect } from 'react';
 import QuestionExercise from "./QuestionExercise";
 import MatchingExercise from "./MatchingExercise";
 import SortingExercise from "./SortingExercise";
 
-const Popup = ({ onClose, content, completedTopics }) => {
+const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }) => {
+    const [bgColor, setBgColor] = useState('#F6F5FC');
+    const isSzenario = (content === 'szenario1' || content === 'szenario2' || content === 'szenario3');
+    const isSzenarioActive = (active === 'szenario1' || active === 'szenario2' || active === 'szenario3');
+    const showUpdateBtn = !isSzenario || (isSzenario && isSzenarioActive);
+    console.log(isSzenario, ' active? ', isSzenarioActive);
+
+    useEffect(() => {
+        switch (content.difficulty) {
+            case 'easy':
+                setBgColor('#E8BBD9');
+                break;
+            case 'medium':
+                setBgColor('#C1BBE8');
+                break;
+            case 'hard':
+                setBgColor('#BBE8E5');
+                break;
+            default:
+                setBgColor('#F6F5FC');
+        }
+    }, [content])
+
+    /* const handleAnswer = (isCorrect) => {
+        console.log('Question was answered correctly: ', isCorrect);
+    } */
 
     const renderPopupContent = (content) => {
         if (content.type === 'question' || content.type === 'match' || content.type === 'sort') {
             switch (content.type) {
                 case 'question':
-                    return <QuestionExercise exercise={content} />;
+                    return <QuestionExercise exercise={content} onAnswer={onAnswer} />;
                 case 'match':
                     return <MatchingExercise exercise={content} />;
                 case 'sort':
@@ -24,6 +50,7 @@ const Popup = ({ onClose, content, completedTopics }) => {
                     return <div>goal, real topic: {completedTopics + 1}</div>;
                 case 'start':
                     return <div>start</div>;
+                // TODO: different szenario design if szenario is/isn't active! (no continue button)
                 case 'szenario1':
                 case 'szenario2':
                 case 'szenario3':
@@ -49,18 +76,26 @@ const Popup = ({ onClose, content, completedTopics }) => {
         }
     }
 
+    const handlePopupClick = (event) => {
+        // prevent popup from closing when popup itself is clicked
+        event.stopPropagation();
+    }
+
     return (
-        <div style={style} onClick={onClose}>
-            <div style={popupContentStyle}>
+        <div style={popupContainer} onClick={onClose}>
+            <div style={{ ...popupContent, background: bgColor }} onClick={handlePopupClick}>
+                <div className="flex row justify-end">
+                    <div onClick={onClose} className="close-btn">X</div>
+                </div>
                 {renderPopupContent(content)}
-                <button className="bg-pink-500" onClick={onClose}>Close</button>
                 <p>{completedTopics} also {whichTopic(completedTopics)}</p>
+                {showUpdateBtn && <div className='w-20 h-16 bg-pink-500' onClick={onUpdate}>Update!!!</div>}
             </div>
         </div>
     )
 };
 
-const style = {
+const popupContainer = {
     background: 'rgba(0, 0, 0, 0.5)',
     position: 'fixed',
     top: 0,
@@ -72,12 +107,13 @@ const style = {
     justifyContent: 'center'
 };
 
-const popupContentStyle = {
-    background: 'white',
+const popupContent = {
     padding: '20px',
     borderRadius: '8px',
-    maxWidth: '600px',
-    width: '100%',
+    width: '900px',
+    height: '700px',
+    display: 'flex',
+    flexDirection: 'column'
 };
 
 export default Popup;

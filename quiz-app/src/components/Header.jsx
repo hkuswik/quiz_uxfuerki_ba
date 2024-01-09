@@ -3,7 +3,7 @@ import logo from '../data/images/wegweiser_flat.png';
 import allQuestionsBtn from '../data/images/AlleFragen.png';
 import Popup from './Popup';
 
-function Header({ onReset }) {
+const Header = ({ onReset }) => {
     const [showPopup, setShowPopup] = useState(false);
 
     const handleBtnClick = () => {
@@ -33,14 +33,6 @@ function Header({ onReset }) {
                 className='img-container h-20 border-dashed border-white border-2 rounded-lg hover:border-solid hover:cursor-pointer'>
                 <img src={allQuestionsBtn} alt="Alle Fragen Button" />
             </div>
-            {/* <p>Header space</p>
-            <div style={joker_group}>
-                <p>Joker:</p>
-                <div style={joker}></div>
-                <div style={joker}></div>
-                <div style={joker}></div>
-                <div style={joker}></div>
-            </div> */}
 
             {showPopup && <Popup onClose={handleClosePopup} />}
         </div>
@@ -61,19 +53,5 @@ const header_style = {
     backgroundColor: '#2D2C36',
     alignItems: 'center'
 }
-
-/* const joker_group = {
-    display: 'flex',
-    flexDirection: 'row'
-}
-
-const joker = {
-    backgroundColor: '#d177b3',
-    borderRadius: '50px', //camelCase instead of kebab-case
-    width: '30px',
-    height: '30px',
-    marginLeft: '10px',
-    marginTop: '15px'
-} */
 
 export default Header;

@@ -11,25 +11,26 @@ const topic2 = 'medium';
 const topic3 = 'hard';
 
 const pathGraph = {
-    start: { reachable: 'szenario1', topic: 'start', x: '8%', y: '14%' },
-    szenario1: { reachable: 'circle1', topic: 'szenario1', x: '8%', y: '50%' },
-    circle1: { reachable: 'circle2', topic: topic1, x: '20%', y: '11%' },
-    circle2: { reachable: 'feedback1', topic: topic1, x: '30%', y: '11%' },
-    feedback1: { reachable: 'szenario2', topic: 'feedback', x: '200', y: '240' },
-    szenario2: { reachable: 'circle3', topic: 'szenario2', x: '30%', y: '50%' },
-    circle3: { reachable: 'circle4', topic: topic2, x: '40%', y: '13%' },
-    circle4: { reachable: 'feedback2', topic: topic2, x: '50%', y: '16%' },
-    feedback2: { reachable: 'szenario3', topic: 'feedback', x: '400', y: '240' },
-    szenario3: { reachable: 'circle5', topic: 'szenario3', x: '50%', y: '50%' },
-    circle5: { reachable: 'circle6', topic: topic3, x: '60%', y: '18%' },
-    circle6: { reachable: 'goal', topic: topic3, x: '70%', y: '20%' },
-    goal: { reachable: '', topic: 'goal', x: '650', y: '230' }
+    start: { next: 'szenario1', topic: 'start', x: '8%', y: '14%' },
+    szenario1: { next: 'circle1', topic: 'szenario1', x: '8%', y: '50%' },
+    circle1: { next: 'circle2', topic: topic1, x: '20%', y: '11%' },
+    circle2: { next: 'feedback1', topic: topic1, x: '30%', y: '11%' },
+    feedback1: { next: 'szenario2', topic: 'feedback', x: '200', y: '240' },
+    szenario2: { next: 'circle3', topic: 'szenario2', x: '30%', y: '50%' },
+    circle3: { next: 'circle4', topic: topic2, x: '40%', y: '13%' },
+    circle4: { next: 'feedback2', topic: topic2, x: '50%', y: '16%' },
+    feedback2: { next: 'szenario3', topic: 'feedback', x: '400', y: '240' },
+    szenario3: { next: 'circle5', topic: 'szenario3', x: '50%', y: '50%' },
+    circle5: { next: 'circle6', topic: topic3, x: '60%', y: '18%' },
+    circle6: { next: 'goal', topic: topic3, x: '70%', y: '20%' },
+    goal: { next: '', topic: 'goal', x: '650', y: '230' }
 };
 
-function Quiz() {
+const Quiz = () => {
     const [state, setState] = useState('DEFAULT');
 
     const [activeCircle, setActiveCircle] = useState('start');
+    const [lastClicked, setLastClicked] = useState(null);
     const [possibleCircles, setPossibleCircles] = useState([]);
     const [completedCircles, setCompletedCircles] = useState([]);
 
@@ -37,6 +38,8 @@ function Quiz() {
     const [szenariosDone, setSzenariosDone] = useState(0);
 
     const [currentContent, setCurrentContent] = useState(null);
+
+    const [correctAnswer, setCorrectAnswer] = useState(false);
 
     const [exercisesTopic1, setExercisesTopic1] = useState([]);
     const [exercisesTopic2, setExercisesTopic2] = useState([]);
@@ -72,62 +75,26 @@ function Quiz() {
             return;
         }
 
-        switch (state) {
-            case 'DEFAULT':
-                // check what type of circle was clicked
-                const topic = pathGraph[circle].topic;
-                const isExercise = (topic === topic1 || topic === topic2 || topic === topic3);
+        setLastClicked(circle);
 
-                // execute behaviour depending on what type of circle
-                if (isExercise) {
-                    handleExerciseBehaviour(circle, topic);
-                }
-                else {
-                    if (topic === 'goal') {
-                        setCompletedTopics(completedTopics + 1);
-                        setPossibleCircles(possibleCircles => [...possibleCircles, ...['circle1', 'circle3', 'circle5']]);
-                        setState('REENTER');
-                    } else if (topic === 'feedback') {
-                        console.log(`feedback circle -> topics: ${completedTopics}, now +1`);
-                        setActiveCircle(pathGraph[circle].reachable);
-                        setCompletedTopics(completedTopics + 1);
-                    } else if (topic.includes('szenario')) {
-                        if (activeCircle === circle) {
-                            setSzenariosDone(szenariosDone + 1);
-                            setActiveCircle(pathGraph[circle].reachable);
-                            !(possibleCircles.includes(circle)) && setPossibleCircles(possibleCircles => [...possibleCircles, circle]);
-                        }
-                    } else { //start
-                        console.log('start?');
-                        setActiveCircle(pathGraph[circle].reachable);
-                    }
-                    // save type of non-exercise circle to later choose correct popup
-                    setCurrentContent(topic);
-                }
+        const topic = pathGraph[circle].topic;
+        const isExercise = (topic === topic1 || topic === topic2 || topic === topic3);
 
-                // update completed circles
-                !(completedCircles.includes(circle)) && setCompletedCircles(completedCircles => [...completedCircles, circle]);
-
-                setShowPopup(true); // make popup visible
-
-                break;
-
-            case 'REENTER':
-                // TODO: how game changes after it was completed once
-                console.log('we enter the reenter case..');
-                break;
-
-            default:
-                console.log('some state problem oh no');
+        if (isExercise) {
+            handleExerciseBehaviour(circle, topic);
+        } else {
+            // save type of non-exercise circle to choose correct popup
+            setCurrentContent(topic);
         }
 
+        setShowPopup(true);
     }
 
     const isCircleReachable = (circle) => {
         return circle === activeCircle || possibleCircles.includes(circle)
     }
 
-    function handleExerciseBehaviour(circle, topic) {
+    const handleExerciseBehaviour = (circle, topic) => {
         // which topic pool to choose exercises from
         const exercises = (topic === topic1 ? exercisesTopic1 : topic === topic2 ? exercisesTopic2 : exercisesTopic3);
 
@@ -157,8 +124,61 @@ function Quiz() {
             // TODO: what happens when question pool of one difficulty is empty
             console.log('No more questions of topic: ', pathGraph[circle].topic);
         }
+    }
 
-        setActiveCircle(pathGraph[circle].reachable);
+    const handleAnswer = (isCorrect) => {
+        console.log('QUIZ! Answer is correct: ', isCorrect);
+        setCorrectAnswer(isCorrect);
+    }
+
+    const handleUpdate = () => {
+        // TODO: change appearance depending on true/false answer
+        console.log('was answer correct?: ', correctAnswer);
+        
+        switch (state) {
+            case 'DEFAULT':
+                // check what type of circle was clicked
+                const topic = pathGraph[lastClicked].topic;
+                const isExercise = (topic === topic1 || topic === topic2 || topic === topic3);
+
+                // execute behaviour depending on what type of circle
+                if (isExercise) {
+                    setActiveCircle(pathGraph[lastClicked].next);
+                }
+                else {
+                    if (topic === 'goal') {
+                        setCompletedTopics(completedTopics + 1);
+                        setPossibleCircles(possibleCircles => [...possibleCircles, ...['circle1', 'circle3', 'circle5']]);
+                        setState('REENTER');
+                    } else if (topic === 'feedback') {
+                        console.log(`feedback circle -> topics: ${completedTopics}, now +1`);
+                        setActiveCircle(pathGraph[lastClicked].next);
+                        setCompletedTopics(completedTopics + 1);
+                    } else if (topic.includes('szenario')) {
+                        setSzenariosDone(szenariosDone + 1);
+                        setActiveCircle(pathGraph[lastClicked].next);
+                        !(possibleCircles.includes(lastClicked)) && setPossibleCircles(possibleCircles => [...possibleCircles, lastClicked]);
+                    } else { //start
+                        console.log('start?');
+                        setActiveCircle(pathGraph[lastClicked].next);
+                    }
+                }
+
+                break;
+
+            case 'REENTER':
+                // TODO: how game changes after it was completed once
+                console.log('we enter the reenter case..');
+                break;
+
+            default:
+                console.log('some state problem oh no');
+        }
+
+        // update completed circles
+        !(completedCircles.includes(lastClicked)) && setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
+    
+        setShowPopup(false);
     }
 
     const handleClosePopup = () => {
@@ -174,7 +194,7 @@ function Quiz() {
         const circleColors = {
             easy: '#D177B3', medium: '#8377D1', hard: '#77D1CB',
             szenario1: '#D177B3', szenario2: '#8377D1', szenario3: '#77D1CB',
-            start: '#817C9C', goal: '#817C9C', feedback: '#817C9C', unreachable: '#54506A'
+            start: '#817C9C', goal: '#817C9C', feedback: '#817C9C'
         };
 
         const circleTexts = {
@@ -182,7 +202,6 @@ function Quiz() {
         }
 
         const handleCircleHover = (event, circle) => {
-            console.log('Parent Node:', event.target.parentNode);
             if (circle === activeCircle) {
                 event.target.parentNode.querySelector('ellipse').style.strokeDasharray = 'none';
             } else if (completedCircles.includes(circle)) {
@@ -290,7 +309,15 @@ function Quiz() {
             <svg className='flex justify-self-center' width="800px" height="800px">
                 {renderBoard()}
             </svg>
-            {showPopup && <Popup onClose={handleClosePopup} content={currentContent} completedTopics={completedTopics} />}
+            {showPopup &&
+                <Popup
+                    onClose={handleClosePopup}
+                    content={currentContent}
+                    active={activeCircle}
+                    completedTopics={completedTopics}
+                    onAnswer={handleAnswer}
+                    onUpdate={handleUpdate}
+                />}
         </div>
     )
 }
