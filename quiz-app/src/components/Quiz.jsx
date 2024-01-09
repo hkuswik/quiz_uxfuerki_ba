@@ -1,6 +1,8 @@
 import '../css/Quiz.css';
 import { useState, useEffect } from 'react';
-import quizData from './../data/questions_onlyUX';
+import quizData from '../data/questions_onlyUX';
+import feedbackImg from '../data/images/feedback.png';
+import goalImg from '../data/images/feedback_ende.png';
 import Header from './Header';
 import Popup from './Popup';
 
@@ -13,15 +15,15 @@ const pathGraph = {
     szenario1: { reachable: 'circle1', topic: 'szenario1', x: '8%', y: '50%' },
     circle1: { reachable: 'circle2', topic: topic1, x: '20%', y: '11%' },
     circle2: { reachable: 'feedback1', topic: topic1, x: '30%', y: '11%' },
-    feedback1: { reachable: 'szenario2', topic: 'feedback', x: '30%', y: '30%' },
+    feedback1: { reachable: 'szenario2', topic: 'feedback', x: '200', y: '240' },
     szenario2: { reachable: 'circle3', topic: 'szenario2', x: '30%', y: '50%' },
     circle3: { reachable: 'circle4', topic: topic2, x: '40%', y: '13%' },
     circle4: { reachable: 'feedback2', topic: topic2, x: '50%', y: '16%' },
-    feedback2: { reachable: 'szenario3', topic: 'feedback', x: '50%', y: '30%' },
+    feedback2: { reachable: 'szenario3', topic: 'feedback', x: '400', y: '240' },
     szenario3: { reachable: 'circle5', topic: 'szenario3', x: '50%', y: '50%' },
     circle5: { reachable: 'circle6', topic: topic3, x: '60%', y: '18%' },
     circle6: { reachable: 'goal', topic: topic3, x: '70%', y: '20%' },
-    goal: { reachable: '', topic: 'goal', x: '80%', y: '25%' }
+    goal: { reachable: '', topic: 'goal', x: '650', y: '230' }
 };
 
 function Quiz() {
@@ -35,7 +37,6 @@ function Quiz() {
     const [szenariosDone, setSzenariosDone] = useState(0);
 
     const [currentContent, setCurrentContent] = useState(null);
-    const [completedExercisesIDs, setCompletedExercisesIDs] = useState([]);
 
     const [exercisesTopic1, setExercisesTopic1] = useState([]);
     const [exercisesTopic2, setExercisesTopic2] = useState([]);
@@ -152,7 +153,6 @@ function Quiz() {
             console.log('id: ', selected.id, ', topic: ', selected.difficulty, ', type: ', selected.type, ', question: ', selected.question);
 
             setCurrentContent(selected); // save which exercise is currently used
-            setCompletedExercisesIDs(completedExercisesIDs => [...completedExercisesIDs, selected.id]); // save its id for progress overview
         } else {
             // TODO: what happens when question pool of one difficulty is empty
             console.log('No more questions of topic: ', pathGraph[circle].topic);
@@ -165,26 +165,36 @@ function Quiz() {
         setShowPopup(false);
     };
 
+    const handleReset = () => {
+        // TODO: resetting quiz
+        console.log('reset btn was pressed');
+    }
+
     const renderBoard = () => {
         const circleColors = {
-            easy: '#D177B3', medium: '#8377D1',  hard: '#77D1CB', 
+            easy: '#D177B3', medium: '#8377D1', hard: '#77D1CB',
             szenario1: '#D177B3', szenario2: '#8377D1', szenario3: '#77D1CB',
             start: '#817C9C', goal: '#817C9C', feedback: '#817C9C', unreachable: '#54506A'
         };
 
+        const circleTexts = {
+            szenario1: 'Vertrauen', szenario2: 'Diskriminierung', szenario3: 'Autonomie', start: 'Start'
+        }
+
         const handleCircleHover = (event, circle) => {
+            console.log('Parent Node:', event.target.parentNode);
             if (circle === activeCircle) {
-                event.target.parentNode.querySelector('circle').style.strokeDasharray = 'none';
+                event.target.parentNode.querySelector('ellipse').style.strokeDasharray = 'none';
             } else if (completedCircles.includes(circle)) {
-                event.target.parentNode.querySelector('circle').style.opacity = '80%';
+                event.target.parentNode.querySelector('ellipse').style.opacity = '80%';
             }
         };
 
         const handleCircleLeave = (event, circle) => {
             if (circle === activeCircle) {
-                event.target.parentNode.querySelector('circle').style.strokeDasharray = '6';
+                event.target.parentNode.querySelector('ellipse').style.strokeDasharray = '6';
             } else if (completedCircles.includes(circle)) {
-                event.target.parentNode.querySelector('circle').style.opacity = '100%';
+                event.target.parentNode.querySelector('ellipse').style.opacity = '100%';
             }
         };
 
@@ -193,16 +203,23 @@ function Quiz() {
         return circles.map((circle) => {
             const isReachable = isCircleReachable(circle);
             const isCompleted = completedCircles.includes(circle);
+
             const topic = pathGraph[circle].topic;
             const isExerciseOrSzenario = topic !== 'start' && topic !== 'goal' && topic !== 'feedback';
-            const color = circleColors[pathGraph[circle].topic];
+            const isSzenario = topic === 'szenario1' || topic === 'szenario2' || topic === 'szenario3';
+            const isFeedback = topic === 'feedback';
+            const isGoal = topic === 'goal';
+
+            const color = circleColors[topic];
+            const text = circleTexts[topic];
 
             return (
                 <g key={circle} onClick={() => handleCircleClick(circle)}>
-                    <circle
+                    <ellipse
                         cx={pathGraph[circle].x}
                         cy={pathGraph[circle].y}
-                        r={circle === 'szenario1' || circle === 'szenario2' || circle === 'szenario3' ? '6%' : '4%'}
+                        rx={isSzenario ? '8%' : '4%'}
+                        ry={isSzenario ? '5%' : '4%'}
                         fill={isExerciseOrSzenario ? isCompleted ? color : '#21202b' : '#21202b'}
                         stroke={isReachable ? 'white' : color}
                         strokeWidth='2px'
@@ -218,12 +235,50 @@ function Quiz() {
                         dy="5px"
                         textAnchor="middle" // text horizontally
                         fill="white"
+                        fontWeight={'400'}
                         style={{ cursor: isReachable ? 'pointer' : 'default' }}
                         onMouseOver={(event) => handleCircleHover(event, circle)}
                         onMouseLeave={(event) => handleCircleLeave(event, circle)}
                     >
-                        {circle.toUpperCase() /*name of circle (for now)*/}
+                        {text}
                     </text>
+                    {isSzenario &&
+                        <text
+                            x={pathGraph[circle].x}
+                            y={pathGraph[circle].y}
+                            textAnchor="middle"
+                            dy='-15px'
+                            fill='white'
+                            className='sm'
+                            style={{ cursor: isReachable ? 'pointer' : 'default' }}
+                            onMouseOver={(event) => handleCircleHover(event, circle)}
+                            onMouseLeave={(event) => handleCircleLeave(event, circle)}
+                        >
+                            Szenario:
+                        </text>
+                    }
+                    {isFeedback &&
+                        <image
+                            x={pathGraph[circle].x - 50}
+                            y={pathGraph[circle].y - 90}
+                            href={feedbackImg}
+                            height='100'
+                            style={{ cursor: isReachable ? 'pointer' : 'default' }}
+                            onMouseOver={(event) => handleCircleHover(event, circle)}
+                            onMouseLeave={(event) => handleCircleLeave(event, circle)}
+                        />
+                    }
+                    {isGoal &&
+                        <image
+                            x={pathGraph[circle].x - 48}
+                            y={pathGraph[circle].y - 109}
+                            href={goalImg}
+                            height='120'
+                            style={{ cursor: isReachable ? 'pointer' : 'default' }}
+                            onMouseOver={(event) => handleCircleHover(event, circle)}
+                            onMouseLeave={(event) => handleCircleLeave(event, circle)}
+                        />
+                    }
                 </g>
             );
         });
@@ -231,7 +286,7 @@ function Quiz() {
 
     return (
         <div className='Quiz'>
-            <Header></Header>
+            <Header onReset={handleReset}></Header>
             <svg className='flex justify-self-center' width="800px" height="800px">
                 {renderBoard()}
             </svg>

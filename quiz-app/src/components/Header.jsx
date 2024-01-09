@@ -1,13 +1,12 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import logo from '../data/images/wegweiser_flat.png';
 import allQuestionsBtn from '../data/images/AlleFragen.png';
 import Popup from './Popup';
 
-function Header() {
+function Header({ onReset }) {
     const [showPopup, setShowPopup] = useState(false);
 
     const handleBtnClick = () => {
-
         console.log('Alle Fragen Button wurde geklickt!');
         setShowPopup(true);
     };
@@ -28,6 +27,7 @@ function Header() {
             <div className='flex row justify-around'>
                 <p className='text-white pr-2'>Fortschritt:</p>
                 <p>long progressbar</p>
+                <button onClick={onReset} className='pl-2 text-white hover:text-gray-400'>reset-btn</button>
             </div>
             <div onClick={handleBtnClick}
                 className='img-container h-20 border-dashed border-white border-2 rounded-lg hover:border-solid hover:cursor-pointer'>
@@ -42,7 +42,7 @@ function Header() {
                 <div style={joker}></div>
             </div> */}
 
-            {showPopup && <Popup onClose={handleClosePopup}/>}
+            {showPopup && <Popup onClose={handleClosePopup} />}
         </div>
     )
 }

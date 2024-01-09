@@ -22,8 +22,12 @@ h1 {
 }
 
 text {
+  font-size: calc(6px + 1vmin);
+  font-weight: 400;
+}
+
+text.sm {
   font-size: calc(4px + 1vmin);
-  font-weight: 600;
 }
 
 /* General */
