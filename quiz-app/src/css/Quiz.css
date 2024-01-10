@@ -24,17 +24,3 @@ img {
 .circle-active-hover {
     stroke-dasharray: none;
 }
-
-.circle-completed-hover {
-    opacity: 80%;
-}
-
-.close-btn {
-    font-size: xx-large;
-    font-weight: 500;
-}
-
-.close-btn:hover {
-    color: #54506A;
-    cursor: pointer;
-}

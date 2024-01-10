@@ -241,7 +241,7 @@ const Quiz = () => {
                         ry={isSzenario ? '45' : '35'}
                         fill={isExerciseOrSzenario ? isCompleted ? color : '#21202b' : '#21202b'}
                         stroke={isReachable ? 'white' : color}
-                        className={`${isActiveHovered ? 'circle-active-hover' : ''} ${isCompletedHovered ? 'circle-completed-hover' : ''}`}
+                        className={`${isActiveHovered ? 'circle-active-hover' : ''} ${isCompletedHovered ? 'opacity-80' : ''}`}
                         strokeWidth='2px'
                         strokeDasharray={isCompleted ? 'none' : '6'}
                         style={{ cursor: isReachable ? 'pointer' : 'default' }}
