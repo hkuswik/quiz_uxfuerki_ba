@@ -25,15 +25,15 @@ const Exercise = ({ exercise, active, onAnswer }) => {
     }
 
     return (
-        <div className='Exercise' style={exerciseContainer}>
+        <div style={exerciseContainer}>
             <div className="flex row h-full">
                 <div style={joker_row}>
                     <h3 className="pb-10">Joker:</h3>
-                    <div style={joker} className="img-container">
-                        <img src={bulbIcon} alt="Glühbirnen Icon" />
+                    <div style={joker} className="img-container hover:opacity-80">
+                        <img src={bulbIcon} className="h-16" alt="Glühbirnen Icon" />
                     </div>
-                    <div style={joker} className="img-container">
-                        <img src={swapIcon} alt="Glühbirnen Icon" />
+                    <div style={joker} className="img-container hover:opacity-80">
+                        <img src={swapIcon} className="h-12" alt="Glühbirnen Icon" />
                     </div>
                 </div>
                 <div style={line}></div>
@@ -59,13 +59,19 @@ const joker_row = {
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
-    width: '200px'
+    width: '150px'
 }
 
 const joker = {
-    height: '70px',
+    height: '100px',
+    width: '100px',
     cursor: 'pointer',
-    margin: '10px'
+    margin: '10px',
+    backgroundColor: 'white',
+    borderRadius: '50px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
 }
 
 const line = {

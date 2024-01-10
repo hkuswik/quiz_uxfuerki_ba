@@ -185,10 +185,13 @@ const Quiz = () => {
     };
 
     const handleReset = () => {
-        // TODO: resetting quiz
         console.log('reset btn was pressed');
         setCompletedCircles([]);
+        setPossibleCircles([]);
+        setSzenariosDone(0);
+        setCompletedTopics(0);
         setActiveCircle('start');
+        // TODO: reset used exercises or not??
     }
 
     const renderBoard = () => {
@@ -231,10 +234,11 @@ const Quiz = () => {
                 <g key={circle} onClick={() => handleCircleClick(circle)}
                     onMouseOver={() => handleCircleHover(circle)} onMouseLeave={handleCircleLeave}
                 >
-                    <circle
+                    <ellipse
                         cx={pathGraph[circle].x}
                         cy={pathGraph[circle].y}
-                        r={isSzenario ? '69' : '35'}
+                        rx={isSzenario ? '69' : '35'}
+                        ry={isSzenario ? '45' : '35'}
                         fill={isExerciseOrSzenario ? isCompleted ? color : '#21202b' : '#21202b'}
                         stroke={isReachable ? 'white' : color}
                         className={`${isActiveHovered ? 'circle-active-hover' : ''} ${isCompletedHovered ? 'circle-completed-hover' : ''}`}

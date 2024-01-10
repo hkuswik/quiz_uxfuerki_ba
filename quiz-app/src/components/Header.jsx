@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import logo from '../data/images/wegweiser_flat.png';
+import logo from '../data/images/Wegweiser_logo.png';
 import allQuestionsBtn from '../data/images/AlleFragen.png';
 import Popup from './Popup';
 

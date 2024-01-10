@@ -19,10 +19,6 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
         setAnswers(allAnswers);
     }
 
-    useEffect(() => {
-        console.log('answers: ', answers);
-    }, [answers]);
-
     return (
         <div className='Question'>
             <div>{exercise.question}</div>

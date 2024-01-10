@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Exercise from './Exercise';
+import Feedback from './Feedback';
 
 const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }) => {
     const [bgColor, setBgColor] = useState('#F6F5FC');
@@ -34,7 +35,7 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }
         } else {
             switch (content) {
                 case 'feedback':
-                    return <div> feedback, real topic: {completedTopics}</div>;
+                    return <Feedback completedTopic={whichTopic(completedTopics)} onUpdate={onUpdate}/>;
                 case 'goal':
                     return <div>goal, real topic: {completedTopics + 1}</div>;
                 case 'start':
@@ -74,7 +75,7 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }
         <div style={popupContainer} onClick={onClose}>
             <div style={{ ...popupContent, background: bgColor }} onClick={handlePopupClick}>
                 <div className="flex row justify-end">
-                    <div onClick={onClose} className="close-btn">X</div>
+                    <div onClick={onClose} className="text-2xl font-medium cursor-pointer hover:opacity-80">X</div>
                 </div>
                 {renderPopupContent(content)}
                 <div className="flex row justify-end">
