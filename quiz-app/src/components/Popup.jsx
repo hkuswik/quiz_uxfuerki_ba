@@ -5,10 +5,10 @@ import SortingExercise from "./SortingExercise";
 
 const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }) => {
     const [bgColor, setBgColor] = useState('#F6F5FC');
+    const isExercise = active.includes('circle');
     const isSzenario = (content === 'szenario1' || content === 'szenario2' || content === 'szenario3');
     const isSzenarioActive = (active === 'szenario1' || active === 'szenario2' || active === 'szenario3');
     const showUpdateBtn = !isSzenario || (isSzenario && isSzenarioActive);
-    console.log(isSzenario, ' active? ', isSzenarioActive);
 
     useEffect(() => {
         switch (content.difficulty) {
@@ -61,6 +61,11 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }
         }
     };
 
+    const getExerciseNumber = (active) => {
+        const numberString = active.substring(active.indexOf('e') + 1);
+        return numberString;
+    }
+
     const whichTopic = (completed) => {
         switch (completed) {
             case 0:
@@ -88,8 +93,10 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }
                     <div onClick={onClose} className="close-btn">X</div>
                 </div>
                 {renderPopupContent(content)}
-                <p>{completedTopics} also {whichTopic(completedTopics)}</p>
-                {showUpdateBtn && <div className='w-20 h-16 bg-pink-500' onClick={onUpdate}>Update!!!</div>}
+                <div className="flex row justify-between">
+                    {isExercise && <h3>{getExerciseNumber(active)}/24</h3>}
+                    {showUpdateBtn && <div className='text-pink-500 font-bold hover:text-pink-400 hover:cursor-pointer' onClick={onUpdate}>Update!!!</div>}
+                </div>
             </div>
         </div>
     )
@@ -113,7 +120,8 @@ const popupContent = {
     width: '900px',
     height: '700px',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    justifyContent: 'space-between'
 };
 
 export default Popup;

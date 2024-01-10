@@ -1,5 +1,5 @@
 import '../css/Quiz.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import quizData from '../data/questions_onlyUX';
 import feedbackImg from '../data/images/feedback.png';
 import goalImg from '../data/images/feedback_ende.png';
@@ -187,6 +187,8 @@ const Quiz = () => {
     const handleReset = () => {
         // TODO: resetting quiz
         console.log('reset btn was pressed');
+        setCompletedCircles([]);
+        setActiveCircle('start');
     }
 
     const renderBoard = () => {
@@ -201,7 +203,6 @@ const Quiz = () => {
         }
 
         const handleCircleHover = (circle) => {
-            console.log('hover: ', circle);
             setHoveredCircle(circle);
         };
 

@@ -21,6 +21,11 @@ h1 {
   align-self: center;
 }
 
+h3 {
+  font-size: calc(14px + 1vmin);
+  font-weight: 400;
+}
+
 text {
   font-size: calc(6px + 1vmin);
   font-weight: 400;
