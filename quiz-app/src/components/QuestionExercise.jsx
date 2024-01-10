@@ -1,45 +1,46 @@
+import { useEffect, useState } from "react";
+
 const QuestionExercise = ({ exercise, onAnswer }) => {
+    const [answers, setAnswers] = useState([]);
+
+    useEffect(() => {
+        randomizeAnswers(exercise);
+    }, [exercise]);
 
     const handleAnswerClick = (selected) => {
         const isCorrect = false;
         onAnswer(isCorrect);
     }
 
+    const randomizeAnswers = (exercise) => {
+        const allAnswers = exercise.wrongAnswers.split(';');
+        allAnswers.push(exercise.correctAnswer);
+        shuffleArray(allAnswers);
+        setAnswers(allAnswers);
+    }
+
+    useEffect(() => {
+        console.log('answers: ', answers);
+    }, [answers]);
+
     return (
         <div className='Question'>
-            <p>{exercise.question}</p>
-            <p onClick={handleAnswerClick}>{exercise.difficulty}</p>
-            <div className='Answer'></div>
-            <div className='Answer'></div>
-            <div className='Answer'></div>
-            <div className='Answer'></div>
+            <div>{exercise.question}</div>
+
+            {answers.map((answer, index) => (
+                <div key={index} className='Answer'>{answer}</div>
+            ))}
+
+            <div onClick={handleAnswerClick}>Check</div>
         </div>
     )
 }
 
-/* const style = {
-    .Question {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-content: center;
-        align-self: center;
-        width: 70%;
+const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
-    
-    .Answer {
-        width: 500px;
-        height: 300px;
-        background-color: #8377d1;
-        margin: 30px;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-    
-    .Answer:hover {
-        background-color: #9185d3;
-    }
-} */
+};
 
 export default QuestionExercise;

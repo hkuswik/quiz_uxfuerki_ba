@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import QuestionExercise from "./QuestionExercise";
-import MatchingExercise from "./MatchingExercise";
-import SortingExercise from "./SortingExercise";
+import Exercise from './Exercise';
 
 const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }) => {
     const [bgColor, setBgColor] = useState('#F6F5FC');
@@ -31,17 +29,8 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }
     } */
 
     const renderPopupContent = (content) => {
-        if (content.type === 'question' || content.type === 'match' || content.type === 'sort') {
-            switch (content.type) {
-                case 'question':
-                    return <QuestionExercise exercise={content} onAnswer={onAnswer} />;
-                case 'match':
-                    return <MatchingExercise exercise={content} />;
-                case 'sort':
-                    return <SortingExercise exercise={content} />;
-                default:
-                    return <div> error exercise type </div>;
-            };
+        if (isExercise) {
+            return <Exercise exercise={content} active={active} onAnswer={onAnswer}/>
         } else {
             switch (content) {
                 case 'feedback':
@@ -60,11 +49,6 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }
             }
         }
     };
-
-    const getExerciseNumber = (active) => {
-        const numberString = active.substring(active.indexOf('e') + 1);
-        return numberString;
-    }
 
     const whichTopic = (completed) => {
         switch (completed) {
@@ -93,8 +77,7 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }
                     <div onClick={onClose} className="close-btn">X</div>
                 </div>
                 {renderPopupContent(content)}
-                <div className="flex row justify-between">
-                    {isExercise && <h3>{getExerciseNumber(active)}/24</h3>}
+                <div className="flex row justify-end">
                     {showUpdateBtn && <div className='text-pink-500 font-bold hover:text-pink-400 hover:cursor-pointer' onClick={onUpdate}>Update!!!</div>}
                 </div>
             </div>
