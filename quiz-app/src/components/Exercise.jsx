@@ -3,13 +3,15 @@ import MatchingExercise from "./MatchingExercise";
 import SortingExercise from "./SortingExercise";
 import bulbIcon from '../data/images/bulb.png';
 import swapIcon from '../data/images/swap.png';
+import { useState } from "react";
 
-const Exercise = ({ exercise, active, onAnswer }) => {
+const Exercise = ({ exercise, active, onAnswer, onUpdate }) => {
+    const [checkClicked, setCheckClicked] = useState(false);
 
     const renderExerciseType = (exercise) => {
         switch (exercise.type) {
             case 'question':
-                return <QuestionExercise exercise={exercise} onAnswer={onAnswer} />;
+                return <QuestionExercise exercise={exercise} onAnswer={handleAnswer}/>;
             case 'match':
                 return <MatchingExercise exercise={exercise} />;
             case 'sort':
@@ -22,6 +24,11 @@ const Exercise = ({ exercise, active, onAnswer }) => {
     const getExerciseNumber = (active) => {
         const numberString = active.substring(active.indexOf('e') + 1);
         return numberString;
+    }
+
+    const handleAnswer = (isCorrect) => {
+        setCheckClicked(true);
+        onAnswer(isCorrect);
     }
 
     return (
@@ -37,10 +44,11 @@ const Exercise = ({ exercise, active, onAnswer }) => {
                     </div>
                 </div>
                 <div style={line}></div>
-                <div className="flex flex-col justify-center">{renderExerciseType(exercise)}</div>
+                <div className="flex flex-col">{renderExerciseType(exercise)}</div>
             </div>
             <div className="flex row justify-between">
                 <h3>{getExerciseNumber(active)}/24</h3>
+                {checkClicked && <div className="text-blue-500 cursor-pointer hover:text-blue-400 font-bold" onClick={onUpdate}>Weiter im Quiz</div>}
             </div>
         </div>
     )

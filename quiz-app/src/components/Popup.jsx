@@ -7,7 +7,8 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }
     const isExercise = active.includes('circle');
     const isSzenario = (content === 'szenario1' || content === 'szenario2' || content === 'szenario3');
     const isSzenarioActive = (active === 'szenario1' || active === 'szenario2' || active === 'szenario3');
-    const showUpdateBtn = !isSzenario || (isSzenario && isSzenarioActive);
+    const isAllQuestions = content === 'alleFragen';
+    const showUpdateBtn = !isAllQuestions && (!isSzenario || (isSzenario && isSzenarioActive));
 
     useEffect(() => {
         switch (content.difficulty) {
@@ -23,6 +24,7 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }
             default:
                 setBgColor('#F6F5FC');
         }
+        console.log(content);
     }, [content])
 
     /* const handleAnswer = (isCorrect) => {
@@ -31,11 +33,11 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }
 
     const renderPopupContent = (content) => {
         if (isExercise) {
-            return <Exercise exercise={content} active={active} onAnswer={onAnswer}/>
+            return <Exercise exercise={content} active={active} onAnswer={onAnswer} onUpdate={onUpdate} />
         } else {
             switch (content) {
                 case 'feedback':
-                    return <Feedback completedTopic={whichTopic(completedTopics)} onUpdate={onUpdate}/>;
+                    return <Feedback completedTopic={whichTopic(completedTopics)} onUpdate={onUpdate} />;
                 case 'goal':
                     return <div>goal, real topic: {completedTopics + 1}</div>;
                 case 'start':
@@ -45,6 +47,8 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }
                 case 'szenario2':
                 case 'szenario3':
                     return <div>szenarioo, numero {completedTopics + 1}</div>;
+                case 'alleFragen':
+                    return <div>Alle Fragen</div>
                 default:
                     return <div> error non-exercise type </div>;
             }

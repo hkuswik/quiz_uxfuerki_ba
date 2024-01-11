@@ -126,7 +126,7 @@ const Quiz = () => {
     }
 
     const handleAnswer = (isCorrect) => {
-        console.log('QUIZ! Answer is correct: ', isCorrect);
+        console.log('Quiz knows that answer was: ', isCorrect);
         setCorrectAnswer(isCorrect);
     }
 

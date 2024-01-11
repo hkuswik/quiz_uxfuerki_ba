@@ -2,7 +2,7 @@
 
 ### Quiz-Anwendung im Kontext gemeinwohlorientierter KI
 
-##### Main component structure:
+#### Main component structure:
 
 * App.js -> *App.css*
     * Quiz.jsx -> *Quiz.css*

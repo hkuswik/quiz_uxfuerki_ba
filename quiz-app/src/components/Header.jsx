@@ -34,7 +34,7 @@ const Header = ({ onReset }) => {
                 <img src={allQuestionsBtn} alt="Alle Fragen Button" />
             </div>
 
-            {showPopup && <Popup onClose={handleClosePopup} />}
+            {showPopup && <Popup onClose={handleClosePopup} content={'alleFragen'} active={''}/>}
         </div>
     )
 }
