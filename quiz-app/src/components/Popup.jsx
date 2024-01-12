@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
 import Exercise from './Exercise';
 import Feedback from './Feedback';
+import Start from './Start';
 
-const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }) => {
+const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate, correctInTopic }) => {
     const [bgColor, setBgColor] = useState('#F6F5FC');
-    const isExercise = active.includes('circle');
+    const isExercise = (content.type === 'question' || content.type === 'match' || content.type === 'sort');
     const isSzenario = (content === 'szenario1' || content === 'szenario2' || content === 'szenario3');
     const isSzenarioActive = (active === 'szenario1' || active === 'szenario2' || active === 'szenario3');
     const isAllQuestions = content === 'alleFragen';
-    const showUpdateBtn = !isExercise && !isAllQuestions && (!isSzenario || (isSzenario && isSzenarioActive));
+    const showUpdateBtn = !(content === 'start') && !(content.type === 'question')
+        && !isAllQuestions && (!isSzenario || (isSzenario && isSzenarioActive))
+        && !(content === 'feedback');
 
     useEffect(() => {
         switch (content.difficulty) {
@@ -37,11 +40,15 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }
         } else {
             switch (content) {
                 case 'feedback':
-                    return <Feedback completedTopic={whichTopic(completedTopics)} onUpdate={onUpdate} />;
+                    return <Feedback
+                        completedTopic={whichTopic(completedTopics)}
+                        correctInTopic={correctInTopic}
+                        onUpdate={onUpdate}
+                    />;
                 case 'goal':
                     return <div>goal, real topic: {completedTopics + 1}</div>;
                 case 'start':
-                    return <div>start</div>;
+                    return <Start onUpdate={onUpdate} />
                 // TODO: different szenario design if szenario is/isn't active! (no continue button)
                 case 'szenario1':
                 case 'szenario2':

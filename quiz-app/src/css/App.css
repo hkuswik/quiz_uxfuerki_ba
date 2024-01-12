@@ -11,6 +11,7 @@
   font-size: calc(10px + 1vmin);
   font-family: 'Montserrat';
   font-weight: 300;
+  color: #21202b;
 }
 
 h1 {
@@ -19,6 +20,35 @@ h1 {
   font-size: calc(60px + 1vmin);
   font-weight: 400;
   align-self: center;
+}
+
+h2 {
+  font-size: calc(35px + 1vmin);
+  font-weight: 400;
+}
+
+h2 b {
+  font-size: calc(35px + 1vmin);
+  font-weight: 600;
+}
+
+b {
+  font-weight: 600;
+}
+
+.pink {
+  color: #D177B3;
+  font-weight: 700;
+}
+
+.lila {
+  color: #8377D1;
+  font-weight: 700;
+}
+
+.türkis {
+  color: #77D1CB;
+  font-weight: 700;
 }
 
 h3 {

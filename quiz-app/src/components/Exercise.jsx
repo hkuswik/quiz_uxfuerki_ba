@@ -47,7 +47,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate }) => {
                 <div style={line}></div>
                 <div className="flex flex-col">{renderExerciseType(exercise)}</div>
             </div>
-            <div className="flex row justify-between items-end">
+            <div className="flex row justify-between items-end h-10">
                 <h3>{getExerciseNumber(active)}/24</h3>
                 {checkClicked &&
                     <div className="img-container">

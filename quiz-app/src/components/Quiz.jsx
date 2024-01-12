@@ -30,16 +30,18 @@ const Quiz = () => {
     const [state, setState] = useState('DEFAULT');
 
     const [activeCircle, setActiveCircle] = useState('start');
-    const [lastClicked, setLastClicked] = useState(null);
+    const [lastClicked, setLastClicked] = useState('start');
     const [possibleCircles, setPossibleCircles] = useState([]);
     const [completedCircles, setCompletedCircles] = useState([]);
     const [hoveredCircle, setHoveredCircle] = useState(null);
     const [correctCircles, setCorrectCircles] = useState([]);
+    const [correctInTopic, setCorrectInTopic] = useState(new Map([[1, 0], [2, 0], [3, 0]]));
 
     const [completedTopics, setCompletedTopics] = useState(0);
     const [szenariosDone, setSzenariosDone] = useState(0);
 
     const [currentContent, setCurrentContent] = useState(null);
+    const [currentExercise, setCurrentExercise] = useState(null);
 
     const [correctAnswer, setCorrectAnswer] = useState(false);
 
@@ -75,16 +77,28 @@ const Quiz = () => {
             return;
         }
 
-        setLastClicked(circle);
-
         const topic = pathGraph[circle].topic;
         const isExercise = (topic === topic1 || topic === topic2 || topic === topic3);
+        const szenarioActive = (activeCircle === 'szenario1' || activeCircle === 'szenario2' || activeCircle === 'szenario3');
 
         if (isExercise) {
-            handleExerciseBehaviour(circle, topic);
+            // check if circle is the same as the last clicked circle
+            if (circle !== lastClicked) {
+                // if it is a new circle, a new exercise shall be selected
+                setNewExercise(circle, topic);
+                setLastClicked(circle);
+            } else {
+                setCurrentContent(currentExercise);
+            }
         } else {
             // save type of non-exercise circle to choose correct popup
             setCurrentContent(topic);
+            // lastClicked shall not be updated if szenario is clicked without being active
+            if ((topic === 'szenario1' || topic === 'szenario2' || topic === 'szenario3') && !szenarioActive) {
+                setShowPopup(true);
+                return;
+            }
+            setLastClicked(circle);
         }
 
         setShowPopup(true);
@@ -94,7 +108,7 @@ const Quiz = () => {
         return circle === activeCircle || possibleCircles.includes(circle)
     }
 
-    const handleExerciseBehaviour = (circle, topic) => {
+    const setNewExercise = (circle, topic) => {
         // which topic pool to choose exercises from
         const exercises = (topic === topic1 ? exercisesTopic1 : topic === topic2 ? exercisesTopic2 : exercisesTopic3);
 
@@ -119,7 +133,8 @@ const Quiz = () => {
 
             console.log('id: ', selected.id, ', topic: ', selected.difficulty, ', type: ', selected.type, ', question: ', selected.question);
 
-            setCurrentContent(selected); // save which exercise is currently used
+            setCurrentExercise(selected); // save which exercise is currently used
+            setCurrentContent(selected);
         } else {
             // TODO: what happens when question pool of one difficulty is empty
             console.log('No more questions of topic: ', pathGraph[circle].topic);
@@ -180,6 +195,7 @@ const Quiz = () => {
 
         // update completed circles
         setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
+        updateCorrectInTopic(lastClicked, correctAnswer);
 
         setShowPopup(false);
     }
@@ -187,6 +203,24 @@ const Quiz = () => {
     const handleClosePopup = () => {
         setShowPopup(false);
     };
+
+    const updateCorrectInTopic = (circle, correct) => {
+        if (correct) {
+            switch (pathGraph[circle].topic) {
+                case topic1:
+                    setCorrectInTopic(correctInTopic.set(1, correctInTopic.get(1) + 1));
+                    break;
+                case topic2:
+                    setCorrectInTopic(correctInTopic.set(2, correctInTopic.get(2) + 1));
+                    break;
+                case topic3:
+                    setCorrectInTopic(correctInTopic.set(3, correctInTopic.get(3) + 1));
+                    break;
+                default:
+                    console.log('error setting correctInTopic');
+            }
+        }
+    }
 
     const handleReset = () => {
         console.log('reset btn was pressed');
@@ -253,7 +287,7 @@ const Quiz = () => {
                         style={
                             {
                                 ...({ cursor: isReachable ? 'pointer' : 'default' }),
-                                ...(isExercise ? isCompleted ? {opacity: wasCorrect ? '100%' : '40%'} : {} : {})
+                                ...(isExercise ? isCompleted ? { opacity: wasCorrect ? '100%' : '40%' } : {} : {})
                             }
                         }
                     />
@@ -318,6 +352,7 @@ const Quiz = () => {
                     completedTopics={completedTopics}
                     onAnswer={handleAnswer}
                     onUpdate={handleUpdate}
+                    correctInTopic={correctInTopic}
                 />}
         </div>
     )

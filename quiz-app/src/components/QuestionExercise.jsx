@@ -110,7 +110,7 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
                     );
                 })}
             </div>
-            <div className="flex justify-end">
+            <div className="flex justify-end h-8">
                 {(selected === null) &&
                     <div className="img-container flex">
                         <img src={check_logo_no} className="h-12" alt="Check Logo" />
@@ -148,7 +148,7 @@ const question_style = {
 
 const answer_style = {
     background: '#F6F5FC',
-    height: '40%',
+    height: '150px',
     width: '300px',
     padding: '20px',
     display: 'flex',
