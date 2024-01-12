@@ -8,7 +8,7 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate }
     const isSzenario = (content === 'szenario1' || content === 'szenario2' || content === 'szenario3');
     const isSzenarioActive = (active === 'szenario1' || active === 'szenario2' || active === 'szenario3');
     const isAllQuestions = content === 'alleFragen';
-    const showUpdateBtn = !isAllQuestions && (!isSzenario || (isSzenario && isSzenarioActive));
+    const showUpdateBtn = !isExercise && !isAllQuestions && (!isSzenario || (isSzenario && isSzenarioActive));
 
     useEffect(() => {
         switch (content.difficulty) {

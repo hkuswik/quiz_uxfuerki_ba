@@ -3,6 +3,7 @@ import MatchingExercise from "./MatchingExercise";
 import SortingExercise from "./SortingExercise";
 import bulbIcon from '../data/images/bulb.png';
 import swapIcon from '../data/images/swap.png';
+import fortfahrenIcon from '../data/images/continue_logo.png';
 import { useState } from "react";
 
 const Exercise = ({ exercise, active, onAnswer, onUpdate }) => {
@@ -11,7 +12,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate }) => {
     const renderExerciseType = (exercise) => {
         switch (exercise.type) {
             case 'question':
-                return <QuestionExercise exercise={exercise} onAnswer={handleAnswer}/>;
+                return <QuestionExercise exercise={exercise} onAnswer={handleAnswer} />;
             case 'match':
                 return <MatchingExercise exercise={exercise} />;
             case 'sort':
@@ -33,22 +34,26 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate }) => {
 
     return (
         <div style={exerciseContainer}>
-            <div className="flex row h-full">
+            <div className="flex row h-full mr-6">
                 <div style={joker_row}>
                     <h3 className="pb-10">Joker:</h3>
-                    <div style={joker} className="img-container hover:opacity-80">
+                    <div style={joker} className="img-container hover:opacity-85">
                         <img src={bulbIcon} className="h-16" alt="Glühbirnen Icon" />
                     </div>
-                    <div style={joker} className="img-container hover:opacity-80">
+                    <div style={joker} className="img-container hover:opacity-85">
                         <img src={swapIcon} className="h-12" alt="Glühbirnen Icon" />
                     </div>
                 </div>
                 <div style={line}></div>
                 <div className="flex flex-col">{renderExerciseType(exercise)}</div>
             </div>
-            <div className="flex row justify-between">
+            <div className="flex row justify-between items-end">
                 <h3>{getExerciseNumber(active)}/24</h3>
-                {checkClicked && <div className="text-blue-500 cursor-pointer hover:text-blue-400 font-bold" onClick={onUpdate}>Weiter im Quiz</div>}
+                {checkClicked &&
+                    <div className="img-container">
+                        <img src={fortfahrenIcon} className=" h-12 hover:opacity-85 cursor-pointer" onClick={onUpdate} alt="mit Quiz fortfahren" />
+                    </div>
+                }
             </div>
         </div>
     )

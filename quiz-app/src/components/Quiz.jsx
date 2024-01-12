@@ -34,6 +34,7 @@ const Quiz = () => {
     const [possibleCircles, setPossibleCircles] = useState([]);
     const [completedCircles, setCompletedCircles] = useState([]);
     const [hoveredCircle, setHoveredCircle] = useState(null);
+    const [correctCircles, setCorrectCircles] = useState([]);
 
     const [completedTopics, setCompletedTopics] = useState(0);
     const [szenariosDone, setSzenariosDone] = useState(0);
@@ -133,6 +134,9 @@ const Quiz = () => {
     const handleUpdate = () => {
         // TODO: change appearance depending on true/false answer
         console.log('was answer correct?: ', correctAnswer);
+        if (correctAnswer) {
+            setCorrectCircles(correctCircles => [...correctCircles, lastClicked]);
+        }
 
         switch (state) {
             case 'DEFAULT':
@@ -219,14 +223,16 @@ const Quiz = () => {
             const isReachable = isCircleReachable(circle);
             const isCompleted = completedCircles.includes(circle);
             const isActiveHovered = circle === activeCircle && circle === hoveredCircle;
-            const isCompletedHovered = isCompleted && circle === hoveredCircle;
+            const wasCorrect = correctCircles.includes(circle);
 
             const topic = pathGraph[circle].topic;
             const isExerciseOrSzenario = topic !== 'start' && topic !== 'goal' && topic !== 'feedback';
             const isSzenario = topic === 'szenario1' || topic === 'szenario2' || topic === 'szenario3';
+            const isExercise = isExerciseOrSzenario && !isSzenario;
             const isFeedback = topic === 'feedback';
             const isGoal = topic === 'goal';
 
+            const isSzenarioHovered = isSzenario && circle === hoveredCircle;
             const color = circleColors[topic];
             const text = circleTexts[topic];
 
@@ -241,10 +247,15 @@ const Quiz = () => {
                         ry={isSzenario ? '45' : '35'}
                         fill={isExerciseOrSzenario ? isCompleted ? color : '#21202b' : '#21202b'}
                         stroke={isReachable ? 'white' : color}
-                        className={`${isActiveHovered ? 'circle-active-hover' : ''} ${isCompletedHovered ? 'opacity-80' : ''}`}
+                        className={`${isActiveHovered ? 'circle-active-hover' : ''} ${isSzenarioHovered ? 'opacity-80' : ''}`}
                         strokeWidth='2px'
                         strokeDasharray={isCompleted ? 'none' : '6'}
-                        style={{ cursor: isReachable ? 'pointer' : 'default' }}
+                        style={
+                            {
+                                ...({ cursor: isReachable ? 'pointer' : 'default' }),
+                                ...(isExercise ? isCompleted ? {opacity: wasCorrect ? '100%' : '40%'} : {} : {})
+                            }
+                        }
                     />
                     <text
                         x={pathGraph[circle].x}

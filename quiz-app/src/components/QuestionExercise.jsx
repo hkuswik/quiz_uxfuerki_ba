@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
+import check_logo_yes from '../data/images/check-bl.png';
+import check_logo_no from '../data/images/check-light.png';
 
 const QuestionExercise = ({ exercise, onAnswer }) => {
     const [answers, setAnswers] = useState([]);
     const [hovered, setHovered] = useState(null);
     const [selected, setSelected] = useState(null);
-    const [color, setColor] = useState('#817C9C');
     const [checkClicked, setCheckClicked] = useState(false);
+    const [isClickable, setIsClickable] = useState(true);
+
+    const [color, setColor] = useState('#817C9C');
+    const correctColor = '#7AD177';
+    const wrongColor = '#D24141';
 
     useEffect(() => {
         randomizeAnswers(exercise);
@@ -39,48 +45,54 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
             console.log('no answer selected :(');
         } else {
             setCheckClicked(true);
+            setIsClickable(false);
             if (selected === exercise.correctAnswer) {
                 console.log('jey answer was correct :)');
                 onAnswer(true);
-                
             } else {
                 console.log('oh no answer was wrong');
                 onAnswer(false);
-                
             }
-
         }
     }
 
     const handleAnswerHover = (answer_box) => {
-        setHovered(answer_box);
+        isClickable && setHovered(answer_box);
     }
 
     const handleAnswerLeave = () => {
-        setHovered(null);
+        isClickable && setHovered(null);
     }
 
     const handleAnswerSelect = (selected) => {
-        setSelected(selected);
+        isClickable && setSelected(selected);
         // maybe add: check button different color if answer was selected (login = possible)
     }
 
     const handleAnswerUnselect = () => {
-        setSelected(null);
+        isClickable && setSelected(null);
         // maybe add: check button different color if answer was selected (login = possible)
     }
 
     return (
-        <div className='flex flex-col h-full justify-center'>
+        <div className='flex flex-col h-full justify-around'>
             <div style={question_style}>{exercise.question}</div>
             <div className='flex row flex-wrap justify-center'>
                 {answers.map((answer, index) => {
 
                     const answerStyles = {
                         ...(answer === selected ? { ...answer_style, background: color } : answer_style),
-                        ...(answer === hovered ? { ...hover_style, outlineColor: color } : {})
+                        ...(answer === hovered ? { ...hover_style, outlineColor: color } : {}),
+                        ...(checkClicked ?
+                            {
+                                background:
+                                    selected === answer
+                                        ? answer === exercise.correctAnswer ? correctColor : wrongColor
+                                        : answer === exercise.correctAnswer ? correctColor : '#F6F5FC'
+                            }
+                            : {}),
+                        ...(checkClicked ? answer === selected ? { outline: '2px dashed white' } : {} : {})
                     };
-
 
                     return (
                         <div
@@ -89,15 +101,27 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
                             onMouseOver={() => handleAnswerHover(answer)}
                             onMouseLeave={handleAnswerLeave}
                             onClick={() =>
-                                selected === null ? handleAnswerSelect(answer) :
-                                    (selected === answer ? handleAnswerUnselect(answer) : handleAnswerSelect(answer))}
+                                selected === null ? handleAnswerSelect(answer)
+                                    : selected === answer ? handleAnswerUnselect(answer)
+                                        : handleAnswerSelect(answer)}
                         >
                             {answer}
                         </div>
                     );
                 })}
             </div>
-            {!checkClicked && <div className="text-green-600 font-bold cursor-pointer hover:text-green-500" onClick={() => checkAnswer(selected)}>Check!!!</div>}
+            <div className="flex justify-end">
+                {(selected === null) &&
+                    <div className="img-container flex">
+                        <img src={check_logo_no} className="h-12" alt="Check Logo" />
+                    </div>
+                }
+                {(selected !== null && !checkClicked) &&
+                    <div onClick={() => checkAnswer(selected)} className="img-container hover:opacity-85 cursor-pointer">
+                        <img src={check_logo_yes} className="h-12" alt="Check Logo" />
+                    </div>
+                }
+            </div>
         </div>
     )
 }
@@ -113,9 +137,8 @@ const question_style = {
     background: '#F6F5FC',
     fontWeight: '400',
     width: '100%',
-    height: '20%',
-    padding: '10px',
-    marginBottom: '10px',
+    height: 'auto',
+    padding: '20px',
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
