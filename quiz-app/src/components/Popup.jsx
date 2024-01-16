@@ -2,16 +2,11 @@ import { useState, useEffect } from 'react';
 import Exercise from './Exercise';
 import Feedback from './Feedback';
 import Start from './Start';
+import Szenario from './Szenario';
 
 const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate, correctInTopic }) => {
     const [bgColor, setBgColor] = useState('#F6F5FC');
     const isExercise = (content.type === 'question' || content.type === 'match' || content.type === 'sort');
-    const isSzenario = (content === 'szenario1' || content === 'szenario2' || content === 'szenario3');
-    const isSzenarioActive = (active === 'szenario1' || active === 'szenario2' || active === 'szenario3');
-    const isAllQuestions = content === 'alleFragen';
-    const showUpdateBtn = !(content === 'start') && !(content.type === 'question')
-        && !isAllQuestions && (!isSzenario || (isSzenario && isSzenarioActive))
-        && !(content === 'feedback');
 
     useEffect(() => {
         switch (content.difficulty) {
@@ -40,10 +35,7 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate, 
         } else {
             switch (content) {
                 case 'feedback':
-                    return <Feedback
-                        completedTopic={whichTopic(completedTopics)}
-                        correctInTopic={correctInTopic}
-                        onUpdate={onUpdate}
+                    return <Feedback completedTopic={whichTopic(completedTopics)} correctInTopic={correctInTopic} onUpdate={onUpdate}
                     />;
                 case 'goal':
                     return <div>goal, real topic: {completedTopics + 1}</div>;
@@ -53,7 +45,8 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate, 
                 case 'szenario1':
                 case 'szenario2':
                 case 'szenario3':
-                    return <div>szenarioo, numero {completedTopics + 1}</div>;
+                    const isSzenarioActive = (active === 'szenario1' || active === 'szenario2' || active === 'szenario3');
+                    return <Szenario whichSzenario={completedTopics + 1} onUpdate={onUpdate} showBtn={isSzenarioActive} />;
                 case 'alleFragen':
                     return <div>Alle Fragen</div>
                 default:
@@ -85,13 +78,10 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate, 
     return (
         <div style={popupContainer} onClick={onClose}>
             <div style={{ ...popupContent, background: bgColor }} onClick={handlePopupClick}>
-                <div className="flex row justify-end">
+                <div className='flex column justify-end'>
                     <div onClick={onClose} className="text-2xl font-medium cursor-pointer hover:opacity-80">X</div>
                 </div>
                 {renderPopupContent(content)}
-                <div className="flex row justify-end">
-                    {showUpdateBtn && <div className='text-pink-500 font-bold hover:text-pink-400 hover:cursor-pointer' onClick={onUpdate}>Update!!!</div>}
-                </div>
             </div>
         </div>
     )

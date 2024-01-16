@@ -4,19 +4,23 @@ import SortingExercise from "./SortingExercise";
 import bulbIcon from '../data/images/bulb.png';
 import swapIcon from '../data/images/swap.png';
 import fortfahrenIcon from '../data/images/continue_logo.png';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Exercise = ({ exercise, active, onAnswer, onUpdate }) => {
     const [checkClicked, setCheckClicked] = useState(false);
+
+    useEffect( () => {
+        setCheckClicked(false);
+    }, [exercise]);
 
     const renderExerciseType = (exercise) => {
         switch (exercise.type) {
             case 'question':
                 return <QuestionExercise exercise={exercise} onAnswer={handleAnswer} />;
             case 'match':
-                return <MatchingExercise exercise={exercise} />;
+                return <MatchingExercise exercise={exercise}  onAnswer={handleAnswer}/>;
             case 'sort':
-                return <SortingExercise exercise={exercise} />;
+                return <SortingExercise exercise={exercise} onAnswer={handleAnswer} />;
             default:
                 return <div> error exercise type </div>;
         };
