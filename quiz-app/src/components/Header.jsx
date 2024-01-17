@@ -5,6 +5,7 @@ import Popup from './Popup';
 
 // TODO: add correct reset button
 // TODO: add progressBar (design + functionality)
+// TODO: add disclaimers for allQuestions / resetting progress
 
 const Header = ({ onReset }) => {
     const [showPopup, setShowPopup] = useState(false);
