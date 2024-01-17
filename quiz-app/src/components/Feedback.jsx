@@ -45,16 +45,16 @@ const Feedback = ({ completedTopic, onUpdate, correctInTopic }) => {
     }
 
     return (
-        <div className='flex flex-col items-center'>
-            <div className='font-normal'>Du hast den Abschnitt</div>
-            <div className={classColor} style={{ fontSize: 'calc(30px + 1vmin)' }}>{topic}</div>
-            <div className='font-normal'>abgeschlossen! Du hast <b className=''>{amountCorrect}/8 Fragen</b> richtig beantwortet und <b> Joker</b> verwendet.</div>
-            <div className="flex row justify-between w-9/12 items-center mt-6">
+        <div className='flex flex-col items-center text-center'>
+            <h4>Du hast den Abschnitt</h4>
+            <h2 className={classColor}>{topic}</h2>
+            <h4 className='w-10/12'>abgeschlossen! Du hast <b>{amountCorrect}/8 Fragen</b> richtig beantwortet und <b> Joker</b> verwendet.</h4>
+            <div className="flex row justify-between w-10/12 items-center mt-12 mb-16">
                 <div className="img-container hover:opacity-85 cursor-pointer">
                     <img src={button1} className="h-16" alt="Abschnitt wiederholen Button" />
                 </div>
                 <div className="img-container hover:opacity-85 cursor-pointer">
-                    <img src={zurück_plattform} className="h-36" alt="zurück zur Plattform Button" />
+                    <img src={zurück_plattform} className="h-44" alt="zurück zur Plattform Button" />
                 </div>
                 <div onClick={onUpdate} className="img-container hover:opacity-85 cursor-pointer">
                     <img src={button2} className="h-16" alt="weiter Button" />

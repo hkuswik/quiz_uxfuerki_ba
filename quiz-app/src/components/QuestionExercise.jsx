@@ -66,12 +66,10 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
 
     const handleAnswerSelect = (selected) => {
         isClickable && setSelected(selected);
-        // maybe add: check button different color if answer was selected (login = possible)
     }
 
     const handleAnswerUnselect = () => {
         isClickable && setSelected(null);
-        // maybe add: check button different color if answer was selected (login = possible)
     }
 
     return (

@@ -1,5 +1,6 @@
 const SortingExercise = ({exercise, onAnswer}) => {
 
+    // TODO: functionality
     return (
         <div>
             <p>sorting: {exercise.question}</p>

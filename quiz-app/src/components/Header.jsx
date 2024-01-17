@@ -3,6 +3,9 @@ import logo from '../data/images/Wegweiser_logo.png';
 import allQuestionsBtn from '../data/images/AlleFragen.png';
 import Popup from './Popup';
 
+// TODO: add correct reset button
+// TODO: add progressBar (design + functionality)
+
 const Header = ({ onReset }) => {
     const [showPopup, setShowPopup] = useState(false);
 

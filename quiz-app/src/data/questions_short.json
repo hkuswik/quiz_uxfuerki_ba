@@ -1,0 +1,40 @@
+[
+ {
+  "id": 0,
+  "type": "question",
+  "difficulty": "medium",
+  "question": "Bei welcher Technik evaluiert ein Experte mit einer Reihe von Guidelines ein Interface?",
+  "correctAnswer": "Heuristische Evaluation",
+  "wrongAnswers": "Usability Test;Erfahrungsbericht;Cognitive Walkthrough",
+  "tip": "Ein Usability Test wird auf jeden Fall mit Nutzer durchgeführt."
+ },
+ {
+  "id": 1,
+  "type": "question",
+  "difficulty": "easy",
+  "question": "Welche Methode wird bei einem Usability Test häufig verwendet, um Probleme zu entdecken?",
+  "correctAnswer": "Thinking Aloud",
+  "wrongAnswers": "Speaking Slowly;Retrospektive Analyse;Abgestufter Intervallabruf",
+  "tip": "Bei einem Usability Test möchte man wissen, was den Nutzer während der Interaktion mit der Anwendung auffällt."
+ },
+ {
+  "id": 2,
+  "type": "sort",
+  "difficulty": "easy",
+  "question": "Ordne zu, ob folgende Aussagen richtig oder falsch sind.",
+  "firstContainer": "Richtig",
+  "secondContainer": "Falsch",
+  "belongsInFirst": "Fragebögen sind aufwändiger als Interviews;bei Interviews entsteht eine große Datenmenge",
+  "belongsInSecond": "für Interviews benötigt man eine größere Stichprobe als für Fragebögen; Interviews sind reliabler als Fragebögen",
+  "tip": "…"
+ },
+ {
+  "id": 27,
+  "type": "question",
+  "difficulty": "hard",
+  "question": "Als Evaluator Effect bezeichnet man:",
+  "correctAnswer": "Die Tendenz verschiedener Evaluations-Teilnehmer, unterschiedliche Probleme zu identifizieren, wenn sie dasselbe Interface testen",
+  "wrongAnswers": "Die Wirkung, die ein Evaluator auf einen Teilnehmer bei einer Studie hat;Die Tendenz verschiedener Evaluatoren, beim Testen desselben Interfaces dieselben Probleme zu erkennen;Die Auswirkungen auf den Leiter des Usability-Tests, wenn er von Stakeholdern beobachtet wird",
+  "tip": "…"
+ }
+]

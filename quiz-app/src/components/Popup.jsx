@@ -3,6 +3,8 @@ import Exercise from './Exercise';
 import Feedback from './Feedback';
 import Start from './Start';
 import Szenario from './Szenario';
+import Goal from './Goal';
+import AllQuestions from './AllQuestions';
 
 const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate, correctInTopic }) => {
     const [bgColor, setBgColor] = useState('#F6F5FC');
@@ -25,10 +27,6 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate, 
         console.log(content);
     }, [content])
 
-    /* const handleAnswer = (isCorrect) => {
-        console.log('Question was answered correctly: ', isCorrect);
-    } */
-
     const renderPopupContent = (content) => {
         if (isExercise) {
             return <Exercise exercise={content} active={active} onAnswer={onAnswer} onUpdate={onUpdate} />
@@ -38,17 +36,16 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate, 
                     return <Feedback completedTopic={whichTopic(completedTopics)} correctInTopic={correctInTopic} onUpdate={onUpdate}
                     />;
                 case 'goal':
-                    return <div>goal, real topic: {completedTopics + 1}</div>;
+                    return <Goal />;
                 case 'start':
                     return <Start onUpdate={onUpdate} />
-                // TODO: different szenario design if szenario is/isn't active! (no continue button)
                 case 'szenario1':
                 case 'szenario2':
                 case 'szenario3':
                     const isSzenarioActive = (active === 'szenario1' || active === 'szenario2' || active === 'szenario3');
                     return <Szenario whichSzenario={completedTopics + 1} onUpdate={onUpdate} showBtn={isSzenarioActive} />;
                 case 'alleFragen':
-                    return <div>Alle Fragen</div>
+                    return <AllQuestions />
                 default:
                     return <div> error non-exercise type </div>;
             }
@@ -78,7 +75,7 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate, 
     return (
         <div style={popupContainer} onClick={onClose}>
             <div style={{ ...popupContent, background: bgColor }} onClick={handlePopupClick}>
-                <div className='flex column justify-end'>
+                <div className='flex row justify-end'>
                     <div onClick={onClose} className="text-2xl font-medium cursor-pointer hover:opacity-80">X</div>
                 </div>
                 {renderPopupContent(content)}

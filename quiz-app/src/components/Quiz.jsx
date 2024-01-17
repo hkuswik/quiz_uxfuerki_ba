@@ -1,6 +1,6 @@
 import '../css/Quiz.css';
 import { useState, useEffect } from 'react';
-import quizData from '../data/questions_onlyUX';
+import quizData from '../data/questions_short.json';
 import feedbackImg from '../data/images/feedback.png';
 import goalImg from '../data/images/feedback_ende.png';
 import Header from './Header';
@@ -136,7 +136,7 @@ const Quiz = () => {
             setCurrentExercise(selected); // save which exercise is currently used
             setCurrentContent(selected);
         } else {
-            // TODO: what happens when question pool of one difficulty is empty
+            // TODO: what happens when question pool of one difficulty is empty (currently: last repeated)
             console.log('No more questions of topic: ', pathGraph[circle].topic);
         }
     }
@@ -147,7 +147,6 @@ const Quiz = () => {
     }
 
     const handleUpdate = () => {
-        // TODO: change appearance depending on true/false answer
         console.log('was answer correct?: ', correctAnswer);
         if (correctAnswer) {
             setCorrectCircles(correctCircles => [...correctCircles, lastClicked]);
@@ -185,7 +184,7 @@ const Quiz = () => {
                 break;
 
             case 'REENTER':
-                // TODO: how game changes after it was completed once
+                // TODO: how game changes after it was completed once (enable reentering at every topic's 1st circle)
                 console.log('we enter the reenter case..');
                 break;
 

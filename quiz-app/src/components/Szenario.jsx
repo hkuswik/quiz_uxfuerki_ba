@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import start_topic1 from '../data/images/weiter_generic.png';
 import start_topic2 from '../data/images/weiter_topic2.png';
 import start_topic3 from '../data/images/weiter_topic3.png';
+// TODO: create correct buttons
 
 const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
     const [color, setColor] = useState('');
@@ -31,9 +32,9 @@ const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
     return (
         <div className="flex flex-col items-center">
             <h2>Szenario {whichSzenario}:</h2>
-            <h2><b style={{ color: color }}>{szenario}</b></h2>
-            <h3>Versetze dich in folgendes Szenario:</h3>
-            <p className="w-11/12 mt-4">
+            <h2 style={{ color: color }} className="font-bold">{szenario}</h2>
+            <p className="font-medium w-11/12 text-lg mt-7">Versetze dich in folgendes Szenario:</p>
+            <p className="w-11/12 mt-3">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Eum ducimus porro magni consequatur dolor facere aspernatur
                 fugiat quidem velit quas ad quod saepe et natus harum, voluptates
@@ -42,7 +43,7 @@ const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
                 aspernatur fugiat quidem velit quas ad quod saepe et natus harum,
                 voluptates accusamus, iste deserunt!
             </p>
-            <div className="flex row w-full justify-end mt-20">
+            <div className="flex row w-full justify-end mt-12">
                 <div onClick={onUpdate} className="img-container hover:opacity-85 cursor-pointer">
                     <img src={button} className="h-24" alt="weiter Button" />
                 </div>

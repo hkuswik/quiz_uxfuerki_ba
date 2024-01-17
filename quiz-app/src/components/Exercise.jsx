@@ -7,6 +7,11 @@ import fortfahrenIcon from '../data/images/continue_logo.png';
 import { useEffect, useState } from "react";
 
 const Exercise = ({ exercise, active, onAnswer, onUpdate }) => {
+
+    // TODO: add joker behaviour
+    // TODO: joker NOT clickable when answer clicked (& no hover-effect)
+    // TODO: stop little movement of content when buttons change
+
     const [checkClicked, setCheckClicked] = useState(false);
 
     useEffect( () => {
@@ -40,7 +45,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate }) => {
         <div style={exerciseContainer}>
             <div className="flex row h-full mr-6">
                 <div style={joker_row}>
-                    <h3 className="pb-10">Joker:</h3>
+                    <h4 className="pb-10">Joker:</h4>
                     <div style={joker} className="img-container hover:opacity-85">
                         <img src={bulbIcon} className="h-16" alt="Glühbirnen Icon" />
                     </div>
@@ -52,7 +57,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate }) => {
                 <div className="flex flex-col">{renderExerciseType(exercise)}</div>
             </div>
             <div className="flex row justify-between items-end h-10">
-                <h3>{getExerciseNumber(active)}/24</h3>
+                <h4>{getExerciseNumber(active)}/24</h4>
                 {checkClicked &&
                     <div className="img-container">
                         <img src={fortfahrenIcon} className=" h-12 hover:opacity-85 cursor-pointer" onClick={onUpdate} alt="mit Quiz fortfahren" />

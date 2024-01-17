@@ -10,7 +10,7 @@
 * {
   font-size: calc(10px + 1vmin);
   font-family: 'Montserrat';
-  font-weight: 300;
+  font-weight: 400;
   color: #21202b;
 }
 
@@ -18,22 +18,24 @@ h1 {
   font-family: 'Montserrat Alternates';
   color: white;
   font-size: calc(60px + 1vmin);
-  font-weight: 400;
   align-self: center;
 }
 
 h2 {
   font-size: calc(35px + 1vmin);
-  font-weight: 400;
 }
 
-h2 b {
-  font-size: calc(35px + 1vmin);
-  font-weight: 600;
+h3 {
+  font-size: calc(30px + 1vmin);
+}
+
+h4 {
+  font-size: calc(17px + 1vmin);
 }
 
 b {
   font-weight: 600;
+  font-size: calc(17px + 1vmin);
 }
 
 .pink {
@@ -51,14 +53,9 @@ b {
   font-weight: 700;
 }
 
-h3 {
-  font-size: calc(14px + 1vmin);
-  font-weight: 400;
-}
-
 text {
   font-size: calc(6px + 1vmin);
-  font-weight: 400;
+  font-weight: 300;
 }
 
 text.sm {
