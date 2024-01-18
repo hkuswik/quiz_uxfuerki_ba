@@ -22,7 +22,8 @@
 
 #### TODOs (roughly ordered by importance):
 
-* [ ] Sorting.jsx
+* [ ] Sorting.jsx:
+    * [ ] was answer correct/wrong?
 * [ ] Matching.jsx
 * [ ] Exercise.jsx: 
     * [ ] joker behaviour:

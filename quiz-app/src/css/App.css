@@ -38,6 +38,10 @@ b {
   font-size: calc(17px + 1vmin);
 }
 
+p.sm {
+  font-size: calc(6px + 1vmin);
+}
+
 .pink {
   color: #D177B3;
   font-weight: 700;
