@@ -128,7 +128,7 @@ const SortingExercise = ({ exercise, onAnswer }) => {
     // TODO: functionality
     return (
         <div className='flex flex-col h-full w-full max-w-4xl justify-around'>
-            <div className="font-medium mb-5">{exercise.question}</div>
+            <div className="font-semibold mb-5">{exercise.question}</div>
             <div className="flex flex-col">
                 {Object.keys(userSelections).map((item) => (
                     <div key={item} className="flex row justify-between mb-2 items-center">

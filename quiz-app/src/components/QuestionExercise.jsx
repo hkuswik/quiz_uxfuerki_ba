@@ -148,7 +148,7 @@ const shuffleArray = (array) => {
 
 const question_style = {
     background: '#F6F5FC',
-    fontWeight: '400',
+    fontWeight: '600',
     width: '100%',
     height: 'auto',
     padding: '20px',

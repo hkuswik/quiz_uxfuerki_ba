@@ -25,7 +25,7 @@
 * [x] Sorting.jsx:
     * [x] was answer correct/wrong?
 * [ ] Matching.jsx
-* [ ] Quiz.jsx: SVG done (all circles in correct place)
+* [x] Quiz.jsx: SVG done (all circles in correct place)
 * [ ] Exercise.jsx: 
     * [ ] joker behaviour:
         * [ ] NewQuestions Joker
