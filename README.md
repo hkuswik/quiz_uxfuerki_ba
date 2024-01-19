@@ -33,7 +33,7 @@
         * [ ] NOT clickable after selecting answer
         * [ ] adding joker amount to Feedback
         * [ ] adding Symbol to svg (when joker used)
-    * [ ] stop movement when buttons change
+    * [x] stop movement when buttons change
     * [x] log answer in AS SOON as check clicked (else: cheating possible)
 * [ ] Feedback.jsx: repeat section
 * [ ] Header.jsx:
