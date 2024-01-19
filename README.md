@@ -44,8 +44,7 @@
 * [ ] Start.jsx: 2nd popup (with explanations) or adding them to current popup
 * [ ] Quiz.jsx: 
     * [ ] reentering after finishing
-    * [ ] what happens when pool empty?
-    * [ ] when finished: resetting used exercises? Starting with not yet used?
+    * [x] what happens when pool empty?
 * [ ] Szenario.jsx: correct buttons
 * [ ] AllQuestions.jsx
 * [x] Quest/Sort/Match: what happens onClick when no answer selected?

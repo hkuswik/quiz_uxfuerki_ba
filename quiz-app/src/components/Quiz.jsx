@@ -100,7 +100,7 @@ const Quiz = () => {
             // check if circle is the same as the last clicked circle
             if (circle !== lastClicked) {
                 // if it is a new circle, a new exercise shall be selected
-                setNewExercise(circle, topic);
+                setNewExercise(topic);
                 setLastClicked(circle);
             } else {
                 setCurrentContent(currentExercise);
@@ -123,34 +123,45 @@ const Quiz = () => {
         return circle === activeCircle || possibleCircles.includes(circle)
     }
 
-    const setNewExercise = (circle, topic) => {
+    const setNewExercise = (topic) => {
         // which topic pool to choose exercises from
         const exercises = (topic === topic1 ? exercisesTopic1 : topic === topic2 ? exercisesTopic2 : exercisesTopic3);
 
-        // if there are still exercises left, choose last exercise of array and delete it
         if (exercises.length > 0) {
-            const selected = exercises.pop();
-
-            // update the changed exercises array in state, according to topic
-            switch (topic) {
-                case topic1:
-                    setExercisesTopic1(exercises);
-                    break;
-                case topic2:
-                    setExercisesTopic2(exercises);
-                    break;
-                case topic3:
-                    setExercisesTopic3(exercises);
-                    break;
-                default:
-                    console.log('some mistake by setting topic exercises');
-            }
-
-            setCurrentExercise(selected); // save which exercise is currently used
-            setCurrentContent(selected);
+            // if there are still exercises left, get a new exercise 
+            getExercise(exercises, topic);
         } else {
-            // TODO: what happens when question pool of one difficulty is empty (currently: last repeated)
-            console.log('No more questions of topic: ', pathGraph[circle].topic);
+            console.log('reset exercise pool of topic: ', topic);
+            // reshuffle exercises for exhausted topic exercise pool
+            const newExercisePool = quizData.filter((exercise) => exercise.difficulty === topic);
+            shuffleArray(newExercisePool);
+
+            // get new exercise and save new exercise pool after popping
+            getExercise(newExercisePool, topic);
+        }
+    }
+
+    const getExercise = (exercises, topic) => {
+        // choose last exercise of array and delete it
+        const selected = exercises.pop();
+
+        // save which exercise is currently used
+        setCurrentExercise(selected);
+        setCurrentContent(selected);
+
+        // update the changed exercises array in state, according to topic
+        switch (topic) {
+            case topic1:
+                setExercisesTopic1(exercises);
+                break;
+            case topic2:
+                setExercisesTopic2(exercises);
+                break;
+            case topic3:
+                setExercisesTopic3(exercises);
+                break;
+            default:
+                console.log('some mistake by setting topic exercises');
         }
     }
 
@@ -230,9 +241,7 @@ const Quiz = () => {
 
     const handleClosePopup = () => {
         setShowPopup(false);
-    };setActiveCircle('circle1');
-    const updatedCircles = completedCircles.filter(circle => pathGraph[circle].topic !== topic1)
-    setCompletedCircles(updatedCircles);
+    };
 
     const handleTopicRepeat = () => {
         if (currentTopic === 1) {
