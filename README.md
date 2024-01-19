@@ -34,7 +34,7 @@
         * [ ] adding joker amount to Feedback
         * [ ] adding Symbol to svg (when joker used)
     * [ ] stop movement when buttons change
-    * [ ] log answer in AS SOON as check clicked (else: cheating possible)
+    * [x] log answer in AS SOON as check clicked (else: cheating possible)
 * [ ] Feedback.jsx: repeat section
 * [ ] Header.jsx:
     * [ ] progressBar

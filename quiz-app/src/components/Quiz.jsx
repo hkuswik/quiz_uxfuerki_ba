@@ -61,8 +61,6 @@ const Quiz = () => {
     const [currentContent, setCurrentContent] = useState(null);
     const [currentExercise, setCurrentExercise] = useState(null);
 
-    const [correctAnswer, setCorrectAnswer] = useState(false);
-
     const [exercisesTopic1, setExercisesTopic1] = useState([]);
     const [exercisesTopic2, setExercisesTopic2] = useState([]);
     const [exercisesTopic3, setExercisesTopic3] = useState([]);
@@ -159,34 +157,35 @@ const Quiz = () => {
         }
     }
 
+    // updating state and board after exercise answer has been locked in
     const handleAnswer = (isCorrect) => {
         console.log('Quiz knows that answer was: ', isCorrect);
-        setCorrectAnswer(isCorrect);
-    }
-
-    const handleUpdate = () => {
-        console.log('was answer correct?: ', correctAnswer);
-        if (correctAnswer) {
+        updateCorrectInTopic(lastClicked, isCorrect);
+        // add circle to correctCircles if answer was correct
+        if (isCorrect) {
             setCorrectCircles(correctCircles => [...correctCircles, lastClicked]);
         }
+        // make next circle active
+        setActiveCircle(pathGraph[lastClicked].next);
+        // update completed circles
+        setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
+    }
 
+    // updating board when user closes popup depending on current quiz situation
+    const handleUpdate = () => {
         switch (state) {
             case 'DEFAULT':
                 // check what type of circle was clicked
                 const topic = pathGraph[lastClicked].topic;
                 const isExercise = (topic === topic1 || topic === topic2 || topic === topic3);
 
-                // execute behaviour depending on what type of circle
-                if (isExercise) {
-                    setActiveCircle(pathGraph[lastClicked].next);
-                }
-                else {
+                // execute behaviour depending on what type of circle (if exercise, board has already been updated)
+                if (!isExercise) {
                     if (topic === 'goal') {
                         setCompletedTopics(completedTopics + 1);
                         setPossibleCircles(possibleCircles => [...possibleCircles, ...['circle1', 'circle3', 'circle5']]);
                         setState('REENTER');
                     } else if (topic === 'feedback') {
-                        console.log(`feedback circle -> topics: ${completedTopics}, now +1`);
                         setActiveCircle(pathGraph[lastClicked].next);
                         setCompletedTopics(completedTopics + 1);
                     } else if (topic.includes('szenario')) {
@@ -194,13 +193,14 @@ const Quiz = () => {
                         setActiveCircle(pathGraph[lastClicked].next);
                         !(possibleCircles.includes(lastClicked)) && setPossibleCircles(possibleCircles => [...possibleCircles, lastClicked]);
                     } else { //start
-                        console.log('start?');
                         setActiveCircle(pathGraph[lastClicked].next);
                     }
+                    // update completed circles
+                    setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
                 }
-
                 break;
 
+            // when quiz has been completed (again), user can re-enter at any topic
             case 'REENTER':
                 // TODO: how game changes after it was completed once (enable reentering at every topic's 1st circle)
                 console.log('we enter the reenter case..');
@@ -209,10 +209,6 @@ const Quiz = () => {
             default:
                 console.log('some state problem oh no');
         }
-
-        // update completed circles
-        setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
-        updateCorrectInTopic(lastClicked, correctAnswer);
 
         setShowPopup(false);
     }
