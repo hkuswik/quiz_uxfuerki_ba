@@ -1,5 +1,9 @@
 import weiter_logo from '../data/images/weiter_generic.png'
 
+const topic1 = 'Vertrauen';
+const topic2 = 'Diskriminierung';
+const topic3 = 'Autonomie';
+
 const Start = ({ onUpdate }) => {
 
     // TODO: add 2nd start popup (explanations for joker/progressBar)
@@ -11,8 +15,8 @@ const Start = ({ onUpdate }) => {
             <h2 className='font-semibold'>Wegweiser.UX-für-KI Quiz</h2>
             <div className="w-9/12 mt-8">
                 <p className="pb-3">
-                    Du kannst dich hier selbstständig zu den Themen <b className="pink">Vertrauen</b>, <b
-                        className="lila">Diskriminierung</b> und <b className="türkis">Autonomie</b> testen.
+                    Du kannst dich hier selbstständig zu den Themen <b className="pink">{topic1}</b>, <b
+                        className="lila">{topic2}</b> und <b className="türkis">{topic3}</b> testen.
                 </p>
                 <p>
                     Zu jedem Thema erhältst du zunächst ein kurzes <b>Szenario</b>, in das du dich reinversetzen sollst.

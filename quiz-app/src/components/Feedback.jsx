@@ -7,6 +7,10 @@ import weiter_generic from '../data/images/weiter_generic.png';
 import zurück_plattform from '../data/images/lernplattform_button.png';
 import { useState, useEffect } from 'react';
 
+const topic1 = 'Vertrauen';
+const topic2 = 'Diskriminierung';
+const topic3 = 'Autonomie';
+
 const Feedback = ({ completedTopic, onUpdate, correctInTopic }) => {
     const [button1, setButton1] = useState(null);
     const [button2, setButton2] = useState(null);
@@ -23,19 +27,19 @@ const Feedback = ({ completedTopic, onUpdate, correctInTopic }) => {
         if (completedTopic === 'Topic 1') {
             setButton1(wdh_topic1);
             setButton2(weiter_topic2);
-            setTopic('Vertrauen');
+            setTopic(topic1);
             setClassColor('pink');
             setAmountCorrect(correctInTopic.get(1));
         } else if (completedTopic === 'Topic 2') {
             setButton1(wdh_topic2);
             setButton2(weiter_topic3);
-            setTopic('Diskriminierung');
+            setTopic(topic2);
             setClassColor('lila');
             setAmountCorrect(correctInTopic.get(2));
         } else {
             setButton1(wdh_topic3);
             setButton2(weiter_generic);
-            setTopic('Autonomie');
+            setTopic(topic3);
             setClassColor('türkis');
             setAmountCorrect(correctInTopic.get(3));
         }

@@ -11,19 +11,37 @@ const topic2 = 'medium';
 const topic3 = 'hard';
 
 const pathGraph = {
-    start: { next: 'szenario1', topic: 'start', x: '8%', y: '14%' },
-    szenario1: { next: 'circle1', topic: 'szenario1', x: '8%', y: '50%' },
-    circle1: { next: 'circle2', topic: topic1, x: '20%', y: '11%' },
-    circle2: { next: 'feedback1', topic: topic1, x: '30%', y: '11%' },
-    feedback1: { next: 'szenario2', topic: 'feedback', x: '200', y: '240' },
-    szenario2: { next: 'circle3', topic: 'szenario2', x: '30%', y: '50%' },
-    circle3: { next: 'circle4', topic: topic2, x: '40%', y: '13%' },
-    circle4: { next: 'feedback2', topic: topic2, x: '50%', y: '16%' },
-    feedback2: { next: 'szenario3', topic: 'feedback', x: '400', y: '240' },
-    szenario3: { next: 'circle5', topic: 'szenario3', x: '50%', y: '50%' },
-    circle5: { next: 'circle6', topic: topic3, x: '60%', y: '18%' },
-    circle6: { next: 'goal', topic: topic3, x: '70%', y: '20%' },
-    goal: { next: '', topic: 'goal', x: '650', y: '230' }
+    start: { next: 'szenario1', topic: 'start', x: '40', y: '140' },
+    szenario1: { next: 'circle1', topic: 'szenario1', x: '180', y: '135' },
+    circle1: { next: 'circle2', topic: topic1, x: '320', y: '170' },
+    circle2: { next: 'circle3', topic: topic1, x: '380', y: '270' },
+    circle3: { next: 'circle4', topic: topic1, x: '290', y: '350' },
+    circle4: { next: 'circle5', topic: topic1, x: '170', y: '390' },
+    circle5: { next: 'circle6', topic: topic1, x: '110', y: '500' },
+    circle6: { next: 'circle7', topic: topic1, x: '140', y: '620' },
+    circle7: { next: 'circle8', topic: topic1, x: '250', y: '690' },
+    circle8: { next: 'feedback1', topic: topic1, x: '380', y: '710' },
+    feedback1: { next: 'szenario2', topic: 'feedback', x: '496', y: '680' },
+    szenario2: { next: 'circle9', topic: 'szenario2', x: '660', y: '680' },
+    circle9: { next: 'circle10', topic: topic2, x: '40%', y: '13%' },
+    circle10: { next: 'circle11', topic: topic2, x: '50%', y: '16%' },
+    circle11: { next: 'circle12', topic: topic2, x: '50%', y: '16%' },
+    circle12: { next: 'circle13', topic: topic2, x: '50%', y: '16%' },
+    circle13: { next: 'circle14', topic: topic2, x: '50%', y: '16%' },
+    circle14: { next: 'circle15', topic: topic2, x: '50%', y: '16%' },
+    circle15: { next: 'circle16', topic: topic2, x: '50%', y: '16%' },
+    circle16: { next: 'feedback2', topic: topic2, x: '50%', y: '16%' },
+    feedback2: { next: 'szenario3', topic: 'feedback', x: '992', y: '140' },
+    szenario3: { next: 'circle17', topic: 'szenario3', x: '50%', y: '50%' },
+    circle17: { next: 'circle18', topic: topic3, x: '60%', y: '18%' },
+    circle18: { next: 'circle19', topic: topic3, x: '60%', y: '18%' },
+    circle19: { next: 'circle20', topic: topic3, x: '60%', y: '18%' },
+    circle20: { next: 'circle21', topic: topic3, x: '60%', y: '18%' },
+    circle21: { next: 'circle22', topic: topic3, x: '60%', y: '18%' },
+    circle22: { next: 'circle23', topic: topic3, x: '60%', y: '18%' },
+    circle23: { next: 'circle24', topic: topic3, x: '60%', y: '18%' },
+    circle24: { next: 'goal', topic: topic3, x: '60%', y: '18%' },
+    goal: { next: '', topic: 'goal', x: '1430', y: '769' }
 };
 
 const Quiz = () => {
@@ -276,8 +294,8 @@ const Quiz = () => {
                     <ellipse
                         cx={pathGraph[circle].x}
                         cy={pathGraph[circle].y}
-                        rx={isSzenario ? '69' : '35'}
-                        ry={isSzenario ? '45' : '35'}
+                        rx={isSzenario ? '80' : '35'}
+                        ry={isSzenario ? '55' : '35'}
                         fill={isExerciseOrSzenario ? isCompleted ? color : '#21202b' : '#21202b'}
                         stroke={isReachable ? 'white' : color}
                         className={`${isActiveHovered ? 'circle-active-hover' : ''} ${isSzenarioHovered ? 'opacity-80' : ''}`}
@@ -306,7 +324,7 @@ const Quiz = () => {
                             x={pathGraph[circle].x}
                             y={pathGraph[circle].y}
                             textAnchor="middle"
-                            dy='-15px'
+                            dy='-20px'
                             fill='white'
                             className='sm'
                             style={{ cursor: isReachable ? 'pointer' : 'default' }}
@@ -340,9 +358,16 @@ const Quiz = () => {
     return (
         <div className='Quiz'>
             <Header onReset={handleReset}></Header>
-            <svg className='flex justify-self-center' width="1000px" height="800px">
-                {renderBoard()}
-            </svg>
+            <div className='svg-container'>
+                <svg id='board'>
+                    <text x={248} y={50} textAnchor="middle" fill='#D177B3' className='h3'>Vertrauen</text>
+                    <text x={744} y={50} textAnchor="middle" fill='#8377D1' className='h3'>Diskriminierung</text>
+                    <text x={1240} y={50} textAnchor="middle" fill='#77D1CB' className='h3'>Autonomie</text>
+                    <line x1={496} y1={0} x2={496} y2={1000} style={{ stroke: '#2D2C36', strokeWidth: '5px' }} />
+                    <line x1={992} y1={0} x2={992} y2={1000} style={{ stroke: '#2D2C36', strokeWidth: '5px' }} />
+                    {renderBoard()}
+                </svg>
+            </div>
             {showPopup &&
                 <Popup
                     onClose={handleClosePopup}

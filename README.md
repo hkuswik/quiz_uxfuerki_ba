@@ -31,11 +31,14 @@
         * [ ] NewQuestions Joker
         * [ ] Tipp Joker
         * [ ] NOT clickable after selecting answer
+        * [ ] adding joker amount to Feedback
+        * [ ] adding Symbol to svg (when joker used)
     * [ ] stop movement when buttons change
     * [ ] log answer in AS SOON as check clicked (else: cheating possible)
+* [ ] Feedback.jsx: repeat section
 * [ ] Header.jsx:
     * [ ] progressBar
-    * [ ] correct reset button
+    * [x] correct reset button
     * [ ] add Disclaimers for allQuestions / resetting quiz
 * [ ] Goal.jsx
 * [ ] Start.jsx: 2nd popup (with explanations) or adding them to current popup
@@ -46,3 +49,5 @@
 * [ ] Szenario.jsx: correct buttons
 * [ ] AllQuestions.jsx
 * [x] Quest/Sort/Match: what happens onClick when no answer selected?
+* [ ] change topic names to variables (after receiving actual exercises)
+* [ ] add comments where missing

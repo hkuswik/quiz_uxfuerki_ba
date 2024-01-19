@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import check_logo_yes from '../data/images/check-bl.png';
 import check_logo_no from '../data/images/check-light.png';
 
+const topic1 = 'easy';
+const topic2 = 'medium';
+const topic3 = 'hard';
+
 const QuestionExercise = ({ exercise, onAnswer }) => {
     const [answers, setAnswers] = useState([]);
     const [hovered, setHovered] = useState(null);
@@ -18,13 +22,13 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
         randomizeAnswers(exercise);
 
         switch (exercise.difficulty) {
-            case 'easy':
+            case topic1:
                 setColor('#D177B3');
                 break;
-            case 'medium':
+            case topic2:
                 setColor('#8377D1');
                 break;
-            case 'hard':
+            case topic3:
                 setColor('#77D1CB');
                 break;
             default:

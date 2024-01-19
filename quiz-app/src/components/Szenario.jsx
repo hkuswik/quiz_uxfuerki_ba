@@ -4,25 +4,33 @@ import start_topic2 from '../data/images/weiter_topic2.png';
 import start_topic3 from '../data/images/weiter_topic3.png';
 // TODO: create correct buttons
 
+const topic1 = 'Vertrauen';
+const topic2 = 'Diskriminierung';
+const topic3 = 'Autonomie';
+
 const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
     const [color, setColor] = useState('');
     const [szenario, setSzenario] = useState('');
+    const [szenarioNr, setSzenarioNr] = useState(1);
     const [button, setButton] = useState(null);
 
     useEffect(() => {
         switch (whichSzenario) {
-            case 1:
-                setSzenario('Vertrauen');
+            case 'szenario1':
+                setSzenario(topic1);
+                setSzenarioNr('1');
                 setColor('#D177B3');
                 setButton(start_topic1);
                 break;
-            case 2:
-                setSzenario('Diskriminierung');
+            case 'szenario2':
+                setSzenario(topic2);
+                setSzenarioNr('2');
                 setColor('#8377D1');
                 setButton(start_topic2);
                 break;
             default:
-                setSzenario('Autonomie');
+                setSzenario(topic3);
+                setSzenarioNr('3');
                 setColor('#77D1CB');
                 setButton(start_topic3);
         }
@@ -30,8 +38,8 @@ const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
     }, [whichSzenario]);
 
     return (
-        <div className="flex flex-col items-center">
-            <h2>Szenario {whichSzenario}:</h2>
+        <div className="flex flex-col items-center" style={showBtn ? {marginBottom: ''} : {marginBottom: '150px'}}>
+            <h2>Szenario {szenarioNr}:</h2>
             <h2 style={{ color: color }} className="font-bold">{szenario}</h2>
             <p className="font-medium w-11/12 text-lg mt-7">Versetze dich in folgendes Szenario:</p>
             <p className="w-11/12 mt-3">
@@ -43,11 +51,13 @@ const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
                 aspernatur fugiat quidem velit quas ad quod saepe et natus harum,
                 voluptates accusamus, iste deserunt!
             </p>
-            <div className="flex row w-full justify-end mt-12">
-                <div onClick={onUpdate} className="img-container hover:opacity-85 cursor-pointer">
-                    <img src={button} className="h-24" alt="weiter Button" />
+            {showBtn &&
+                <div className="flex row w-full justify-end mt-12">
+                    <div onClick={onUpdate} className="img-container hover:opacity-85 cursor-pointer">
+                        <img src={button} className="h-24" alt="weiter Button" />
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     )
 }

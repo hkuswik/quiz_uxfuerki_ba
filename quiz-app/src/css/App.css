@@ -29,6 +29,11 @@ h3 {
   font-size: calc(30px + 1vmin);
 }
 
+.h3 {
+  font-size: calc(22px + 1vmin);
+  font-weight: 500;
+}
+
 h4 {
   font-size: calc(17px + 1vmin);
 }
@@ -63,12 +68,13 @@ p.sm {
 }
 
 text {
-  font-size: calc(6px + 1vmin);
-  font-weight: 300;
+  font-size: calc(8px + 1vmin);
+  font-weight: 400;
 }
 
 text.sm {
-  font-size: calc(4px + 1vmin);
+  font-size: calc(6px + 1vmin);
+  font-weight: 300;
 }
 
 /* General */
