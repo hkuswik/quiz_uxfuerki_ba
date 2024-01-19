@@ -6,7 +6,7 @@ import Szenario from './Szenario';
 import Goal from './Goal';
 import AllQuestions from './AllQuestions';
 
-const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate, correctInTopic }) => {
+const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat, correctInTopic }) => {
     const [bgColor, setBgColor] = useState('#F6F5FC');
     const isExercise = (content.type === 'question' || content.type === 'match' || content.type === 'sort');
 
@@ -24,7 +24,6 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate, 
             default:
                 setBgColor('#F6F5FC');
         }
-        console.log(content);
     }, [content])
 
     const renderPopupContent = (content) => {
@@ -33,7 +32,7 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate, 
         } else {
             switch (content) {
                 case 'feedback':
-                    return <Feedback completedTopic={whichTopic(completedTopics)} correctInTopic={correctInTopic} onUpdate={onUpdate}
+                    return <Feedback currentTopic={currentTopic} correctInTopic={correctInTopic} onUpdate={onUpdate} onRepeat={onRepeat}
                     />;
                 case 'goal':
                     return <Goal />;
@@ -51,21 +50,6 @@ const Popup = ({ onClose, content, active, completedTopics, onAnswer, onUpdate, 
             }
         }
     };
-
-    const whichTopic = (completed) => {
-        switch (completed) {
-            case 0:
-                return 'Topic 1';
-            case 1:
-                return 'Topic 2';
-            case 2:
-                return 'Topic 3';
-            case 3:
-                return 'all done! :)';
-            default:
-                return 'Error wrong Topic completed number...';
-        }
-    }
 
     const handlePopupClick = (event) => {
         // prevent popup from closing when popup itself is clicked

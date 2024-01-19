@@ -45,17 +45,13 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
 
     const checkAnswer = () => {
         if (selected === null) {
-            // TODO: handle what happens when you haven't selected an answer
-            // maybe text: 'select an answer'?
             console.log('no answer selected :(');
         } else {
             setCheckClicked(true);
             setIsClickable(false);
             if (selected === exercise.correctAnswer) {
-                console.log('jey answer was correct :)');
                 onAnswer(true);
             } else {
-                console.log('oh no answer was wrong');
                 onAnswer(false);
             }
         }

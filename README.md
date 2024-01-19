@@ -35,7 +35,7 @@
         * [ ] adding Symbol to svg (when joker used)
     * [x] stop movement when buttons change
     * [x] log answer in AS SOON as check clicked (else: cheating possible)
-* [ ] Feedback.jsx: repeat section
+* [x] Feedback.jsx: repeat section
 * [ ] Header.jsx:
     * [ ] progressBar
     * [x] correct reset button

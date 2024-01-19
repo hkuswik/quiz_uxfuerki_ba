@@ -11,7 +11,7 @@ const topic1 = 'Vertrauen';
 const topic2 = 'Diskriminierung';
 const topic3 = 'Autonomie';
 
-const Feedback = ({ completedTopic, onUpdate, correctInTopic }) => {
+const Feedback = ({ currentTopic, onUpdate, correctInTopic, onRepeat }) => {
     const [button1, setButton1] = useState(null);
     const [button2, setButton2] = useState(null);
     const [topic, setTopic] = useState('Topic');
@@ -20,17 +20,17 @@ const Feedback = ({ completedTopic, onUpdate, correctInTopic }) => {
     /* const [amountJoker, setAmountJoker] = useState(0); */
 
     useEffect(() => {
-        selectButtons(completedTopic);
+        selectButtons(currentTopic);
     });
 
-    const selectButtons = (completedTopic) => {
-        if (completedTopic === 'Topic 1') {
+    const selectButtons = (currentTopic) => {
+        if (currentTopic === 1) {
             setButton1(wdh_topic1);
             setButton2(weiter_topic2);
             setTopic(topic1);
             setClassColor('pink');
             setAmountCorrect(correctInTopic.get(1));
-        } else if (completedTopic === 'Topic 2') {
+        } else if (currentTopic === 2) {
             setButton1(wdh_topic2);
             setButton2(weiter_topic3);
             setTopic(topic2);
@@ -43,9 +43,6 @@ const Feedback = ({ completedTopic, onUpdate, correctInTopic }) => {
             setClassColor('türkis');
             setAmountCorrect(correctInTopic.get(3));
         }
-        console.log('correct: 1: ', correctInTopic.get(1),
-            ', 2: ', correctInTopic.get(2), ', 3: ', correctInTopic.get(3));
-        console.log('topic: ', completedTopic);
     }
 
     return (
@@ -54,7 +51,7 @@ const Feedback = ({ completedTopic, onUpdate, correctInTopic }) => {
             <h2 className={classColor}>{topic}</h2>
             <h4 className='w-10/12'>abgeschlossen! Du hast <b>{amountCorrect}/8 Fragen</b> richtig beantwortet und <b> Joker</b> verwendet.</h4>
             <div className="flex row justify-between w-10/12 items-center mt-12 mb-16">
-                <div className="img-container hover:opacity-85 cursor-pointer">
+                <div onClick={onRepeat} className="img-container hover:opacity-85 cursor-pointer">
                     <img src={button1} className="h-16" alt="Abschnitt wiederholen Button" />
                 </div>
                 <div className="img-container hover:opacity-85 cursor-pointer">
