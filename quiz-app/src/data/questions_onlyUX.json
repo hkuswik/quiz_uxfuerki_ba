@@ -90,17 +90,6 @@
   "tip": "…"
  },
  {
-  "id": 9,
-  "type": "sort",
-  "difficulty": "medium",
-  "question": "Welche Elemente sind Teil des Nutzungskontexts?",
-  "firstContainer": "Teil des Nutzungskontexts",
-  "secondContainer": "nicht Teil des Nutzungskontexts",
-  "belongsInFirst": "Benutzer;Arbeitsaufgaben;Arbeitsmittel;physische und soziale Umgebung",
-  "belongsInSecond": "Entwicklungsprozess;Implementierungsdetails;Designentscheidungen;Methodenwahl",
-  "tip": "…"
- },
- {
   "id": 10,
   "type": "match",
   "difficulty": "medium",
@@ -108,28 +97,6 @@
   "correctPair1": "Ease of Learning;wie leicht es ist, ein Produkt erstmalig zu verstehen",
   "correctPair2": "Ease of Use;wie effizient ein Produkt bei regelmäßiger Nutzung ist",
   "wrongDefinitions": "wie schnell Aufgaben erledigt werden können;wie schnell und einfach ein Produkt installiert werden kann;der Preis eines Produkts;die soziale Akzeptanz eines Produkts",
-  "tip": "…"
- },
- {
-  "id": 11,
-  "type": "sort",
-  "difficulty": "easy",
-  "question": "Was sind mögliche Klassifikationen für Evaluationsmethoden?",
-  "firstContainer": "ist eine mögliche Klassifikation",
-  "secondContainer": "ist keine mögliche Klassifikation",
-  "belongsInFirst": "formativ\/summativ;objektiv\/subjektiv;Labor-\/Feldstudie",
-  "belongsInSecond": "ex ante\/ex post;quick\/slow",
-  "tip": "…"
- },
- {
-  "id": 12,
-  "type": "sort",
-  "difficulty": "easy",
-  "question": "Welche Kriterien sollte ein Produkt\/System erfüllen, um per Definition gebrauchstauglich zu sein?",
-  "firstContainer": "Kriterium für Gebrauchstauglichkeit",
-  "secondContainer": "kein Kriterium für Gebrauchstauglichkeit",
-  "belongsInFirst": "Effektivität;Effizienz;Zufriedenstellung",
-  "belongsInSecond": "Erlernbarkeit;Einfachheit;Originalität",
   "tip": "…"
  },
  {

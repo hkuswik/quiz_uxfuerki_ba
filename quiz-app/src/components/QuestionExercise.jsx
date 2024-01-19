@@ -8,6 +8,7 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
     const [selected, setSelected] = useState(null);
     const [checkClicked, setCheckClicked] = useState(false);
     const [isClickable, setIsClickable] = useState(true);
+    const [showWarning, setShowWarning] = useState(false);
 
     const [color, setColor] = useState('#817C9C');
     const correctColor = '#7AD177';
@@ -56,6 +57,10 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
         }
     }
 
+    const handleWarning = () => {
+        setShowWarning(true);
+    }
+
     const handleAnswerHover = (answer_box) => {
         isClickable && setHovered(answer_box);
     }
@@ -66,6 +71,9 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
 
     const handleAnswerSelect = (selected) => {
         isClickable && setSelected(selected);
+
+        // hide warning again when an answer was clicked
+        showWarning && setShowWarning(false);
     }
 
     const handleAnswerUnselect = () => {
@@ -109,8 +117,11 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
                 })}
             </div>
             <div className="flex justify-end h-8">
+                {showWarning &&
+                    <div className="self-end font-bold mr-24" style={{ color: wrongColor }}>Bitte wähle eine Antwort aus</div>
+                }
                 {(selected === null) &&
-                    <div className="img-container flex">
+                    <div onClick={() => handleWarning()} className="img-container flex">
                         <img src={check_logo_no} className="h-12" alt="Check Logo" />
                     </div>
                 }

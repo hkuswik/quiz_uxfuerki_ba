@@ -22,15 +22,17 @@
 
 #### TODOs (roughly ordered by importance):
 
-* [ ] Sorting.jsx:
-    * [ ] was answer correct/wrong?
+* [x] Sorting.jsx:
+    * [x] was answer correct/wrong?
 * [ ] Matching.jsx
+* [ ] Quiz.jsx: SVG done (all circles in correct place)
 * [ ] Exercise.jsx: 
     * [ ] joker behaviour:
         * [ ] NewQuestions Joker
         * [ ] Tipp Joker
         * [ ] NOT clickable after selecting answer
     * [ ] stop movement when buttons change
+    * [ ] log answer in AS SOON as check clicked (else: cheating possible)
 * [ ] Header.jsx:
     * [ ] progressBar
     * [ ] correct reset button
@@ -43,4 +45,4 @@
     * [ ] when finished: resetting used exercises? Starting with not yet used?
 * [ ] Szenario.jsx: correct buttons
 * [ ] AllQuestions.jsx
-* [ ] Quest/Sort/Match: what happens onClick when no answer selected?
+* [x] Quest/Sort/Match: what happens onClick when no answer selected?

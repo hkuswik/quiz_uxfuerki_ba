@@ -5,10 +5,15 @@ import check_logo_no from '../data/images/check-light.png';
 const SortingExercise = ({ exercise, onAnswer }) => {
     const [firstCategory, setFirstCategory] = useState('');
     const [secondCategory, setSecondCategory] = useState('');
+    const [firstItems, setFirstItems] = useState([]);
+    const [secondItems, setSecondItems] = useState([]);
+
     const [userSelections, setUserSelections] = useState(new Map());
     const [allSelected, setAllSelected] = useState(false);
     const [checkClicked, setCheckClicked] = useState(false);
+
     const [isClickable, setIsClickable] = useState(true);
+    const [showWarning, setShowWarning] = useState(false);
 
     const [firstBtnHover, setFirstBtnHover] = useState(null);
     const [secondBtnHover, setSecondBtnHover] = useState(null);
@@ -38,8 +43,14 @@ const SortingExercise = ({ exercise, onAnswer }) => {
     }, [exercise]);
 
     const prepareItems = (exercise) => {
-        const items = exercise.belongsInFirst.split(';').concat(exercise.belongsInSecond.split(';'));
+        const first = exercise.belongsInFirst.split(';');
+        const second = exercise.belongsInSecond.split(';');
+        setFirstItems(first);
+        setSecondItems(second);
+
+        const items = first.concat(second);
         shuffleArray(items);
+
         setUserSelections(items.reduce((userSelectionsMap, item) => {
             // accumulate user selections for each item
             userSelectionsMap[item] = ''; // initialize user selection for each item
@@ -48,8 +59,13 @@ const SortingExercise = ({ exercise, onAnswer }) => {
     }
 
     const handleButtonClick = (item, category) => {
+        if (!isClickable) {
+            return; // disable clicking when answeres have been logged in
+        }
+
+        // save clicked category for corresponding item
         const newSelections = { ...userSelections, [item]: category };
-        
+
         // check if user has selected a category for each item
         let allDone = true;
         Object.keys(newSelections).forEach((item) => {
@@ -60,24 +76,39 @@ const SortingExercise = ({ exercise, onAnswer }) => {
         });
         setAllSelected(allDone);
 
+        // hide warning again when next category was clicked
+        showWarning && setShowWarning(false);
+
+        // save new selections
         setUserSelections(newSelections);
     };
 
     const checkAnswer = (selected) => {
         if (!allSelected) {
-            // TODO: handle what happens when you haven't selected all answers
-            // maybe text: 'select all answers'?
             console.log('not all answers selected :(');
         } else {
             setCheckClicked(true);
             setIsClickable(false);
             // TODO: answer correct?
+            for (const [item, category] of Object.entries(selected)) {
+                if (category === firstCategory && !firstItems.includes(item)) {
+                    onAnswer(false);
+                    return;
+                } else if (category === secondCategory && !secondItems.includes(item)) {
+                    onAnswer(false);
+                    return;
+                }
+            }
             onAnswer(true);
         }
     }
 
+    const handleWarning = () => {
+        setShowWarning(true);
+    }
+
     const handleBtnHover = (item, selectedCategory) => {
-        if (userSelections[item] !== selectedCategory) {
+        if (userSelections[item] !== selectedCategory && isClickable) {
             if (selectedCategory === firstCategory) {
                 setFirstBtnHover(item);
             } else {
@@ -87,7 +118,7 @@ const SortingExercise = ({ exercise, onAnswer }) => {
     };
 
     const handleBtnLeave = (selectedCategory) => {
-        if (selectedCategory === firstCategory) {
+        if (selectedCategory === firstCategory && isClickable) {
             setFirstBtnHover(null);
         } else {
             setSecondBtnHover(null);
@@ -97,10 +128,10 @@ const SortingExercise = ({ exercise, onAnswer }) => {
     // TODO: functionality
     return (
         <div className='flex flex-col h-full w-full max-w-4xl justify-around'>
-            <div>{exercise.question}</div>
+            <div className="font-medium mb-5">{exercise.question}</div>
             <div className="flex flex-col">
                 {Object.keys(userSelections).map((item) => (
-                    <div key={item} className="flex row justify-between mb-2">
+                    <div key={item} className="flex row justify-between mb-2 items-center">
                         <p style={item_style} className="sm">{item}</p>
                         <div className="flex row">
                             <div
@@ -110,7 +141,10 @@ const SortingExercise = ({ exercise, onAnswer }) => {
                                 style={{
                                     ...button_style,
                                     ...(userSelections[item] === firstCategory ? {} : firstBtnHover === item ? { ...hover_style, outlineColor: color } : {}),
-                                    background: userSelections[item] === firstCategory ? color : '#F6F5FC'
+                                    ...(checkClicked
+                                        ? { background: userSelections[item] === firstCategory ? firstItems.includes(item) ? correctColor : wrongColor : '#F6F5FC' }
+                                        : { background: userSelections[item] === firstCategory ? color : '#F6F5FC' }
+                                    ),
                                 }}
                             >
                                 {firstCategory}
@@ -122,7 +156,10 @@ const SortingExercise = ({ exercise, onAnswer }) => {
                                 style={{
                                     ...button_style,
                                     ...(userSelections[item] === secondCategory ? {} : secondBtnHover === item ? { ...hover_style, outlineColor: color } : {}),
-                                    background: userSelections[item] === secondCategory ? color : '#F6F5FC'
+                                    ...(checkClicked
+                                        ? { background: userSelections[item] === secondCategory ? secondItems.includes(item) ? correctColor : wrongColor : '#F6F5FC' }
+                                        : { background: userSelections[item] === secondCategory ? color : '#F6F5FC' }
+                                    ),
                                 }}
                             >
                                 {secondCategory}
@@ -132,8 +169,11 @@ const SortingExercise = ({ exercise, onAnswer }) => {
                 ))}
             </div>
             <div className="flex justify-end h-8">
-                {(!allSelected) &&
-                    <div className="img-container flex">
+                {showWarning &&
+                    <div className="self-end font-bold mr-28" style={{ color: wrongColor }}>Bitte wähle alle Antworten aus</div>
+                }
+                {!allSelected &&
+                    <div onClick={() => handleWarning()} className="img-container flex">
                         <img src={check_logo_no} className="h-12" alt="Check Logo" />
                     </div>
                 }
@@ -143,7 +183,7 @@ const SortingExercise = ({ exercise, onAnswer }) => {
                     </div>
                 }
             </div>
-        </div>
+        </div >
     );
 };
 
@@ -159,9 +199,8 @@ const item_style = {
     borderRadius: '10px',
     display: 'flex',
     alignItems: 'center',
-    maxWidth: '300px',
-    width: '50%',
-    padding: '0 10px 0 10px',
+    width: '65%',
+    padding: '5px 10px 5px 10px',
 }
 
 const button_style = {
@@ -170,10 +209,11 @@ const button_style = {
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    maxWidth: '200px',
-    padding: '0 5px 0 5px',
+    padding: '10px',
+    height: '30px',
     marginLeft: '10px',
-    fontSize: 'calc(6px + 1vmin)'
+    fontSize: 'calc(6px + 1vmin)',
+    fontWeight: '600'
 }
 
 const hover_style = {
