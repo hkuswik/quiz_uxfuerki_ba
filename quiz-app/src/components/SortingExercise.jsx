@@ -89,7 +89,6 @@ const SortingExercise = ({ exercise, onAnswer }) => {
         } else {
             setCheckClicked(true);
             setIsClickable(false);
-            // TODO: answer correct?
             for (const [item, category] of Object.entries(selected)) {
                 if (category === firstCategory && !firstItems.includes(item)) {
                     onAnswer(false);
@@ -125,7 +124,6 @@ const SortingExercise = ({ exercise, onAnswer }) => {
         }
     }
 
-    // TODO: functionality
     return (
         <div className='flex flex-col h-full w-full max-w-4xl justify-around'>
             <div className="font-semibold mb-5">{exercise.question}</div>

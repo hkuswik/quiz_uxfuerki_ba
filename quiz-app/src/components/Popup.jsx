@@ -6,7 +6,7 @@ import Szenario from './Szenario';
 import Goal from './Goal';
 import AllQuestions from './AllQuestions';
 
-const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat, onJoker, jokerUsed, correctInTopic }) => {
+const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat, onJoker, jokerUsed, correctInTopic, jokerAmount }) => {
     const [bgColor, setBgColor] = useState('#F6F5FC');
     const isExercise = (content.type === 'question' || content.type === 'match' || content.type === 'sort');
 
@@ -28,11 +28,23 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
 
     const renderPopupContent = (content) => {
         if (isExercise) {
-            return <Exercise exercise={content} active={active} onAnswer={onAnswer} onUpdate={onUpdate} onJoker={onJoker} jokerUsed={jokerUsed} />
+            return <Exercise
+                exercise={content}
+                active={active}
+                onAnswer={onAnswer}
+                onUpdate={onUpdate}
+                onJoker={onJoker}
+                jokerUsed={jokerUsed}
+            />
         } else {
             switch (content) {
                 case 'feedback':
-                    return <Feedback currentTopic={currentTopic} correctInTopic={correctInTopic} onUpdate={onUpdate} onRepeat={onRepeat}
+                    return <Feedback
+                        currentTopic={currentTopic}
+                        correctInTopic={correctInTopic}
+                        jokerAmount={jokerAmount}
+                        onUpdate={onUpdate}
+                        onRepeat={onRepeat}
                     />;
                 case 'goal':
                     return <Goal />;
@@ -42,7 +54,11 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                 case 'szenario2':
                 case 'szenario3':
                     const isSzenarioActive = (active === 'szenario1' || active === 'szenario2' || active === 'szenario3');
-                    return <Szenario whichSzenario={content} onUpdate={onUpdate} showBtn={isSzenarioActive} />;
+                    return <Szenario
+                        whichSzenario={content}
+                        onUpdate={onUpdate}
+                        showBtn={isSzenarioActive}
+                    />;
                 case 'alleFragen':
                     return <AllQuestions />
                 default:

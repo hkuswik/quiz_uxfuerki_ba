@@ -26,13 +26,13 @@
     * [x] was answer correct/wrong?
 * [ ] Matching.jsx
 * [x] Quiz.jsx: SVG done (all circles in correct place)
-* [ ] Exercise.jsx: 
-    * [ ] joker behaviour:
+* [x] Exercise.jsx: 
+    * [x] joker behaviour:
         * [x] NewQuestions Joker
         * [x] Tipp Joker
         * [x] NOT clickable after selecting answer
-        * [ ] adding joker amount to Feedback
-        * [ ] adding Symbol to svg (when joker used)
+        * [x] adding joker amount to Feedback
+        * [x] adding Symbol to svg (when joker used)
     * [x] stop movement when buttons change
     * [x] log answer in AS SOON as check clicked (else: cheating possible)
 * [x] Feedback.jsx: repeat section
@@ -43,10 +43,15 @@
 * [ ] Goal.jsx
 * [ ] Start.jsx: 2nd popup (with explanations) or adding them to current popup
 * [ ] Quiz.jsx: 
-    * [ ] reentering after finishing
+    * [ ] reenter state after finishing
     * [x] what happens when pool empty?
+    * [x] reset everything needed when resetting / repeating
 * [ ] Szenario.jsx: correct buttons
 * [ ] AllQuestions.jsx
 * [x] Quest/Sort/Match: what happens onClick when no answer selected?
 * [ ] change topic names to variables (after receiving actual exercises)
 * [ ] add comments where missing
+
+laaater (if time)
+* [ ] re-clicking on finished circles to see what was answered
+* [ ] clean up code / improving & reducing where possible

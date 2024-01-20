@@ -11,13 +11,12 @@ const topic1 = 'Vertrauen';
 const topic2 = 'Diskriminierung';
 const topic3 = 'Autonomie';
 
-const Feedback = ({ currentTopic, onUpdate, correctInTopic, onRepeat }) => {
+const Feedback = ({ currentTopic, onUpdate, correctInTopic, jokerAmount, onRepeat }) => {
     const [button1, setButton1] = useState(null);
     const [button2, setButton2] = useState(null);
     const [topic, setTopic] = useState('Topic');
     const [classColor, setClassColor] = useState('');
     const [amountCorrect, setAmountCorrect] = useState(0);
-    /* const [amountJoker, setAmountJoker] = useState(0); */
 
     useEffect(() => {
         selectButtons(currentTopic);
@@ -49,7 +48,7 @@ const Feedback = ({ currentTopic, onUpdate, correctInTopic, onRepeat }) => {
         <div className='flex flex-col items-center text-center'>
             <h4>Du hast den Abschnitt</h4>
             <h2 className={classColor}>{topic}</h2>
-            <h4 className='w-10/12'>abgeschlossen! Du hast <b>{amountCorrect}/8 Fragen</b> richtig beantwortet und <b> Joker</b> verwendet.</h4>
+            <h4 className='w-10/12'>abgeschlossen! Du hast <b>{amountCorrect}/8 Fragen</b> richtig beantwortet und <b>{jokerAmount} Joker</b> verwendet.</h4>
             <div className="flex row justify-between w-10/12 items-center mt-12 mb-16">
                 <div onClick={onRepeat} className="img-container hover:opacity-85 cursor-pointer">
                     <img src={button1} className="h-16" alt="Abschnitt wiederholen Button" />

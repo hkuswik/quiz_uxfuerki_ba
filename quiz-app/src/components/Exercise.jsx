@@ -11,10 +11,6 @@ import { useEffect, useState } from "react";
 
 const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) => {
 
-    // TODO: add joker behaviour
-    // TODO: joker NOT clickable when answer clicked (& no hover-effect)
-    // TODO: stop little movement of content when buttons change
-
     const [checkClicked, setCheckClicked] = useState(false);
     const [exerciseNr, setExerciseNr] = useState(null);
 

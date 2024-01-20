@@ -5,16 +5,18 @@ import feedbackImg from '../data/images/feedback.png';
 import goalImg from '../data/images/feedback_ende.png';
 import Header from './Header';
 import Popup from './Popup';
+import swapIcon from '../data/images/swap.png';
+import bulbIcon from '../data/images/bulb.png';
 
 const topic1 = 'easy';
 const topic2 = 'medium';
 const topic3 = 'hard';
 
 const pathGraph = {
-    start: { next: 'szenario1', topic: 'start', x: '40', y: '140' },
-    szenario1: { next: 'circle1', topic: 'szenario1', x: '180', y: '135' },
-    circle1: { next: 'circle2', topic: topic1, x: '320', y: '170' },
-    circle2: { next: 'circle3', topic: topic1, x: '380', y: '270' },
+    start: { next: 'szenario1', topic: 'start', x: '60', y: '140' },
+    szenario1: { next: 'circle1', topic: 'szenario1', x: '210', y: '135' },
+    circle1: { next: 'circle2', topic: topic1, x: '350', y: '180' },
+    circle2: { next: 'circle3', topic: topic1, x: '390', y: '280' },
     circle3: { next: 'circle4', topic: topic1, x: '290', y: '350' },
     circle4: { next: 'circle5', topic: topic1, x: '170', y: '390' },
     circle5: { next: 'circle6', topic: topic1, x: '110', y: '500' },
@@ -47,27 +49,29 @@ const pathGraph = {
 const Quiz = () => {
     const [state, setState] = useState('DEFAULT');
 
+    const [exercisesTopic1, setExercisesTopic1] = useState([]);
+    const [exercisesTopic2, setExercisesTopic2] = useState([]);
+    const [exercisesTopic3, setExercisesTopic3] = useState([]);
+
+    const [showPopup, setShowPopup] = useState(false);
+
     const [activeCircle, setActiveCircle] = useState('start');
     const [lastClicked, setLastClicked] = useState('start');
     const [possibleCircles, setPossibleCircles] = useState([]);
     const [completedCircles, setCompletedCircles] = useState([]);
     const [hoveredCircle, setHoveredCircle] = useState(null);
     const [correctCircles, setCorrectCircles] = useState([]);
-    const [correctInTopic, setCorrectInTopic] = useState(new Map([[1, 0], [2, 0], [3, 0]]));
 
     const [currentTopic, setCurrentTopic] = useState(1);
     const [szenariosDone, setSzenariosDone] = useState(0);
-
     const [currentContent, setCurrentContent] = useState(null);
     const [currentExercise, setCurrentExercise] = useState(null);
 
-    const [jokerUsed, setJokerUsed] = useState(null);
+    const [jokerUsed, setJokerUsed] = useState(null); // which type of joker was just used
+    const [jokerMap, setJokerMap] = useState(new Map()); // which joker was used at which circle
 
-    const [exercisesTopic1, setExercisesTopic1] = useState([]);
-    const [exercisesTopic2, setExercisesTopic2] = useState([]);
-    const [exercisesTopic3, setExercisesTopic3] = useState([]);
-
-    const [showPopup, setShowPopup] = useState(false);
+    const [jokerInTopic, setJokerInTopic] = useState(new Map([[1, 0], [2, 0], [3, 0]]));
+    const [correctInTopic, setCorrectInTopic] = useState(new Map([[1, 0], [2, 0], [3, 0]]));
 
     useEffect(() => {
         // save questions according to topic
@@ -83,6 +87,15 @@ const Quiz = () => {
         setExercisesTopic1(firstTopic);
         setExercisesTopic2(secondTopic);
         setExercisesTopic3(thirdTopic);
+
+        // save circle names in Map (as keys) to save where joker were used (values)
+        const circleMap = Object.keys(pathGraph)
+            .filter(key => key.includes('circle'))
+            .reduce((acc, key) => { // acc = accumulator
+                acc[key] = ''
+                return acc;
+            }, {});
+        setJokerMap(circleMap);
     }, []);
 
     const handleCircleClick = (circle) => {
@@ -119,11 +132,11 @@ const Quiz = () => {
         }
 
         setShowPopup(true);
-    }
+    };
 
     const isCircleReachable = (circle) => {
         return circle === activeCircle || possibleCircles.includes(circle)
-    }
+    };
 
     const setNewExercise = (topic) => {
         // which topic pool to choose exercises from
@@ -141,7 +154,7 @@ const Quiz = () => {
             // get new exercise and save new exercise pool after popping
             getExercise(newExercisePool, topic);
         }
-    }
+    };
 
     const getExercise = (exercises, topic) => {
         // choose last exercise of array and delete it
@@ -165,15 +178,14 @@ const Quiz = () => {
             default:
                 console.log('some mistake by setting topic exercises');
         }
-    }
+    };
 
     const handleJoker = (joker) => {
         setJokerUsed(joker);
+        setJokerMap({ ...jokerMap, [activeCircle]: joker });
+        setJokerInTopic(jokerInTopic.set(currentTopic, jokerInTopic.get(currentTopic) + 1));
 
-        if (joker === 'tip') {
-            console.log('add bulb icon to board');
-        } else {
-            console.log('add swap icon to board');
+        if (joker === 'swap') {
             switch (currentTopic) {
                 case 1:
                     setNewExercise(topic1);
@@ -188,15 +200,15 @@ const Quiz = () => {
                     console.log(currentTopic, ' is neither 1, 2 or 3 (error swap joker');
             }
         }
-    }
+    };
 
     // updating state and board after exercise answer has been locked in
     const handleAnswer = (isCorrect) => {
         console.log('Quiz knows that answer was: ', isCorrect);
-        updateCorrectInTopic(lastClicked, isCorrect);
-        // add circle to correctCircles if answer was correct
+        // add circle to correctCircles if answer was correct & update correctInTopic
         if (isCorrect) {
             setCorrectCircles(correctCircles => [...correctCircles, lastClicked]);
+            setCorrectInTopic(correctInTopic.set(currentTopic, correctInTopic.get(currentTopic) + 1));
         }
         // make next circle active
         setActiveCircle(pathGraph[lastClicked].next);
@@ -204,25 +216,7 @@ const Quiz = () => {
         setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
         // make joker available again for new exercise
         setJokerUsed(null);
-    }
-
-    const updateCorrectInTopic = (circle, correct) => {
-        if (correct) {
-            switch (pathGraph[circle].topic) {
-                case topic1:
-                    setCorrectInTopic(correctInTopic.set(1, correctInTopic.get(1) + 1));
-                    break;
-                case topic2:
-                    setCorrectInTopic(correctInTopic.set(2, correctInTopic.get(2) + 1));
-                    break;
-                case topic3:
-                    setCorrectInTopic(correctInTopic.set(3, correctInTopic.get(3) + 1));
-                    break;
-                default:
-                    console.log('error setting correctInTopic');
-            }
-        }
-    }
+    };
 
     // updating board when user closes popup depending on current quiz situation
     const handleUpdate = () => {
@@ -264,32 +258,56 @@ const Quiz = () => {
         }
 
         setShowPopup(false);
-    }
+    };
 
     const handleClosePopup = () => {
         setShowPopup(false);
     };
 
     const handleTopicRepeat = () => {
+        // reset amount of used joker & correct circles in current topic
+        setCorrectInTopic(correctInTopic.set(currentTopic, 0));
+        setJokerInTopic(jokerInTopic.set(currentTopic, 0));
+        // depending on which topic is repeated, set active circle, reset completed circles & joker
         if (currentTopic === 1) {
-            // repeat first topic
             setActiveCircle('circle1');
-            const updatedCircles = completedCircles.filter(circle => pathGraph[circle].topic !== topic1)
+            const updatedCircles = completedCircles.filter(
+                circle => pathGraph[circle].topic !== topic1
+            );
             setCompletedCircles(updatedCircles);
+            Object.keys(jokerMap).forEach((circle) => {
+                if (parseInt(circle.substring(circle.indexOf('e') + 1)) < 9) {
+                    jokerMap[circle] = '';
+                }
+            });
         } else if (currentTopic === 2) {
-            // repeat second topic
             setActiveCircle('circle9');
-            const updatedCircles = completedCircles.filter(circle => pathGraph[circle].topic !== topic2)
+            const updatedCircles = completedCircles.filter(
+                circle => pathGraph[circle].topic !== topic2
+            );
             setCompletedCircles(updatedCircles);
+            Object.keys(jokerMap).forEach((circle) => {
+                const nr = parseInt(circle.substring(circle.indexOf('e') + 1));
+                console.log('nr: ', nr);
+                if (nr >= 9 && nr < 17) {
+                    jokerMap[circle] = '';
+                }
+            });
         } else {
-            // repeat third topic
             setActiveCircle('circle17');
-            const updatedCircles = completedCircles.filter(circle => pathGraph[circle].topic !== topic3)
+            const updatedCircles = completedCircles.filter(
+                circle => pathGraph[circle].topic !== topic3
+            );
             setCompletedCircles(updatedCircles);
+            Object.keys(jokerMap).forEach((circle) => {
+                if (parseInt(circle.substring(circle.indexOf('e') + 1)) >= 17) {
+                    jokerMap[circle] = '';
+                }
+            });
         }
 
         setShowPopup(false);
-    }
+    };
 
     const handleReset = () => {
         setCompletedCircles([]);
@@ -297,8 +315,17 @@ const Quiz = () => {
         setSzenariosDone(0);
         setCurrentTopic(1);
         setActiveCircle('start');
-        // TODO: reset used exercises or not??
-    }
+        setCorrectInTopic(new Map([[1, 0], [2, 0], [3, 0]]));
+        setJokerInTopic(new Map([[1, 0], [2, 0], [3, 0]]));
+
+        Object.keys(jokerMap).forEach((circle) => {
+            jokerMap[circle] = '';
+        });
+    };
+
+    useEffect(() => {
+        console.log('jokerMap: ', jokerMap);
+    }, [jokerMap])
 
     const renderBoard = () => {
         const circleColors = {
@@ -337,6 +364,8 @@ const Quiz = () => {
             const isSzenarioHovered = isSzenario && circle === hoveredCircle;
             const color = circleColors[topic];
             const text = circleTexts[topic];
+
+            const joker = jokerMap[circle];
 
             return (
                 <g key={circle} onClick={() => handleCircleClick(circle)}
@@ -401,6 +430,14 @@ const Quiz = () => {
                             style={{ cursor: isReachable ? 'pointer' : 'default' }}
                         />
                     }
+                    {(joker === 'tip' || joker === 'swap') &&
+                        <image
+                            x={pathGraph[circle].x - (joker === 'tip' ? 30 : 24)}
+                            y={pathGraph[circle].y - (joker === 'tip' ? 29 : 22)}
+                            href={joker === 'tip' ? bulbIcon : swapIcon}
+                            height={joker === 'tip' ? 60 : 45}
+                        />
+                    }
                 </g>
             );
         });
@@ -431,9 +468,10 @@ const Quiz = () => {
                     onRepeat={handleTopicRepeat}
                     jokerUsed={jokerUsed}
                     correctInTopic={correctInTopic}
+                    jokerAmount={jokerInTopic.get(currentTopic)}
                 />}
         </div>
-    )
+    );
 }
 
 const shuffleArray = (array) => {

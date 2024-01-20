@@ -4,7 +4,6 @@ import resetBtn from '../data/images/reset-btn.png';
 import allQuestionsBtn from '../data/images/AlleFragen.png';
 import Popup from './Popup';
 
-// TODO: add correct reset button
 // TODO: add progressBar (design + functionality)
 // TODO: add disclaimers for allQuestions / resetting progress
 
