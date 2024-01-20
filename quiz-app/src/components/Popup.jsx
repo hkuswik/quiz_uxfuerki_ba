@@ -6,7 +6,7 @@ import Szenario from './Szenario';
 import Goal from './Goal';
 import AllQuestions from './AllQuestions';
 
-const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat, onJoker, jokerUsed, correctInTopic, jokerAmount }) => {
+const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat, onJoker, jokerUsed, correctAmount, jokerAmount }) => {
     const [bgColor, setBgColor] = useState('#F6F5FC');
     const isExercise = (content.type === 'question' || content.type === 'match' || content.type === 'sort');
 
@@ -41,7 +41,7 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                 case 'feedback':
                     return <Feedback
                         currentTopic={currentTopic}
-                        correctInTopic={correctInTopic}
+                        correctAmount={correctAmount}
                         jokerAmount={jokerAmount}
                         onUpdate={onUpdate}
                         onRepeat={onRepeat}

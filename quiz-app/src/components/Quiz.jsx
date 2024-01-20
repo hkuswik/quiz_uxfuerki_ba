@@ -70,8 +70,8 @@ const Quiz = () => {
     const [jokerUsed, setJokerUsed] = useState(null); // which type of joker was just used
     const [jokerMap, setJokerMap] = useState(new Map()); // which joker was used at which circle
 
-    const [jokerInTopic, setJokerInTopic] = useState(new Map([[1, 0], [2, 0], [3, 0]]));
-    const [correctInTopic, setCorrectInTopic] = useState(new Map([[1, 0], [2, 0], [3, 0]]));
+    const [jokerInTopic, setJokerInTopic] = useState({ 1: 0, 2: 0, 3: 0 });
+    const [correctInTopic, setCorrectInTopic] = useState({ 1: 0, 2: 0, 3: 0 });
 
     useEffect(() => {
         // save questions according to topic
@@ -183,7 +183,10 @@ const Quiz = () => {
     const handleJoker = (joker) => {
         setJokerUsed(joker);
         setJokerMap({ ...jokerMap, [activeCircle]: joker });
-        setJokerInTopic(jokerInTopic.set(currentTopic, jokerInTopic.get(currentTopic) + 1));
+        setJokerInTopic(prevJokerInTopic => ({
+            ...prevJokerInTopic,
+            [currentTopic]: prevJokerInTopic[currentTopic] + 1,
+        }));
 
         if (joker === 'swap') {
             switch (currentTopic) {
@@ -208,7 +211,10 @@ const Quiz = () => {
         // add circle to correctCircles if answer was correct & update correctInTopic
         if (isCorrect) {
             setCorrectCircles(correctCircles => [...correctCircles, lastClicked]);
-            correctInTopic.set(currentTopic, correctInTopic.get(currentTopic) + 1);
+            setCorrectInTopic(prevCorrectInTopic => ({
+                ...prevCorrectInTopic,
+                [currentTopic]: prevCorrectInTopic[currentTopic] + 1,
+            }));
         }
         // make next circle active
         setActiveCircle(pathGraph[lastClicked].next);
@@ -217,6 +223,11 @@ const Quiz = () => {
         // make joker available again for new exercise
         setJokerUsed(null);
     };
+
+    useEffect(() => {
+        console.log('joker: ', jokerInTopic);
+        console.log('correct: ', correctInTopic);
+    }, [correctInTopic, jokerInTopic]);
 
     // updating board when user closes popup depending on current quiz situation
     const handleUpdate = () => {
@@ -266,8 +277,14 @@ const Quiz = () => {
 
     const handleTopicRepeat = () => {
         // reset amount of used joker & correct circles in current topic
-        setCorrectInTopic(correctInTopic.set(currentTopic, 0));
-        setJokerInTopic(jokerInTopic.set(currentTopic, 0));
+        setCorrectInTopic(prevCorrectInTopic => ({
+            ...prevCorrectInTopic,
+            [currentTopic]: 0,
+        }));
+        setJokerInTopic(prevJokerInTopic => ({
+            ...prevJokerInTopic,
+            [currentTopic]: 0,
+        }));
         // depending on which topic is repeated, set active circle, reset completed circles & joker
         if (currentTopic === 1) {
             setActiveCircle('circle1');
@@ -315,8 +332,8 @@ const Quiz = () => {
         setSzenariosDone(0);
         setCurrentTopic(1);
         setActiveCircle('start');
-        setCorrectInTopic(new Map([[1, 0], [2, 0], [3, 0]]));
-        setJokerInTopic(new Map([[1, 0], [2, 0], [3, 0]]));
+        setCorrectInTopic({ 1: 0, 2: 0, 3: 0 });
+        setJokerInTopic({ 1: 0, 2: 0, 3: 0 });
 
         Object.keys(jokerMap).forEach((circle) => {
             jokerMap[circle] = '';
@@ -467,8 +484,8 @@ const Quiz = () => {
                     onJoker={handleJoker}
                     onRepeat={handleTopicRepeat}
                     jokerUsed={jokerUsed}
-                    correctInTopic={correctInTopic}
-                    jokerAmount={jokerInTopic.get(currentTopic)}
+                    correctAmount={correctInTopic[currentTopic]}
+                    jokerAmount={jokerInTopic[currentTopic]}
                 />}
         </div>
     );
