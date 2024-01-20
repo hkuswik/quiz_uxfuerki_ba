@@ -28,9 +28,9 @@
 * [x] Quiz.jsx: SVG done (all circles in correct place)
 * [ ] Exercise.jsx: 
     * [ ] joker behaviour:
-        * [ ] NewQuestions Joker
-        * [ ] Tipp Joker
-        * [ ] NOT clickable after selecting answer
+        * [x] NewQuestions Joker
+        * [x] Tipp Joker
+        * [x] NOT clickable after selecting answer
         * [ ] adding joker amount to Feedback
         * [ ] adding Symbol to svg (when joker used)
     * [x] stop movement when buttons change

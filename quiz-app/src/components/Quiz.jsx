@@ -61,6 +61,8 @@ const Quiz = () => {
     const [currentContent, setCurrentContent] = useState(null);
     const [currentExercise, setCurrentExercise] = useState(null);
 
+    const [jokerUsed, setJokerUsed] = useState(null);
+
     const [exercisesTopic1, setExercisesTopic1] = useState([]);
     const [exercisesTopic2, setExercisesTopic2] = useState([]);
     const [exercisesTopic3, setExercisesTopic3] = useState([]);
@@ -165,6 +167,29 @@ const Quiz = () => {
         }
     }
 
+    const handleJoker = (joker) => {
+        setJokerUsed(joker);
+
+        if (joker === 'tip') {
+            console.log('add bulb icon to board');
+        } else {
+            console.log('add swap icon to board');
+            switch (currentTopic) {
+                case 1:
+                    setNewExercise(topic1);
+                    break;
+                case 2:
+                    setNewExercise(topic2);
+                    break;
+                case 3:
+                    setNewExercise(topic3);
+                    break;
+                default:
+                    console.log(currentTopic, ' is neither 1, 2 or 3 (error swap joker');
+            }
+        }
+    }
+
     // updating state and board after exercise answer has been locked in
     const handleAnswer = (isCorrect) => {
         console.log('Quiz knows that answer was: ', isCorrect);
@@ -177,6 +202,8 @@ const Quiz = () => {
         setActiveCircle(pathGraph[lastClicked].next);
         // update completed circles
         setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
+        // make joker available again for new exercise
+        setJokerUsed(null);
     }
 
     const updateCorrectInTopic = (circle, correct) => {
@@ -400,7 +427,9 @@ const Quiz = () => {
                     currentTopic={currentTopic}
                     onAnswer={handleAnswer}
                     onUpdate={handleUpdate}
+                    onJoker={handleJoker}
                     onRepeat={handleTopicRepeat}
+                    jokerUsed={jokerUsed}
                     correctInTopic={correctInTopic}
                 />}
         </div>

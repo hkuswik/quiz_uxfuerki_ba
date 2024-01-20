@@ -12,7 +12,6 @@ const Header = ({ onReset }) => {
     const [showPopup, setShowPopup] = useState(false);
 
     const handleBtnClick = () => {
-        console.log('Alle Fragen Button wurde geklickt!');
         setShowPopup(true);
     };
 

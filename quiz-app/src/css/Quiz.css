@@ -41,3 +41,30 @@ img {
 .circle-active-hover {
     stroke-dasharray: none;
 }
+
+.speech-bubble {
+	position: relative;
+	background: #D4D2DD;
+	border-radius: 90px;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 2%;
+	left: 30%;
+	width: 0;
+	height: 0;
+	border: 38px solid transparent;
+	border-top-color: #D4D2DD;
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -19px;
+	margin-bottom: -38px;
+}

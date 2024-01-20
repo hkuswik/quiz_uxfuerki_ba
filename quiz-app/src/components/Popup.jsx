@@ -6,7 +6,7 @@ import Szenario from './Szenario';
 import Goal from './Goal';
 import AllQuestions from './AllQuestions';
 
-const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat, correctInTopic }) => {
+const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat, onJoker, jokerUsed, correctInTopic }) => {
     const [bgColor, setBgColor] = useState('#F6F5FC');
     const isExercise = (content.type === 'question' || content.type === 'match' || content.type === 'sort');
 
@@ -28,7 +28,7 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
 
     const renderPopupContent = (content) => {
         if (isExercise) {
-            return <Exercise exercise={content} active={active} onAnswer={onAnswer} onUpdate={onUpdate} />
+            return <Exercise exercise={content} active={active} onAnswer={onAnswer} onUpdate={onUpdate} onJoker={onJoker} jokerUsed={jokerUsed} />
         } else {
             switch (content) {
                 case 'feedback':
