@@ -208,7 +208,7 @@ const Quiz = () => {
         // add circle to correctCircles if answer was correct & update correctInTopic
         if (isCorrect) {
             setCorrectCircles(correctCircles => [...correctCircles, lastClicked]);
-            setCorrectInTopic(correctInTopic.set(currentTopic, correctInTopic.get(currentTopic) + 1));
+            correctInTopic.set(currentTopic, correctInTopic.get(currentTopic) + 1);
         }
         // make next circle active
         setActiveCircle(pathGraph[lastClicked].next);

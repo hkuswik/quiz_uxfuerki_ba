@@ -43,7 +43,7 @@
 * [ ] Goal.jsx
 * [ ] Start.jsx: 2nd popup (with explanations) or adding them to current popup
 * [ ] Quiz.jsx: 
-    * [ ] reenter state after finishing
+    * [ ] REENTER state (after finishing)
     * [x] what happens when pool empty?
     * [x] reset everything needed when resetting / repeating
 * [x] Szenario.jsx: correct buttons
@@ -52,6 +52,7 @@
 * [ ] change topic names to variables (after receiving actual exercises)
 * [ ] add comments where missing
 
-laaater (if time)
+##### laaater (if time)
+
 * [ ] re-clicking on finished circles to see what was answered
 * [ ] clean up code / improving & reducing where possible
