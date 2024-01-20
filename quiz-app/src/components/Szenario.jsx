@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import start_topic1 from '../data/images/weiter_generic.png';
-import start_topic2 from '../data/images/weiter_topic2.png';
-import start_topic3 from '../data/images/weiter_topic3.png';
-// TODO: create correct buttons
+import start_topic1 from '../data/images/start_topic1.png';
+import start_topic2 from '../data/images/start_topic2.png';
+import start_topic3 from '../data/images/start_topic3.png';
 
 const topic1 = 'Vertrauen';
 const topic2 = 'Diskriminierung';
@@ -54,7 +53,7 @@ const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
             {showBtn &&
                 <div className="flex row w-full justify-end mt-12">
                     <div onClick={onUpdate} className="img-container hover:opacity-85 cursor-pointer">
-                        <img src={button} className="h-24" alt="weiter Button" />
+                        <img src={button} className="h-20" alt="weiter Button" />
                     </div>
                 </div>
             }

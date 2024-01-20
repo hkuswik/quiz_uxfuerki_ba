@@ -46,7 +46,7 @@
     * [ ] reenter state after finishing
     * [x] what happens when pool empty?
     * [x] reset everything needed when resetting / repeating
-* [ ] Szenario.jsx: correct buttons
+* [x] Szenario.jsx: correct buttons
 * [ ] AllQuestions.jsx
 * [x] Quest/Sort/Match: what happens onClick when no answer selected?
 * [ ] change topic names to variables (after receiving actual exercises)
