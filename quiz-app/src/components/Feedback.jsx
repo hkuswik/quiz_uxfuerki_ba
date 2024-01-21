@@ -3,7 +3,7 @@ import wdh_topic2 from '../data/images/wiederholen_topic2.png';
 import wdh_topic3 from '../data/images/wiederholen_topic3.png';
 import weiter_topic2 from '../data/images/weiter_topic2.png';
 import weiter_topic3 from '../data/images/weiter_topic3.png';
-import weiter_generic from '../data/images/weiter_generic.png';
+import new_topic from '../data/images/new_topic.png';
 import zurück_plattform from '../data/images/lernplattform_button.png';
 import { useState, useEffect } from 'react';
 
@@ -11,7 +11,7 @@ const topic1 = 'Vertrauen';
 const topic2 = 'Diskriminierung';
 const topic3 = 'Autonomie';
 
-const Feedback = ({ currentTopic, onUpdate, correctAmount, jokerAmount, onRepeat }) => {
+const Feedback = ({ currentTopic, completedAtLeastOnce, onUpdate, correctAmount, jokerAmount, onRepeat }) => {
     const [button1, setButton1] = useState(null);
     const [button2, setButton2] = useState(null);
     const [topic, setTopic] = useState('Topic');
@@ -34,14 +34,22 @@ const Feedback = ({ currentTopic, onUpdate, correctAmount, jokerAmount, onRepeat
             setClassColor('lila');
         } else {
             setButton1(wdh_topic3);
-            setButton2(weiter_generic);
+            setButton2(new_topic);
             setTopic(topic3);
             setClassColor('türkis');
+        }
+
+        // after quiz has been completed at least once, can always choose which topic next
+        if (completedAtLeastOnce) {
+            setButton2(new_topic);
         }
     }
 
     return (
         <div className='flex flex-col items-center text-center'>
+            {completedAtLeastOnce &&
+                <h4 className="mb-5"><b>Glückwunsch!</b> Du hast alle Abschnitte abgeschlossen!</h4>
+            }
             <h4>Du hast den Abschnitt</h4>
             <h2 className={classColor}>{topic}</h2>
             <h4 className='w-10/12'>abgeschlossen! Du hast <b>{correctAmount}/8 Fragen</b> richtig beantwortet und <b>{jokerAmount} Joker</b> verwendet.</h4>

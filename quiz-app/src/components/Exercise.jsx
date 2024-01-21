@@ -112,16 +112,14 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
 
     return (
         <div style={exerciseContainer}>
-            <div className="flex row h-full mr-6">
+            <div className="flex row h-full mr-5">
                 <div style={joker_row}>
                     <h4 className="pb-4">Joker:</h4>
                     <div onClick={() => handleJokerClick('tip')} style={tip_joker} className={(!(jokerUsed === 'swap') && !checkClicked ? 'hover:opacity-85 cursor-pointer' : '')}>
                         <img src={bulbIcon} className="h-16" alt="Glühbirnen Icon" />
-                        <p className="sm">Tipp</p>
                     </div>
                     <div onClick={() => handleJokerClick('swap')} style={swap_joker} className={((jokerUsed === null) && !checkClicked ? 'hover:opacity-85 cursor-pointer' : '')}>
                         <img src={swapIcon} className="h-12" alt="Frage wechseln Icon" />
-                        <p className="sm">Tauschen</p>
                     </div>
                 </div>
                 <div style={line}></div>

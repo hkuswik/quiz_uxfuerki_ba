@@ -14,7 +14,6 @@ const Start = ({ onUpdate }) => {
     const [content, setContent] = useState(1);
 
     const renderContent = (content) => {
-        console.log('content: ', content);
         if (content === 1) {
 
             return (
@@ -54,11 +53,9 @@ const Start = ({ onUpdate }) => {
                         <div className='flex row'>
                             <div style={joker}>
                                 <img src={bulbIcon} className="h-16" alt="Glühbirnen Icon" />
-                                <p className="sm">Tipp</p>
                             </div>
                             <div style={joker}>
                                 <img src={swapIcon} className="h-12" alt="Frage wechseln Icon" />
-                                <p className="sm">Tauschen</p>
                             </div>
                         </div>
                         <p className='w-3/5'>

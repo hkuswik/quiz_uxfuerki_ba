@@ -3,10 +3,11 @@ import Exercise from './Exercise';
 import Feedback from './Feedback';
 import Start from './Start';
 import Szenario from './Szenario';
-import Goal from './Goal';
 import AllQuestions from './AllQuestions';
 
-const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat, onJoker, jokerUsed, correctAmount, jokerAmount }) => {
+const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat,
+    onJoker, jokerUsed, correctAmount, jokerAmount, completedAtLeastOnce }) => {
+
     const [bgColor, setBgColor] = useState('#F6F5FC');
     const isExercise = (content.type === 'question' || content.type === 'match' || content.type === 'sort');
 
@@ -45,11 +46,12 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                         jokerAmount={jokerAmount}
                         onUpdate={onUpdate}
                         onRepeat={onRepeat}
+                        completedAtLeastOnce={completedAtLeastOnce}
                     />;
-                case 'goal':
-                    return <Goal />;
                 case 'start':
-                    return <Start onUpdate={onUpdate} />
+                    return <Start
+                        onUpdate={onUpdate}
+                    />
                 case 'szenario1':
                 case 'szenario2':
                 case 'szenario3':

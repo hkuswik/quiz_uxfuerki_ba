@@ -41,13 +41,14 @@
     * [ ] progressBar
     * [x] correct reset button
     * [ ] add Disclaimers for allQuestions / resetting quiz
-* [ ] Goal.jsx
+* [x] Goal (Feedback 3)
 * [x] Start.jsx: 2nd popup (with explanations) or adding them to current popup
 * [ ] adding explanation button? (user can always see exlanations again) OR start always clickable?
-* [ ] Quiz.jsx: 
-    * [ ] REENTER state (after finishing)
+* [x] Quiz.jsx: 
+    * [x] REENTER state (after finishing)
     * [x] what happens when pool empty?
     * [x] reset everything needed when resetting / repeating
+* [x] STILL: #correctAnswers sometimes wrong OR colors wrong?
 * [x] Szenario.jsx: correct buttons
 * [ ] AllQuestions.jsx
 * [x] Quest/Sort/Match: what happens onClick when no answer selected?
