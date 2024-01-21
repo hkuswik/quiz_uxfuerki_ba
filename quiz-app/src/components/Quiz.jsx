@@ -224,11 +224,6 @@ const Quiz = () => {
         setJokerUsed(null);
     };
 
-    useEffect(() => {
-        console.log('joker: ', jokerInTopic);
-        console.log('correct: ', correctInTopic);
-    }, [correctInTopic, jokerInTopic]);
-
     // updating board when user closes popup depending on current quiz situation
     const handleUpdate = () => {
         switch (state) {

@@ -35,13 +35,15 @@
         * [x] adding Symbol to svg (when joker used)
     * [x] stop movement when buttons change
     * [x] log answer in AS SOON as check clicked (else: cheating possible)
+* [x] Joker: adding joker name to button (?)
 * [x] Feedback.jsx: repeat section
 * [ ] Header.jsx:
     * [ ] progressBar
     * [x] correct reset button
     * [ ] add Disclaimers for allQuestions / resetting quiz
 * [ ] Goal.jsx
-* [ ] Start.jsx: 2nd popup (with explanations) or adding them to current popup
+* [x] Start.jsx: 2nd popup (with explanations) or adding them to current popup
+* [ ] adding explanation button? (user can always see exlanations again) OR start always clickable?
 * [ ] Quiz.jsx: 
     * [ ] REENTER state (after finishing)
     * [x] what happens when pool empty?
