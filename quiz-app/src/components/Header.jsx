@@ -4,10 +4,66 @@ import resetBtn from '../data/images/reset-btn.png';
 import allQuestionsBtn from '../data/images/AlleFragen.png';
 import Popup from './Popup';
 
-// TODO: add progressBar (design + functionality)
 // TODO: add disclaimers for allQuestions / resetting progress
+const ProgressBar = ({ doneInTopic, correctInTopic }) => {
 
-const Header = ({ onReset }) => {
+    const exercisesPerTopic = 8;
+
+    // calculate percentage of completion (for topic)
+    const calculateSectionWidth = (topic) => {
+        console.log('topicProgress: ', (doneInTopic[topic] / exercisesPerTopic) * 100);
+        return (doneInTopic[topic] / exercisesPerTopic) * 100;
+    };
+
+    return (
+        <div style={progress_bar}>
+            <div style={progress_section}>
+                <div style={{
+                    ...progress,
+                    width: `${calculateSectionWidth(1)}%`,
+                    backgroundColor: '#D177B3',
+                }}></div>
+            </div>
+            <div style={progress_section}>
+                <div style={{
+                    ...progress,
+                    width: `${calculateSectionWidth(2)}%`,
+                    backgroundColor: '#8377D1',
+                }}></div>
+            </div>
+            <div style={progress_section}>
+                <div style={{
+                    ...progress,
+                    width: `${calculateSectionWidth(3)}%`,
+                    backgroundColor: '#77D1CB',
+                }}></div>
+            </div>
+        </div>
+    )
+};
+
+const progress_bar = {
+    display: 'flex',
+    height: '25px',
+    width: '250px',
+    backgroundColor: '#54506A',
+    borderRadius: '10px',
+    overflow: 'hidden',
+    justifyContent: 'space-between'
+}
+
+const progress_section = {
+    width: '82px',
+    height: '100%',
+    backgroundColor: '#D4D2DD',
+}
+
+const progress = {
+    height: '100%',
+    transition: 'width 0.3s ease'
+}
+
+const Header = ({ onReset, doneInTopic, correctInTopic }) => {
     const [showPopup, setShowPopup] = useState(false);
 
     const handleBtnClick = () => {
@@ -30,7 +86,7 @@ const Header = ({ onReset }) => {
                 </div>
                 <div className='flex row justify-around items-center'>
                     <p className='text-white mr-4'>Fortschritt:</p>
-                    <p>long progressbar</p>
+                    <ProgressBar doneInTopic={doneInTopic} correctInTopic={correctInTopic} />
                     <div onClick={onReset} className='img-container h-5 cursor-pointer ml-4 hover:opacity-85'>
                         <img src={resetBtn} alt="Fortschritt zurücksetzen Button" />
                     </div>

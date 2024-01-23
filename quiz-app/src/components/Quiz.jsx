@@ -73,6 +73,7 @@ const Quiz = () => {
 
     const [jokerInTopic, setJokerInTopic] = useState({ 1: 0, 2: 0, 3: 0 });
     const [correctInTopic, setCorrectInTopic] = useState({ 1: 0, 2: 0, 3: 0 });
+    const [doneInTopic, setDoneInTopic] = useState({ 1: 0, 2: 0, 3: 0 });
 
     useEffect(() => {
         // save questions according to topic
@@ -254,8 +255,12 @@ const Quiz = () => {
         }
         // make next circle active
         setActiveCircle(pathGraph[lastClicked].next);
-        // update completed circles
+        // update completed circles and doneInTopic
         setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
+        setDoneInTopic(prevDoneInTopic => ({
+            ...prevDoneInTopic,
+            [currentTopic]: prevDoneInTopic[currentTopic] + 1,
+        }))
         // make joker available again for new exercise
         setJokerUsed(null);
         // if it was last answer, quiz has been completed at least once
@@ -308,6 +313,10 @@ const Quiz = () => {
             ...prevJokerInTopic,
             [repeatTopic]: 0,
         }));
+        setDoneInTopic(prevDoneInTopic => ({
+            ...prevDoneInTopic,
+            [repeatTopic]: 0,
+        }))
         // depending on which topic is repeated, set active circle, reset completed/correct circles & joker
         if (repeatTopic === 1) {
             setActiveCircle('circle1');
@@ -364,9 +373,8 @@ const Quiz = () => {
     };
 
     useEffect(() => {
-        console.log('correct in topic: ', correctInTopic);
-        console.log('topic: ', currentTopic);
-    }, [correctInTopic, currentTopic]);
+        console.log('done in topic: ', doneInTopic);
+    }, [doneInTopic]);
 
     const handleReset = () => {
         setCompletedCircles([]);
@@ -377,6 +385,7 @@ const Quiz = () => {
         setActiveCircle('start');
         setCorrectInTopic({ 1: 0, 2: 0, 3: 0 });
         setJokerInTopic({ 1: 0, 2: 0, 3: 0 });
+        setDoneInTopic({ 1: 0, 2: 0, 3: 0 });
 
         Object.keys(jokerMap).forEach((circle) => {
             jokerMap[circle] = '';
@@ -519,7 +528,7 @@ const Quiz = () => {
 
     return (
         <div className='Quiz'>
-            <Header onReset={handleReset}></Header>
+            <Header onReset={handleReset} doneInTopic={doneInTopic} correctInTopic={correctInTopic}></Header>
             <div className='svg-container'>
                 <svg id='board'>
                     <text x={248} y={50} textAnchor="middle" fill='#D177B3' className='h3'>Vertrauen</text>

@@ -38,12 +38,13 @@
 * [x] Joker: adding joker name to button (?)
 * [x] Feedback.jsx: repeat section
 * [ ] Header.jsx:
-    * [ ] progressBar
+    * [x] progressBar:
+        * [ ] when correct: lighter, else: darker
     * [x] correct reset button
     * [ ] add Disclaimers for allQuestions / resetting quiz
 * [x] Goal (Feedback 3)
 * [x] Start.jsx: 2nd popup (with explanations) or adding them to current popup
-* [ ] adding explanation button? (user can always see exlanations again) OR start always clickable?
+* [ ] adding explanation button? (user can always see explanations again) OR start always clickable?
 * [x] Quiz.jsx: 
     * [x] REENTER state (after finishing)
     * [x] what happens when pool empty?
