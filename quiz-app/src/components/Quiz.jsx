@@ -372,10 +372,6 @@ const Quiz = () => {
         }
     };
 
-    useEffect(() => {
-        console.log('done in topic: ', doneInTopic);
-    }, [doneInTopic]);
-
     const handleReset = () => {
         setCompletedCircles([]);
         setPossibleCircles([]);
@@ -383,6 +379,7 @@ const Quiz = () => {
         setSzenariosDone(0);
         setCurrentTopic(1);
         setActiveCircle('start');
+        setCorrectCircles([]);
         setCorrectInTopic({ 1: 0, 2: 0, 3: 0 });
         setJokerInTopic({ 1: 0, 2: 0, 3: 0 });
         setDoneInTopic({ 1: 0, 2: 0, 3: 0 });

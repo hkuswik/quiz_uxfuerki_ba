@@ -5,63 +5,6 @@ import allQuestionsBtn from '../data/images/AlleFragen.png';
 import Popup from './Popup';
 
 // TODO: add disclaimers for allQuestions / resetting progress
-const ProgressBar = ({ doneInTopic, correctInTopic }) => {
-
-    const exercisesPerTopic = 8;
-
-    // calculate percentage of completion (for topic)
-    const calculateSectionWidth = (topic) => {
-        console.log('topicProgress: ', (doneInTopic[topic] / exercisesPerTopic) * 100);
-        return (doneInTopic[topic] / exercisesPerTopic) * 100;
-    };
-
-    return (
-        <div style={progress_bar}>
-            <div style={progress_section}>
-                <div style={{
-                    ...progress,
-                    width: `${calculateSectionWidth(1)}%`,
-                    backgroundColor: '#D177B3',
-                }}></div>
-            </div>
-            <div style={progress_section}>
-                <div style={{
-                    ...progress,
-                    width: `${calculateSectionWidth(2)}%`,
-                    backgroundColor: '#8377D1',
-                }}></div>
-            </div>
-            <div style={progress_section}>
-                <div style={{
-                    ...progress,
-                    width: `${calculateSectionWidth(3)}%`,
-                    backgroundColor: '#77D1CB',
-                }}></div>
-            </div>
-        </div>
-    )
-};
-
-const progress_bar = {
-    display: 'flex',
-    height: '25px',
-    width: '250px',
-    backgroundColor: '#54506A',
-    borderRadius: '10px',
-    overflow: 'hidden',
-    justifyContent: 'space-between'
-}
-
-const progress_section = {
-    width: '82px',
-    height: '100%',
-    backgroundColor: '#D4D2DD',
-}
-
-const progress = {
-    height: '100%',
-    transition: 'width 0.3s ease'
-}
 
 const Header = ({ onReset, doneInTopic, correctInTopic }) => {
     const [showPopup, setShowPopup] = useState(false);
@@ -120,6 +63,88 @@ const header_bg = {
     backgroundColor: '#2D2C36',
     width: '100%',
     justifyContent: 'center'
+}
+
+const ProgressBar = ({ doneInTopic, correctInTopic }) => {
+
+    const exercisesPerTopic = 8;
+
+    // calculate percentage of completion (for topic)
+    const calculateSectionWidth = (topic) => {
+        return (doneInTopic[topic] / exercisesPerTopic) * 100;
+    };
+
+    // calculate percentage of correctly completed for topic
+    const calculateCorrect = (topic) => {
+        return (correctInTopic[topic] / exercisesPerTopic) * 100;
+    }
+
+    return (
+        <div style={progress_bar}>
+            <div style={progress_section}>
+                <div style={{
+                    ...progress,
+                    width: `${calculateSectionWidth(1)}%`,
+                    backgroundColor: '#D177B3',
+                    opacity: '45%',
+                }}></div>
+                <div style={{
+                    ...progress,
+                    width: `${calculateCorrect(1)}%`,
+                    backgroundColor: '#D177B3',
+                }}></div>
+            </div>
+            <div style={progress_section}>
+                <div style={{
+                    ...progress,
+                    width: `${calculateSectionWidth(2)}%`,
+                    backgroundColor: '#8377D1',
+                    opacity: '45%',
+                }}></div>
+                <div style={{
+                    ...progress,
+                    width: `${calculateCorrect(2)}%`,
+                    backgroundColor: '#8377D1',
+                }}></div>
+            </div>
+            <div style={progress_section}>
+                <div style={{
+                    ...progress,
+                    width: `${calculateSectionWidth(3)}%`,
+                    backgroundColor: '#77D1CB',
+                    opacity: '45%',
+                }}></div>
+                <div style={{
+                    ...progress,
+                    width: `${calculateCorrect(3)}%`,
+                    backgroundColor: '#77D1CB',
+                }}></div>
+            </div>
+        </div>
+    )
+};
+
+const progress_bar = {
+    display: 'flex',
+    height: '25px',
+    width: '250px',
+    backgroundColor: '#54506A',
+    borderRadius: '10px',
+    overflow: 'hidden',
+    justifyContent: 'space-between'
+}
+
+const progress_section = {
+    width: '82px',
+    height: '100%',
+    backgroundColor: '#D4D2DD',
+    display: 'grid'
+}
+
+const progress = {
+    gridColumn: '1',
+    gridRow: '1',
+    transition: 'width 0.3s ease'
 }
 
 export default Header;
