@@ -25,6 +25,11 @@ h2 {
   font-size: calc(35px + 1vmin);
 }
 
+h2 b {
+  font-size: calc(35px + 1vmin);
+  font-weight: 600;
+}
+
 h3 {
   font-size: calc(30px + 1vmin);
 }
@@ -50,21 +55,6 @@ p b {
 
 p.sm {
   font-size: calc(6px + 1vmin);
-}
-
-.pink {
-  color: #D177B3;
-  font-weight: 700;
-}
-
-.lila {
-  color: #8377D1;
-  font-weight: 700;
-}
-
-.türkis {
-  color: #77D1CB;
-  font-weight: 700;
 }
 
 text {

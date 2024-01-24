@@ -1,3 +1,4 @@
+/* styles for main Quiz component */
 .Quiz {
     display: flex;
     flex-direction: column;
@@ -26,6 +27,7 @@ svg#board {
     height: 100%;
 }
 
+/* general styles, reusable */
 img {
     max-width: 100%;
     max-height: 100%;
@@ -38,14 +40,54 @@ img {
     overflow: hidden;
 }
 
+.pink {
+    color: #D177B3;
+    font-weight: 700;
+}
+
+.lila {
+    color: #8377D1;
+    font-weight: 700;
+}
+
+.türkis {
+    color: #77D1CB;
+    font-weight: 700;
+}
+
 .circle-active-hover {
     stroke-dasharray: none;
 }
 
+/* Header: Progress Bar */
+.progress-bar {
+    display: flex;
+    height: 25px;
+    width: 250px;
+    background-color: #54506A;
+    border-radius: 10px;
+    overflow: hidden;
+    justify-content: space-between;
+}
+
+.progress-section {
+    width: 82px;
+    height: 100%;
+    background-color: #D4D2DD;
+    display: grid;
+}
+
+.progress {
+    grid-column: 1;
+    grid-row: 1;
+    transition: width 0.3s ease;
+}
+
+/* Tip Joker */
 .speech-bubble {
-	position: relative;
-	background: #D4D2DD;
-	border-radius: 90px;
+    position: relative;
+    background: #D4D2DD;
+    border-radius: 90px;
     width: 300px;
     height: 200px;
     display: flex;
@@ -55,16 +97,16 @@ img {
 }
 
 .speech-bubble:after {
-	content: '';
-	position: absolute;
-	bottom: 2%;
-	left: 30%;
-	width: 0;
-	height: 0;
-	border: 38px solid transparent;
-	border-top-color: #D4D2DD;
-	border-bottom: 0;
-	border-left: 0;
-	margin-left: -19px;
-	margin-bottom: -38px;
+    content: '';
+    position: absolute;
+    bottom: 2%;
+    left: 30%;
+    width: 0;
+    height: 0;
+    border: 38px solid transparent;
+    border-top-color: #D4D2DD;
+    border-bottom: 0;
+    border-left: 0;
+    margin-left: -19px;
+    margin-bottom: -38px;
 }

@@ -3,10 +3,10 @@ import Exercise from './Exercise';
 import Feedback from './Feedback';
 import Start from './Start';
 import Szenario from './Szenario';
-import AllQuestions from './AllQuestions';
+import Disclaimer from './Disclaimer';
 
 const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat,
-    onJoker, jokerUsed, correctAmount, jokerAmount, completedAtLeastOnce }) => {
+    onJoker, jokerUsed, correctAmount, jokerAmount, completedAtLeastOnce, onReset }) => {
 
     const [bgColor, setBgColor] = useState('#F6F5FC');
     const isExercise = (content.type === 'question' || content.type === 'match' || content.type === 'sort');
@@ -62,7 +62,8 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                         showBtn={isSzenarioActive}
                     />;
                 case 'alleFragen':
-                    return <AllQuestions />
+                case 'reset':
+                    return <Disclaimer content={content} onReset={onReset} />
                 default:
                     return <div> error non-exercise type </div>;
             }

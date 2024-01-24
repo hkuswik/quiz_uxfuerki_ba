@@ -37,11 +37,11 @@
     * [x] log answer in AS SOON as check clicked (else: cheating possible)
 * [x] Joker: adding joker name to button (?)
 * [x] Feedback.jsx: repeat section
-* [ ] Header.jsx:
+* [x] Header.jsx:
     * [x] progressBar:
-        * [ ] when correct: lighter, else: darker
+        * [x] when correct: lighter, else: darker
     * [x] correct reset button
-    * [ ] add Disclaimers for allQuestions / resetting quiz
+    * [x] add Disclaimers for allQuestions / resetting quiz
 * [x] Goal (Feedback 3)
 * [x] Start.jsx: 2nd popup (with explanations) or adding them to current popup
 * [ ] adding explanation button? (user can always see explanations again) OR start always clickable?
@@ -53,10 +53,15 @@
 * [x] Szenario.jsx: correct buttons
 * [ ] AllQuestions.jsx
 * [x] Quest/Sort/Match: what happens onClick when no answer selected?
-* [ ] change topic names to variables (after receiving actual exercises)
-* [ ] add comments where missing
+  
+##### when finished
+* [ ] add comments (!!!) where missing
+
+##### after receiving actual exercises
+* [ ] change topic names to variables
+* [ ] any errors?
 
 ##### laaater (if time)
 
-* [ ] re-clicking on finished circles to see what was answered
 * [ ] clean up code / improving & reducing where possible
+* [ ] re-clicking on finished circles to see what was answered

@@ -4,18 +4,23 @@ import resetBtn from '../data/images/reset-btn.png';
 import allQuestionsBtn from '../data/images/AlleFragen.png';
 import Popup from './Popup';
 
-// TODO: add disclaimers for allQuestions / resetting progress
-
 const Header = ({ onReset, doneInTopic, correctInTopic }) => {
     const [showPopup, setShowPopup] = useState(false);
+    const [popupContent, setPopupContent] = useState(null);
 
-    const handleBtnClick = () => {
+    const handleBtnClick = (content) => {
+        setPopupContent(content);
         setShowPopup(true);
     };
 
     const handleClosePopup = () => {
         setShowPopup(false);
     };
+
+    const handleReset = () => {
+        setShowPopup(false);
+        onReset();
+    }
 
     return (
         <div style={header_bg}>
@@ -30,16 +35,17 @@ const Header = ({ onReset, doneInTopic, correctInTopic }) => {
                 <div className='flex row justify-around items-center'>
                     <p className='text-white mr-4'>Fortschritt:</p>
                     <ProgressBar doneInTopic={doneInTopic} correctInTopic={correctInTopic} />
-                    <div onClick={onReset} className='img-container h-5 cursor-pointer ml-4 hover:opacity-85'>
+                    <div onClick={() => handleBtnClick('reset')} className='img-container h-5 cursor-pointer ml-4 hover:opacity-85'>
                         <img src={resetBtn} alt="Fortschritt zurücksetzen Button" />
                     </div>
                 </div>
-                <div onClick={handleBtnClick}
-                    className='img-container h-20 border-dashed border-white border-2 rounded-lg hover:border-solid hover:cursor-pointer'>
+                <div onClick={() => handleBtnClick('alleFragen')} className='img-container h-20 border-dashed border-white border-2 rounded-lg hover:border-solid hover:cursor-pointer'>
                     <img src={allQuestionsBtn} alt="Alle Fragen Button" />
                 </div>
             </div>
-            {showPopup && <Popup onClose={handleClosePopup} content={'alleFragen'} active={''} />}
+            {showPopup &&
+                <Popup onClose={handleClosePopup} content={popupContent} onReset={handleReset} />
+            }
         </div>
     )
 }
@@ -80,71 +86,53 @@ const ProgressBar = ({ doneInTopic, correctInTopic }) => {
     }
 
     return (
-        <div style={progress_bar}>
-            <div style={progress_section}>
-                <div style={{
-                    ...progress,
-                    width: `${calculateSectionWidth(1)}%`,
-                    backgroundColor: '#D177B3',
-                    opacity: '45%',
-                }}></div>
-                <div style={{
-                    ...progress,
-                    width: `${calculateCorrect(1)}%`,
-                    backgroundColor: '#D177B3',
-                }}></div>
+        <div className='progress-bar'>
+            <div className='progress-section'>
+                <div className='progress'
+                    style={{
+                        width: `${calculateSectionWidth(1)}%`,
+                        backgroundColor: '#D177B3',
+                        opacity: '40%',
+                    }}></div>
+                <div className='progress'
+                    style={{
+                        width: `${calculateCorrect(1)}%`,
+                        backgroundColor: '#D177B3',
+                    }}
+                ></div>
             </div>
-            <div style={progress_section}>
-                <div style={{
-                    ...progress,
-                    width: `${calculateSectionWidth(2)}%`,
-                    backgroundColor: '#8377D1',
-                    opacity: '45%',
-                }}></div>
-                <div style={{
-                    ...progress,
-                    width: `${calculateCorrect(2)}%`,
-                    backgroundColor: '#8377D1',
-                }}></div>
+            <div className='progress-section'>
+                <div className='progress'
+                    style={{
+                        width: `${calculateSectionWidth(2)}%`,
+                        backgroundColor: '#8377D1',
+                        opacity: '40%',
+                    }}
+                ></div>
+                <div className='progress'
+                    style={{
+                        width: `${calculateCorrect(2)}%`,
+                        backgroundColor: '#8377D1',
+                    }}
+                ></div>
             </div>
-            <div style={progress_section}>
-                <div style={{
-                    ...progress,
-                    width: `${calculateSectionWidth(3)}%`,
-                    backgroundColor: '#77D1CB',
-                    opacity: '45%',
-                }}></div>
-                <div style={{
-                    ...progress,
-                    width: `${calculateCorrect(3)}%`,
-                    backgroundColor: '#77D1CB',
-                }}></div>
+            <div className='progress-section'>
+                <div className='progress'
+                    style={{
+                        width: `${calculateSectionWidth(3)}%`,
+                        backgroundColor: '#77D1CB',
+                        opacity: '40%',
+                    }}
+                ></div>
+                <div className='progress'
+                    style={{
+                        width: `${calculateCorrect(3)}%`,
+                        backgroundColor: '#77D1CB',
+                    }}
+                ></div>
             </div>
         </div>
     )
 };
-
-const progress_bar = {
-    display: 'flex',
-    height: '25px',
-    width: '250px',
-    backgroundColor: '#54506A',
-    borderRadius: '10px',
-    overflow: 'hidden',
-    justifyContent: 'space-between'
-}
-
-const progress_section = {
-    width: '82px',
-    height: '100%',
-    backgroundColor: '#D4D2DD',
-    display: 'grid'
-}
-
-const progress = {
-    gridColumn: '1',
-    gridRow: '1',
-    transition: 'width 0.3s ease'
-}
 
 export default Header;
