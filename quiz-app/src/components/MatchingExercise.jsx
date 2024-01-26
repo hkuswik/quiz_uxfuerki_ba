@@ -10,23 +10,21 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         [...exercise.correctPair4.split(';')],
     ];
 
+    // save shuffled definitions
+    const shuffledPairs = shuffleArray(correctPairs);
+    const shuffledDefinitions = shuffledPairs.map(pair => pair[1]);
+
     // save terms
     const terms = correctPairs.map(pair => pair[0]);
 
-    // create Object so save which definition is matched with which term
+    // create Object to save which definition is matched with which term
     const [selected, setSelected] = useState(
         terms.reduce((t, term) => ({ ...t, [term]: null }), {})
     );
 
-    // save shuffled definitions
-    const shuffledPairs = shuffleArray(correctPairs);
-    const shuffledDefinitions = shuffledPairs.map(pair => pair[1]);
-    console.log('shuffled def: ', shuffledDefinitions);
-    const [definitions, setDefinitions] = useState(shuffledDefinitions);
-
-    const initialCol = {
-        notUsedDefs: {
-            id: 'noch nicht verwendet',
+    const initialContainers = {
+        containerDefault: {
+            id: 'Definitionen:',
             list: shuffledDefinitions
         },
         container1: {
@@ -36,19 +34,75 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         container2: {
             id: terms[1],
             list: []
+        },
+        container3: {
+            id: terms[2],
+            list: []
+        },
+        container4: {
+            id: terms[3],
+            list: []
         }
     }
-    const [cols, setCols] = useState(initialCol);
+    const [containers, setContainers] = useState(initialContainers);
 
     const handleOnDragEnd = (result) => {
         console.log('result: ', result);
-        if (!result.destination) return;
-        const items = definitions;
-        const [reorderedItems] = items.splice(result.source.index, 1);
-        items.splice(result.destination.index, 0, reorderedItems);
+        const source = result.source;
+        const destination = result.destination;
 
-        setDefinitions(items);
+        // make sure destination is valid
+        if (destination === undefined || destination === null) return;
+
+        // make sure item is actually being moved
+        if (
+            source.droppableId === destination.droppableId &&
+            destination.index === source.index
+        ) return;
+
+        // set start and end variables
+        const startId = source.droppableId;
+        const endId = destination.droppableId;
+        console.log('startid: ', startId);
+        console.log('endid: ', endId);
+        console.log('startid === endid? ', startId === endId);
+        // get start container
+        let startName = '';
+        if (startId === 'Definitionen:') {
+            startName = 'containerDefault';
+        } else {
+            startName = `container${terms.indexOf(startId) + 1}`;
+        }
+        const startContainer = containers[startName];
+        console.log('start container: ', startContainer);
+        // get end container
+        let endName = '';
+        if (endId === 'Definitionen:') {
+            endName = 'containerDefault';
+        } else {
+            endName = `container${terms.indexOf(endId) + 1}`;
+        }
+        const endContainer = containers[endName];
+        console.log('end container: ', endContainer);
+
+        // if start and end ids are equal, container is the same
+        if (startId === endId) {
+            // move item within list
+            const itemsList = startContainer.list;
+            const [reorderdedList] = itemsList.splice(result.source.index, 1);
+            itemsList.splice(result.destination.index, 0, reorderdedList);
+            // update state
+            setContainers(prevContainers => ({ ...prevContainers, [startName]: {id: startId, list: itemsList} }));
+            return;
+        } else {
+            // multiple containers have to be updated if start and end ids aren't the same
+            // create new start list without item
+        }
     }
+
+    useEffect(() => {
+        console.log('containers: ', containers);
+    }, [containers]);
 
     const checkAnswers = () => {
         const selectedPairs = Object.entries(selected);
@@ -69,32 +123,9 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
     return (
         <div>
             <DragDropContext onDragEnd={handleOnDragEnd}>
-                <Droppable droppableId='notUsed'>
-                    {provided => (
-                        <ul {...provided.droppableProps} ref={provided.innerRef} style={col_style}>
-                            {definitions.map((defText, index) => {
-                                return (
-                                    <Draggable
-                                        key={defText}
-                                        draggableId={defText}
-                                        index={index}
-                                    >
-                                        {provided => (
-                                            <li
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                                ref={provided.innerRef}
-                                            >
-                                                {defText}
-                                            </li>
-                                        )}
-                                    </Draggable>
-                                )
-                            })}
-                            {provided.placeholder}
-                        </ul>
-                    )}
-                </Droppable>
+                {Object.values(containers).map(container => (
+                    <DropContainer key={container.id} container={container} />
+                ))}
             </DragDropContext>
             <button onClick={checkAnswers} className='mt-20'>Check!</button>
         </div>
@@ -113,9 +144,6 @@ const shuffleArray = (array) => {
 
 const Definition = ({ defText, index }) => {
 
-    console.log('def text: ', defText);
-    console.log('def index: ', index);
-
     return (
         <Draggable draggableId={defText} index={index}>
             {provided => (
@@ -131,16 +159,16 @@ const Definition = ({ defText, index }) => {
     );
 };
 
-const DropContainer = ({ col: { list, id } }) => {
+const DropContainer = ({ container: { list, id } }) => {
 
-    console.log('list: ', list);
+    console.log('id: ', id);
 
     return (
         <Droppable droppableId={id}>
             {provided => (
                 <div>
-                    <h4>{id}</h4>
-                    <div className='bg-teal-100 m-5 min-w-11 min-h-9' {...provided.droppableProps} ref={provided.innerRef}>
+                    <p>{id}</p>
+                    <div className='bg-teal-100 m-2 w-44 min-h-9' {...provided.droppableProps} ref={provided.innerRef}>
                         {list.map((defText, index) => (
                             <Definition key={defText} defText={defText} index={index} />
                         ))}
@@ -150,13 +178,6 @@ const DropContainer = ({ col: { list, id } }) => {
             )}
         </Droppable>
     )
-}
-
-const col_style = {
-    background: 'lightblue',
-    margin: '5px',
-    minWidth: '100px',
-    minHeight: '100px'
 }
 
 export default MatchingExercise;

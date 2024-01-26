@@ -105,9 +105,7 @@ const Quiz = () => {
         console.log('active: ', activeCircle);
 
         // check if clicked circle is currently possible
-        if (!isCircleReachable(circle)) {
-            return;
-        }
+        if (!isCircleReachable(circle)) return;
 
         const topic = pathGraph[circle].topic;
         const isExercise = (topic === topic1 || topic === topic2 || topic === topic3);
@@ -264,9 +262,7 @@ const Quiz = () => {
         // make joker available again for new exercise
         setJokerUsed(null);
         // if it was last answer, quiz has been completed at least once
-        if (lastClicked === 'circle24') {
-            setCompletedAtLeastOnce(true);
-        }
+        if (lastClicked === 'circle24') setCompletedAtLeastOnce(true);
     };
 
     // updating board when user closes popup
@@ -329,9 +325,7 @@ const Quiz = () => {
             );
             setCorrectCircles(newCorrect);
             Object.keys(jokerMap).forEach((circle) => {
-                if (parseInt(circle.substring(circle.indexOf('e') + 1)) < 9) {
-                    jokerMap[circle] = '';
-                }
+                if (parseInt(circle.substring(circle.indexOf('e') + 1)) < 9) jokerMap[circle] = '';
             });
         } else if (repeatTopic === 2) {
             setActiveCircle('circle9');
@@ -345,9 +339,7 @@ const Quiz = () => {
             setCorrectCircles(newCorrect);
             Object.keys(jokerMap).forEach((circle) => {
                 const nr = parseInt(circle.substring(circle.indexOf('e') + 1));
-                if (nr >= 9 && nr < 17) {
-                    jokerMap[circle] = '';
-                }
+                if (nr >= 9 && nr < 17) jokerMap[circle] = '';
             });
         } else {
             setActiveCircle('circle17');
@@ -360,16 +352,12 @@ const Quiz = () => {
             );
             setCorrectCircles(newCorrect);
             Object.keys(jokerMap).forEach((circle) => {
-                if (parseInt(circle.substring(circle.indexOf('e') + 1)) >= 17) {
-                    jokerMap[circle] = '';
-                }
+                if (parseInt(circle.substring(circle.indexOf('e') + 1)) >= 17) jokerMap[circle] = '';
             });
         }
 
         // close popup automatically if topic repeat was triggered by feedback popup
-        if (pathGraph[lastClicked].topic === 'feedback') {
-            setShowPopup(false);
-        }
+        if (pathGraph[lastClicked].topic === 'feedback') setShowPopup(false);
     };
 
     const handleReset = () => {
