@@ -63,27 +63,12 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         // set start and end variables
         const startId = source.droppableId;
         const endId = destination.droppableId;
-        console.log('startid: ', startId);
-        console.log('endid: ', endId);
-        console.log('startid === endid? ', startId === endId);
-        // get start container
-        let startName = '';
-        if (startId === 'Definitionen:') {
-            startName = 'containerDefault';
-        } else {
-            startName = `container${terms.indexOf(startId) + 1}`;
-        }
-        const startContainer = containers[startName];
+        const startContainer = containers[getContainerNameFromId(startId)];
+        const endContainer = containers[getContainerNameFromId(endId)];
+
         console.log('start container: ', startContainer);
-        // get end container
-        let endName = '';
-        if (endId === 'Definitionen:') {
-            endName = 'containerDefault';
-        } else {
-            endName = `container${terms.indexOf(endId) + 1}`;
-        }
-        const endContainer = containers[endName];
         console.log('end container: ', endContainer);
+        console.log('startid === endid? ', startId === endId);
 
         // if start and end ids are equal, container is the same
         if (startId === endId) {
@@ -92,13 +77,22 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
             const [reorderdedList] = itemsList.splice(result.source.index, 1);
             itemsList.splice(result.destination.index, 0, reorderdedList);
             // update state
-            setContainers(prevContainers => ({ ...prevContainers, [startName]: {id: startId, list: itemsList} }));
+            setContainers(prevContainers => ({
+                ...prevContainers,
+                [getContainerNameFromId(startId)]: { id: startId, list: itemsList }
+            }));
             return;
         } else {
             // multiple containers have to be updated if start and end ids aren't the same
             // create new start list without item
         }
     }
+
+    // helper function: gets id and returns name of drop container
+    const getContainerNameFromId = (id) => {
+        if (id === 'Definitionen:') return 'containerDefault';
+        return `container${terms.indexOf(id) + 1}`;
+    };
 
     useEffect(() => {
         console.log('containers: ', containers);
