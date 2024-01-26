@@ -1,298 +1,292 @@
 [
- {
-  "id": 0,
-  "type": "question",
-  "difficulty": "medium",
-  "question": "Bei welcher Technik evaluiert ein Experte mit einer Reihe von Guidelines ein Interface?",
-  "correctAnswer": "Heuristische Evaluation",
-  "wrongAnswers": "Usability Test;Erfahrungsbericht;Cognitive Walkthrough",
-  "tip": "Ein Usability Test wird auf jeden Fall mit Nutzer durchgeführt."
- },
- {
-  "id": 1,
-  "type": "question",
-  "difficulty": "easy",
-  "question": "Welche Methode wird bei einem Usability Test häufig verwendet, um Probleme zu entdecken?",
-  "correctAnswer": "Thinking Aloud",
-  "wrongAnswers": "Speaking Slowly;Retrospektive Analyse;Abgestufter Intervallabruf",
-  "tip": "Bei einem Usability Test möchte man wissen, was den Nutzer während der Interaktion mit der Anwendung auffällt."
- },
- {
-  "id": 2,
-  "type": "sort",
-  "difficulty": "easy",
-  "question": "Ordne zu, ob folgende Aussagen richtig oder falsch sind.",
-  "firstContainer": "Richtig",
-  "secondContainer": "Falsch",
-  "belongsInFirst": "Fragebögen sind aufwändiger als Interviews;bei Interviews entsteht eine große Datenmenge",
-  "belongsInSecond": "für Interviews benötigt man eine größere Stichprobe als für Fragebögen; Interviews sind reliabler als Fragebögen",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 3,
-  "type": "question",
-  "difficulty": "medium",
-  "question": "Was trifft bei Fokusgruppen zu? ",
-  "correctAnswer": "Sie können durch Gruppendenken beeinflusst werden",
-  "wrongAnswers": "Sie werden verwendet, um A\/B-Tests mit verschiedenen Prototypen durchzuführen;Sie sind eine Methode, die Benutzerfreundlichkeit eines Produkts zu testen;Sie zeigen, wie Nutzer mit einem Produkt in einer natürlichen Umgebung interagieren",
-  "tip": "Eine Fokusgruppe ist…"
- },
- {
-  "id": 4,
-  "type": "match",
-  "difficulty": "easy",
-  "question": "Ordne den Begriffen ihre korrekten Definitionen zu.",
-  "correctPair1": "Augmented Reality;Anreicherung der realen Welt mit computergenerierten Informationen\/Objekten",
-  "correctPair2": "Virtual Reality;Computergenerierte Umgebung, in die Nutzer eintauchen können",
-  "wrongDefinitions": "Sichtkorrektur durch Verwendung digitaler Brillen;eine Technologie, die es ermöglicht, physische Objekte in die digitale Welt zu übertragen;eine Technologie, die digitale Illusionen schafft, um die Realität zu verändern",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 5,
-  "type": "sort",
-  "difficulty": "medium",
-  "question": "Welche Methoden bieten sich in der Analyse-, welche in der Designphase an?",
-  "firstContainer": "Analysephase",
-  "secondContainer": "Designphase",
-  "belongsInFirst": "Interviews;Szenarien;Personas;Use Cases;Hierarchische Aufgabenanalyse;Fragebogen",
-  "belongsInSecond": "Prototypen;Sketching;Storyboards;Card Sorting",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 6,
-  "type": "sort",
-  "difficulty": "easy",
-  "question": "Bei welchen Methoden handelt es sich um subjektive, bei welchen um objektive Evaluationsmethoden?",
-  "firstContainer": "Subjektiv",
-  "secondContainer": "Objektiv",
-  "belongsInFirst": "Fragebogen;Interview;Fokusgruppe;Cognitive Walkthrough;Heuristische Evaluation;Thinking Aloud",
-  "belongsInSecond": "Eye-Tracking;LogFile-Analyse;Physiologische Maße;Beobachtung",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 7,
-  "type": "match",
-  "difficulty": "easy",
-  "question": "Ordne den Begriffen ihre korrekten Definitionen zu.",
-  "correctPair1": "Gebrauchstauglichkeit;das Ausmaß, in dem ein System durch bestimmte Nutzer in einem bestimmten Nutzungskontext genutzt werden kann, um bestimmte Ziele effektiv, effizient und zufriedenstellend zu erreichen",
-  "correctPair2": "User Experience;Wahrnehmungen und Reaktionen einer Person, die aus der tatsächlichen und\/oder der erwarteten Benutzung eines Produkts, eines Systems oder einer Dienstleistung resultieren",
-  "wrongDefinitions": "das Ausmaß, in dem ein System eine einfache Bedienbarkeit und hohe Interaktivität für bestimmte Nutzer zur Erfüllung eines Ziels gewährleistet;das Ausmaß, in dem ein Produkt den neuesten Designtrends und Modeerscheinungen entspricht;wie einfach oder schwierig es ist, ein Produkt zu erlernen",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 8,
-  "type": "match",
-  "difficulty": "easy",
-  "question": "Ordne den Begriffen ihre korrekten Definitionen zu.",
-  "correctPair1": "Effektivität;Die Genauigkeit und Vollständigkeit, mit der Nutzer ein bestimmtes Ziel erreichen",
-  "correctPair2": "Effizienz;Der im Verhältnis zur Genauigkeit und Vollständigkeit gesetzte Aufwand, mit dem Nutzer ein bestimmtes Ziel erreichen",
-  "wrongDefinitions": "Die Geschwindigkeit, in der eine Aufgabe erledigt wird, unabhängig von der Qualität des Ergebnisses; das Gesamterscheinungsbild eines Produktes;das Ausmaß, in dem die verfügbaren Ressourcen in einem Prozess genutzt werden, unabhängig davon, ob die festgelegten Ziele erreicht werden;Freiheit von Beeinträchtigungen und positive Einstellung gegenüber dem Produkt",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 10,
-  "type": "match",
-  "difficulty": "medium",
-  "question": "Ordne den Begriffen ihre korrekten Definitionen zu.",
-  "correctPair1": "Ease of Learning;wie leicht es ist, ein Produkt erstmalig zu verstehen",
-  "correctPair2": "Ease of Use;wie effizient ein Produkt bei regelmäßiger Nutzung ist",
-  "wrongDefinitions": "wie schnell Aufgaben erledigt werden können;wie schnell und einfach ein Produkt installiert werden kann;der Preis eines Produkts;die soziale Akzeptanz eines Produkts",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 13,
-  "type": "sort",
-  "difficulty": "medium",
-  "question": "Welche Aussagen sind richtig, welche sind falsch?",
-  "firstContainer": "Richtig",
-  "secondContainer": "Falsch",
-  "belongsInFirst": "Guidelines reichen nicht allein aus für gutes Interface Design",
-  "belongsInSecond": "Usability ist subjektiv und nicht objektivierbar;Das Design des Interfaces geschieht in einer Phase des Prozesses;Usability kostet viel Zeit und Geld",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 14,
-  "type": "match",
-  "difficulty": "medium",
-  "question": "Welche Fragen passen zu welchen Design-Prinzipien von Don Norman?",
-  "correctPair1": "Constraints;werde ich an falschen Handlungen gehindert?",
-  "correctPair2": "Affordance;erkenne ich, wie und wozu ich das Element bediene?",
-  "wrongDefinitions": "kann ich alles Relevante sehen?;kommt mir das Element bekannt vor?;weiß ich, was passieren wird, wenn ich das Element bediene?;werde ich über den Systemzustand informiert?;weiß ich, was für Eingaben erlaubt sind?",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 15,
-  "type": "sort",
-  "difficulty": "hard",
-  "question": "Ist das Prinzip eines von Jakob Nielsens Design-Prinzipien?",
-  "firstContainer": "Ja",
-  "secondContainer": "Nein",
-  "belongsInFirst": "Error Prevention;Visibility of System Status;User Control and Freedom;Aesthetic and Minimalist Design;Help and Documentation;Consistency and Standards",
-  "belongsInSecond": "Task Efficiency;Adaptability and Customization;Intuitive Navigation;Engagement and Delight;Responsive Design",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 16,
-  "type": "sort",
-  "difficulty": "medium",
-  "question": "Ordne zu: Was trifft für vertikale, was für horizontale Prototypen zu?",
-  "firstContainer": "vertikal",
-  "secondContainer": "horizontal",
-  "belongsInFirst": "Interface und dahinterstehende Funktionalität;Teilmenge von Funktionen, die in gesamter Tiefe abgebildet werden;Evaluierung komplexer Funktionen",
-  "belongsInSecond": "Abbildung des gesamten Systems durch ein User Interface;Funktionalität kaum oder nur limitiert vorhanden;Evaluieren von Zusammenhängen und Abhängigkeiten",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 17,
-  "type": "question",
-  "difficulty": "hard",
-  "question": "Welche Aussage beschreibt Fitt's Law?",
-  "correctAnswer": "Die Bewegungszeit zu einem Ziel hängt von der Entfernung zum Ziel und von der Größe des Ziels ab",
-  "wrongAnswers": "Die Zeit für die Auswahl eines Elements in einer Liste hängt von der Anzahl der Elemente in dieser Liste ab;Die Zeit zum Bewegen eines Cursors auf einem Pfad hängt von der Länge und Breite des Pfades ab;Die Zeit, um eine Aufgabe auszuführen, hängt von der Anzahl der Übungsversuche ab",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 18,
-  "type": "question",
-  "difficulty": "easy",
-  "question": "Wie kann eine formative UX-Evaluation beschrieben werden?",
-  "correctAnswer": "Qualitative Tests der Benutzerfreundlichkeit eines Prototypen, um herauszufinden, welche Änderungen vorgenommen werden müssen",
-  "wrongAnswers": "Usability-Tests auf einer Online-Website, um zu verstehen, wie sie im Vergleich zu ihren Mitbewerbern abschneidet;Quantitative Usability-Tests an der aktuellen Version der Website, um eine Ausgangsbasis für weiteres Benchmarking zu schaffen;Durchführung einer Fokusgruppe, um die Bedürfnisse der Zielgruppen zu verstehen",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 19,
-  "type": "question",
-  "difficulty": "medium",
-  "question": "Was ist der wesentliche Punkt der 'Wizard-of-Oz'-Methode?",
-  "correctAnswer": "Verwendung eines menschlichen Stellvertreters zur Simulation eines Computersystems",
-  "wrongAnswers": "Testen eines voll funktionsfähigen Prototyps mit Benutzern;Erstellen eines realistischen Mockups;Durchführung von Nutzerforschung, um Designentscheidungen zu treffen",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 20,
-  "type": "question",
-  "difficulty": "easy",
-  "question": "Was ist KEIN Beispiel für eine Methode in der Kontextforschung?",
-  "correctAnswer": "Usability Test",
-  "wrongAnswers": "Contextual Inquiry;Feldbeobachtung;Tagebuch-Studie",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 21,
-  "type": "question",
-  "difficulty": "hard",
-  "question": "Was ist ein Cognitive Walkthrough?",
-  "correctAnswer": "Eine Methode, bei der ein Team von Evaluatoren die verschiedenen Schritte einer Aufgabe aus der Sicht des Benutzers durchläuft",
-  "wrongAnswers": "Eine Methode der Nutzerforschung, bei der ein Teilnehmer einen Prototyp benutzt, um die verschiedenen Schritte einer Aufgabe zu durchlaufen;Eine Methode zur Bewertung der Benutzerfreundlichkeit, bei der ein Experte jedem Schritt eines Entwurfs eine oder mehrere quantitative Bewertungen zuweist;Eine Methode, bei der ein Usability-Spezialist jeden Schritt einer Interaktion anhand etablierter Usability-Prinzipien bewertet",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 22,
-  "type": "question",
-  "difficulty": "medium",
-  "question": "Was ist die empfohlene Teilnehmer-Anzahl für ein exploratives UX-Interview?",
-  "correctAnswer": "hängt von der Breite der Forschungsziele ab",
-  "wrongAnswers": "hängt von der Größe des Zielpublikums ab;ist die gleiche wie bei Usability-Tests (5);ist die gleiche wie bei quantitativen Studien (40)",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 23,
-  "type": "question",
-  "difficulty": "medium",
-  "question": "Eine Stichprobengröße von 5 Nutzer in einem Usability-Test wird:",
-  "correctAnswer": "85% der Probleme aufdecken, die wahrscheinlich mindestens 31% der Nutzer betreffen",
-  "wrongAnswers": "85% aller Probleme aufdecken;15% aller Probleme aufdecken;85% der Probleme aufdecken, die wahrscheinlich mindestens 68% der Nutzer betreffen",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 24,
-  "type": "question",
-  "difficulty": "hard",
-  "question": "Welche der folgenden Metriken ist der beste Maßstab für Effizienz?",
-  "correctAnswer": "Task Time",
-  "wrongAnswers": "Anzahl der Klicks;Task Completion Rate;Task Level Satisfaction",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 25,
-  "type": "question",
-  "difficulty": "easy",
-  "question": "Wie kann summative UX-Evaluation beschrieben werden?",
-  "correctAnswer": "Bewertung der Anwendung hinsichtlich ihrer Gebrauchstauglichkeit",
-  "wrongAnswers": "Auffinden und Beheben von Problemen mit der Gebrauchstauglichkeit;Testen im Vergleich zu anderen Anwendungen;Addieren der verschiedenen Task Performances",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 26,
-  "type": "question",
-  "difficulty": "easy",
-  "question": "Was sind die beiden besten Methoden, um Usability-Probleme zu priorisieren?",
-  "correctAnswer": "Problemhäufigkeit und Problemschwere",
-  "wrongAnswers": "Problemschwere und Problemlänge;Erstes und letztes Auftreten;Am verwirrendsten und am wenigsten verwirrend",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 27,
-  "type": "question",
-  "difficulty": "hard",
-  "question": "Als Evaluator Effect bezeichnet man:",
-  "correctAnswer": "Die Tendenz verschiedener Evaluations-Teilnehmer, unterschiedliche Probleme zu identifizieren, wenn sie dasselbe Interface testen",
-  "wrongAnswers": "Die Wirkung, die ein Evaluator auf einen Teilnehmer bei einer Studie hat;Die Tendenz verschiedener Evaluatoren, beim Testen desselben Interfaces dieselben Probleme zu erkennen;Die Auswirkungen auf den Leiter des Usability-Tests, wenn er von Stakeholdern beobachtet wird",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 28,
-  "type": "question",
-  "difficulty": "easy",
-  "question": "Eine Persona:",
-  "correctAnswer": "repräsentiert einen bestimmten Nutzertyp",
-  "wrongAnswers": "ist eine reale Person, die für Werbekampagnen eingestellt wird;soll einen durchschnittlichen Nutzer repräsentieren;ist ein zufällig erstellter Charakter, der das Design interessanter gestalten soll",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 29,
-  "type": "question",
-  "difficulty": "easy",
-  "question": "Post-test-Fragebögen werden nach dem Usability-Test durchgeführt und sind nützlich für die Messung von:",
-  "correctAnswer": "Nutzerzufriedenheit",
-  "wrongAnswers": "Sicherheit;Effizienz;Erlernbarkeit",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 30,
-  "type": "question",
-  "difficulty": "medium",
-  "question": "Zu Beginn des Interface-Designs sollten, wenn möglich:",
-  "correctAnswer": "keine Farben verwendet werden",
-  "wrongAnswers": "keine gesättigten Rot- und Blau-Töne verwendet werden;keine grellen Farben verwendet werden;so viele Farben wie möglich verwendet werden",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 31,
-  "type": "question",
-  "difficulty": "easy",
-  "question": "Sie sollen ein Usability-Problem in Bezug auf ein Software-Interface lösen. Was müssen Sie zunächst verstehen, bevor Sie Lösungen anbieten können?",
-  "correctAnswer": "Wie User die Software nutzen?",
-  "wrongAnswers": "Wie Freunde die Software nutzen?;Wie Entwickler die Software nutzen?;Wie Sie die Software nutzen?",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 32,
-  "type": "question",
-  "difficulty": "easy",
-  "question": "Wann sollte ein Entwickler Usability Prinzipien anwenden?",
-  "correctAnswer": "Früh im Entwicklungszyklus",
-  "wrongAnswers": "Nach erster Veröffentlichung des Systems;In der Evaluationsphase;Keine der angegebenen Lösungen trifft zu",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- },
- {
-  "id": 33,
-  "type": "question",
-  "difficulty": "easy",
-  "question": "Warum ist Gebrauchstauglichkeit ein wichtiger Aspekt?",
-  "correctAnswer": "Erhöht die Zufriedenheit der Nutzer",
-  "wrongAnswers": "Das Endprodukt sieht ansprechend aus;Das System besteht alle Softwaretests;Verringert die Anzahl benötigter Schulungen für Mitarbeitende",
-  "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
- }
+    {
+        "id": 0,
+        "type": "question",
+        "difficulty": "medium",
+        "question": "Bei welcher Technik evaluiert ein Experte mit einer Reihe von Guidelines ein Interface?",
+        "correctAnswer": "Heuristische Evaluation",
+        "wrongAnswers": "Usability Test;Erfahrungsbericht;Cognitive Walkthrough",
+        "tip": "Ein Usability Test wird auf jeden Fall mit Nutzer durchgeführt."
+    },
+    {
+        "id": 1,
+        "type": "question",
+        "difficulty": "easy",
+        "question": "Welche Methode wird bei einem Usability Test häufig verwendet, um Probleme zu entdecken?",
+        "correctAnswer": "Thinking Aloud",
+        "wrongAnswers": "Speaking Slowly;Retrospektive Analyse;Abgestufter Intervallabruf",
+        "tip": "Bei einem Usability Test möchte man wissen, was den Nutzer während der Interaktion mit der Anwendung auffällt."
+    },
+    {
+        "id": 2,
+        "type": "sort",
+        "difficulty": "easy",
+        "question": "Ordne zu, ob folgende Aussagen richtig oder falsch sind.",
+        "firstContainer": "Richtig",
+        "secondContainer": "Falsch",
+        "belongsInFirst": "Fragebögen sind aufwändiger als Interviews;bei Interviews entsteht eine große Datenmenge",
+        "belongsInSecond": "für Interviews benötigt man eine größere Stichprobe als für Fragebögen; Interviews sind reliabler als Fragebögen",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 3,
+        "type": "question",
+        "difficulty": "medium",
+        "question": "Was trifft bei Fokusgruppen zu? ",
+        "correctAnswer": "Sie können durch Gruppendenken beeinflusst werden",
+        "wrongAnswers": "Sie werden verwendet, um A\/B-Tests mit verschiedenen Prototypen durchzuführen;Sie sind eine Methode, die Benutzerfreundlichkeit eines Produkts zu testen;Sie zeigen, wie Nutzer mit einem Produkt in einer natürlichen Umgebung interagieren",
+        "tip": "Eine Fokusgruppe ist…"
+    },
+    {
+        "id": 4,
+        "type": "match",
+        "difficulty": "easy",
+        "question": "Ordne den Begriffen ihre korrekten Definitionen zu.",
+        "correctPair1": "Augmented Reality;Anreicherung der realen Welt mit computergenerierten Informationen\/Objekten",
+        "correctPair2": "Virtual Reality;Computergenerierte Umgebung, in die Nutzer eintauchen können",
+        "correctPair3": "Effektivität;Die Genauigkeit und Vollständigkeit, mit der Nutzer ein bestimmtes Ziel erreichen",
+        "correctPair4": "Effizienz;Der im Verhältnis zur Genauigkeit und Vollständigkeit gesetzte Aufwand, mit dem Nutzer ein bestimmtes Ziel erreichen",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 5,
+        "type": "sort",
+        "difficulty": "medium",
+        "question": "Welche Methoden bieten sich in der Analyse-, welche in der Designphase an?",
+        "firstContainer": "Analysephase",
+        "secondContainer": "Designphase",
+        "belongsInFirst": "Interviews;Szenarien;Personas;Use Cases;Hierarchische Aufgabenanalyse;Fragebogen",
+        "belongsInSecond": "Prototypen;Sketching;Storyboards;Card Sorting",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 6,
+        "type": "sort",
+        "difficulty": "easy",
+        "question": "Bei welchen Methoden handelt es sich um subjektive, bei welchen um objektive Evaluationsmethoden?",
+        "firstContainer": "Subjektiv",
+        "secondContainer": "Objektiv",
+        "belongsInFirst": "Fragebogen;Interview;Fokusgruppe;Cognitive Walkthrough;Heuristische Evaluation;Thinking Aloud",
+        "belongsInSecond": "Eye-Tracking;LogFile-Analyse;Physiologische Maße;Beobachtung",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 7,
+        "type": "match",
+        "difficulty": "easy",
+        "question": "Ordne den Begriffen ihre korrekten Definitionen zu.",
+        "correctPair1": "Gebrauchstauglichkeit;das Ausmaß, in dem ein System durch bestimmte Nutzer in einem bestimmten Nutzungskontext genutzt werden kann, um bestimmte Ziele effektiv, effizient und zufriedenstellend zu erreichen",
+        "correctPair2": "User Experience;Wahrnehmungen und Reaktionen einer Person, die aus der tatsächlichen und\/oder der erwarteten Benutzung eines Produkts, eines Systems oder einer Dienstleistung resultieren",
+        "correctPair3": "Effektivität;Die Genauigkeit und Vollständigkeit, mit der Nutzer ein bestimmtes Ziel erreichen",
+        "correctPair4": "Effizienz;Der im Verhältnis zur Genauigkeit und Vollständigkeit gesetzte Aufwand, mit dem Nutzer ein bestimmtes Ziel erreichen",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 10,
+        "type": "match",
+        "difficulty": "medium",
+        "question": "Ordne den Begriffen ihre korrekten Definitionen zu.",
+        "correctPair1": "Ease of Learning;wie leicht es ist, ein Produkt erstmalig zu verstehen",
+        "correctPair2": "Ease of Use;wie effizient ein Produkt bei regelmäßiger Nutzung ist",
+        "correctPair3": "Effektivität;Die Genauigkeit und Vollständigkeit, mit der Nutzer ein bestimmtes Ziel erreichen",
+        "correctPair4": "Effizienz;Der im Verhältnis zur Genauigkeit und Vollständigkeit gesetzte Aufwand, mit dem Nutzer ein bestimmtes Ziel erreichen",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 13,
+        "type": "sort",
+        "difficulty": "medium",
+        "question": "Welche Aussagen sind richtig, welche sind falsch?",
+        "firstContainer": "Richtig",
+        "secondContainer": "Falsch",
+        "belongsInFirst": "Guidelines reichen nicht allein aus für gutes Interface Design",
+        "belongsInSecond": "Usability ist subjektiv und nicht objektivierbar;Das Design des Interfaces geschieht in einer Phase des Prozesses;Usability kostet viel Zeit und Geld",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 14,
+        "type": "match",
+        "difficulty": "medium",
+        "question": "Welche Fragen passen zu welchen Design-Prinzipien von Don Norman?",
+        "correctPair1": "Constraints;werde ich an falschen Handlungen gehindert?",
+        "correctPair2": "Affordance;erkenne ich, wie und wozu ich das Element bediene?",
+        "correctPair3": "Effektivität;Die Genauigkeit und Vollständigkeit, mit der Nutzer ein bestimmtes Ziel erreichen",
+        "correctPair4": "Effizienz;Der im Verhältnis zur Genauigkeit und Vollständigkeit gesetzte Aufwand, mit dem Nutzer ein bestimmtes Ziel erreichen",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 15,
+        "type": "sort",
+        "difficulty": "hard",
+        "question": "Ist das Prinzip eines von Jakob Nielsens Design-Prinzipien?",
+        "firstContainer": "Ja",
+        "secondContainer": "Nein",
+        "belongsInFirst": "Error Prevention;Visibility of System Status;User Control and Freedom;Aesthetic and Minimalist Design;Help and Documentation;Consistency and Standards",
+        "belongsInSecond": "Task Efficiency;Adaptability and Customization;Intuitive Navigation;Engagement and Delight;Responsive Design",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 16,
+        "type": "sort",
+        "difficulty": "medium",
+        "question": "Ordne zu: Was trifft für vertikale, was für horizontale Prototypen zu?",
+        "firstContainer": "vertikal",
+        "secondContainer": "horizontal",
+        "belongsInFirst": "Interface und dahinterstehende Funktionalität;Teilmenge von Funktionen, die in gesamter Tiefe abgebildet werden;Evaluierung komplexer Funktionen",
+        "belongsInSecond": "Abbildung des gesamten Systems durch ein User Interface;Funktionalität kaum oder nur limitiert vorhanden;Evaluieren von Zusammenhängen und Abhängigkeiten",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 17,
+        "type": "question",
+        "difficulty": "hard",
+        "question": "Welche Aussage beschreibt Fitt's Law?",
+        "correctAnswer": "Die Bewegungszeit zu einem Ziel hängt von der Entfernung zum Ziel und von der Größe des Ziels ab",
+        "wrongAnswers": "Die Zeit für die Auswahl eines Elements in einer Liste hängt von der Anzahl der Elemente in dieser Liste ab;Die Zeit zum Bewegen eines Cursors auf einem Pfad hängt von der Länge und Breite des Pfades ab;Die Zeit, um eine Aufgabe auszuführen, hängt von der Anzahl der Übungsversuche ab",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 18,
+        "type": "question",
+        "difficulty": "easy",
+        "question": "Wie kann eine formative UX-Evaluation beschrieben werden?",
+        "correctAnswer": "Qualitative Tests der Benutzerfreundlichkeit eines Prototypen, um herauszufinden, welche Änderungen vorgenommen werden müssen",
+        "wrongAnswers": "Usability-Tests auf einer Online-Website, um zu verstehen, wie sie im Vergleich zu ihren Mitbewerbern abschneidet;Quantitative Usability-Tests an der aktuellen Version der Website, um eine Ausgangsbasis für weiteres Benchmarking zu schaffen;Durchführung einer Fokusgruppe, um die Bedürfnisse der Zielgruppen zu verstehen",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 19,
+        "type": "question",
+        "difficulty": "medium",
+        "question": "Was ist der wesentliche Punkt der 'Wizard-of-Oz'-Methode?",
+        "correctAnswer": "Verwendung eines menschlichen Stellvertreters zur Simulation eines Computersystems",
+        "wrongAnswers": "Testen eines voll funktionsfähigen Prototyps mit Benutzern;Erstellen eines realistischen Mockups;Durchführung von Nutzerforschung, um Designentscheidungen zu treffen",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 20,
+        "type": "question",
+        "difficulty": "easy",
+        "question": "Was ist KEIN Beispiel für eine Methode in der Kontextforschung?",
+        "correctAnswer": "Usability Test",
+        "wrongAnswers": "Contextual Inquiry;Feldbeobachtung;Tagebuch-Studie",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 21,
+        "type": "question",
+        "difficulty": "hard",
+        "question": "Was ist ein Cognitive Walkthrough?",
+        "correctAnswer": "Eine Methode, bei der ein Team von Evaluatoren die verschiedenen Schritte einer Aufgabe aus der Sicht des Benutzers durchläuft",
+        "wrongAnswers": "Eine Methode der Nutzerforschung, bei der ein Teilnehmer einen Prototyp benutzt, um die verschiedenen Schritte einer Aufgabe zu durchlaufen;Eine Methode zur Bewertung der Benutzerfreundlichkeit, bei der ein Experte jedem Schritt eines Entwurfs eine oder mehrere quantitative Bewertungen zuweist;Eine Methode, bei der ein Usability-Spezialist jeden Schritt einer Interaktion anhand etablierter Usability-Prinzipien bewertet",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 22,
+        "type": "question",
+        "difficulty": "medium",
+        "question": "Was ist die empfohlene Teilnehmer-Anzahl für ein exploratives UX-Interview?",
+        "correctAnswer": "hängt von der Breite der Forschungsziele ab",
+        "wrongAnswers": "hängt von der Größe des Zielpublikums ab;ist die gleiche wie bei Usability-Tests (5);ist die gleiche wie bei quantitativen Studien (40)",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 23,
+        "type": "question",
+        "difficulty": "medium",
+        "question": "Eine Stichprobengröße von 5 Nutzer in einem Usability-Test wird:",
+        "correctAnswer": "85% der Probleme aufdecken, die wahrscheinlich mindestens 31% der Nutzer betreffen",
+        "wrongAnswers": "85% aller Probleme aufdecken;15% aller Probleme aufdecken;85% der Probleme aufdecken, die wahrscheinlich mindestens 68% der Nutzer betreffen",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 24,
+        "type": "question",
+        "difficulty": "hard",
+        "question": "Welche der folgenden Metriken ist der beste Maßstab für Effizienz?",
+        "correctAnswer": "Task Time",
+        "wrongAnswers": "Anzahl der Klicks;Task Completion Rate;Task Level Satisfaction",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 25,
+        "type": "question",
+        "difficulty": "easy",
+        "question": "Wie kann summative UX-Evaluation beschrieben werden?",
+        "correctAnswer": "Bewertung der Anwendung hinsichtlich ihrer Gebrauchstauglichkeit",
+        "wrongAnswers": "Auffinden und Beheben von Problemen mit der Gebrauchstauglichkeit;Testen im Vergleich zu anderen Anwendungen;Addieren der verschiedenen Task Performances",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 26,
+        "type": "question",
+        "difficulty": "easy",
+        "question": "Was sind die beiden besten Methoden, um Usability-Probleme zu priorisieren?",
+        "correctAnswer": "Problemhäufigkeit und Problemschwere",
+        "wrongAnswers": "Problemschwere und Problemlänge;Erstes und letztes Auftreten;Am verwirrendsten und am wenigsten verwirrend",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 27,
+        "type": "question",
+        "difficulty": "hard",
+        "question": "Als Evaluator Effect bezeichnet man:",
+        "correctAnswer": "Die Tendenz verschiedener Evaluations-Teilnehmer, unterschiedliche Probleme zu identifizieren, wenn sie dasselbe Interface testen",
+        "wrongAnswers": "Die Wirkung, die ein Evaluator auf einen Teilnehmer bei einer Studie hat;Die Tendenz verschiedener Evaluatoren, beim Testen desselben Interfaces dieselben Probleme zu erkennen;Die Auswirkungen auf den Leiter des Usability-Tests, wenn er von Stakeholdern beobachtet wird",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 28,
+        "type": "question",
+        "difficulty": "easy",
+        "question": "Eine Persona:",
+        "correctAnswer": "repräsentiert einen bestimmten Nutzertyp",
+        "wrongAnswers": "ist eine reale Person, die für Werbekampagnen eingestellt wird;soll einen durchschnittlichen Nutzer repräsentieren;ist ein zufällig erstellter Charakter, der das Design interessanter gestalten soll",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 29,
+        "type": "question",
+        "difficulty": "easy",
+        "question": "Post-test-Fragebögen werden nach dem Usability-Test durchgeführt und sind nützlich für die Messung von:",
+        "correctAnswer": "Nutzerzufriedenheit",
+        "wrongAnswers": "Sicherheit;Effizienz;Erlernbarkeit",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 30,
+        "type": "question",
+        "difficulty": "medium",
+        "question": "Zu Beginn des Interface-Designs sollten, wenn möglich:",
+        "correctAnswer": "keine Farben verwendet werden",
+        "wrongAnswers": "keine gesättigten Rot- und Blau-Töne verwendet werden;keine grellen Farben verwendet werden;so viele Farben wie möglich verwendet werden",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 31,
+        "type": "question",
+        "difficulty": "easy",
+        "question": "Sie sollen ein Usability-Problem in Bezug auf ein Software-Interface lösen. Was müssen Sie zunächst verstehen, bevor Sie Lösungen anbieten können?",
+        "correctAnswer": "Wie User die Software nutzen?",
+        "wrongAnswers": "Wie Freunde die Software nutzen?;Wie Entwickler die Software nutzen?;Wie Sie die Software nutzen?",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 32,
+        "type": "question",
+        "difficulty": "easy",
+        "question": "Wann sollte ein Entwickler Usability Prinzipien anwenden?",
+        "correctAnswer": "Früh im Entwicklungszyklus",
+        "wrongAnswers": "Nach erster Veröffentlichung des Systems;In der Evaluationsphase;Keine der angegebenen Lösungen trifft zu",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+        "id": 33,
+        "type": "question",
+        "difficulty": "easy",
+        "question": "Warum ist Gebrauchstauglichkeit ein wichtiger Aspekt?",
+        "correctAnswer": "Erhöht die Zufriedenheit der Nutzer",
+        "wrongAnswers": "Das Endprodukt sieht ansprechend aus;Das System besteht alle Softwaretests;Verringert die Anzahl benötigter Schulungen für Mitarbeitende",
+        "tip": "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    }
 ]

@@ -1,9 +1,9 @@
 # Bachelorarbeit
 
-## Quiz-Anwendung im Kontext gemeinwohlorientierter KI
+### Quiz-Anwendung im Kontext gemeinwohlorientierter KI
 
 
-### Main component structure:
+#### Main component structure:
 
 * App.js -> *App.css*
     * Quiz.jsx -> *Quiz.css*
@@ -21,7 +21,7 @@
             * Disclaimer.jsx (later)
 
 
-### TODOs (roughly ordered by importance):
+#### TODOs (roughly ordered by importance):
 
 * [x] Sorting.jsx:
     * [x] was answer correct/wrong?
@@ -62,6 +62,7 @@
 ##### after receiving actual exercises
 
 * [ ] change topic names to variables
+* [ ] filter by topic (not by difficulty)
 * [ ] any errors?
 
 ##### laaater (if time)

@@ -1,6 +1,6 @@
 import '../css/Quiz.css';
 import { useState, useEffect } from 'react';
-import quizData from '../data/questions_onlyUX.json';
+import quizData from '../data/questions_onlyMatch.json';
 import feedbackImg from '../data/images/feedback.png';
 import goalImg from '../data/images/feedback_ende.png';
 import Header from './Header';
@@ -556,6 +556,7 @@ const Quiz = () => {
     );
 }
 
+// helper function: shuffles array
 const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
