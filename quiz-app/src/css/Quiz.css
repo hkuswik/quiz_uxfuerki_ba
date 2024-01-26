@@ -31,12 +31,9 @@ svg#board {
 img {
     max-width: 100%;
     max-height: 100%;
-    width: auto;
-    height: auto;
 }
 
 .img-container {
-    width: auto;
     overflow: hidden;
 }
 
