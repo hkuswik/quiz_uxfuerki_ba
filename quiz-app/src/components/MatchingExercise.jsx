@@ -50,6 +50,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         console.log('result: ', result);
         const source = result.source;
         const destination = result.destination;
+        const draggedDefId = result.draggableId;
 
         // make sure destination is valid
         if (destination === undefined || destination === null) return;
@@ -61,30 +62,43 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         ) return;
 
         // set start and end variables
-        const startId = source.droppableId;
-        const endId = destination.droppableId;
-        const startContainer = containers[getContainerNameFromId(startId)];
-        const endContainer = containers[getContainerNameFromId(endId)];
+        const startName = getContainerNameFromId(source.droppableId);
+        const endName = getContainerNameFromId(destination.droppableId);
+        const startContainer = containers[startName];
+        const endContainer = containers[endName];
 
         console.log('start container: ', startContainer);
         console.log('end container: ', endContainer);
-        console.log('startid === endid? ', startId === endId);
+        console.log('startid === endid? ', startName === endName);
 
         // if start and end ids are equal, container is the same
-        if (startId === endId) {
+        if (startName === endName) {
             // move item within list
             const itemsList = startContainer.list;
-            const [reorderdedList] = itemsList.splice(result.source.index, 1);
-            itemsList.splice(result.destination.index, 0, reorderdedList);
+            const [reorderdedList] = itemsList.splice(source.index, 1);
+            itemsList.splice(destination.index, 0, reorderdedList);
+            
             // update state
             setContainers(prevContainers => ({
                 ...prevContainers,
-                [getContainerNameFromId(startId)]: { id: startId, list: itemsList }
+                [startName]: { id: startContainer.id, list: itemsList }
             }));
             return;
-        } else {
-            // multiple containers have to be updated if start and end ids aren't the same
+        } else { // multiple containers have to be updated if start and end ids aren't the same
             // create new start list without item
+            const newStartList = startContainer.list.filter(item => item !== draggedDefId);
+
+            // create new end list and insert item
+            const newEndList = endContainer.list;
+            newEndList.splice(destination.index, 0, draggedDefId);
+
+            // update state
+            setContainers(prevContainers => ({
+                ...prevContainers,
+                [startName]: { id: startContainer.id, list: newStartList },
+                [endName]: { id: endContainer.id, list: newEndList }
+            }))
+            return;
         }
     }
 
