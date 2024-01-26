@@ -3,16 +3,12 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const MatchingExercise = ({ exercise, onAnswer }) => {
     // split correct pairs and save them
-    const correctPairs = [
-        [...exercise.correctPair1.split(';')],
-        [...exercise.correctPair2.split(';')],
-        [...exercise.correctPair3.split(';')],
-        [...exercise.correctPair4.split(';')],
-    ];
+    const correctPairs = Object.values(exercise)
+        .filter(value => typeof value === 'string' && value.includes(';'))
+        .map(pair => pair.split(';'));
 
     // save shuffled definitions
-    const shuffledPairs = shuffleArray(correctPairs);
-    const shuffledDefinitions = shuffledPairs.map(pair => pair[1]);
+    const shuffledDefinitions = correctPairs.map(pair => pair[1]).sort(() => Math.random() - 0.5);
 
     // save terms
     const terms = correctPairs.map(pair => pair[0]);
@@ -22,32 +18,17 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         terms.reduce((t, term) => ({ ...t, [term]: null }), {})
     );
 
+    // save initial assignment of containers (all in default)
     const initialContainers = {
-        containerDefault: {
-            id: 'Definitionen:',
-            list: shuffledDefinitions
-        },
-        container1: {
-            id: terms[0],
-            list: []
-        },
-        container2: {
-            id: terms[1],
-            list: []
-        },
-        container3: {
-            id: terms[2],
-            list: []
-        },
-        container4: {
-            id: terms[3],
-            list: []
-        }
+        containerDefault: { id: 'Definitionen:', list: shuffledDefinitions },
+        container1: { id: terms[0], list: [] },
+        container2: { id: terms[1], list: [] },
+        container3: { id: terms[2], list: [] },
+        container4: { id: terms[3], list: [] }
     }
     const [containers, setContainers] = useState(initialContainers);
 
     const handleOnDragEnd = (result) => {
-        console.log('result: ', result);
         const source = result.source;
         const destination = result.destination;
         const draggedDefId = result.draggableId;
@@ -56,10 +37,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         if (destination === undefined || destination === null) return;
 
         // make sure item is actually being moved
-        if (
-            source.droppableId === destination.droppableId &&
-            destination.index === source.index
-        ) return;
+        if (source.droppableId === destination.droppableId && destination.index === source.index) return;
 
         // set start and end variables
         const startName = getContainerNameFromId(source.droppableId);
@@ -67,24 +45,23 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         const startContainer = containers[startName];
         const endContainer = containers[endName];
 
-        console.log('start container: ', startContainer);
-        console.log('end container: ', endContainer);
-        console.log('startid === endid? ', startName === endName);
-
         // if start and end ids are equal, container is the same
         if (startName === endName) {
             // move item within list
             const itemsList = startContainer.list;
             const [reorderdedList] = itemsList.splice(source.index, 1);
             itemsList.splice(destination.index, 0, reorderdedList);
-            
+
             // update state
             setContainers(prevContainers => ({
                 ...prevContainers,
                 [startName]: { id: startContainer.id, list: itemsList }
             }));
             return;
-        } else { // multiple containers have to be updated if start and end ids aren't the same
+        } else { // item is moved; have to update multiple containers
+            // return if there is already an item in a container that is not the default container
+            if (endName !== 'containerDefault' && endContainer.list.length !== 0) return;
+
             // create new start list without item
             const newStartList = startContainer.list.filter(item => item !== draggedDefId);
 
@@ -98,6 +75,24 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
                 [startName]: { id: startContainer.id, list: newStartList },
                 [endName]: { id: endContainer.id, list: newEndList }
             }))
+
+            // remove dragged item from it's current matched term (if there is one) in selected
+            const currentMatchedTerm = Object.keys(selected).find(term => selected[term] === draggedDefId);
+            if (typeof currentMatchedTerm !== "undefined") {
+                setSelected(prevSelected => ({
+                    ...prevSelected,
+                    [currentMatchedTerm]: null
+                }))
+            }
+
+            // update selected with new match if new container isn't default
+            if (endName !== 'containerDefault') {
+                setSelected(prevSelected => ({
+                    ...prevSelected,
+                    [endContainer.id]: draggedDefId
+                }))
+            }
+
             return;
         }
     }
@@ -111,6 +106,10 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
     useEffect(() => {
         console.log('containers: ', containers);
     }, [containers]);
+
+    useEffect(() => {
+        console.log('selected: ', selected);
+    }, [selected]);
 
     const checkAnswers = () => {
         const selectedPairs = Object.entries(selected);
