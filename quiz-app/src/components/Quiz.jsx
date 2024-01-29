@@ -170,7 +170,8 @@ const Quiz = () => {
     };
 
     const isCircleReachable = (circle) => {
-        return circle === activeCircle || possibleCircles.includes(circle);
+        console.log(circle, ' reachable?: ', circle === activeCircle || possibleCircles.includes(circle));
+        return (circle === activeCircle || possibleCircles.includes(circle));
     };
 
     const setNewExercise = (topic) => {
@@ -377,6 +378,11 @@ const Quiz = () => {
         });
     };
 
+    useEffect(() => {
+        console.log('possible: ', possibleCircles);
+        console.log('next: ', activeCircle);
+    }, [possibleCircles, activeCircle]);
+
     const renderBoard = () => {
         const circleColors = {
             easy: '#D177B3', medium: '#8377D1', hard: '#77D1CB',
@@ -452,7 +458,13 @@ const Quiz = () => {
                         style={
                             {
                                 ...({ cursor: isReachable ? 'pointer' : 'default' }),
-                                ...(isExercise ? isCompleted ? { opacity: wasCorrect ? '100%' : '40%' } : {} : {})
+                                ...(isExercise
+                                    ? isReachable
+                                        ? { opacity: '100%' }
+                                        : isCompleted
+                                            ? { opacity: wasCorrect ? '100%' : '40%' }
+                                            : {}
+                                    : {})
                             }
                         }
                     />

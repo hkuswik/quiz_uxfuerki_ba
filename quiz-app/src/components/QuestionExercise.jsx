@@ -57,10 +57,6 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
         }
     }
 
-    const handleWarning = () => {
-        setShowWarning(true);
-    }
-
     const handleAnswerHover = (answer_box) => {
         isClickable && setHovered(answer_box);
     }
@@ -121,7 +117,7 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
                     <div className="self-end font-bold mr-28" style={{ color: wrongColor }}>Bitte wähle eine Antwort aus</div>
                 }
                 {(selected === null) &&
-                    <div onClick={() => handleWarning()} className="img-container flex">
+                    <div onClick={() => setShowWarning(true)} className="img-container flex">
                         <img src={check_logo_no} className="h-12" alt="Check Logo" />
                     </div>
                 }

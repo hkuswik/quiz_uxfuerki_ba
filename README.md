@@ -60,7 +60,7 @@
 
 ##### to fix
 
-* [ ] found coloring error when chosing topic for 2nd time! (but functionality is ok)
+* [x] found coloring error when chosing topic for 2nd time! (but functionality is ok)
   
 ##### when finished
 

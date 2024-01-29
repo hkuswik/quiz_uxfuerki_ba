@@ -140,10 +140,6 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         return `container${terms.indexOf(id) + 1}`;
     };
 
-    const handleWarning = () => {
-        setShowWarning(true);
-    };
-
     const checkAnswers = () => {
         const selectedPairs = Object.entries(selected);
 
@@ -190,7 +186,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
                     <div className="self-end font-bold mr-32" style={{ color: wrongColor }}>Bitte wähle alle Antworten aus</div>
                 }
                 {!allMatched &&
-                    <div onClick={() => handleWarning()} className="img-container flex">
+                    <div onClick={() => setShowWarning(true)} className="img-container flex">
                         <img src={check_logo_no} className="w-8 self-end" alt="Check Logo" />
                     </div>
                 }

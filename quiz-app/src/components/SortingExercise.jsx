@@ -102,10 +102,6 @@ const SortingExercise = ({ exercise, onAnswer }) => {
         }
     }
 
-    const handleWarning = () => {
-        setShowWarning(true);
-    }
-
     const handleBtnHover = (item, selectedCategory) => {
         if (userSelections[item] !== selectedCategory && isClickable) {
             if (selectedCategory === firstCategory) {
