@@ -170,8 +170,7 @@ const Quiz = () => {
     };
 
     const isCircleReachable = (circle) => {
-        console.log(circle, ' reachable?: ', circle === activeCircle || possibleCircles.includes(circle));
-        return (circle === activeCircle || possibleCircles.includes(circle));
+        return circle === activeCircle || possibleCircles.includes(circle);
     };
 
     const setNewExercise = (topic) => {

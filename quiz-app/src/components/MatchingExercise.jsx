@@ -10,7 +10,6 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
 
     const [color, setColor] = useState('#817C9C');
     const [containerColor, setContainerColor] = useState('#F1F0F4');
-    const correctColor = '#7AD177';
     const wrongColor = '#D24141';
 
     useEffect(() => {
@@ -144,18 +143,29 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         const selectedPairs = Object.entries(selected);
 
         let isCorrect = true;
-
+        let newDefaultList = [];
         for (const [term, definition] of selectedPairs) {
             const correctDefinition = correctPairs.find(pair => pair[0] === term)[1];
             if (definition !== correctDefinition) {
                 isCorrect = false;
-                break; // exit loop if any pair is incorrect
+                // move wrongly matched definition to default container
+                newDefaultList.push(definition)
+                console.log('default list: ', newDefaultList);
             };
         };
+
+        setContainers(prevContainers => ({
+            ...prevContainers,
+            'containerDefault': { id: 'default', list: newDefaultList }
+        }));
 
         setCheckClicked(true);
         onAnswer(isCorrect);
     };
+
+    useEffect(() => {
+        console.log('containers: ', containers);
+    }, [containers]);
 
     return (
         <div>
@@ -168,6 +178,9 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
                                 key={filteredContainer.id}
                                 container={filteredContainer}
                                 color={color}
+                                selected={selected}
+                                correct={correctPairs}
+                                checkClicked={checkClicked}
                             />
                         ))}
                     </div>
@@ -177,6 +190,9 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
                             container={Object.values(containers)[0]}
                             color={color}
                             containerColor={containerColor}
+                            selected={selected}
+                            correct={correctPairs}
+                            checkClicked={checkClicked}
                         />
                     </div>
                 </div>
@@ -201,14 +217,42 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
 };
 
 // component for draggable definitions
-const Definition = ({ defText, index, color }) => {
+const Definition = ({ defText, index, color, selected, correct, checkClicked, isDefault }) => {
+
+    const correctColor = '#7AD177';
+    const wrongColor = '#D24141';
+
+    const matchIsCorrect = () => {
+        const matchedTerm = Object.keys(selected).find(term => selected[term] === defText);
+        const correctDef = correct.find(pair => pair[0] === matchedTerm)[1];
+        console.log('matchedTerm: ', matchedTerm, ', correct: ', correctDef, ', I am: ', defText);
+        return correctDef === defText;
+    };
 
     return (
-        <Draggable draggableId={defText} index={index}>
+        <Draggable draggableId={defText} index={index} isDragDisabled={checkClicked}>
             {provided => (
                 <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                    <div style={{ ...draggable_style, outlineColor: color }} className={'hover:outline-dashed hover:outline-2'}>
-                        {defText}
+                    <div
+                        style={{
+                            ...draggable_style,
+                            ...(checkClicked
+                                ? isDefault
+                                    ? { background: wrongColor }
+                                    : matchIsCorrect()
+                                        ? { background: correctColor }
+                                        : { background: '#F1F0F4' }
+                                : { outlineColor: color }
+                            )
+                        }}
+                        className={checkClicked ? '' : 'hover:outline-dashed hover:outline-2'}>
+                        {!checkClicked && defText}
+                        {checkClicked && !isDefault && !matchIsCorrect() && 
+                            /* search for correct def for term that this def was wrongly matched with */
+                            correct.find(pair => pair[0] === Object.keys(selected).find(t => selected[t] === defText))[1]
+                        }
+                        {checkClicked && isDefault && !matchIsCorrect() && defText}
+                        {checkClicked && matchIsCorrect() && defText}
                     </div>
                 </div>
             )}
@@ -217,7 +261,7 @@ const Definition = ({ defText, index, color }) => {
 };
 
 // component for droppable container
-const DropContainer = ({ container: { list, id }, color, containerColor }) => {
+const DropContainer = ({ container: { list, id }, color, containerColor, selected, correct, checkClicked }) => {
     const isDefault = id === 'default';
 
     return (
@@ -231,7 +275,16 @@ const DropContainer = ({ container: { list, id }, color, containerColor }) => {
                         ref={provided.innerRef}
                     >
                         {list.map((defText, index) => (
-                            <Definition key={defText} defText={defText} index={index} color={color} />
+                            <Definition
+                                key={defText}
+                                defText={defText}
+                                index={index}
+                                color={color}
+                                selected={selected}
+                                correct={correct}
+                                checkClicked={checkClicked}
+                                isDefault={isDefault}
+                            />
                         ))}
                         {provided.placeholder}
                     </div>

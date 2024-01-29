@@ -28,7 +28,7 @@
 * [x] Sorting.jsx:
     * [x] was answer correct/wrong?
 * [x] Matching.jsx
-* [ ] Matching.jsx: how to show if answer was correct/wrong?
+* [x] Matching.jsx: how to show if answer was correct/wrong?
 * [x] Quiz.jsx: SVG done (all circles in correct place)
 * [x] Exercise.jsx: 
     * [x] joker behaviour:
@@ -61,6 +61,7 @@
 ##### to fix
 
 * [x] found coloring error when chosing topic for 2nd time! (but functionality is ok)
+* [ ] re-enter error after reentering from 2nd topic section
   
 ##### when finished
 
