@@ -37,10 +37,10 @@ const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
     }, [whichSzenario]);
 
     return (
-        <div className="flex flex-col items-center" style={showBtn ? {marginBottom: ''} : {marginBottom: '150px'}}>
+        <div className="flex flex-col items-center mb-4" style={showBtn ? {marginBottom: ''} : {marginBottom: '150px'}}>
             <h2>Szenario {szenarioNr}:</h2>
             <h2 style={{ color: color }} className="font-bold">{szenario}</h2>
-            <p className="font-medium w-11/12 text-lg mt-7">Versetze dich in folgendes Szenario:</p>
+            <p className="font-medium w-11/12 text-lg mt-16">Versetze dich in folgendes Szenario:</p>
             <p className="w-11/12 mt-3">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Eum ducimus porro magni consequatur dolor facere aspernatur
@@ -51,7 +51,7 @@ const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
                 voluptates accusamus, iste deserunt!
             </p>
             {showBtn &&
-                <div className="flex row w-full justify-end mt-12">
+                <div className="flex row w-full justify-end mt-24 mr-4">
                     <div onClick={onUpdate} className="img-container hover:opacity-85 cursor-pointer">
                         <img src={button} className="h-20" alt="weiter Button" />
                     </div>

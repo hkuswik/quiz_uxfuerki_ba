@@ -12,14 +12,14 @@ const Disclaimer = ({ content, onReset }) => {
             return <AllQuestions />
         } else {
             return (
-                <div className='flex flex-col items-center text-center mb-14'>
+                <div className='flex flex-col items-center text-center mb-16'>
                     <h2 className='mb-8'><b>Achtung!</b></h2>
                     {isAllQuest &&
                         <h4 className='w-3/4 mb-7'>Wenn du fortfährst, siehst du eine Übersicht aller Fragen mitsamt ihrer Lösungen.</h4>
                     }
                     {!isAllQuest &&
                         <div className='flex flex-col items-center'>
-                            <h4 className='w-3/4 mb-5'>Wenn du fortfährst, wird dein gesamter Fortschritt zurückgesetzt - das Quiz beginnt von vorne.</h4>
+                            <h4 className='w-3/4 mb-7 mt-3'>Wenn du fortfährst, wird dein gesamter Fortschritt zurückgesetzt - das Quiz beginnt von vorne.</h4>
                             <div className='flex row items-center rounded-lg'>
                                 <p className='mr-3'>Fortschritt:</p>
                                 <div className='progress-bar'>
@@ -30,7 +30,7 @@ const Disclaimer = ({ content, onReset }) => {
                             </div>
                         </div>
                     }
-                    <div className="img-container hover:opacity-85 cursor-pointer mt-16 self-end mr-8">
+                    <div className="img-container hover:opacity-85 cursor-pointer mt-24 self-end mr-16">
                         <img onClick={() => isAllQuest ? setRenderAllQuest(true) : onReset()} src={fortfahrenBtn} className="h-20" alt="fortfahren Button" />
                     </div>
                 </div>

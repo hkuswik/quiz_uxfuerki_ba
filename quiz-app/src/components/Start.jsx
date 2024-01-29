@@ -17,7 +17,7 @@ const Start = ({ onUpdate }) => {
         if (content === 1) {
 
             return (
-                <div className='flex flex-col mb-3 items-center text-center'>
+                <div className='flex flex-col mb-4 items-center text-center'>
                     <h2>Willkommen</h2>
                     <h2>beim</h2>
                     <h2 className='font-semibold'>Wegweiser.UX-für-KI Quiz</h2>
@@ -31,15 +31,15 @@ const Start = ({ onUpdate }) => {
                             Zum Abschluss jedes Wegabschnitts erhältst du ein kurzes <b>Feedback</b>.
                         </p>
                     </div>
-                    <div className="img-container self-end mt-14 ">
+                    <div className="img-container self-end mt-20 mr-4 ">
                         <img src={weiter_logo} className="h-20 hover:opacity-85 cursor-pointer" onClick={() => setContent(2)} alt="weiter Logo" />
                     </div>
                 </div>
             );
         } else {
             return (
-                <div className='flex flex-col mb-3'>
-                    <div className='flex row justify-between items-center mb-12 mr-5 ml-5'>
+                <div className='flex flex-col mb-4'>
+                    <div className='flex row justify-between items-center mb-20 mr-5 ml-5'>
                         <div className='flex flex-col w-4/12 items-center'>
                             <div className='progress-bar'>
                                 <div className='progress-section'>
@@ -95,7 +95,7 @@ const Start = ({ onUpdate }) => {
                             Die dunklere Farbe zeigt, wieviele der Fragen du <b>korrekt</b> beantwortet hast.
                         </p>
                     </div>
-                    <div className='flex row justify-between items-center mb-12 mr-5 ml-5'>
+                    <div className='flex row justify-between items-center mb-20 mr-5 ml-5'>
                         <div className='flex flex-col w-4/12 items-center'>
                             <div className='flex row'>
                                 <div style={joker}>
@@ -111,7 +111,7 @@ const Start = ({ onUpdate }) => {
                             Du kannst bei jeder Aufgabe genau <b>einen Joker</b> einsetzen. In der Quiz-Übersicht siehst du, bei welchen Fragen du Joker verwendet hast.
                         </p>
                     </div>
-                    <div className="img-container self-end">
+                    <div className="img-container self-end mr-4">
                         <img src={starten_logo} className="h-20 hover:opacity-85 cursor-pointer" onClick={onUpdate} alt="Quiz starten Logo" />
                     </div>
                 </div >

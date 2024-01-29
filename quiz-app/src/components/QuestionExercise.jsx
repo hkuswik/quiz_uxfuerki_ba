@@ -81,7 +81,7 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
     }
 
     return (
-        <div className='flex flex-col h-full justify-around'>
+        <div className='flex flex-col h-full justify-between'>
             <div style={question_style}>{exercise.question}</div>
             <div className='flex row flex-wrap justify-center'>
                 {answers.map((answer, index) => {
@@ -118,7 +118,7 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
             </div>
             <div className="flex justify-end h-8">
                 {showWarning &&
-                    <div className="self-end font-bold mr-24" style={{ color: wrongColor }}>Bitte wähle eine Antwort aus</div>
+                    <div className="self-end font-bold mr-28" style={{ color: wrongColor }}>Bitte wähle eine Antwort aus</div>
                 }
                 {(selected === null) &&
                     <div onClick={() => handleWarning()} className="img-container flex">
@@ -149,6 +149,8 @@ const question_style = {
     width: '100%',
     height: 'auto',
     padding: '20px',
+    marginTop: '30px',
+    marginBottom: '-10px',
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
@@ -158,9 +160,10 @@ const question_style = {
 
 const answer_style = {
     background: '#F6F5FC',
-    height: '150px',
+    height: 'auto',
+    minHeight: '150px',
     width: '300px',
-    padding: '20px',
+    padding: '10px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

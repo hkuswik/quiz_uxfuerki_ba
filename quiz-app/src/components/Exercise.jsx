@@ -36,7 +36,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
                 break;
             default:
                 console.log('error setting avatar');
-        }
+        };
     }, [exercise]);
 
     useEffect(() => {
@@ -48,7 +48,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
             } else {
                 setExerciseNr(active.substring(active.indexOf('e') + 1));
             }
-        }
+        };
     }, [checkClicked, active]);
 
     const renderExerciseType = (exercise) => {
@@ -83,7 +83,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
             } else {
                 onJoker('swap');
             }
-        }
+        };
     };
 
     const handleTipClick = (event) => {
@@ -184,7 +184,7 @@ const joker = {
 }
 
 const line = {
-    height: '100%',
+    height: '650px',
     width: '4px',
     backgroundColor: '#21202b',
     borderRadius: '99px',

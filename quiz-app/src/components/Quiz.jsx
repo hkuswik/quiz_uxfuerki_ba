@@ -1,6 +1,6 @@
 import '../css/Quiz.css';
 import { useState, useEffect } from 'react';
-import quizData from '../data/questions_onlyMatch.json';
+import quizData from '../data/questions_onlyUX.json';
 import feedbackImg from '../data/images/feedback.png';
 import goalImg from '../data/images/feedback_ende.png';
 import Header from './Header';

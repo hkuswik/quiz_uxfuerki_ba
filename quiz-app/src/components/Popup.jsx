@@ -102,8 +102,9 @@ const popupContainer = {
 const popupContent = {
     padding: '20px',
     borderRadius: '8px',
-    width: '900px',
-    height: '700px',
+    width: '1000px',
+    height: 'auto',
+    minHeight: '800px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between'

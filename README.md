@@ -8,24 +8,27 @@
 * App.js -> *App.css*
     * Quiz.jsx -> *Quiz.css*
         * Header.jsx
+            * ProgressBar.jsx
         * Popup.jsx
             * Start.jsx
-            * Feedback.jsx 
-            * Goal.jsx
+            * Feedback.jsx
             * Szenario.jsx
             * Exercise.jsx
                 * QuestionExercise.jsx
                 * SortingExercise.jsx
                 * MatchingExercise.jsx
-            * AllQuestions.jsx
-            * Disclaimer.jsx (later)
+                    * DroppableContainer.jsx
+                    * Definition.jsx
+            * Disclaimer.jsx
+                * AllQuestions.jsx
 
 
 #### TODOs (roughly ordered by importance):
 
 * [x] Sorting.jsx:
     * [x] was answer correct/wrong?
-* [ ] Matching.jsx
+* [x] Matching.jsx
+* [ ] Matching.jsx: how to show if answer was correct/wrong?
 * [x] Quiz.jsx: SVG done (all circles in correct place)
 * [x] Exercise.jsx: 
     * [x] joker behaviour:
@@ -54,10 +57,15 @@
 * [x] Szenario.jsx: correct buttons
 * [ ] AllQuestions.jsx
 * [x] Quest/Sort/Match: what happens onClick when no answer selected?
+
+##### to fix
+
+* [ ] found coloring error when chosing topic for 2nd time! (but functionality is ok)
   
 ##### when finished
 
 * [ ] add comments (!!!) where missing
+* [ ] test on smaller screens (at least laptop)
 
 ##### after receiving actual exercises
 

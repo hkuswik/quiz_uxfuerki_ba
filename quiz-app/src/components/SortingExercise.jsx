@@ -125,8 +125,8 @@ const SortingExercise = ({ exercise, onAnswer }) => {
     }
 
     return (
-        <div className='flex flex-col h-full w-full max-w-4xl justify-around'>
-            <div className="font-semibold mb-5">{exercise.question}</div>
+        <div className='flex flex-col h-full w-full max-w-4xl justify-between'>
+            <div className="font-semibold mt-4">{exercise.question}</div>
             <div className="flex flex-col">
                 {Object.keys(userSelections).map((item) => (
                     <div key={item} className="flex row justify-between mb-2 items-center">
@@ -168,10 +168,10 @@ const SortingExercise = ({ exercise, onAnswer }) => {
             </div>
             <div className="flex justify-end h-8">
                 {showWarning &&
-                    <div className="self-end font-bold mr-28" style={{ color: wrongColor }}>Bitte wähle alle Antworten aus</div>
+                    <div className="self-end font-bold mr-32" style={{ color: wrongColor }}>Bitte wähle alle Antworten aus</div>
                 }
                 {!allSelected &&
-                    <div onClick={() => handleWarning()} className="img-container flex">
+                    <div onClick={() => setShowWarning(true)} className="img-container flex">
                         <img src={check_logo_no} className="h-12" alt="Check Logo" />
                     </div>
                 }

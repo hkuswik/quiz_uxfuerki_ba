@@ -4,11 +4,12 @@ import check_logo_yes from '../data/images/check-bl.png';
 import check_logo_no from '../data/images/check-light.png';
 
 const MatchingExercise = ({ exercise, onAnswer }) => {
-    const [allSelected, setAllSelected] = useState(false);
+    const [allMatched, setAllMatched] = useState(false);
     const [checkClicked, setCheckClicked] = useState(false);
     const [showWarning, setShowWarning] = useState(false);
 
     const [color, setColor] = useState('#817C9C');
+    const [containerColor, setContainerColor] = useState('#F1F0F4');
     const correctColor = '#7AD177';
     const wrongColor = '#D24141';
 
@@ -16,12 +17,15 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         switch (exercise.difficulty) {
             case 'easy':
                 setColor('#D177B3');
+                setContainerColor('#EECCE3');
                 break;
             case 'medium':
                 setColor('#8377D1');
+                setContainerColor('#D1CCEE');
                 break;
             case 'hard':
                 setColor('#77D1CB');
+                setContainerColor('#CCEEEC');
                 break;
             default:
                 setColor('#817C9C');
@@ -65,6 +69,9 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         // make sure item is actually being moved
         if (source.droppableId === destination.droppableId && destination.index === source.index) return;
 
+        // remove warning after next movement
+        showWarning && setShowWarning(false);
+
         // set start and end variables
         const startName = getContainerNameFromId(source.droppableId);
         const endName = getContainerNameFromId(destination.droppableId);
@@ -100,7 +107,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
                 ...prevContainers,
                 [startName]: { id: startContainer.id, list: newStartList },
                 [endName]: { id: endContainer.id, list: newEndList }
-            }))
+            }));
 
             // remove dragged item from it's current matched term (if there is one) in selected
             const currentMatchedTerm = Object.keys(selected).find(term => selected[term] === draggedDefId);
@@ -108,20 +115,24 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
                 setSelected(prevSelected => ({
                     ...prevSelected,
                     [currentMatchedTerm]: null
-                }))
-            }
+                }));
+            };
 
             // update selected with new match if new container isn't default
             if (endName !== 'containerDefault') {
                 setSelected(prevSelected => ({
                     ...prevSelected,
                     [endContainer.id]: draggedDefId
-                }))
-            }
+                }));
+            };
 
-            return;
-        }
-    }
+            // if startContainer = defaultContainer and it had only 1 item left; all items are now matched
+            if (startName === 'containerDefault' && startContainer.list.length <= 1) setAllMatched(true);
+
+            // if an item is put back in the defaultContainer, not all items are matched
+            if (endName === 'containerDefault' && endContainer.list.length >= 0) setAllMatched(false);
+        };
+    };
 
     // helper function: gets id and returns name of drop container
     const getContainerNameFromId = (id) => {
@@ -131,7 +142,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
 
     const handleWarning = () => {
         setShowWarning(true);
-    }
+    };
 
     const checkAnswers = () => {
         const selectedPairs = Object.entries(selected);
@@ -143,39 +154,49 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
             if (definition !== correctDefinition) {
                 isCorrect = false;
                 break; // exit loop if any pair is incorrect
-            }
-        }
+            };
+        };
 
-        console.log('answer was correct: ', isCorrect);
+        setCheckClicked(true);
+        onAnswer(isCorrect);
     };
 
     return (
         <div>
-            <div className="font-semibold mb-5">{exercise.question}</div>
+            <div className="font-semibold mb-4">{exercise.question}</div>
             <DragDropContext onDragEnd={handleOnDragEnd}>
                 <div className='flex row justify-between items-center'>
                     <div className='flex flex-col'>
                         {Object.values(containers).filter((container, index) => index > 0).map(filteredContainer => (
-                            <DropContainer key={filteredContainer.id} container={filteredContainer} color={color} />
+                            <DropContainer
+                                key={filteredContainer.id}
+                                container={filteredContainer}
+                                color={color}
+                            />
                         ))}
                     </div>
                     <div className='flex flex-col'>
-                        <DropContainer key={Object.values(containers)[0].id} container={Object.values(containers)[0]} color={color} />
+                        <DropContainer
+                            key={Object.values(containers)[0].id}
+                            container={Object.values(containers)[0]}
+                            color={color}
+                            containerColor={containerColor}
+                        />
                     </div>
                 </div>
             </DragDropContext>
-            <div className="flex justify-end">
+            <div className="flex justify-end mt-5">
                 {showWarning &&
-                    <div className="self-end font-bold mr-28" style={{ color: wrongColor }}>Bitte wähle alle Antworten aus</div>
+                    <div className="self-end font-bold mr-32" style={{ color: wrongColor }}>Bitte wähle alle Antworten aus</div>
                 }
-                {!allSelected &&
+                {!allMatched &&
                     <div onClick={() => handleWarning()} className="img-container flex">
-                        <img src={check_logo_no} className="w-9 self-end" alt="Check Logo" />
+                        <img src={check_logo_no} className="w-8 self-end" alt="Check Logo" />
                     </div>
                 }
-                {(allSelected && !checkClicked) &&
+                {(allMatched && !checkClicked) &&
                     <div onClick={() => checkAnswers()} className="img-container hover:opacity-85 cursor-pointer">
-                        <img src={check_logo_yes} className="w-9 justify-self-end" alt="Check Logo" />
+                        <img src={check_logo_yes} className="w-8 justify-self-end" alt="Check Logo" />
                     </div>
                 }
             </div>
@@ -183,16 +204,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
     );
 };
 
-// helper function: shuffles array and returns it
-const shuffleArray = (array) => {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-};
-
+// component for draggable definitions
 const Definition = ({ defText, index, color }) => {
 
     return (
@@ -208,16 +220,17 @@ const Definition = ({ defText, index, color }) => {
     );
 };
 
-const DropContainer = ({ container: { list, id }, color }) => {
-
+// component for droppable container
+const DropContainer = ({ container: { list, id }, color, containerColor }) => {
     const isDefault = id === 'default';
 
     return (
         <Droppable droppableId={id}>
             {provided => (
-                <div>
-                    <p>{!isDefault && id}</p>
-                    <div style={isDefault ? defaultContainer_style : { ...dropContainer_style, outlineColor: color }}
+                <div className='flex flex-col items-center'>
+                    <p style={!isDefault ? { ...term_style, background: color } : {}}>{!isDefault && id}</p>
+                    <div
+                        style={isDefault ? { ...defaultContainer_style, background: containerColor } : dropContainer_style}
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                     >
@@ -233,38 +246,46 @@ const DropContainer = ({ container: { list, id }, color }) => {
 };
 
 const dropContainer_style = {
-    width: '300px',
-    height: '80px',
-    marginBottom: '10px',
-    padding: '5px',
+    width: '350px',
+    height: 'auto',
+    minHeight: '80px',
+    marginBottom: '15px',
+    padding: '2px',
     borderRadius: '10px',
-    background: '#F6F5FC',
+    background: '#F1F0F4',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
 };
 
+const term_style = {
+    borderRadius: '10px 10px 0 0',
+    width: '280px',
+    textAlign: 'center',
+    padding: '3px',
+}
+
 const defaultContainer_style = {
-    width: '300px',
-    height: '400px',
-    background: '#D4D2DD',
+    width: '350px',
+    height: '550px',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-around',
     alignItems: 'center',
-    borderRadius: '10px'
+    borderRadius: '10px',
+    padding: '5px'
 }
 
 const draggable_style = {
     background: 'white',
-    width: '200px',
+    width: '300px',
     height: 'auto',
-    padding: '2px',
+    padding: '4px',
     margin: '5px',
     textAlign: 'center',
     display: 'flex',
     justifyContent: 'center',
-    borderRadius: '10px'
+    borderRadius: '10px',
+    fontSize: '15px',
 }
 
 export default MatchingExercise;
