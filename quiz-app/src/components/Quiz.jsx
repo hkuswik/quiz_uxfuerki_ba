@@ -274,7 +274,10 @@ const Quiz = () => {
         // execute behaviour depending on what type of circle (if exercise, board has already been updated)
         if (!isExercise) {
             if (topic === 'feedback') {
-                if (currentTopic === 3) {
+                if (completedAtLeastOnce) {
+                    setState('REENTER');
+                    setPossibleCircles(possibleCircles => [...possibleCircles, ...['circle1', 'circle9', 'circle17']]);
+                } else if (currentTopic === 3) {
                     setState('REENTER');
                     setPossibleCircles(possibleCircles => [...possibleCircles, ...['circle1', 'circle9', 'circle17']]);
                 } else {
@@ -300,6 +303,12 @@ const Quiz = () => {
     };
 
     const handleTopicRepeat = (repeatTopic) => {
+        // if repeat is clicked after quiz was completed at least once, reset possible circles to only szenarios
+        if (completedAtLeastOnce) {
+            const newPossible = possibleCircles.filter(circle => pathGraph[circle].topic.includes('szenario'));
+            setPossibleCircles(newPossible);
+        };
+
         // reset amount of used joker & correct circles in current topic
         setCorrectInTopic(prevCorrectInTopic => ({
             ...prevCorrectInTopic,
@@ -312,7 +321,8 @@ const Quiz = () => {
         setDoneInTopic(prevDoneInTopic => ({
             ...prevDoneInTopic,
             [repeatTopic]: 0,
-        }))
+        }));
+
         // depending on which topic is repeated, set active circle, reset completed/correct circles & joker
         if (repeatTopic === 1) {
             setActiveCircle('circle1');
@@ -354,7 +364,7 @@ const Quiz = () => {
             Object.keys(jokerMap).forEach((circle) => {
                 if (parseInt(circle.substring(circle.indexOf('e') + 1)) >= 17) jokerMap[circle] = '';
             });
-        }
+        };
 
         // close popup automatically if topic repeat was triggered by feedback popup
         if (pathGraph[lastClicked].topic === 'feedback') setShowPopup(false);
@@ -445,15 +455,15 @@ const Quiz = () => {
                         stroke={isReachable ? 'white' : color}
                         className={`${isReachableHovered ? 'circle-active-hover' : ''} ${isSzenarioHovered ? 'opacity-80' : ''}`}
                         strokeWidth='2px'
-                        strokeDasharray={isExercise
-                            ? isReachable
+                        strokeDasharray={isSzenario
+                            ? isCompleted
+                                ? 'none'
+                                : '6'
+                            : isReachable
                                 ? '6'
                                 : isCompleted
                                     ? 'none'
-                                    : '6'
-                            : isCompleted
-                                ? 'none'
-                                : '6'}
+                                    : '6'}
                         style={
                             {
                                 ...({ cursor: isReachable ? 'pointer' : 'default' }),

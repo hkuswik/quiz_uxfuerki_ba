@@ -150,7 +150,6 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
                 isCorrect = false;
                 // move wrongly matched definition to default container
                 newDefaultList.push(definition)
-                console.log('default list: ', newDefaultList);
             };
         };
 
@@ -162,10 +161,6 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         setCheckClicked(true);
         onAnswer(isCorrect);
     };
-
-    useEffect(() => {
-        console.log('containers: ', containers);
-    }, [containers]);
 
     return (
         <div>
@@ -225,7 +220,6 @@ const Definition = ({ defText, index, color, selected, correct, checkClicked, is
     const matchIsCorrect = () => {
         const matchedTerm = Object.keys(selected).find(term => selected[term] === defText);
         const correctDef = correct.find(pair => pair[0] === matchedTerm)[1];
-        console.log('matchedTerm: ', matchedTerm, ', correct: ', correctDef, ', I am: ', defText);
         return correctDef === defText;
     };
 

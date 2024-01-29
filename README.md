@@ -61,7 +61,7 @@
 ##### to fix
 
 * [x] found coloring error when chosing topic for 2nd time! (but functionality is ok)
-* [ ] re-enter error after reentering from 2nd topic section
+* [x] re-enter error after reentering from 2nd topic section
   
 ##### when finished
 
