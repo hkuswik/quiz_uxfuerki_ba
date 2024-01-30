@@ -76,7 +76,7 @@ const Quiz = () => {
     const [doneInTopic, setDoneInTopic] = useState({ 1: 0, 2: 0, 3: 0 });
 
     useEffect(() => {
-        // save questions according to topic
+        // save exercises according to topic
         const firstTopic = quizData.filter((q) => q.difficulty === topic1);
         const secondTopic = quizData.filter((q) => q.difficulty === topic2);
         const thirdTopic = quizData.filter((q) => q.difficulty === topic3);
@@ -386,11 +386,6 @@ const Quiz = () => {
             jokerMap[circle] = '';
         });
     };
-
-    useEffect(() => {
-        console.log('possible: ', possibleCircles);
-        console.log('next: ', activeCircle);
-    }, [possibleCircles, activeCircle]);
 
     const renderBoard = () => {
         const circleColors = {

@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import check_logo_yes from '../data/images/check-bl.png';
 import check_logo_no from '../data/images/check-light.png';
 
+const correctColor = '#7AD177';
+const wrongColor = '#D24141';
+
 const SortingExercise = ({ exercise, onAnswer }) => {
     const [firstCategory, setFirstCategory] = useState('');
     const [secondCategory, setSecondCategory] = useState('');
@@ -19,8 +22,6 @@ const SortingExercise = ({ exercise, onAnswer }) => {
     const [secondBtnHover, setSecondBtnHover] = useState(null);
 
     const [color, setColor] = useState('#817C9C');
-    const correctColor = '#7AD177';
-    const wrongColor = '#D24141';
 
     useEffect(() => {
         prepareItems(exercise);
@@ -214,17 +215,5 @@ const hover_style = {
     outline: '2px dashed',
     cursor: 'pointer'
 }
-
-/**
-  "id": 2,
-  "type": "sort",
-  "difficulty": "easy",
-  "question": "Ordne zu, ob folgende Aussagen richtig oder falsch sind.",
-  "firstContainer": "Richtig",
-  "secondContainer": "Falsch",
-  "belongsInFirst": "Fragebögen sind aufwändiger als Interviews;bei Interviews entsteht eine große Datenmenge",
-  "belongsInSecond": "für Interviews benötigt man eine größere Stichprobe als für Fragebögen; Interviews sind reliabler als Fragebögen",
-  "tip": "…"
- */
 
 export default SortingExercise;

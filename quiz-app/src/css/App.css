@@ -43,6 +43,11 @@ h4 {
   font-size: calc(17px + 1vmin);
 }
 
+h5 {
+  font-size: calc(15px + 1vmin);
+  font-weight: 500;
+}
+
 b {
   font-weight: 600;
   font-size: calc(17px + 1vmin);

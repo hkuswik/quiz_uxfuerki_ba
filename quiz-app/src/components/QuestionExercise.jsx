@@ -6,6 +6,9 @@ const topic1 = 'easy';
 const topic2 = 'medium';
 const topic3 = 'hard';
 
+const correctColor = '#7AD177';
+const wrongColor = '#D24141';
+
 const QuestionExercise = ({ exercise, onAnswer }) => {
     const [answers, setAnswers] = useState([]);
     const [hovered, setHovered] = useState(null);
@@ -15,8 +18,6 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
     const [showWarning, setShowWarning] = useState(false);
 
     const [color, setColor] = useState('#817C9C');
-    const correctColor = '#7AD177';
-    const wrongColor = '#D24141';
 
     useEffect(() => {
         randomizeAnswers(exercise);

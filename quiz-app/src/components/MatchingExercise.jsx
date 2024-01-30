@@ -3,6 +3,9 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import check_logo_yes from '../data/images/check-bl.png';
 import check_logo_no from '../data/images/check-light.png';
 
+const correctColor = '#7AD177';
+const wrongColor = '#D24141';
+
 const MatchingExercise = ({ exercise, onAnswer }) => {
     const [allMatched, setAllMatched] = useState(false);
     const [checkClicked, setCheckClicked] = useState(false);
@@ -10,7 +13,6 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
 
     const [color, setColor] = useState('#817C9C');
     const [containerColor, setContainerColor] = useState('#F1F0F4');
-    const wrongColor = '#D24141';
 
     useEffect(() => {
         switch (exercise.difficulty) {
@@ -214,9 +216,6 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
 // component for draggable definitions
 const Definition = ({ defText, index, color, selected, correct, checkClicked, isDefault }) => {
 
-    const correctColor = '#7AD177';
-    const wrongColor = '#D24141';
-
     const matchIsCorrect = () => {
         const matchedTerm = Object.keys(selected).find(term => selected[term] === defText);
         const correctDef = correct.find(pair => pair[0] === matchedTerm)[1];
@@ -241,7 +240,7 @@ const Definition = ({ defText, index, color, selected, correct, checkClicked, is
                         }}
                         className={checkClicked ? '' : 'hover:outline-dashed hover:outline-2'}>
                         {!checkClicked && defText}
-                        {checkClicked && !isDefault && !matchIsCorrect() && 
+                        {checkClicked && !isDefault && !matchIsCorrect() &&
                             /* search for correct def for term that this def was wrongly matched with */
                             correct.find(pair => pair[0] === Object.keys(selected).find(t => selected[t] === defText))[1]
                         }

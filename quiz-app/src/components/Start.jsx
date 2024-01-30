@@ -10,7 +10,6 @@ const topic3 = 'Autonomie';
 
 const Start = ({ onUpdate }) => {
 
-    // TODO: add 2nd start popup (explanations for joker/progressBar)
     const [content, setContent] = useState(1);
 
     const renderContent = (content) => {
