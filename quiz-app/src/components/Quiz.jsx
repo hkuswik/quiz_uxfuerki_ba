@@ -101,9 +101,6 @@ const Quiz = () => {
     }, []);
 
     const handleCircleClick = (circle) => {
-        console.log('circle clicked: ', circle);
-        console.log('active: ', activeCircle);
-
         // check if clicked circle is currently possible
         if (!isCircleReachable(circle)) return;
 

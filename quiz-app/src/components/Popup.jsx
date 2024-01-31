@@ -82,6 +82,7 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                     <div onClick={onClose} className="text-2xl font-medium cursor-pointer hover:opacity-80">X</div>
                 </div>
                 {renderPopupContent(content)}
+                <div></div>
             </div>
         </div>
     )

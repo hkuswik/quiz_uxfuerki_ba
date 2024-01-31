@@ -241,7 +241,7 @@ const Definition = ({ defText, index, color, selected, correct, checkClicked, is
                         className={checkClicked ? '' : 'hover:outline-dashed hover:outline-2'}>
                         {!checkClicked && defText}
                         {checkClicked && !isDefault && !matchIsCorrect() &&
-                            /* search for correct def for term that this def was wrongly matched with */
+                            // search for correct def for term that this def was wrongly matched with
                             correct.find(pair => pair[0] === Object.keys(selected).find(t => selected[t] === defText))[1]
                         }
                         {checkClicked && isDefault && !matchIsCorrect() && defText}

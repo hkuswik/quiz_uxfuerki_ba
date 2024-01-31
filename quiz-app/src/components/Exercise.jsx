@@ -204,7 +204,7 @@ const tipPopupContainer = {
 }
 
 const tipPopupContent = {
-    backgroundColor: '#F6F5FC',
+    backgroundColor: 'white',
     height: '500px',
     width: '650px',
     marginLeft: '150px',

@@ -6,7 +6,6 @@ const topic2 = 'medium';
 const topic3 = 'hard';
 
 const correctColor = '#7AD177';
-const wrongColor = '#D24141';
 
 const AllQuestions = () => {
     // save exercies according to topic
@@ -30,9 +29,9 @@ const AllQuestions = () => {
                 shuffleArray(answers);
 
                 return (
-                    <div className='ml-10 mr-10'>
+                    <div className='flex flex-col ml-8 mr-8'>
                         <div style={{ ...question_style, background: color }}>{exercise.question}</div>
-                        <div className='flex row flex-wrap justify-center mb-24'>
+                        <div className='flex row flex-wrap justify-center mb-20'>
                             {answers.map((answer, index) => {
                                 return (
                                     <div key={index} style={{
@@ -47,12 +46,59 @@ const AllQuestions = () => {
                     </div>
                 );
             case 'match':
+                const matches = [
+                    exercise.correctPair1.split(';'),
+                    exercise.correctPair2.split(';'),
+                    exercise.correctPair3.split(';'),
+                    exercise.correctPair4.split(';'),
+                ]
+                shuffleArray(matches);
+
                 return (
-                    <div>quest</div>
+                    <div className='flex flex-col ml-8 mr-8'>
+                        <div className="font-semibold mb-10 rounded-lg p-3 text-center" style={{ background: color }}>{exercise.question}</div>
+                        <div className='flex flex-row flex-wrap justify-center'>
+                            {matches.map((match, index) => (
+                                <div key={index} className='flex flex-col items-center justify-center m-2'>
+                                    <div style={term_style}>{match[0]}</div>
+                                    <div style={definition_style}>{match[1]}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 );
             case 'sort':
+                const firstCategory = exercise.firstContainer;
+                const secondCategory = exercise.secondContainer;
+                const items = exercise.belongsInFirst.split(';').concat(exercise.belongsInSecond.split(';'));
+                shuffleArray(items);
+
                 return (
-                    <div>quest</div>
+                    <div className='flex flex-col ml-8 mr-8'>
+                        <div className="font-semibold mb-12 rounded-lg p-3" style={{ background: color }}>{exercise.question}</div>
+                        <div className="flex flex-col">
+                            {items.map((item) => (
+                                <div key={item} className="flex row justify-between mb-2 items-center">
+                                    <p style={item_style} className="sm">{item}</p>
+                                    <div className="flex row">
+                                        <div style={{
+                                            ...button_style,
+                                            background: exercise.belongsInFirst.includes(item) ? correctColor : '#D4D2DD'
+                                        }}>
+                                            {firstCategory}
+                                        </div>
+                                        <div style={{
+                                            ...button_style,
+                                            background: exercise.belongsInSecond.includes(item) ? correctColor : '#D4D2DD'
+                                        }}>
+                                            {secondCategory}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div></div>
+                    </div>
                 );
             default:
                 return <div>some error rendering :/</div>;
@@ -89,9 +135,10 @@ const AllQuestions = () => {
     };
 
     return (
-        <div>
+        <div className='flex flex-col h-full w-full justify-between'>
+            <div className='w-full h-auto'></div>
             {renderExercise(exercise)}
-            <div className="flex row justify-between items-end relative bottom-0">
+            <div className="flex row justify-between items-end justify-self-end">
                 <div className='flex w-14 justify-start'>
                     <h5 style={{ color: getColor(exercise.difficulty) }}>{exercise.difficulty}</h5>
                 </div>
@@ -115,6 +162,7 @@ const shuffleArray = (array) => {
     }
 };
 
+// general styles
 const left_arrow = {
     width: '0',
     height: '0',
@@ -134,6 +182,7 @@ const right_arrow = {
     cursor: 'pointer'
 };
 
+// question exercise styles
 const question_style = {
     fontWeight: '600',
     width: '100%',
@@ -144,7 +193,7 @@ const question_style = {
     alignItems: 'center',
     textAlign: 'center',
     justifyContent: 'center',
-    borderRadius: '8px'
+    borderRadius: '8px',
 }
 
 const answer_style = {
@@ -158,6 +207,53 @@ const answer_style = {
     textAlign: 'center',
     borderRadius: '8px',
     margin: '10px',
+}
+
+// sorting exercise styles
+const item_style = {
+    background: '#D4D2DD',
+    borderRadius: '10px',
+    display: 'flex',
+    alignItems: 'center',
+    width: '65%',
+    padding: '5px 10px 5px 10px',
+}
+
+const button_style = {
+    borderRadius: '10px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    padding: '10px',
+    height: '30px',
+    marginLeft: '10px',
+    fontSize: 'calc(6px + 1vmin)',
+    fontWeight: '600',
+}
+
+// matching exercise style
+const term_style = {
+    borderRadius: '10px',
+    width: '330px',
+    textAlign: 'center',
+    padding: '3px',
+    background: '#D4D2DD',
+    boxShadow: '2px 2px 7px #999',
+}
+
+const definition_style = {
+    background: 'white',
+    width: '330px',
+    height: '150px',
+    padding: '7px',
+    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: '10px',
+    fontSize: '16px',
+    boxShadow: '2px 2px 7px #999',
 }
 
 export default AllQuestions;

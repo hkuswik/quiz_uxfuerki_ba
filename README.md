@@ -55,7 +55,7 @@
     * [x] reset everything needed when resetting / repeating
 * [x] STILL: #correctAnswers sometimes wrong OR colors wrong?
 * [x] Szenario.jsx: correct buttons
-* [ ] AllQuestions.jsx
+* [x] AllQuestions.jsx
 * [x] Quest/Sort/Match: what happens onClick when no answer selected?
 
 ##### to fix
@@ -73,8 +73,3 @@
 * [ ] change topic names to variables
 * [ ] filter by topic (not by difficulty)
 * [ ] any errors?
-
-##### laaater (if time)
-
-* [ ] clean up code / improving & reducing where possible
-* [ ] re-clicking on finished circles to see what was answered
