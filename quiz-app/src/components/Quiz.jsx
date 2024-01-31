@@ -109,67 +109,60 @@ const Quiz = () => {
         if (!isCircleReachable(circle)) return;
 
         const topic = pathGraph[circle].topic;
-        const isExercise = (topic === topic1 || topic === topic2 || topic === topic3);
-        const szenarioActive = (activeCircle === 'szenario1' || activeCircle === 'szenario2' || activeCircle === 'szenario3');
+        const isExercise = [topic1, topic2, topic3].includes(topic);
+        const szenarioActive = ['szenario1', 'szenario2', 'szenario3'].includes(activeCircle);
 
         if (isExercise) {
             // check if circle is the same as the last clicked circle
             if (circle !== lastClicked) {
                 switch (state) {
                     case 'DEFAULT':
-                        // if it is a new circle, a new exercise shall be selected
-                        setNewExercise(topic);
+                        setNewExercise(topic); // if it is a new circle, select a new exercise
                         break;
                     case 'REENTER':
                         // check which topic was selected and save as new current topic; select exercise of this topic
-                        switch (pathGraph[circle].topic) {
-                            case topic1:
-                                setCurrentTopic(1);
-                                setNewExercise(topic1);
-                                handleTopicRepeat(1);
-                                break;
-                            case topic2:
-                                setCurrentTopic(2);
-                                setNewExercise(topic2);
-                                handleTopicRepeat(2);
-                                break;
-                            case topic3:
-                                setCurrentTopic(3);
-                                setNewExercise(topic3);
-                                handleTopicRepeat(3);
-                                break;
-                            default:
-                                console.log('some error setting new topic in REENTER state');
-                        }
+                        setCurrentTopic(getTopicNumber(topic));
+                        setNewExercise(topic);
+                        handleTopicRepeat(getTopicNumber(topic));
                         // remove REENTER-circles from possible circles
-                        const newPossibleCircles = possibleCircles.filter((circle) => !circle.includes('circle'));
-                        setPossibleCircles(newPossibleCircles);
+                        setPossibleCircles(possibleCircles.filter((circle) => !circle.includes('circle')));
                         setState('DEFAULT');
                         break;
                     default:
                         console.log('some state error in handleCircleClick');
                 }
-                // circle is now last clicked circle
-                setLastClicked(circle);
+                setLastClicked(circle); // circle is now last clicked circle
             }
             else {
-                // if circle was just clicked again, show current content again
-                setCurrentContent(currentExercise);
+                setCurrentContent(currentExercise); // if circle was just clicked again, show current content again
             }
         } else {
             // save type of non-exercise circle to choose correct popup
             setCurrentContent(topic);
-            // lastClicked shall not be updated if szenario is clicked without being active
-            if ((topic === 'szenario1' || topic === 'szenario2' || topic === 'szenario3') && !szenarioActive) {
+            // don't update lastClicked if szenario is clicked without being active
+            if (topic.startsWith('szenario') && !szenarioActive) {
                 setShowPopup(true);
                 return;
             }
             setLastClicked(circle);
         }
-
         setShowPopup(true);
     };
 
+    // helper function: get topic number
+    const getTopicNumber = (topic) => {
+        switch (topic) {
+            case topic1:
+                return 1;
+            case topic2:
+                return 2;
+            default:
+                console.log('error in getTopicNumber');
+                return 0;
+        }
+    };
+
+    // helper function: check if circle is reachable
     const isCircleReachable = (circle) => {
         return circle === activeCircle || possibleCircles.includes(circle);
     };
@@ -201,7 +194,7 @@ const Quiz = () => {
         setCurrentContent(selected);
 
         // update the changed exercises array in state, according to topic
-        setExercises(currentExercises => ({...currentExercises, [topic]: exercises}));
+        setExercises(currentExercises => ({ ...currentExercises, [topic]: exercises }));
     };
 
     const handleJoker = (joker) => {
@@ -293,28 +286,19 @@ const Quiz = () => {
 
     const handleTopicRepeat = (repeatTopic) => {
         // if repeat is clicked after quiz was completed at least once, reset possible circles to only szenarios
-        if (completedAtLeastOnce) {
-            const newPossible = possibleCircles.filter(circle => pathGraph[circle].topic.includes('szenario'));
-            setPossibleCircles(newPossible);
-        };
+        if (completedAtLeastOnce) setPossibleCircles(possibleCircles.filter(circle => pathGraph[circle].topic.includes('szenario')));
 
-        // reset amount of used joker & correct circles in current topic
-        setCorrectInTopic(prevCorrectInTopic => ({
-            ...prevCorrectInTopic,
-            [repeatTopic]: 0,
-        }));
-        setJokerInTopic(prevJokerInTopic => ({
-            ...prevJokerInTopic,
-            [repeatTopic]: 0,
-        }));
-        setDoneInTopic(prevDoneInTopic => ({
-            ...prevDoneInTopic,
-            [repeatTopic]: 0,
-        }));
+        // reset topic state for repeated topic
+        setCorrectInTopic(prevCorrectInTopic => ({ ...prevCorrectInTopic, [repeatTopic]: 0, }));
+        setJokerInTopic(prevJokerInTopic => ({ ...prevJokerInTopic, [repeatTopic]: 0, }));
+        setDoneInTopic(prevDoneInTopic => ({ ...prevDoneInTopic, [repeatTopic]: 0, }));
+
+        // set active circle to first circle of repeated topic
+        const initialCircle = `circle${repeatTopic === 1 ? '1' : repeatTopic === 2 ? '9' : '17'}`;
+        setActiveCircle(initialCircle);
 
         // depending on which topic is repeated, set active circle, reset completed/correct circles & joker
         if (repeatTopic === 1) {
-            setActiveCircle('circle1');
             const newCompleted = completedCircles.filter(
                 circle => pathGraph[circle].topic !== topic1
             );
@@ -327,7 +311,6 @@ const Quiz = () => {
                 if (parseInt(circle.substring(circle.indexOf('e') + 1)) < 9) jokerMap[circle] = '';
             });
         } else if (repeatTopic === 2) {
-            setActiveCircle('circle9');
             const newCompleted = completedCircles.filter(
                 circle => pathGraph[circle].topic !== topic2
             );
@@ -341,7 +324,6 @@ const Quiz = () => {
                 if (nr >= 9 && nr < 17) jokerMap[circle] = '';
             });
         } else {
-            setActiveCircle('circle17');
             const newCompleted = completedCircles.filter(
                 circle => pathGraph[circle].topic !== topic3
             );
@@ -358,6 +340,15 @@ const Quiz = () => {
         // close popup automatically if topic repeat was triggered by feedback popup
         if (pathGraph[lastClicked].topic === 'feedback') setShowPopup(false);
     };
+
+    // helper function: reset completed circles (depending on given topic)
+    /*  const resetCompletedCircles = (topic) => {
+         const newCompleted = completedCircles.filter(circle => pathGraph[circle].topic !== topic);
+     } */
+
+    // helper function: reset correct circles (depending on given topic)
+
+    //helper function: reset joker map (depending on given topic)
 
     const handleReset = () => {
         setCompletedCircles([]);
