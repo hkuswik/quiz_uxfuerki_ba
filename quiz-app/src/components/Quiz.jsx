@@ -50,9 +50,11 @@ const Quiz = () => {
     const [state, setState] = useState('DEFAULT');
     const [completedAtLeastOnce, setCompletedAtLeastOnce] = useState(false);
 
-    const [exercisesTopic1, setExercisesTopic1] = useState([]);
-    const [exercisesTopic2, setExercisesTopic2] = useState([]);
-    const [exercisesTopic3, setExercisesTopic3] = useState([]);
+    const [exercises, setExercises] = useState({
+        [topic1]: [],
+        [topic2]: [],
+        [topic3]: [],
+    });
 
     const [showPopup, setShowPopup] = useState(false);
 
@@ -72,25 +74,11 @@ const Quiz = () => {
     const [jokerMap, setJokerMap] = useState(new Map()); // which joker was used at which circle
 
     const [jokerInTopic, setJokerInTopic] = useState({ 1: 0, 2: 0, 3: 0 });
-    const [correctInTopic, setCorrectInTopic] = useState({ 1: 0, 2: 0, 3: 0 });
     const [doneInTopic, setDoneInTopic] = useState({ 1: 0, 2: 0, 3: 0 });
+    const [correctInTopic, setCorrectInTopic] = useState({ 1: 0, 2: 0, 3: 0 });
 
-    useEffect(() => {
-        // save exercises according to topic
-        const firstTopic = quizData.filter((q) => q.difficulty === topic1);
-        const secondTopic = quizData.filter((q) => q.difficulty === topic2);
-        const thirdTopic = quizData.filter((q) => q.difficulty === topic3);
-
-        // randomize the order
-        shuffleArray(firstTopic);
-        shuffleArray(secondTopic);
-        shuffleArray(thirdTopic);
-
-        setExercisesTopic1(firstTopic);
-        setExercisesTopic2(secondTopic);
-        setExercisesTopic3(thirdTopic);
-
-        // save circle names in Map (as keys) to save where joker were used (values)
+    const initializeJokerMap = () => {
+        // save circle names in Map (as keys) to save where joker were used (as values)
         const circleMap = Object.keys(pathGraph)
             .filter(key => key.includes('circle'))
             .reduce((acc, key) => { // acc = accumulator
@@ -98,6 +86,22 @@ const Quiz = () => {
                 return acc;
             }, {});
         setJokerMap(circleMap);
+    }
+
+    useEffect(() => {
+        const initializeExercises = () => {
+            // save exercises according to topic and randomize order for each topic
+            const topicExercises = {};
+            [topic1, topic2, topic3].forEach(topic => {
+                const currExercises = quizData.filter(q => q.difficulty === topic);
+                shuffleArray(currExercises);
+                topicExercises[topic] = currExercises;
+            });
+            setExercises(topicExercises);
+        }
+
+        initializeExercises();
+        initializeJokerMap();
     }, []);
 
     const handleCircleClick = (circle) => {
@@ -172,11 +176,11 @@ const Quiz = () => {
 
     const setNewExercise = (topic) => {
         // which topic pool to choose exercises from
-        const exercises = (topic === topic1 ? exercisesTopic1 : topic === topic2 ? exercisesTopic2 : exercisesTopic3);
+        const currentTopicExercises = exercises[topic];
 
-        if (exercises.length > 0) {
+        if (currentTopicExercises.length > 0) {
             // if there are still exercises left, get a new exercise 
-            getExercise(exercises, topic);
+            getExercise(currentTopicExercises, topic);
         } else {
             console.log('reset exercise pool of topic: ', topic);
             // reshuffle exercises for exhausted topic exercise pool
@@ -197,19 +201,7 @@ const Quiz = () => {
         setCurrentContent(selected);
 
         // update the changed exercises array in state, according to topic
-        switch (topic) {
-            case topic1:
-                setExercisesTopic1(exercises);
-                break;
-            case topic2:
-                setExercisesTopic2(exercises);
-                break;
-            case topic3:
-                setExercisesTopic3(exercises);
-                break;
-            default:
-                console.log('some mistake by setting topic exercises');
-        }
+        setExercises(currentExercises => ({...currentExercises, [topic]: exercises}));
     };
 
     const handleJoker = (joker) => {
