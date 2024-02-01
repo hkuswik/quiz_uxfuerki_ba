@@ -4,6 +4,10 @@ import resetBtn from '../data/images/reset-btn.png';
 import allQuestionsBtn from '../data/images/AlleFragen.png';
 import Popup from './Popup';
 
+const topic1 = 'easy';
+const topic2 = 'medium';
+const topic3 = 'hard';
+
 const Header = ({ onReset, doneInTopic, correctInTopic }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [popupContent, setPopupContent] = useState(null);
@@ -90,13 +94,13 @@ const ProgressBar = ({ doneInTopic, correctInTopic }) => {
             <div className='progress-section'>
                 <div className='progress'
                     style={{
-                        width: `${calculateSectionWidth(1)}%`,
+                        width: `${calculateSectionWidth(topic1)}%`,
                         backgroundColor: '#D177B3',
                         opacity: '40%',
                     }}></div>
                 <div className='progress'
                     style={{
-                        width: `${calculateCorrect(1)}%`,
+                        width: `${calculateCorrect(topic1)}%`,
                         backgroundColor: '#D177B3',
                     }}
                 ></div>
@@ -104,14 +108,14 @@ const ProgressBar = ({ doneInTopic, correctInTopic }) => {
             <div className='progress-section'>
                 <div className='progress'
                     style={{
-                        width: `${calculateSectionWidth(2)}%`,
+                        width: `${calculateSectionWidth(topic2)}%`,
                         backgroundColor: '#8377D1',
                         opacity: '40%',
                     }}
                 ></div>
                 <div className='progress'
                     style={{
-                        width: `${calculateCorrect(2)}%`,
+                        width: `${calculateCorrect(topic2)}%`,
                         backgroundColor: '#8377D1',
                     }}
                 ></div>
@@ -119,14 +123,14 @@ const ProgressBar = ({ doneInTopic, correctInTopic }) => {
             <div className='progress-section'>
                 <div className='progress'
                     style={{
-                        width: `${calculateSectionWidth(3)}%`,
+                        width: `${calculateSectionWidth(topic3)}%`,
                         backgroundColor: '#77D1CB',
                         opacity: '40%',
                     }}
                 ></div>
                 <div className='progress'
                     style={{
-                        width: `${calculateCorrect(3)}%`,
+                        width: `${calculateCorrect(topic3)}%`,
                         backgroundColor: '#77D1CB',
                     }}
                 ></div>

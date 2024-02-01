@@ -22,12 +22,12 @@ const Feedback = ({ currentTopic, completedAtLeastOnce, onUpdate, correctAmount,
     });
 
     const selectButtons = (currentTopic) => {
-        if (currentTopic === 1) {
+        if (currentTopic === 'easy') {
             setButton1(wdh_topic1);
             setButton2(weiter_topic2);
             setTopic(topic1);
             setClassColor('pink');
-        } else if (currentTopic === 2) {
+        } else if (currentTopic === 'medium') {
             setButton1(wdh_topic2);
             setButton2(weiter_topic3);
             setTopic(topic2);

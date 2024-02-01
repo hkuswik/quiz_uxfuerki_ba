@@ -65,7 +65,7 @@ const Quiz = () => {
     const [hoveredCircle, setHoveredCircle] = useState(null);
     const [correctCircles, setCorrectCircles] = useState([]);
 
-    const [currentTopic, setCurrentTopic] = useState(1);
+    const [currentTopic, setCurrentTopic] = useState(topic1);
     const [szenariosDone, setSzenariosDone] = useState(0);
     const [currentContent, setCurrentContent] = useState(null);
     const [currentExercise, setCurrentExercise] = useState(null);
@@ -73,9 +73,9 @@ const Quiz = () => {
     const [jokerUsed, setJokerUsed] = useState(null); // which type of joker was just used
     const [jokerMap, setJokerMap] = useState(new Map()); // which joker was used at which circle
 
-    const [jokerInTopic, setJokerInTopic] = useState({ 1: 0, 2: 0, 3: 0 });
-    const [doneInTopic, setDoneInTopic] = useState({ 1: 0, 2: 0, 3: 0 });
-    const [correctInTopic, setCorrectInTopic] = useState({ 1: 0, 2: 0, 3: 0 });
+    const [jokerInTopic, setJokerInTopic] = useState({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
+    const [doneInTopic, setDoneInTopic] = useState({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
+    const [correctInTopic, setCorrectInTopic] = useState({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
 
     const initializeJokerMap = () => {
         // save circle names in Map (as keys) to save where joker were used (as values)
@@ -121,7 +121,7 @@ const Quiz = () => {
                         break;
                     case 'REENTER':
                         // check which topic was selected and save as new current topic; select exercise of this topic
-                        setCurrentTopic(getTopicNumber(topic));
+                        setCurrentTopic(topic);
                         setNewExercise(topic);
                         handleTopicRepeat(getTopicNumber(topic));
                         // remove REENTER-circles from possible circles
@@ -156,6 +156,8 @@ const Quiz = () => {
                 return 1;
             case topic2:
                 return 2;
+            case topic3:
+                return 3;
             default:
                 console.log('error in getTopicNumber');
                 return 0;
@@ -205,21 +207,7 @@ const Quiz = () => {
             [currentTopic]: prevJokerInTopic[currentTopic] + 1,
         }));
 
-        if (joker === 'swap') {
-            switch (currentTopic) {
-                case 1:
-                    setNewExercise(topic1);
-                    break;
-                case 2:
-                    setNewExercise(topic2);
-                    break;
-                case 3:
-                    setNewExercise(topic3);
-                    break;
-                default:
-                    console.log(currentTopic, ' is neither 1, 2 or 3 (error swap joker');
-            }
-        }
+        if (joker === 'swap') setNewExercise(currentTopic);
     };
 
     // updating state and board after exercise answer has been locked in
@@ -259,12 +247,12 @@ const Quiz = () => {
                 if (completedAtLeastOnce) {
                     setState('REENTER');
                     setPossibleCircles(possibleCircles => [...possibleCircles, ...['circle1', 'circle9', 'circle17']]);
-                } else if (currentTopic === 3) {
+                } else if (currentTopic === topic3) {
                     setState('REENTER');
                     setPossibleCircles(possibleCircles => [...possibleCircles, ...['circle1', 'circle9', 'circle17']]);
                 } else {
                     setActiveCircle(pathGraph[lastClicked].next);
-                    setCurrentTopic(currentTopic + 1);
+                    setCurrentTopic(currentTopic === topic1 ? topic2 : topic3);
                 }
             } else if (topic.includes('szenario')) {
                 setSzenariosDone(szenariosDone + 1);
@@ -280,10 +268,6 @@ const Quiz = () => {
         setShowPopup(false);
     };
 
-    const handleClosePopup = () => {
-        setShowPopup(false);
-    };
-
     const handleTopicRepeat = (repeatTopic) => {
         // if repeat is clicked after quiz was completed at least once, reset possible circles to only szenarios
         if (completedAtLeastOnce) setPossibleCircles(possibleCircles.filter(circle => pathGraph[circle].topic.includes('szenario')));
@@ -294,59 +278,24 @@ const Quiz = () => {
         setDoneInTopic(prevDoneInTopic => ({ ...prevDoneInTopic, [repeatTopic]: 0, }));
 
         // set active circle to first circle of repeated topic
-        const initialCircle = `circle${repeatTopic === 1 ? '1' : repeatTopic === 2 ? '9' : '17'}`;
+        const initialCircle = `circle${repeatTopic === topic1 ? '1' : repeatTopic === topic2 ? '9' : '17'}`;
         setActiveCircle(initialCircle);
 
-        // depending on which topic is repeated, set active circle, reset completed/correct circles & joker
-        if (repeatTopic === 1) {
-            const newCompleted = completedCircles.filter(
-                circle => pathGraph[circle].topic !== topic1
-            );
-            setCompletedCircles(newCompleted);
-            const newCorrect = correctCircles.filter(
-                circle => pathGraph[circle].topic !== topic1
-            );
-            setCorrectCircles(newCorrect);
-            Object.keys(jokerMap).forEach((circle) => {
-                if (parseInt(circle.substring(circle.indexOf('e') + 1)) < 9) jokerMap[circle] = '';
-            });
-        } else if (repeatTopic === 2) {
-            const newCompleted = completedCircles.filter(
-                circle => pathGraph[circle].topic !== topic2
-            );
-            setCompletedCircles(newCompleted);
-            const newCorrect = correctCircles.filter(
-                circle => pathGraph[circle].topic !== topic2
-            );
-            setCorrectCircles(newCorrect);
-            Object.keys(jokerMap).forEach((circle) => {
-                const nr = parseInt(circle.substring(circle.indexOf('e') + 1));
-                if (nr >= 9 && nr < 17) jokerMap[circle] = '';
-            });
-        } else {
-            const newCompleted = completedCircles.filter(
-                circle => pathGraph[circle].topic !== topic3
-            );
-            setCompletedCircles(newCompleted);
-            const newCorrect = correctCircles.filter(
-                circle => pathGraph[circle].topic !== topic3
-            );
-            setCorrectCircles(newCorrect);
-            Object.keys(jokerMap).forEach((circle) => {
-                if (parseInt(circle.substring(circle.indexOf('e') + 1)) >= 17) jokerMap[circle] = '';
-            });
-        };
+        // reset completed/correct circles depending by deleting repeated topic's circles
+        setCompletedCircles(completedCircles.filter(circle => pathGraph[circle].topic !== repeatTopic));
+        setCorrectCircles(correctCircles.filter(circle => pathGraph[circle].topic !== repeatTopic));
+
+        const updatedJokerMap = Object.fromEntries(Object.entries(jokerMap).map(([circle, value]) => {
+            return (parseInt(circle.substring(circle.indexOf('e') + 1)) >= (getTopicNumber(repeatTopic) - 1) * 8 + 1 &&
+                parseInt(circle.substring(circle.indexOf('e') + 1)) <= getTopicNumber(repeatTopic) * 8)
+                ? [circle, '']
+                : [circle, value];
+        }));
+        setJokerMap(updatedJokerMap);
 
         // close popup automatically if topic repeat was triggered by feedback popup
         if (pathGraph[lastClicked].topic === 'feedback') setShowPopup(false);
     };
-
-    // helper function: reset completed circles (depending on given topic)
-    /*  const resetCompletedCircles = (topic) => {
-         const newCompleted = completedCircles.filter(circle => pathGraph[circle].topic !== topic);
-     } */
-
-    // helper function: reset correct circles (depending on given topic)
 
     //helper function: reset joker map (depending on given topic)
 
@@ -355,12 +304,12 @@ const Quiz = () => {
         setPossibleCircles([]);
         setCompletedAtLeastOnce(false);
         setSzenariosDone(0);
-        setCurrentTopic(1);
+        setCurrentTopic(topic1);
         setActiveCircle('start');
         setCorrectCircles([]);
-        setCorrectInTopic({ 1: 0, 2: 0, 3: 0 });
-        setJokerInTopic({ 1: 0, 2: 0, 3: 0 });
-        setDoneInTopic({ 1: 0, 2: 0, 3: 0 });
+        setCorrectInTopic({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
+        setJokerInTopic({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
+        setDoneInTopic({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
 
         Object.keys(jokerMap).forEach((circle) => {
             jokerMap[circle] = '';
@@ -439,18 +388,16 @@ const Quiz = () => {
                                 : isCompleted
                                     ? 'none'
                                     : '6'}
-                        style={
-                            {
-                                ...({ cursor: isReachable ? 'pointer' : 'default' }),
-                                ...(isExercise
-                                    ? isReachable
-                                        ? { opacity: '100%' }
-                                        : isCompleted
-                                            ? { opacity: wasCorrect ? '100%' : '40%' }
-                                            : {}
-                                    : {})
-                            }
-                        }
+                        style={{
+                            ...({ cursor: isReachable ? 'pointer' : 'default' }),
+                            ...(isExercise
+                                ? isReachable
+                                    ? { opacity: '100%' }
+                                    : isCompleted
+                                        ? { opacity: wasCorrect ? '100%' : '40%' }
+                                        : {}
+                                : {})
+                        }}
                     />
                     <text
                         x={pathGraph[circle].x}
@@ -522,7 +469,7 @@ const Quiz = () => {
             </div>
             {showPopup &&
                 <Popup
-                    onClose={handleClosePopup}
+                    onClose={() => setShowPopup(false)}
                     content={currentContent}
                     active={activeCircle}
                     currentTopic={currentTopic}
