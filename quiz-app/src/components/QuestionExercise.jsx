@@ -9,16 +9,19 @@ const topic3 = 'hard';
 const correctColor = '#7AD177';
 const wrongColor = '#D24141';
 
+// popup content when exercise is of type 'question'
 const QuestionExercise = ({ exercise, onAnswer }) => {
     const [answers, setAnswers] = useState([]);
     const [hovered, setHovered] = useState(null);
     const [selected, setSelected] = useState(null);
+
     const [checkClicked, setCheckClicked] = useState(false);
     const [isClickable, setIsClickable] = useState(true);
     const [showWarning, setShowWarning] = useState(false);
 
     const [color, setColor] = useState('#817C9C');
 
+    // prepare answers and set design color depending on topic
     useEffect(() => {
         randomizeAnswers(exercise);
 
@@ -34,48 +37,54 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
                 break;
             default:
                 setColor('#817C9C');
-        }
+        };
     }, [exercise]);
 
+    // saves all answers and randomizes them
     const randomizeAnswers = (exercise) => {
         const allAnswers = exercise.wrongAnswers.split(';');
         allAnswers.push(exercise.correctAnswer);
         shuffleArray(allAnswers);
         setAnswers(allAnswers);
-    }
+    };
 
+    // checks if selected answer is correct
     const checkAnswer = () => {
         if (selected === null) {
             console.log('no answer selected :(');
         } else {
             setCheckClicked(true);
-            setIsClickable(false);
+            setIsClickable(false); // can't change answer anymore
             if (selected === exercise.correctAnswer) {
                 onAnswer(true);
             } else {
                 onAnswer(false);
-            }
-        }
-    }
+            };
+        };
+    };
 
+    // save which answer is currently hovered over
     const handleAnswerHover = (answer_box) => {
         isClickable && setHovered(answer_box);
-    }
+    };
 
+    // resets hovered answer
     const handleAnswerLeave = () => {
         isClickable && setHovered(null);
-    }
+    };
 
+    // logic for selecting an answer
     const handleAnswerSelect = (selected) => {
         isClickable && setSelected(selected);
 
         // hide warning again when an answer was clicked
         showWarning && setShowWarning(false);
-    }
+    };
 
+    // unselects answer by re-click on selected answer
     const handleAnswerUnselect = () => {
         isClickable && setSelected(null);
-    }
+    };
 
     return (
         <div className='flex flex-col h-full justify-between'>
@@ -129,17 +138,18 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
                 }
             </div>
         </div>
-    )
-}
+    );
+};
 
 // helper function: shuffles array
 const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
-    }
+    };
 };
 
+// styles
 const question_style = {
     background: '#F6F5FC',
     fontWeight: '600',
@@ -153,7 +163,7 @@ const question_style = {
     textAlign: 'center',
     justifyContent: 'center',
     borderRadius: '8px'
-}
+};
 
 const answer_style = {
     background: '#F6F5FC',
@@ -167,11 +177,11 @@ const answer_style = {
     textAlign: 'center',
     borderRadius: '8px',
     margin: '10px',
-}
+};
 
 const hover_style = {
     outline: '2px dashed',
     cursor: 'pointer'
-}
+};
 
 export default QuestionExercise;

@@ -9,8 +9,8 @@ import avatarTürkis from '../data/images/avatar_türkis.png';
 import avatarPink from '../data/images/avatar_pink.png';
 import { useEffect, useState } from "react";
 
+// popup content for exercises; displays joker row, exercise number and renders specific exercise type
 const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) => {
-
     const [checkClicked, setCheckClicked] = useState(false);
     const [exerciseNr, setExerciseNr] = useState(null);
 
@@ -24,6 +24,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
         // set correct tip for every new exercise
         setTip(exercise.tip);
 
+        // set correct avatar (with correct color elements) depending on exercise topic
         switch (exercise.difficulty) {
             case 'easy':
                 setTipAvatar(avatarPink);
@@ -42,7 +43,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
     useEffect(() => {
         // exerciseNr only possible if active circle is an exercise
         if (active.includes('circle')) {
-            // calculate current exerciseNr (if check clicked -1, since active has been already updated)
+            // calculate current exerciseNr (if check clicked: -1, since active gets already updated onAnswer)
             if (checkClicked) {
                 setExerciseNr(active.substring(active.indexOf('e') + 1) - 1);
             } else {
@@ -51,6 +52,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
         };
     }, [checkClicked, active]);
 
+    // render correct exercise type
     const renderExerciseType = (exercise) => {
         switch (exercise.type) {
             case 'question':
@@ -64,33 +66,37 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
         };
     };
 
+    // when answers is logged in, set checkClicked to true and forward it
     const handleAnswer = (isCorrect) => {
         setCheckClicked(true);
         onAnswer(isCorrect);
     };
 
+    // logic for clicking a joker (only 1 joker is allowed per exercise)
     const handleJokerClick = (joker) => {
-        if (jokerUsed === 'swap') {
+        if (jokerUsed === 'swap') { // if already used 'swap', nothing happens onClick
             return;
-        } else if (jokerUsed === 'tip') {
+        } else if (jokerUsed === 'tip') { 
+            // if already used 'tip', user can reclick on 'tip' and see tip again (but not 'swap' anymore)
             if (joker === 'tip') {
                 setShowTipPopup(true);
-            }
+            };
         } else { // no joker yet used 
             if (joker === 'tip') {
                 onJoker('tip');
                 setShowTipPopup(true);
             } else {
-                onJoker('swap');
-            }
+                onJoker('swap'); // swapping happens in Quiz.jsx
+            };
         };
     };
 
+    // prevent popup from closing when popup itself is clicked
     const handleTipClick = (event) => {
-        // prevent popup from closing when popup itself is clicked
         event.stopPropagation();
-    }
+    };
 
+    // styles for tip and swap joker (inside scope because needs to know if check was clicked)
     const tip_joker = {
         ...joker,
         ...({
@@ -104,11 +110,10 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
                         : 'white'
         })
     };
-
     const swap_joker = {
         ...joker,
         ...({ backgroundColor: checkClicked || jokerUsed !== null ? '#D4D2DD' : 'white' })
-    }
+    };
 
     return (
         <div style={exerciseContainer}>
@@ -153,15 +158,16 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
                 </div>
             }
         </div>
-    )
-}
+    );
+};
 
+// styles
 const exerciseContainer = {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between'
-}
+};
 
 const joker_row = {
     display: 'flex',
@@ -169,7 +175,7 @@ const joker_row = {
     justifyContent: 'center',
     alignItems: 'center',
     width: '150px'
-}
+};
 
 const joker = {
     height: '120px',
@@ -181,7 +187,7 @@ const joker = {
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden'
-}
+};
 
 const line = {
     height: '650px',
@@ -190,7 +196,7 @@ const line = {
     borderRadius: '99px',
     marginLeft: '20px',
     marginRight: '30px'
-}
+};
 
 const tipPopupContainer = {
     position: 'fixed',
@@ -201,7 +207,7 @@ const tipPopupContainer = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
-}
+};
 
 const tipPopupContent = {
     backgroundColor: 'white',
@@ -213,6 +219,6 @@ const tipPopupContent = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-}
+};
 
 export default Exercise;

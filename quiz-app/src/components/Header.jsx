@@ -8,23 +8,22 @@ const topic1 = 'easy';
 const topic2 = 'medium';
 const topic3 = 'hard';
 
+// the header displays the quiz' name, progressBar, reset button and allQuestions button
 const Header = ({ onReset, doneInTopic, correctInTopic }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [popupContent, setPopupContent] = useState(null);
 
+    // open popup with content depending on which button was clicked
     const handleBtnClick = (content) => {
         setPopupContent(content);
         setShowPopup(true);
     };
 
-    const handleClosePopup = () => {
-        setShowPopup(false);
-    };
-
+    // close popup automatically if quiz is reset and forward reset call to Quiz.jsx
     const handleReset = () => {
         setShowPopup(false);
         onReset();
-    }
+    };
 
     return (
         <div style={header_bg}>
@@ -48,12 +47,13 @@ const Header = ({ onReset, doneInTopic, correctInTopic }) => {
                 </div>
             </div>
             {showPopup &&
-                <Popup onClose={handleClosePopup} content={popupContent} onReset={handleReset} />
+                <Popup onClose={() => setShowPopup(false)} content={popupContent} onReset={handleReset} />
             }
         </div>
     )
 }
 
+// styles for header
 const header_style = {
     width: '1490px',
     display: 'flex',
@@ -75,8 +75,8 @@ const header_bg = {
     justifyContent: 'center'
 }
 
+// displays how many exercises are done in each topic and how many of those were correct
 const ProgressBar = ({ doneInTopic, correctInTopic }) => {
-
     const exercisesPerTopic = 8;
 
     // calculate percentage of completion (for topic)
@@ -87,7 +87,7 @@ const ProgressBar = ({ doneInTopic, correctInTopic }) => {
     // calculate percentage of correctly completed for topic
     const calculateCorrect = (topic) => {
         return (correctInTopic[topic] / exercisesPerTopic) * 100;
-    }
+    };
 
     return (
         <div className='progress-bar'>
@@ -136,7 +136,7 @@ const ProgressBar = ({ doneInTopic, correctInTopic }) => {
                 ></div>
             </div>
         </div>
-    )
+    );
 };
 
 export default Header;

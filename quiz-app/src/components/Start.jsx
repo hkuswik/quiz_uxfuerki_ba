@@ -8,10 +8,11 @@ const topic1 = 'Vertrauen';
 const topic2 = 'Diskriminierung';
 const topic3 = 'Autonomie';
 
+// popup content when start circle is clicked; displays welcome text and explains some main features
 const Start = ({ onUpdate }) => {
-
     const [content, setContent] = useState(1);
 
+    // render content to distinguish between first (welcome text) and second part (explanations) of popup content
     const renderContent = (content) => {
         if (content === 1) {
 
@@ -121,15 +122,15 @@ const Start = ({ onUpdate }) => {
                     </div>
                 </div >
             );
-        }
+        };
     };
 
     return (
         <div style={{height: '700px'}}>
             {renderContent(content)}
         </div>
-    )
-}
+    );
+};
 
 const joker = {
     height: '120px',
@@ -144,6 +145,6 @@ const joker = {
     alignItems: 'center',
     overflow: 'hidden',
     backgroundColor: 'white'
-}
+};
 
 export default Start;

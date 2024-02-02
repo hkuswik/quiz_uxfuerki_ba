@@ -65,7 +65,7 @@
   
 ##### when finished
 
-* [ ] add comments (!!!) where missing
+* [x] add comments (!!!) where missing
 * [ ] test on smaller screens (at least laptop)
 
 ##### after receiving actual exercises

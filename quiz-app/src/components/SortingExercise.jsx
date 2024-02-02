@@ -5,6 +5,7 @@ import check_logo_no from '../data/images/check-light.png';
 const correctColor = '#7AD177';
 const wrongColor = '#D24141';
 
+// popup content when exercise is of type 'sort'
 const SortingExercise = ({ exercise, onAnswer }) => {
     const [firstCategory, setFirstCategory] = useState('');
     const [secondCategory, setSecondCategory] = useState('');
@@ -23,6 +24,7 @@ const SortingExercise = ({ exercise, onAnswer }) => {
 
     const [color, setColor] = useState('#817C9C');
 
+    // save categories, call prepare function and set design color according to topic
     useEffect(() => {
         prepareItems(exercise);
         setFirstCategory(exercise.firstContainer);
@@ -40,9 +42,10 @@ const SortingExercise = ({ exercise, onAnswer }) => {
                 break;
             default:
                 setColor('#817C9C');
-        }
+        };
     }, [exercise]);
 
+    // save all items that have to be sorted and shuffle them
     const prepareItems = (exercise) => {
         const first = exercise.belongsInFirst.split(';');
         const second = exercise.belongsInSecond.split(';');
@@ -52,17 +55,17 @@ const SortingExercise = ({ exercise, onAnswer }) => {
         const items = first.concat(second);
         shuffleArray(items);
 
+        // create map in which selections for each item are saved
         setUserSelections(items.reduce((userSelectionsMap, item) => {
             // accumulate user selections for each item
-            userSelectionsMap[item] = ''; // initialize user selection for each item
+            userSelectionsMap[item] = ''; // initialize user selection for each item with empty string
             return userSelectionsMap;
         }, {}));
-    }
+    };
 
+    // logic for clicking on category button (and sorting item to that category)
     const handleButtonClick = (item, category) => {
-        if (!isClickable) {
-            return; // disable clicking when answeres have been logged in
-        }
+        if (!isClickable) return; // disable clicking when answers have been logged in
 
         // save clicked category for corresponding item
         const newSelections = { ...userSelections, [item]: category };
@@ -77,49 +80,53 @@ const SortingExercise = ({ exercise, onAnswer }) => {
         });
         setAllSelected(allDone);
 
-        // hide warning again when next category was clicked
+        // hide warning again when next category is clicked
         showWarning && setShowWarning(false);
 
         // save new selections
         setUserSelections(newSelections);
     };
 
+    // checks if selections were correct after check button is clicked
     const checkAnswer = (selected) => {
         if (!allSelected) {
             console.log('not all answers selected :(');
         } else {
             setCheckClicked(true);
-            setIsClickable(false);
+            setIsClickable(false); // disable clicking functionality
+            // iterate through selected map and check if selected category for item corresponds to correct category
             for (const [item, category] of Object.entries(selected)) {
                 if (category === firstCategory && !firstItems.includes(item)) {
                     onAnswer(false);
-                    return;
+                    return; // set false and return as soon as an item is sorted wrongly
                 } else if (category === secondCategory && !secondItems.includes(item)) {
                     onAnswer(false);
                     return;
                 }
-            }
-            onAnswer(true);
-        }
-    }
+            };
+            onAnswer(true); // true if no item was sorted wrong
+        };
+    };
 
+    // sets hovered button depending on if a category is already selected and which button is the hovered one
     const handleBtnHover = (item, selectedCategory) => {
-        if (userSelections[item] !== selectedCategory && isClickable) {
+        if (userSelections[item] !== selectedCategory && isClickable) { // no hover effect if already selected or not clickable
             if (selectedCategory === firstCategory) {
                 setFirstBtnHover(item);
             } else {
                 setSecondBtnHover(item);
-            }
-        }
+            };
+        };
     };
 
+    // resets the hovered button
     const handleBtnLeave = (selectedCategory) => {
-        if (selectedCategory === firstCategory && isClickable) {
+        if (selectedCategory === firstCategory) {
             setFirstBtnHover(null);
         } else {
             setSecondBtnHover(null);
-        }
-    }
+        };
+    };
 
     return (
         <div className='flex flex-col h-full w-full max-w-4xl justify-between'>
@@ -182,6 +189,7 @@ const SortingExercise = ({ exercise, onAnswer }) => {
     );
 };
 
+// helper function: shuffles given array
 const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -189,6 +197,7 @@ const shuffleArray = (array) => {
     }
 };
 
+// styles
 const item_style = {
     background: 'white',
     borderRadius: '10px',
@@ -196,7 +205,7 @@ const item_style = {
     alignItems: 'center',
     width: '65%',
     padding: '5px 10px 5px 10px',
-}
+};
 
 const button_style = {
     borderRadius: '10px',
@@ -209,11 +218,11 @@ const button_style = {
     marginLeft: '10px',
     fontSize: 'calc(6px + 1vmin)',
     fontWeight: '600'
-}
+};
 
 const hover_style = {
     outline: '2px dashed',
     cursor: 'pointer'
-}
+};
 
 export default SortingExercise;

@@ -2,14 +2,15 @@ import { useState } from 'react';
 import fortfahrenBtn from '../data/images/fortfahren.png';
 import AllQuestions from './AllQuestions';
 
+// dislaimer content for popup; displays a warning before resetting or seeing all exercises with solutions
 const Disclaimer = ({ content, onReset }) => {
-
     const [renderAllQuest, setRenderAllQuest] = useState(false);
-    const isAllQuest = content === 'alleFragen'; // else: reset content
+    const isAllQuest = content === 'alleFragen'; // else: disclaimer before resetting
 
+    // render content depending on if next content will be AllQuestions or resetting of quiz
     const renderPopupContent = () => {
         if (renderAllQuest) {
-            return <AllQuestions />
+            return <AllQuestions /> // will also directly return AllQuestions after user decides to procede
         } else {
             return (
                 <div className='flex flex-col justify-between'>
@@ -38,14 +39,14 @@ const Disclaimer = ({ content, onReset }) => {
                     </div>
                 </div>
             );
-        }
-    }
+        };
+    };
 
     return (
         <div className='flex w-full self-center' style={{height: '700px'}}>
             {renderPopupContent()}
         </div>
     );
-}
+};
 
 export default Disclaimer;

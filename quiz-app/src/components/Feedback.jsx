@@ -11,6 +11,7 @@ const topic1 = 'Vertrauen';
 const topic2 = 'Diskriminierung';
 const topic3 = 'Autonomie';
 
+// popup content for feedback circles; displays what topic was finished, how many exercises were correct and how many jokers were used
 const Feedback = ({ currentTopic, completedAtLeastOnce, onUpdate, correctAmount, jokerAmount, onRepeat }) => {
     const [button1, setButton1] = useState(null);
     const [button2, setButton2] = useState(null);
@@ -18,9 +19,10 @@ const Feedback = ({ currentTopic, completedAtLeastOnce, onUpdate, correctAmount,
     const [classColor, setClassColor] = useState('');
 
     useEffect(() => {
-        selectButtons(currentTopic);
+        selectButtons(currentTopic); 
     });
 
+    // display correct buttons depending on current topic
     const selectButtons = (currentTopic) => {
         if (currentTopic === 'easy') {
             setButton1(wdh_topic1);
@@ -39,7 +41,7 @@ const Feedback = ({ currentTopic, completedAtLeastOnce, onUpdate, correctAmount,
             setClassColor('türkis');
         }
 
-        // after quiz has been completed at least once, can always choose which topic next
+        // 'new topic' button after quiz has been completed at least once (can always choose next topic now)
         if (completedAtLeastOnce) {
             setButton2(new_topic);
         }

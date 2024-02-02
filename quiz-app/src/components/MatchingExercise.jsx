@@ -6,6 +6,7 @@ import check_logo_no from '../data/images/check-light.png';
 const correctColor = '#7AD177';
 const wrongColor = '#D24141';
 
+// popup content when exercise is of type 'match'
 const MatchingExercise = ({ exercise, onAnswer }) => {
     const [allMatched, setAllMatched] = useState(false);
     const [checkClicked, setCheckClicked] = useState(false);
@@ -14,6 +15,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
     const [color, setColor] = useState('#817C9C');
     const [containerColor, setContainerColor] = useState('#F1F0F4');
 
+    // set design colors depending on topic
     useEffect(() => {
         switch (exercise.difficulty) {
             case 'easy':
@@ -59,6 +61,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
     }
     const [containers, setContainers] = useState(initialContainers);
 
+    // functionality for dragging an item
     const handleOnDragEnd = (result) => {
         const source = result.source;
         const destination = result.destination;
@@ -141,11 +144,13 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         return `container${terms.indexOf(id) + 1}`;
     };
 
+    // checks if all definitions are matched with corresponding terms
     const checkAnswers = () => {
         const selectedPairs = Object.entries(selected);
 
         let isCorrect = true;
         let newDefaultList = [];
+        // iterate through all matches and set isCorrect to false if a match is wrong
         for (const [term, definition] of selectedPairs) {
             const correctDefinition = correctPairs.find(pair => pair[0] === term)[1];
             if (definition !== correctDefinition) {
@@ -155,6 +160,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
             };
         };
 
+        // update container state (defaultContainer contains wrongly matched definitions)
         setContainers(prevContainers => ({
             ...prevContainers,
             'containerDefault': { id: 'default', list: newDefaultList }
@@ -215,7 +221,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
 
 // component for draggable definitions
 const Definition = ({ defText, index, color, selected, correct, checkClicked, isDefault }) => {
-
+    // check if match was correct (to have correctColor after clicking on check)
     const matchIsCorrect = () => {
         const matchedTerm = Object.keys(selected).find(term => selected[term] === defText);
         const correctDef = correct.find(pair => pair[0] === matchedTerm)[1];
@@ -255,6 +261,7 @@ const Definition = ({ defText, index, color, selected, correct, checkClicked, is
 
 // component for droppable container
 const DropContainer = ({ container: { list, id }, color, containerColor, selected, correct, checkClicked }) => {
+    // check if container is defaultContainer (has different style)
     const isDefault = id === 'default';
 
     return (
@@ -287,6 +294,7 @@ const DropContainer = ({ container: { list, id }, color, containerColor, selecte
     );
 };
 
+// styles
 const dropContainer_style = {
     width: '350px',
     height: 'auto',
@@ -305,7 +313,7 @@ const term_style = {
     width: '280px',
     textAlign: 'center',
     padding: '3px',
-}
+};
 
 const defaultContainer_style = {
     width: '350px',
@@ -315,7 +323,7 @@ const defaultContainer_style = {
     alignItems: 'center',
     borderRadius: '10px',
     padding: '5px'
-}
+};
 
 const draggable_style = {
     background: 'white',
@@ -328,6 +336,6 @@ const draggable_style = {
     justifyContent: 'center',
     borderRadius: '10px',
     fontSize: '15px',
-}
+};
 
 export default MatchingExercise;

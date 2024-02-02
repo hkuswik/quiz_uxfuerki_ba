@@ -12,6 +12,7 @@ const topic1 = 'easy';
 const topic2 = 'medium';
 const topic3 = 'hard';
 
+// save all circles in a graph-like structure (directed); with their topic, x and y position (in svg) and what circle is reachable
 const pathGraph = {
     start: { next: 'szenario1', topic: 'start', x: '60', y: '140' },
     szenario1: { next: 'circle1', topic: 'szenario1', x: '210', y: '135' },
@@ -46,6 +47,7 @@ const pathGraph = {
     feedback3: { next: 'circle1', topic: 'feedback', x: '1430', y: '769' }
 };
 
+// main component that handles quiz state and renders quiz board
 const Quiz = () => {
     const [state, setState] = useState('DEFAULT');
     const [completedAtLeastOnce, setCompletedAtLeastOnce] = useState(false);
@@ -58,17 +60,17 @@ const Quiz = () => {
 
     const [showPopup, setShowPopup] = useState(false);
 
-    const [activeCircle, setActiveCircle] = useState('start');
+    const [activeCircle, setActiveCircle] = useState('start'); // which circle is next
     const [lastClicked, setLastClicked] = useState('start');
-    const [possibleCircles, setPossibleCircles] = useState([]);
+    const [possibleCircles, setPossibleCircles] = useState([]); // which circles can also be clicked currently
     const [completedCircles, setCompletedCircles] = useState([]);
     const [hoveredCircle, setHoveredCircle] = useState(null);
-    const [correctCircles, setCorrectCircles] = useState([]);
+    const [correctCircles, setCorrectCircles] = useState([]); // correctly answered
 
     const [currentTopic, setCurrentTopic] = useState(topic1);
     const [szenariosDone, setSzenariosDone] = useState(0);
-    const [currentContent, setCurrentContent] = useState(null);
-    const [currentExercise, setCurrentExercise] = useState(null);
+    const [currentContent, setCurrentContent] = useState(null); // current content for popup
+    const [currentExercise, setCurrentExercise] = useState(null); // currently selected exercise
 
     const [jokerUsed, setJokerUsed] = useState(null); // which type of joker was just used
     const [jokerMap, setJokerMap] = useState(new Map()); // which joker was used at which circle
@@ -77,8 +79,8 @@ const Quiz = () => {
     const [doneInTopic, setDoneInTopic] = useState({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
     const [correctInTopic, setCorrectInTopic] = useState({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
 
+    // save circle names in Map (as keys) to save where joker were used (as values)
     const initializeJokerMap = () => {
-        // save circle names in Map (as keys) to save where joker were used (as values)
         const circleMap = Object.keys(pathGraph)
             .filter(key => key.includes('circle'))
             .reduce((acc, key) => { // acc = accumulator
@@ -86,7 +88,7 @@ const Quiz = () => {
                 return acc;
             }, {});
         setJokerMap(circleMap);
-    }
+    };
 
     useEffect(() => {
         const initializeExercises = () => {
@@ -98,12 +100,13 @@ const Quiz = () => {
                 topicExercises[topic] = currExercises;
             });
             setExercises(topicExercises);
-        }
+        };
 
         initializeExercises();
         initializeJokerMap();
     }, []);
 
+    // logic for clicking on a circle
     const handleCircleClick = (circle) => {
         // check if clicked circle is currently possible
         if (!isCircleReachable(circle)) return;
@@ -161,7 +164,7 @@ const Quiz = () => {
             default:
                 console.log('error in getTopicNumber');
                 return 0;
-        }
+        };
     };
 
     // helper function: check if circle is reachable
@@ -169,6 +172,7 @@ const Quiz = () => {
         return circle === activeCircle || possibleCircles.includes(circle);
     };
 
+    // sets a new exercise from given topic
     const setNewExercise = (topic) => {
         // which topic pool to choose exercises from
         const currentTopicExercises = exercises[topic];
@@ -178,41 +182,40 @@ const Quiz = () => {
             getExercise(currentTopicExercises, topic);
         } else {
             console.log('reset exercise pool of topic: ', topic);
-            // reshuffle exercises for exhausted topic exercise pool
+            // reshuffle exercise pool for exhausted topic
             const newExercisePool = quizData.filter((exercise) => exercise.difficulty === topic);
             shuffleArray(newExercisePool);
-
-            // get new exercise and save new exercise pool after popping
+            // get new exercise from reshuffled pool
             getExercise(newExercisePool, topic);
-        }
+        };
     };
 
+    // pops last exercise of array and saves updated exercise pool
     const getExercise = (exercises, topic) => {
         // choose last exercise of array and delete it
         const selected = exercises.pop();
-
         // save which exercise is currently used
         setCurrentExercise(selected);
         setCurrentContent(selected);
-
         // update the changed exercises array in state, according to topic
         setExercises(currentExercises => ({ ...currentExercises, [topic]: exercises }));
     };
 
+    // logic when a joker is clicked
     const handleJoker = (joker) => {
+        // update all relevant states with used joker
         setJokerUsed(joker);
         setJokerMap({ ...jokerMap, [activeCircle]: joker });
         setJokerInTopic(prevJokerInTopic => ({
             ...prevJokerInTopic,
             [currentTopic]: prevJokerInTopic[currentTopic] + 1,
         }));
-
+        // set new exercise for 'swap' joker
         if (joker === 'swap') setNewExercise(currentTopic);
     };
 
     // updating state and board after exercise answer has been locked in
     const handleAnswer = (isCorrect) => {
-        console.log('Quiz knows that answer was: ', isCorrect);
         // add circle to correctCircles if answer was correct & update correctInTopic
         if (isCorrect) {
             setCorrectCircles(correctCircles => [...correctCircles, lastClicked]);
@@ -264,10 +267,10 @@ const Quiz = () => {
             // update completed circles
             setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
         }
-
         setShowPopup(false);
     };
 
+    // resets all relevant information for given topic
     const handleTopicRepeat = (repeatTopic) => {
         // if repeat is clicked after quiz was completed at least once, reset possible circles to only szenarios
         if (completedAtLeastOnce) setPossibleCircles(possibleCircles.filter(circle => pathGraph[circle].topic.includes('szenario')));
@@ -281,15 +284,16 @@ const Quiz = () => {
         const initialCircle = `circle${repeatTopic === topic1 ? '1' : repeatTopic === topic2 ? '9' : '17'}`;
         setActiveCircle(initialCircle);
 
-        // reset completed/correct circles depending by deleting repeated topic's circles
+        // reset completed/correct circles by deleting repeated topic's circles
         setCompletedCircles(completedCircles.filter(circle => pathGraph[circle].topic !== repeatTopic));
         setCorrectCircles(correctCircles.filter(circle => pathGraph[circle].topic !== repeatTopic));
 
         const updatedJokerMap = Object.fromEntries(Object.entries(jokerMap).map(([circle, value]) => {
+            // look at number of circle (subsstring that comes after 'e') to reset joker depending on topic
             return (parseInt(circle.substring(circle.indexOf('e') + 1)) >= (getTopicNumber(repeatTopic) - 1) * 8 + 1 &&
                 parseInt(circle.substring(circle.indexOf('e') + 1)) <= getTopicNumber(repeatTopic) * 8)
-                ? [circle, '']
-                : [circle, value];
+                ? [circle, ''] // if number is between first and last circle of topic, reset value (empty string)
+                : [circle, value]; // else, keep value from before (don't reset)
         }));
         setJokerMap(updatedJokerMap);
 
@@ -297,8 +301,7 @@ const Quiz = () => {
         if (pathGraph[lastClicked].topic === 'feedback') setShowPopup(false);
     };
 
-    //helper function: reset joker map (depending on given topic)
-
+    // resets everything back to start state
     const handleReset = () => {
         setCompletedCircles([]);
         setPossibleCircles([]);
@@ -310,27 +313,23 @@ const Quiz = () => {
         setCorrectInTopic({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
         setJokerInTopic({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
         setDoneInTopic({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
-
         Object.keys(jokerMap).forEach((circle) => {
             jokerMap[circle] = '';
         });
     };
 
+    // renders board with all circles, icons and text elements
     const renderBoard = () => {
         const circleColors = {
             easy: '#D177B3', medium: '#8377D1', hard: '#77D1CB',
             szenario1: '#D177B3', szenario2: '#8377D1', szenario3: '#77D1CB',
             start: '#817C9C', feedback: '#817C9C'
         };
-
-        const circleTexts = {
-            szenario1: 'Vertrauen', szenario2: 'Diskriminierung', szenario3: 'Autonomie', start: 'Start'
-        }
+        const circleTexts = {szenario1: 'Vertrauen', szenario2: 'Diskriminierung', szenario3: 'Autonomie', start: 'Start'}
 
         const handleCircleHover = (circle) => {
             setHoveredCircle(circle);
         };
-
         const handleCircleLeave = () => {
             setHoveredCircle(null);
         };
@@ -485,7 +484,7 @@ const Quiz = () => {
             }
         </div>
     );
-}
+};
 
 // helper function: shuffles array
 const shuffleArray = (array) => {

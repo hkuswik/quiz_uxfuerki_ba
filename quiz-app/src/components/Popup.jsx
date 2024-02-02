@@ -5,12 +5,14 @@ import Start from './Start';
 import Szenario from './Szenario';
 import Disclaimer from './Disclaimer';
 
+// empty popup component that renders all popup types
 const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat,
     onJoker, jokerUsed, correctAmount, jokerAmount, completedAtLeastOnce, onReset }) => {
 
     const [bgColor, setBgColor] = useState('#F6F5FC');
     const isExercise = (content.type === 'question' || content.type === 'match' || content.type === 'sort');
 
+    // set (lighter) background color depending on topic
     useEffect(() => {
         switch (content.difficulty) {
             case 'easy':
@@ -24,9 +26,10 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                 break;
             default:
                 setBgColor('#F6F5FC');
-        }
-    }, [content])
+        };
+    }, [content]);
 
+    // renders popup content depending on popup type
     const renderPopupContent = (content) => {
         if (isExercise) {
             return <Exercise
@@ -66,14 +69,14 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                     return <Disclaimer content={content} onReset={onReset} />
                 default:
                     return <div> error non-exercise type </div>;
-            }
-        }
+            };
+        };
     };
 
+    // prevent popup from closing when popup itself is clicked
     const handlePopupClick = (event) => {
-        // prevent popup from closing when popup itself is clicked
         event.stopPropagation();
-    }
+    };
 
     return (
         <div style={popupContainer} onClick={onClose}>
@@ -85,9 +88,10 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                 <div></div>
             </div>
         </div>
-    )
+    );
 };
 
+// styles
 const popupContainer = {
     background: 'rgba(0, 0, 0, 0.5)',
     position: 'fixed',

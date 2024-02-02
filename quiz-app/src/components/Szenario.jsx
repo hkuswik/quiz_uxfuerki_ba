@@ -7,6 +7,7 @@ const topic1 = 'Vertrauen';
 const topic2 = 'Diskriminierung';
 const topic3 = 'Autonomie';
 
+// popup content when szenario circles are clicked; displays szenario text for current topic
 const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
     const [color, setColor] = useState('');
     const [szenario, setSzenario] = useState('');
@@ -32,7 +33,7 @@ const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
                 setSzenarioNr('3');
                 setColor('#77D1CB');
                 setButton(start_topic3);
-        }
+        };
 
     }, [whichSzenario]);
 
@@ -60,7 +61,7 @@ const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
             }
             {!showBtn && <div className="h-20"></div>}
         </div>
-    )
-}
+    );
+};
 
 export default Szenario;

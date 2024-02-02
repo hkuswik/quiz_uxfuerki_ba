@@ -7,23 +7,24 @@ const topic3 = 'hard';
 
 const correctColor = '#7AD177';
 
+// popup content that displays all exercises with their correct solutions
 const AllQuestions = () => {
     // save exercies according to topic
     const firstTopic = quizData.filter((q) => q.difficulty === topic1);
     const secondTopic = quizData.filter((q) => q.difficulty === topic2);
     const thirdTopic = quizData.filter((q) => q.difficulty === topic3);
 
-    // save all exercises in one array in topic order
+    // save all exercises in one array in topic order, start with first
     const allExercises = firstTopic.concat(secondTopic).concat(thirdTopic);
-
-    // save state for first exercise
     const [exercise, setExercise] = useState(allExercises[0]);
 
+    // render exercise depending on exercise type
     const renderExercise = (exercise) => {
-        const color = getColor(exercise.difficulty);
+        const color = getColor(exercise.difficulty); // color for design elements depending on topic
 
         switch (exercise.type) {
             case 'question':
+                // save answers and shuffle them
                 const answers = exercise.wrongAnswers.split(';');
                 answers.push(exercise.correctAnswer);
                 shuffleArray(answers);
@@ -46,6 +47,7 @@ const AllQuestions = () => {
                     </div>
                 );
             case 'match':
+                // save matches in 2-dimensional array and shuffle them
                 const matches = [
                     exercise.correctPair1.split(';'),
                     exercise.correctPair2.split(';'),
@@ -68,6 +70,7 @@ const AllQuestions = () => {
                     </div>
                 );
             case 'sort':
+                // save categories; save and shuffle items
                 const firstCategory = exercise.firstContainer;
                 const secondCategory = exercise.secondContainer;
                 const items = exercise.belongsInFirst.split(';').concat(exercise.belongsInSecond.split(';'));
@@ -105,6 +108,7 @@ const AllQuestions = () => {
         };
     };
 
+    // helper function: returns color depending on topic
     const getColor = (topic) => {
         switch (topic) {
             case 'easy':
@@ -116,8 +120,9 @@ const AllQuestions = () => {
         };
     };
 
+    // switching to previous exercise on left click (or to the last one if first one is reached)
     const handleLeftClick = () => {
-        const index = allExercises.indexOf(exercise);
+        const index = allExercises.indexOf(exercise); // index of current exercise
         if (index === 0) {
             setExercise(allExercises[allExercises.length - 1]);
             return;
@@ -125,8 +130,9 @@ const AllQuestions = () => {
         setExercise(allExercises[index - 1]);
     };
 
+    // switching to next exercise on right click (or first one if last one is reached)
     const handleRightClick = () => {
-        const index = allExercises.indexOf(exercise);
+        const index = allExercises.indexOf(exercise); // index of current exercise
         if (index === allExercises.length - 1) {
             setExercise(allExercises[0]);
             return;
