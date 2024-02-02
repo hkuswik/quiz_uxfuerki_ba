@@ -126,7 +126,7 @@ const Quiz = () => {
                         // check which topic was selected and save as new current topic; select exercise of this topic
                         setCurrentTopic(topic);
                         setNewExercise(topic);
-                        handleTopicRepeat(getTopicNumber(topic));
+                        handleTopicRepeat(topic);
                         // remove REENTER-circles from possible circles
                         setPossibleCircles(possibleCircles.filter((circle) => !circle.includes('circle')));
                         setState('DEFAULT');
@@ -150,21 +150,6 @@ const Quiz = () => {
             setLastClicked(circle);
         }
         setShowPopup(true);
-    };
-
-    // helper function: get topic number
-    const getTopicNumber = (topic) => {
-        switch (topic) {
-            case topic1:
-                return 1;
-            case topic2:
-                return 2;
-            case topic3:
-                return 3;
-            default:
-                console.log('error in getTopicNumber');
-                return 0;
-        };
     };
 
     // helper function: check if circle is reachable
@@ -299,6 +284,21 @@ const Quiz = () => {
 
         // close popup automatically if topic repeat was triggered by feedback popup
         if (pathGraph[lastClicked].topic === 'feedback') setShowPopup(false);
+    };
+
+    // helper function: get topic number
+    const getTopicNumber = (topic) => {
+        switch (topic) {
+            case topic1:
+                return 1;
+            case topic2:
+                return 2;
+            case topic3:
+                return 3;
+            default:
+                console.log('error in getTopicNumber');
+                return 0;
+        };
     };
 
     // resets everything back to start state
