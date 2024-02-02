@@ -149,22 +149,16 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         const selectedPairs = Object.entries(selected);
 
         let isCorrect = true;
-        let newDefaultList = [];
         // iterate through all matches and set isCorrect to false if a match is wrong
         for (const [term, definition] of selectedPairs) {
             const correctDefinition = correctPairs.find(pair => pair[0] === term)[1];
             if (definition !== correctDefinition) {
                 isCorrect = false;
-                // move wrongly matched definition to default container
-                newDefaultList.push(definition)
             };
         };
 
         // update container state (defaultContainer contains wrongly matched definitions)
-        setContainers(prevContainers => ({
-            ...prevContainers,
-            'containerDefault': { id: 'default', list: newDefaultList }
-        }));
+
 
         setCheckClicked(true);
         onAnswer(isCorrect);
@@ -196,6 +190,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
                             selected={selected}
                             correct={correctPairs}
                             checkClicked={checkClicked}
+                            correctPairs={correctPairs}
                         />
                     </div>
                 </div>
@@ -236,11 +231,9 @@ const Definition = ({ defText, index, color, selected, correct, checkClicked, is
                         style={{
                             ...draggable_style,
                             ...(checkClicked
-                                ? isDefault
-                                    ? { background: wrongColor }
-                                    : matchIsCorrect()
-                                        ? { background: correctColor }
-                                        : { background: '#F1F0F4' }
+                                ? matchIsCorrect()
+                                    ? { background: correctColor }
+                                    : { background: wrongColor }
                                 : { outlineColor: color }
                             )
                         }}
@@ -260,7 +253,7 @@ const Definition = ({ defText, index, color, selected, correct, checkClicked, is
 };
 
 // component for droppable container
-const DropContainer = ({ container: { list, id }, color, containerColor, selected, correct, checkClicked }) => {
+const DropContainer = ({ container: { list, id }, color, containerColor, selected, correct, checkClicked, correctPairs }) => {
     // check if container is defaultContainer (has different style)
     const isDefault = id === 'default';
 
@@ -286,6 +279,16 @@ const DropContainer = ({ container: { list, id }, color, containerColor, selecte
                                 isDefault={isDefault}
                             />
                         ))}
+                        {isDefault && checkClicked &&
+                            <div>
+                                <div className='text-center font-semibold text-sm'>Lösungen:</div>
+                                {correctPairs.map((pair, index) => (
+                                    <div key={index}>
+                                        <p className='sm p-2'><b>{pair[0]}:</b> {pair[1]}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        }
                         {provided.placeholder}
                     </div>
                 </div>
