@@ -9,88 +9,40 @@ const topic2 = 'Diskriminierung';
 const topic3 = 'Autonomie';
 
 // popup content when start circle is clicked; displays welcome text and explains some main features
-const Start = ({ onUpdate }) => {
+const Start = ({ onUpdate, popup_type }) => {
     const [content, setContent] = useState(1);
 
     // render content to distinguish between first (welcome text) and second part (explanations) of popup content
     const renderContent = (content) => {
-        if (content === 1) {
-
+        if (content === 2 || popup_type === 'help') {
             return (
                 <div className='flex flex-col h-full justify-between'>
                     <div></div>
-                    <div className='flex flex-col items-center text-center'>
-                        <h2>Willkommen</h2>
-                        <h2>beim</h2>
-                        <h2 className='font-semibold'>Wegweiser.UX-für-KI Quiz</h2>
-                        <div className="w-9/12 mt-8">
+                    {popup_type === 'help' &&
+                        <div className="flex flex-col items-center self-center text-center w-5/6">
                             <p className="pb-3">
-                                Du kannst dich hier selbstständig zu den Themen <b className="pink">{topic1}
+                                Im <b>Wegweiser.UX-für-KI Quiz</b> kannst du dich selbstständig zu den Themen <b className="pink">{topic1}
                                 </b>, <b className="lila">{topic2}</b> und <b className="türkis">{topic3}</b> testen.
-                            </p>
-                            <p>
                                 Zu jedem Thema erhältst du zunächst ein kurzes <b>Szenario</b>, in das du dich reinversetzen sollst.
                                 Zum Abschluss jedes Wegabschnitts erhältst du ein kurzes <b>Feedback</b>.
                             </p>
                         </div>
-                    </div>
-                    <div className="img-container self-end mr-4">
-                        <img src={weiter_logo} className="h-20 hover:opacity-85 cursor-pointer" onClick={() => setContent(2)} alt="weiter Logo" />
-                    </div>
-                </div>
-            );
-        } else {
-            return (
-                <div className='flex flex-col h-full justify-between'>
-                    <div></div>
+                    }
                     <div>
-                        <div className='flex row justify-between items-center mb-20 mr-5 ml-5'>
+                        <div className='flex row justify-between items-center mr-5 ml-5' style={{marginBottom: (popup_type === 'help') ? '20px' : '80px'}}>
                             <div className='flex flex-col w-4/12 items-center'>
                                 <div className='progress-bar'>
                                     <div className='progress-section'>
-                                        <div className='progress'
-                                            style={{
-                                                width: '100%',
-                                                backgroundColor: '#D177B3',
-                                                opacity: '40%',
-                                            }}
-                                        ></div>
-                                        <div className='progress'
-                                            style={{
-                                                width: '60%',
-                                                backgroundColor: '#D177B3',
-                                            }}
-                                        ></div>
+                                        <div className='progress' style={{ width: '100%', backgroundColor: '#D177B3', opacity: '40%' }}></div>
+                                        <div className='progress' style={{ width: '60%', backgroundColor: '#D177B3', }}></div>
                                     </div>
                                     <div className='progress-section'>
-                                        <div className='progress'
-                                            style={{
-                                                width: '100%',
-                                                backgroundColor: '#8377D1',
-                                                opacity: '40%',
-                                            }}
-                                        ></div>
-                                        <div className='progress'
-                                            style={{
-                                                width: '80%',
-                                                backgroundColor: '#8377D1',
-                                            }}
-                                        ></div>
+                                        <div className='progress' style={{ width: '100%', backgroundColor: '#8377D1', opacity: '40%' }}></div>
+                                        <div className='progress' style={{ width: '80%', backgroundColor: '#8377D1' }}></div>
                                     </div>
                                     <div className='progress-section'>
-                                        <div className='progress'
-                                            style={{
-                                                width: '40%',
-                                                backgroundColor: '#77D1CB',
-                                                opacity: '40%',
-                                            }}
-                                        ></div>
-                                        <div className='progress'
-                                            style={{
-                                                width: '20%',
-                                                backgroundColor: '#77D1CB',
-                                            }}
-                                        ></div>
+                                        <div className='progress' style={{ width: '40%', backgroundColor: '#77D1CB', opacity: '40%' }}></div>
+                                        <div className='progress' style={{ width: '20%', backgroundColor: '#77D1CB' }}></div>
                                     </div>
                                 </div>
                             </div>
@@ -117,16 +69,43 @@ const Start = ({ onUpdate }) => {
                             </p>
                         </div>
                     </div>
-                    <div className="img-container self-end mr-4">
-                        <img src={starten_logo} className="h-20 hover:opacity-85 cursor-pointer" onClick={onUpdate} alt="Quiz starten Logo" />
-                    </div>
+                    {popup_type === 'start' &&
+                        <div className="img-container self-end mr-4">
+                            <img src={starten_logo} className="h-20 hover:opacity-85 cursor-pointer" onClick={onUpdate} alt="Quiz starten Logo" />
+                        </div>
+                    }
+                    {popup_type === 'help' && <div></div>}
                 </div >
+            );
+        } else {
+            return (
+                <div className='flex flex-col h-full justify-between'>
+                    <div></div>
+                    <div className='flex flex-col items-center text-center'>
+                        <h2>Willkommen</h2>
+                        <h2>beim</h2>
+                        <h2 className='font-semibold'>Wegweiser.UX-für-KI Quiz</h2>
+                        <div className="w-9/12 mt-8">
+                            <p className="pb-3">
+                                Du kannst dich hier selbstständig zu den Themen <b className="pink">{topic1}
+                                </b>, <b className="lila">{topic2}</b> und <b className="türkis">{topic3}</b> testen.
+                            </p>
+                            <p>
+                                Zu jedem Thema erhältst du zunächst ein kurzes <b>Szenario</b>, in das du dich reinversetzen sollst.
+                                Zum Abschluss jedes Wegabschnitts erhältst du ein kurzes <b>Feedback</b>.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="img-container self-end mr-4">
+                        <img src={weiter_logo} className="h-20 hover:opacity-85 cursor-pointer" onClick={() => setContent(2)} alt="weiter Logo" />
+                    </div>
+                </div>
             );
         };
     };
 
     return (
-        <div style={{height: '80vh'}}>
+        <div style={{ height: '80vh' }}>
             {renderContent(content)}
         </div>
     );

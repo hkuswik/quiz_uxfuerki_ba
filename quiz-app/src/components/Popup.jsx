@@ -52,7 +52,9 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                         completedAtLeastOnce={completedAtLeastOnce}
                     />;
                 case 'start':
+                case 'help':
                     return <Start
+                        popup_type={content}
                         onUpdate={onUpdate}
                     />
                 case 'szenario1':

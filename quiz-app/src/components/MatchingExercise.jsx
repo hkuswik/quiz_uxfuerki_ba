@@ -323,7 +323,7 @@ const defaultContainer_style = {
 
 const draggable_style = {
     background: 'white',
-    width: '30em',
+    width: '23em',
     height: 'auto',
     padding: '4px',
     margin: '5px',

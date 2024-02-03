@@ -34,11 +34,14 @@ const Header = ({ onReset, doneInTopic, correctInTopic }) => {
                         <img src={logo} alt="Wegweiser.UX-für-KI Logo" />
                     </div>
                     <h1>Quiz</h1>
+                    <div onClick={() => handleBtnClick('help')} style={help_button} className='hover:opacity-80'>
+                        <h4>?</h4>
+                    </div>
                 </div>
                 <div className='flex row justify-around items-center'>
                     <p className='text-white mr-4'>Fortschritt:</p>
                     <ProgressBar doneInTopic={doneInTopic} correctInTopic={correctInTopic} />
-                    <div onClick={() => handleBtnClick('reset')} className='img-container h-5 cursor-pointer ml-4 hover:opacity-85'>
+                    <div onClick={() => handleBtnClick('reset')} className='img-container h-5 cursor-pointer ml-4 hover:opacity-80'>
                         <img src={resetBtn} alt="Fortschritt zurücksetzen Button" />
                     </div>
                 </div>
@@ -52,6 +55,19 @@ const Header = ({ onReset, doneInTopic, correctInTopic }) => {
         </div>
     );
 };
+
+const help_button = {
+    width: '25px',
+    height: '25px',
+    borderRadius: '100%',
+    backgroundColor: '#D4D2DD',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    cursor: 'pointer',
+    marginLeft: '10px',
+    marginTop: '5px'
+}
 
 // displays how many exercises are done in each topic and how many of those were correct
 const ProgressBar = ({ doneInTopic, correctInTopic }) => {
