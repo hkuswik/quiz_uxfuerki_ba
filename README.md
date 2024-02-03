@@ -2,7 +2,6 @@
 
 ### Quiz-Anwendung im Kontext gemeinwohlorientierter KI
 
-
 #### Main component structure:
 
 * App.js -> *App.css*
@@ -48,7 +47,7 @@
     * [x] add Disclaimers for allQuestions / resetting quiz
 * [x] Goal (Feedback 3)
 * [x] Start.jsx: 2nd popup (with explanations) or adding them to current popup
-* [ ] adding explanation button? (user can always see explanations again) OR start always clickable?
+* [x] adding explanation button? (user can always see explanations again) OR start always clickable?
 * [x] Quiz.jsx: 
     * [x] REENTER state (after finishing)
     * [x] what happens when pool empty?
@@ -66,7 +65,7 @@
 ##### when finished
 
 * [x] add comments (!!!) where missing
-* [ ] test on smaller screens (at least laptop)
+* [x] test on smaller screens (at least laptop)
 
 ##### after receiving actual exercises
 

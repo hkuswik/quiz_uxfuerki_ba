@@ -111,6 +111,7 @@ const Start = ({ onUpdate, popup_type }) => {
     );
 };
 
+// styles
 const joker = {
     height: '120px',
     width: '120px',

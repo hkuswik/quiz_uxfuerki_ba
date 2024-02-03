@@ -56,9 +56,10 @@ const Header = ({ onReset, doneInTopic, correctInTopic }) => {
     );
 };
 
+// styles
 const help_button = {
-    width: '25px',
-    height: '25px',
+    width: '24px',
+    height: '24px',
     borderRadius: '100%',
     backgroundColor: '#D4D2DD',
     display: 'flex',
