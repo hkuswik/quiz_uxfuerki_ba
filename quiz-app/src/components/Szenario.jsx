@@ -38,7 +38,7 @@ const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
     }, [whichSzenario]);
 
     return (
-        <div className="flex flex-col items-center justify-between" style={{height: '700px'}}>
+        <div className="flex flex-col items-center justify-between" style={{height: '80vh'}}>
             <div></div>
             <div className="flex flex-col items-center">
                 <h2>Szenario {szenarioNr}:</h2>

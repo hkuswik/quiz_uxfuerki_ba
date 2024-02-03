@@ -168,8 +168,8 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         <div>
             <div className="font-semibold mb-4">{exercise.question}</div>
             <DragDropContext onDragEnd={handleOnDragEnd}>
-                <div className='flex row justify-between items-center'>
-                    <div className='flex flex-col'>
+                <div className='flex flex-col justify-around' style={{height: '69vh'}}>
+                    <div className='flex row flex-wrap justify-around'>
                         {Object.values(containers).filter((container, index) => index > 0).map(filteredContainer => (
                             <DropContainer
                                 key={filteredContainer.id}
@@ -181,7 +181,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
                             />
                         ))}
                     </div>
-                    <div className='flex flex-col'>
+                    <div>
                         <DropContainer
                             key={Object.values(containers)[0].id}
                             container={Object.values(containers)[0]}
@@ -195,18 +195,19 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
                     </div>
                 </div>
             </DragDropContext>
-            <div className="flex justify-end mt-5">
+            <div className="flex row justify-between items-end">
+                <div></div>
                 {showWarning &&
-                    <div className="self-end font-bold mr-32" style={{ color: wrongColor }}>Bitte wähle alle Antworten aus</div>
+                    <div className="font-bold" style={{ color: wrongColor }}>Bitte wähle alle Antworten aus</div>
                 }
                 {!allMatched &&
                     <div onClick={() => setShowWarning(true)} className="img-container flex">
-                        <img src={check_logo_no} className="w-8 self-end" alt="Check Logo" />
+                        <img src={check_logo_no} className="w-9" alt="Check Logo" />
                     </div>
                 }
                 {(allMatched && !checkClicked) &&
-                    <div onClick={() => checkAnswers()} className="img-container hover:opacity-85 cursor-pointer">
-                        <img src={check_logo_yes} className="w-8 justify-self-end" alt="Check Logo" />
+                    <div onClick={() => checkAnswers()} className="img-container hover:opacity-80 cursor-pointer">
+                        <img src={check_logo_yes} className="w-9" alt="Check Logo" />
                     </div>
                 }
             </div>
@@ -260,7 +261,7 @@ const DropContainer = ({ container: { list, id }, color, containerColor, selecte
     return (
         <Droppable droppableId={id}>
             {provided => (
-                <div className='flex flex-col items-center'>
+                <div className='drop-container flex flex-col items-center'>
                     <p style={!isDefault ? { ...term_style, background: color } : {}}>{!isDefault && id}</p>
                     <div
                         style={isDefault ? { ...defaultContainer_style, background: containerColor } : dropContainer_style}
@@ -284,7 +285,7 @@ const DropContainer = ({ container: { list, id }, color, containerColor, selecte
                                 <div className='text-center font-semibold text-sm'>Lösungen:</div>
                                 {correctPairs.map((pair, index) => (
                                     <div key={index}>
-                                        <p className='sm p-2'><b>{pair[0]}:</b> {pair[1]}</p>
+                                        <p className='sm p-1'><b>{pair[0]}:</b> {pair[1]}</p>
                                     </div>
                                 ))}
                             </div>
@@ -299,11 +300,9 @@ const DropContainer = ({ container: { list, id }, color, containerColor, selecte
 
 // styles
 const dropContainer_style = {
-    width: '350px',
+    width: '400px',
     height: 'auto',
     minHeight: '80px',
-    marginBottom: '15px',
-    padding: '2px',
     borderRadius: '10px',
     background: '#F1F0F4',
     display: 'flex',
@@ -319,10 +318,12 @@ const term_style = {
 };
 
 const defaultContainer_style = {
-    width: '350px',
-    height: '550px',
+    width: '100%',
+    height: 'auto',
+    minHeight: '20vh',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     alignItems: 'center',
     borderRadius: '10px',
     padding: '5px'
@@ -330,7 +331,7 @@ const defaultContainer_style = {
 
 const draggable_style = {
     background: 'white',
-    width: '300px',
+    width: '30vw',
     height: 'auto',
     padding: '4px',
     margin: '5px',
@@ -338,7 +339,7 @@ const draggable_style = {
     display: 'flex',
     justifyContent: 'center',
     borderRadius: '10px',
-    fontSize: '15px',
+    fontSize: '12px',
 };
 
 export default MatchingExercise;

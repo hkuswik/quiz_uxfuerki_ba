@@ -26,11 +26,11 @@ const Header = ({ onReset, doneInTopic, correctInTopic }) => {
     };
 
     return (
-        <div style={header_bg}>
-            <div style={header_style}>
+        <div className='header-bg'>
+            <div className='header'>
                 <div className='flex row justify-around'>
                     <h1>Das</h1>
-                    <div className='img-container h-24 cursor-pointer'>
+                    <div id='header-logo' className='img-container cursor-pointer'>
                         <img src={logo} alt="Wegweiser.UX-für-KI Logo" />
                     </div>
                     <h1>Quiz</h1>
@@ -42,7 +42,7 @@ const Header = ({ onReset, doneInTopic, correctInTopic }) => {
                         <img src={resetBtn} alt="Fortschritt zurücksetzen Button" />
                     </div>
                 </div>
-                <div onClick={() => handleBtnClick('alleFragen')} className='img-container h-20 border-dashed border-white border-2 rounded-lg hover:border-solid hover:cursor-pointer'>
+                <div onClick={() => handleBtnClick('alleFragen')} id='all-quest' className='img-container border-dashed border-white border-2 rounded-lg hover:border-solid hover:cursor-pointer'>
                     <img src={allQuestionsBtn} alt="Alle Fragen Button" />
                 </div>
             </div>
@@ -50,30 +50,8 @@ const Header = ({ onReset, doneInTopic, correctInTopic }) => {
                 <Popup onClose={() => setShowPopup(false)} content={popupContent} onReset={handleReset} />
             }
         </div>
-    )
-}
-
-// styles for header
-const header_style = {
-    width: '1490px',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    justifySelf: 'center',
-    padding: '10px',
-    alignItems: 'center'
-}
-
-const header_bg = {
-    position: 'fixed',
-    top: '0',
-    display: 'flex',
-    flexDirection: 'row',
-    height: '125px',
-    backgroundColor: '#2D2C36',
-    width: '100%',
-    justifyContent: 'center'
-}
+    );
+};
 
 // displays how many exercises are done in each topic and how many of those were correct
 const ProgressBar = ({ doneInTopic, correctInTopic }) => {

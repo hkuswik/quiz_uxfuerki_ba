@@ -32,7 +32,7 @@ const AllQuestions = () => {
                 return (
                     <div className='flex flex-col ml-8 mr-8'>
                         <div style={{ ...question_style, background: color }}>{exercise.question}</div>
-                        <div className='flex row flex-wrap justify-center mb-20'>
+                        <div className='flex row flex-wrap justify-center mb-3'>
                             {answers.map((answer, index) => {
                                 return (
                                     <div key={index} style={{
@@ -58,7 +58,7 @@ const AllQuestions = () => {
 
                 return (
                     <div className='flex flex-col ml-8 mr-8'>
-                        <div className="font-semibold mb-10 rounded-lg p-3 text-center" style={{ background: color }}>{exercise.question}</div>
+                        <div className="font-semibold mb-6 rounded-lg p-3 text-center" style={{ background: color }}>{exercise.question}</div>
                         <div className='flex flex-row flex-wrap justify-center'>
                             {matches.map((match, index) => (
                                 <div key={index} className='flex flex-col items-center justify-center m-2'>
@@ -78,8 +78,8 @@ const AllQuestions = () => {
 
                 return (
                     <div className='flex flex-col ml-8 mr-8'>
-                        <div className="font-semibold mb-12 rounded-lg p-3" style={{ background: color }}>{exercise.question}</div>
-                        <div className="flex flex-col">
+                        <div className="font-semibold mb-8 rounded-lg p-3" style={{ background: color }}>{exercise.question}</div>
+                        <div className="flex flex-col mb-3">
                             {items.map((item) => (
                                 <div key={item} className="flex row justify-between mb-2 items-center">
                                     <p style={item_style} className="sm">{item}</p>
@@ -141,8 +141,8 @@ const AllQuestions = () => {
     };
 
     return (
-        <div className='flex flex-col h-full w-full justify-between'>
-            <div className='w-full h-auto'></div>
+        <div className='flex flex-col h-full w-full ml-4 mr-4 justify-between'>
+            <div className='w-full'></div>
             {renderExercise(exercise)}
             <div className="flex row justify-between items-end justify-self-end">
                 <div className='flex w-14 justify-start'>
@@ -172,18 +172,18 @@ const shuffleArray = (array) => {
 const left_arrow = {
     width: '0',
     height: '0',
-    borderTop: '30px solid transparent',
-    borderBottom: '30px solid transparent',
-    borderRight: '40px solid #21202B',
+    borderTop: '25px solid transparent',
+    borderBottom: '25px solid transparent',
+    borderRight: '30px solid #21202B',
     cursor: 'pointer'
 };
 
 const right_arrow = {
     width: '0',
     height: '0',
-    borderTop: '30px solid transparent',
-    borderBottom: '30px solid transparent',
-    borderLeft: '40px solid #21202B',
+    borderTop: '25px solid transparent',
+    borderBottom: '25px solid transparent',
+    borderLeft: '30px solid #21202B',
     marginLeft: '40px',
     cursor: 'pointer'
 };
@@ -212,7 +212,7 @@ const answer_style = {
     justifyContent: 'center',
     textAlign: 'center',
     borderRadius: '8px',
-    margin: '10px',
+    margin: '8px',
 }
 
 // sorting exercise styles

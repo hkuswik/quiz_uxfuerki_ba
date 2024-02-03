@@ -126,7 +126,7 @@ const Start = ({ onUpdate }) => {
     };
 
     return (
-        <div style={{height: '700px'}}>
+        <div style={{height: '80vh'}}>
             {renderContent(content)}
         </div>
     );

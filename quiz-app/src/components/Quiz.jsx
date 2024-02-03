@@ -14,9 +14,9 @@ const topic3 = 'hard';
 
 // save all circles in a graph-like structure (directed); with their topic, x and y position (in svg) and what circle is reachable
 const pathGraph = {
-    start: { next: 'szenario1', topic: 'start', x: '60', y: '140' },
-    szenario1: { next: 'circle1', topic: 'szenario1', x: '210', y: '135' },
-    circle1: { next: 'circle2', topic: topic1, x: '350', y: '180' },
+    start: { next: 'szenario1', topic: 'start', x: '40', y: '140' },
+    szenario1: { next: 'circle1', topic: 'szenario1', x: '200', y: '135' },
+    circle1: { next: 'circle2', topic: topic1, x: '345', y: '180' },
     circle2: { next: 'circle3', topic: topic1, x: '390', y: '280' },
     circle3: { next: 'circle4', topic: topic1, x: '290', y: '350' },
     circle4: { next: 'circle5', topic: topic1, x: '170', y: '390' },
@@ -457,7 +457,7 @@ const Quiz = () => {
         <div className='Quiz'>
             <Header onReset={handleReset} doneInTopic={doneInTopic} correctInTopic={correctInTopic}></Header>
             <div className='svg-container'>
-                <svg id='board'>
+                <svg id='board' viewBox="0 0 1470 820">
                     <text x={248} y={50} textAnchor="middle" fill='#D177B3' className='h3'>Vertrauen</text>
                     <text x={744} y={50} textAnchor="middle" fill='#8377D1' className='h3'>Diskriminierung</text>
                     <text x={1240} y={50} textAnchor="middle" fill='#77D1CB' className='h3'>Autonomie</text>

@@ -87,7 +87,7 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
     };
 
     return (
-        <div className='flex flex-col h-full justify-between'>
+        <div className='flex flex-col h-full justify-between m-5'>
             <div style={question_style}>{exercise.question}</div>
             <div className='flex row flex-wrap justify-center'>
                 {answers.map((answer, index) => {
@@ -110,6 +110,7 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
                         <div
                             key={index}
                             style={answerStyles}
+                            className="sm"
                             onMouseOver={() => handleAnswerHover(answer)}
                             onMouseLeave={handleAnswerLeave}
                             onClick={() =>
@@ -122,18 +123,19 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
                     );
                 })}
             </div>
-            <div className="flex justify-end h-8">
+            <div className="flex row justify-between items-end h-8">
+                <div></div>
                 {showWarning &&
-                    <div className="self-end font-bold mr-28" style={{ color: wrongColor }}>Bitte wähle eine Antwort aus</div>
+                    <div className="font-bold" style={{ color: wrongColor }}>Bitte wähle eine Antwort aus</div>
                 }
                 {(selected === null) &&
                     <div onClick={() => setShowWarning(true)} className="img-container flex">
-                        <img src={check_logo_no} className="h-12" alt="Check Logo" />
+                        <img src={check_logo_no} className="w-9" alt="Check Logo" />
                     </div>
                 }
                 {(selected !== null && !checkClicked) &&
                     <div onClick={() => checkAnswer(selected)} className="img-container hover:opacity-85 cursor-pointer">
-                        <img src={check_logo_yes} className="h-12" alt="Check Logo" />
+                        <img src={check_logo_yes} className="w-9" alt="Check Logo" />
                     </div>
                 }
             </div>
@@ -155,9 +157,8 @@ const question_style = {
     fontWeight: '600',
     width: '100%',
     height: 'auto',
-    padding: '20px',
-    marginTop: '30px',
-    marginBottom: '-10px',
+    padding: '1.5vh',
+    marginTop: '1.5vh',
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
@@ -168,15 +169,15 @@ const question_style = {
 const answer_style = {
     background: '#F6F5FC',
     height: 'auto',
-    minHeight: '150px',
-    width: '300px',
+    minHeight: '20vh',
+    width: '45vh',
     padding: '10px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
     borderRadius: '8px',
-    margin: '10px',
+    margin: '10px'
 };
 
 const hover_style = {

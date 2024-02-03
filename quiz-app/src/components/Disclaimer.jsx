@@ -43,7 +43,7 @@ const Disclaimer = ({ content, onReset }) => {
     };
 
     return (
-        <div className='flex w-full self-center' style={{height: '700px'}}>
+        <div className='flex w-full self-center' style={{height: '80vh'}}>
             {renderPopupContent()}
         </div>
     );

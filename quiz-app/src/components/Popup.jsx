@@ -80,9 +80,9 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
 
     return (
         <div style={popupContainer} onClick={onClose}>
-            <div style={{ ...popupContent, background: bgColor }} onClick={handlePopupClick}>
+            <div style={{ ...popupContent, background: bgColor }} className='popup-size' onClick={handlePopupClick}>
                 <div className='flex row justify-end'>
-                    <div onClick={onClose} className="text-2xl font-medium cursor-pointer hover:opacity-80">X</div>
+                    <div onClick={onClose} id='close-btn' className="font-medium cursor-pointer hover:opacity-80">X</div>
                 </div>
                 {renderPopupContent(content)}
                 <div></div>
@@ -105,14 +105,11 @@ const popupContainer = {
 };
 
 const popupContent = {
-    padding: '20px',
     borderRadius: '8px',
-    width: '1000px',
-    height: 'auto',
-    minHeight: '800px',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    width: '80vw',
 };
 
 export default Popup;

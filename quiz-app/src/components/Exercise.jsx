@@ -76,7 +76,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
     const handleJokerClick = (joker) => {
         if (jokerUsed === 'swap') { // if already used 'swap', nothing happens onClick
             return;
-        } else if (jokerUsed === 'tip') { 
+        } else if (jokerUsed === 'tip') {
             // if already used 'tip', user can reclick on 'tip' and see tip again (but not 'swap' anymore)
             if (joker === 'tip') {
                 setShowTipPopup(true);
@@ -117,18 +117,20 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
 
     return (
         <div style={exerciseContainer}>
-            <div className="flex row h-full mr-5">
-                <div style={joker_row}>
-                    <h4 className="pb-4">Joker:</h4>
-                    <div onClick={() => handleJokerClick('tip')} style={tip_joker} className={(!(jokerUsed === 'swap') && !checkClicked ? 'hover:opacity-85 cursor-pointer' : '')}>
-                        <img src={bulbIcon} className="h-16" alt="Glühbirnen Icon" />
+            <div className="flex row mr-3 justify-between" style={{ height: '92%' }}>
+                <div className="flex row">
+                    <div style={joker_row}>
+                        <h4 className="pb-4">Joker:</h4>
+                        <div onClick={() => handleJokerClick('tip')} style={tip_joker} className={(!(jokerUsed === 'swap') && !checkClicked ? 'hover:opacity-85 cursor-pointer' : '')}>
+                            <img src={bulbIcon} className="h-16" alt="Glühbirnen Icon" />
+                        </div>
+                        <div onClick={() => handleJokerClick('swap')} style={swap_joker} className={((jokerUsed === null) && !checkClicked ? 'hover:opacity-85 cursor-pointer' : '')}>
+                            <img src={swapIcon} className="h-12" alt="Frage wechseln Icon" />
+                        </div>
                     </div>
-                    <div onClick={() => handleJokerClick('swap')} style={swap_joker} className={((jokerUsed === null) && !checkClicked ? 'hover:opacity-85 cursor-pointer' : '')}>
-                        <img src={swapIcon} className="h-12" alt="Frage wechseln Icon" />
-                    </div>
+                    <div style={line}></div>
                 </div>
-                <div style={line}></div>
-                <div className="flex flex-col" style={{ width: '750px' }}>{renderExerciseType(exercise)}</div>
+                <div className="flex flex-col ml-3 w-5/6">{renderExerciseType(exercise)}</div>
             </div>
             <div className="flex row justify-between items-end h-12 relative bottom-0">
                 <h4>{exerciseNr}/24</h4>
@@ -178,8 +180,8 @@ const joker_row = {
 };
 
 const joker = {
-    height: '120px',
-    width: '120px',
+    height: '15vh',
+    width: '15vh',
     margin: '10px',
     borderRadius: '80px',
     display: 'flex',
@@ -190,12 +192,10 @@ const joker = {
 };
 
 const line = {
-    height: '650px',
+    height: '95%',
     width: '4px',
     backgroundColor: '#21202b',
-    borderRadius: '99px',
-    marginLeft: '20px',
-    marginRight: '30px'
+    borderRadius: '99px'
 };
 
 const tipPopupContainer = {
