@@ -58,7 +58,7 @@ const AllQuestions = () => {
 
                 return (
                     <div className='flex flex-col ml-8 mr-8'>
-                        <div className="font-semibold mb-6 rounded-lg p-3 text-center" style={{ background: color }}>{exercise.question}</div>
+                        <div className="font-semibold mb-3 rounded-lg p-3 text-center" style={{ background: color }}>{exercise.question}</div>
                         <div className='flex flex-row flex-wrap justify-center'>
                             {matches.map((match, index) => (
                                 <div key={index} className='flex flex-col items-center justify-center m-2'>
@@ -78,7 +78,7 @@ const AllQuestions = () => {
 
                 return (
                     <div className='flex flex-col ml-8 mr-8'>
-                        <div className="font-semibold mb-8 rounded-lg p-3" style={{ background: color }}>{exercise.question}</div>
+                        <div className="font-semibold mb-4 rounded-lg p-3" style={{ background: color }}>{exercise.question}</div>
                         <div className="flex flex-col mb-3">
                             {items.map((item) => (
                                 <div key={item} className="flex row justify-between mb-2 items-center">
@@ -149,8 +149,8 @@ const AllQuestions = () => {
                     <h5 style={{ color: getColor(exercise.difficulty) }}>{exercise.difficulty}</h5>
                 </div>
                 <div className='flex row justify-self-center'>
-                    <div onClick={() => handleLeftClick()} style={left_arrow} className='hover:opacity-70'></div>
-                    <div onClick={() => handleRightClick()} style={right_arrow} className='hover:opacity-70'></div>
+                    <div onClick={() => handleLeftClick()} id='left-arrow' className='hover:opacity-70'></div>
+                    <div onClick={() => handleRightClick()} id='right-arrow' className='hover:opacity-70'></div>
                 </div>
                 <div className='flex w-14 justify-end'>
                     <h5>{allExercises.indexOf(exercise) + 1}/{allExercises.length}</h5>
@@ -168,33 +168,13 @@ const shuffleArray = (array) => {
     }
 };
 
-// general styles
-const left_arrow = {
-    width: '0',
-    height: '0',
-    borderTop: '25px solid transparent',
-    borderBottom: '25px solid transparent',
-    borderRight: '30px solid #21202B',
-    cursor: 'pointer'
-};
-
-const right_arrow = {
-    width: '0',
-    height: '0',
-    borderTop: '25px solid transparent',
-    borderBottom: '25px solid transparent',
-    borderLeft: '30px solid #21202B',
-    marginLeft: '40px',
-    cursor: 'pointer'
-};
-
 // question exercise styles
 const question_style = {
     fontWeight: '600',
     width: '100%',
     height: 'auto',
     padding: '20px',
-    marginBottom: '50px',
+    marginBottom: '1vh',
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',

@@ -165,8 +165,8 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         <div className='flex flex-col h-full w-full justify-around'>
             <div className="font-semibold mb-4">{exercise.question}</div>
             <DragDropContext onDragEnd={handleOnDragEnd}>
-                <div className='flex flex-col justify-around'>
-                    <div className='flex row flex-wrap justify-around'>
+                <div className='flex flex-col h-full w-full justify-around'>
+                    <div className='flex row flex-wrap w-full justify-around'>
                         {Object.values(containers).filter((container, index) => index > 0).map(filteredContainer => (
                             <DropContainer
                                 key={filteredContainer.id}
@@ -252,7 +252,7 @@ const DropContainer = ({ container: { list, id }, color, containerColor, selecte
     return (
         <Droppable droppableId={id}>
             {provided => (
-                <div className='drop-container flex flex-col items-center'>
+                <div className='drop-container flex flex-col items-center' style={isDefault ? {width: '100%'} : {width: '45%'}}>
                     <p style={!isDefault ? { ...term_style, background: color } : {}}>{!isDefault && id}</p>
                     <div
                         style={isDefault ? { ...defaultContainer_style, background: containerColor } : dropContainer_style}
@@ -291,7 +291,7 @@ const DropContainer = ({ container: { list, id }, color, containerColor, selecte
 
 // styles
 const dropContainer_style = {
-    width: '23vw',
+    width: '100%',
     height: 'auto',
     minHeight: '80px',
     borderRadius: '10px',
@@ -303,7 +303,7 @@ const dropContainer_style = {
 
 const term_style = {
     borderRadius: '10px 10px 0 0',
-    width: '280px',
+    width: '80%',
     textAlign: 'center',
     padding: '3px',
 };
@@ -323,7 +323,7 @@ const defaultContainer_style = {
 
 const draggable_style = {
     background: 'white',
-    width: '22vw',
+    width: '30em',
     height: 'auto',
     padding: '4px',
     margin: '5px',
