@@ -157,18 +157,15 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
             };
         };
 
-        // update container state (defaultContainer contains wrongly matched definitions)
-
-
         setCheckClicked(true);
         onAnswer(isCorrect);
     };
 
     return (
-        <div>
+        <div className='flex flex-col h-full w-full justify-around'>
             <div className="font-semibold mb-4">{exercise.question}</div>
             <DragDropContext onDragEnd={handleOnDragEnd}>
-                <div className='flex flex-col justify-around' style={{height: '69vh'}}>
+                <div className='flex flex-col justify-around'>
                     <div className='flex row flex-wrap justify-around'>
                         {Object.values(containers).filter((container, index) => index > 0).map(filteredContainer => (
                             <DropContainer
@@ -239,13 +236,7 @@ const Definition = ({ defText, index, color, selected, correct, checkClicked, is
                             )
                         }}
                         className={checkClicked ? '' : 'hover:outline-dashed hover:outline-2'}>
-                        {!checkClicked && defText}
-                        {checkClicked && !isDefault && !matchIsCorrect() &&
-                            // search for correct def for term that this def was wrongly matched with
-                            correct.find(pair => pair[0] === Object.keys(selected).find(t => selected[t] === defText))[1]
-                        }
-                        {checkClicked && isDefault && !matchIsCorrect() && defText}
-                        {checkClicked && matchIsCorrect() && defText}
+                        {defText}
                     </div>
                 </div>
             )}
@@ -300,7 +291,7 @@ const DropContainer = ({ container: { list, id }, color, containerColor, selecte
 
 // styles
 const dropContainer_style = {
-    width: '400px',
+    width: '23vw',
     height: 'auto',
     minHeight: '80px',
     borderRadius: '10px',
@@ -325,13 +316,14 @@ const defaultContainer_style = {
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: '10px',
     padding: '5px'
 };
 
 const draggable_style = {
     background: 'white',
-    width: '30vw',
+    width: '22vw',
     height: 'auto',
     padding: '4px',
     margin: '5px',

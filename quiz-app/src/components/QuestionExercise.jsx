@@ -170,7 +170,7 @@ const answer_style = {
     background: '#F6F5FC',
     height: 'auto',
     minHeight: '20vh',
-    width: '45vh',
+    width: '45%',
     padding: '10px',
     display: 'flex',
     alignItems: 'center',

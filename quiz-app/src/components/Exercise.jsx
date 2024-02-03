@@ -195,7 +195,9 @@ const line = {
     height: '95%',
     width: '4px',
     backgroundColor: '#21202b',
-    borderRadius: '99px'
+    borderRadius: '99px',
+    marginLeft: '1vw',
+    marginRight: '0.40vw'
 };
 
 const tipPopupContainer = {

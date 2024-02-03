@@ -113,8 +113,8 @@ img {
 /* Popup */
 .popup-size {
     padding: 20px;
-    height: auto;
-    min-height: 90vh;
+    height: 80vh;
+    width: 60vw;
 }
 
 #close-btn {
@@ -150,6 +150,7 @@ img {
     .popup-size {
         padding: 10px;
         height: 90vh;
+        width: 80vw;
     }
 
     #close-btn {

@@ -74,7 +74,7 @@ const ProgressBar = ({ doneInTopic, correctInTopic }) => {
                     style={{
                         width: `${calculateSectionWidth(topic1)}%`,
                         backgroundColor: '#D177B3',
-                        opacity: '40%',
+                        opacity: '50%',
                     }}></div>
                 <div className='progress'
                     style={{
@@ -88,7 +88,7 @@ const ProgressBar = ({ doneInTopic, correctInTopic }) => {
                     style={{
                         width: `${calculateSectionWidth(topic2)}%`,
                         backgroundColor: '#8377D1',
-                        opacity: '40%',
+                        opacity: '50%',
                     }}
                 ></div>
                 <div className='progress'
@@ -103,7 +103,7 @@ const ProgressBar = ({ doneInTopic, correctInTopic }) => {
                     style={{
                         width: `${calculateSectionWidth(topic3)}%`,
                         backgroundColor: '#77D1CB',
-                        opacity: '40%',
+                        opacity: '50%',
                     }}
                 ></div>
                 <div className='progress'

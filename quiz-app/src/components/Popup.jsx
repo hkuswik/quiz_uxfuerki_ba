@@ -108,8 +108,7 @@ const popupContent = {
     borderRadius: '8px',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    width: '80vw',
+    justifyContent: 'space-between'
 };
 
 export default Popup;

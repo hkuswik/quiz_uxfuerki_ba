@@ -129,7 +129,7 @@ const SortingExercise = ({ exercise, onAnswer }) => {
     };
 
     return (
-        <div className='flex flex-col h-full w-full max-w-4xl justify-around'>
+        <div className='flex flex-col h-full w-full justify-around'>
             <div className="font-semibold">{exercise.question}</div>
             <div className="flex flex-col">
                 {Object.keys(userSelections).map((item) => (

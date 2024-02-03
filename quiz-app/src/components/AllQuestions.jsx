@@ -142,7 +142,7 @@ const AllQuestions = () => {
 
     return (
         <div className='flex flex-col h-full w-full ml-4 mr-4 justify-between'>
-            <div className='w-full'></div>
+            <div></div>
             {renderExercise(exercise)}
             <div className="flex row justify-between items-end justify-self-end">
                 <div className='flex w-14 justify-start'>
@@ -241,7 +241,7 @@ const button_style = {
 // matching exercise style
 const term_style = {
     borderRadius: '10px',
-    width: '330px',
+    width: '24vw',
     textAlign: 'center',
     padding: '3px',
     background: '#D4D2DD',
@@ -250,7 +250,7 @@ const term_style = {
 
 const definition_style = {
     background: 'white',
-    width: '330px',
+    width: '24vw',
     height: '150px',
     padding: '7px',
     textAlign: 'center',

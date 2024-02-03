@@ -393,7 +393,7 @@ const Quiz = () => {
                                 ? isReachable
                                     ? { opacity: '100%' }
                                     : isCompleted
-                                        ? { opacity: wasCorrect ? '100%' : '40%' }
+                                        ? { opacity: wasCorrect ? '100%' : '30%' }
                                         : {}
                                 : {})
                         }}
