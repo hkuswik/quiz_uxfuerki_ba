@@ -134,6 +134,7 @@ img {
     padding: 20px;
     height: 80vh;
     width: 60vw;
+    max-width: 1000px;
 }
 
 #close-btn {
@@ -153,10 +154,6 @@ img {
         height: 69px;
     }
 
-    .svg-container {
-        margin-top: 69px;
-    }
-
     #header-logo {
         height: 60px;
     }
@@ -164,6 +161,22 @@ img {
     #all-quest {
         height: 60px;
         border-width: 1px;
+    }
+
+    #left-arrow {
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-left: 20px solid #21202B;
+    }
+
+    #right-arrow {
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-left: 20px solid #21202B;
+    }
+    
+    .svg-container {
+        margin-top: 69px;
     }
 
     .popup-size {
@@ -180,18 +193,6 @@ img {
     .drop-container {
         margin: 5px;
         padding: 1px;
-    }
-
-    #left-arrow {
-        border-top: 15px solid transparent;
-        border-bottom: 15px solid transparent;
-        border-left: 20px solid #21202B;
-    }
-
-    #right-arrow {
-        border-top: 15px solid transparent;
-        border-bottom: 15px solid transparent;
-        border-left: 20px solid #21202B;
     }
 }
 
