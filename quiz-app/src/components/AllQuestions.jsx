@@ -222,6 +222,7 @@ const button_style = {
 const term_style = {
     borderRadius: '10px',
     width: '24vw',
+    maxWidth: '370px',
     textAlign: 'center',
     padding: '3px',
     background: '#D4D2DD',
@@ -231,6 +232,7 @@ const term_style = {
 const definition_style = {
     background: 'white',
     width: '24vw',
+    maxWidth: '370px',
     height: '150px',
     padding: '7px',
     textAlign: 'center',
