@@ -28,7 +28,7 @@ const Header = ({ onReset, doneInTopic, correctInTopic }) => {
     return (
         <div className='header-bg'>
             <div className='header'>
-                <div className='flex row justify-around'>
+                <div className='flex row w-1/3 justify-start'>
                     <h1>Das</h1>
                     <div id='header-logo' className='img-container cursor-pointer'>
                         <img src={logo} alt="Wegweiser.UX-für-KI Logo" />
@@ -45,8 +45,10 @@ const Header = ({ onReset, doneInTopic, correctInTopic }) => {
                         <img src={resetBtn} alt="Fortschritt zurücksetzen Button" />
                     </div>
                 </div>
-                <div onClick={() => handleBtnClick('alleFragen')} id='all-quest' className='img-container border-dashed border-white border-2 rounded-lg hover:border-solid hover:cursor-pointer'>
-                    <img src={allQuestionsBtn} alt="Alle Fragen Button" />
+                <div className='w-1/3 flex justify-end'>
+                    <div onClick={() => handleBtnClick('alleFragen')} id='all-quest' className='img-container border-dashed border-white border-2 rounded-lg hover:border-solid hover:cursor-pointer'>
+                        <img src={allQuestionsBtn} alt="Alle Fragen Button" />
+                    </div>
                 </div>
             </div>
             {showPopup &&
