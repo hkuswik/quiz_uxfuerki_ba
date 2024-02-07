@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/quiz_uxfuerki_ba/static/css/main.77562aa8.css",
-    "main.js": "/quiz_uxfuerki_ba/static/js/main.1e4cf3b8.js",
+    "main.js": "/quiz_uxfuerki_ba/static/js/main.d3915268.js",
     "static/media/feedback_ende.png": "/quiz_uxfuerki_ba/static/media/feedback_ende.4e1a3c9df95e615673db.png",
     "static/media/feedback.png": "/quiz_uxfuerki_ba/static/media/feedback.1302d0725fc7b98a963d.png",
     "static/media/lernplattform_button.png": "/quiz_uxfuerki_ba/static/media/lernplattform_button.4fffb215f0caeb8e7532.png",
@@ -26,10 +26,10 @@
     "static/media/weiter_topic2.png": "/quiz_uxfuerki_ba/static/media/weiter_topic2.7b0864260e0699bfabcc.png",
     "index.html": "/quiz_uxfuerki_ba/index.html",
     "main.77562aa8.css.map": "/quiz_uxfuerki_ba/static/css/main.77562aa8.css.map",
-    "main.1e4cf3b8.js.map": "/quiz_uxfuerki_ba/static/js/main.1e4cf3b8.js.map"
+    "main.d3915268.js.map": "/quiz_uxfuerki_ba/static/js/main.d3915268.js.map"
   },
   "entrypoints": [
     "static/css/main.77562aa8.css",
-    "static/js/main.1e4cf3b8.js"
+    "static/js/main.d3915268.js"
   ]
 }
