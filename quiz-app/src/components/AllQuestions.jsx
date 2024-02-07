@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import quizData from '../data/questions_onlyUX.json';
+import quizData from '../data/exercises_UX_byTopic.json';
 
 const topic1 = 'UX Grundlagen';
 const topic2 = 'UCD Prozess';
@@ -145,14 +145,14 @@ const AllQuestions = () => {
             <div></div>
             {renderExercise(exercise)}
             <div className="flex row justify-between items-end justify-self-end">
-                <div className='flex w-14 justify-start'>
+                <div className='flex w-1/3 justify-start'>
                     <h5 style={{ color: getColor(exercise.topic) }}>{exercise.topic}</h5>
                 </div>
                 <div className='flex row justify-self-center'>
                     <div onClick={() => handleLeftClick()} id='left-arrow' className='hover:opacity-70'></div>
                     <div onClick={() => handleRightClick()} id='right-arrow' className='hover:opacity-70'></div>
                 </div>
-                <div className='flex w-14 justify-end'>
+                <div className='flex w-1/3 justify-end'>
                     <h5>{allExercises.indexOf(exercise) + 1}/{allExercises.length}</h5>
                 </div>
             </div>
