@@ -69,6 +69,6 @@
 
 ##### after receiving actual exercises
 
-* [ ] change topic names to variables
-* [ ] filter by topic (not by difficulty)
-* [ ] any errors?
+* [x] change topic names to variables
+* [x] filter by topic (not by difficulty)
+* [x] any errors?

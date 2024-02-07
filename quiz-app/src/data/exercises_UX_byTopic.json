@@ -1,0 +1,325 @@
+[
+    {
+        "id": 0,
+        "type": "match",
+        "topic": "UX Grundlagen",
+        "question": "Ordne den Begriffen ihre korrekten Definitionen zu.",
+        "correctPair1": "Augmented Reality;Erweiterung der realen Welt durch computergenerierte Informationen",
+        "correctPair2": "Virtual Reality;Computergenerierte Umgebung, die von der realen Welt getrennt ist",
+        "correctPair4": "Mixed Reality;Begriff, der die Vermischung von realer und digitaler Welt beschreibt und Interaktion mit beiden ermöglicht",
+        "correctPair3": "Cross Reality;Oberbegriff, der verschiedene Technologien zwischen realer und virtueller Welt zusammenfasst",
+        "tip": "Vielleicht helfen dir einige Beispiele weiter. Die HoloLens von Microsoft lässt sich der MR zuordnen, wohingegen Ikeas Möbelplatzier-App AR verwendet."
+    },
+    {
+        "id": 1,
+        "type": "match",
+        "topic": "UX Grundlagen",
+        "question": "Ordne den Begriffen ihre korrekten Definitionen zu.",
+        "correctPair1": "Effektivität;Die Genauigkeit und Vollständigkeit, mit der Nutzer ein Ziel erreichen",
+        "correctPair2": "Effizienz;Der im Verhältnis zur Genauigkeit und Vollständigkeit gesetzte Aufwand, mit dem Nutzer ein Ziel erreichen",
+        "correctPair4": "Ease of Learning;Wie leicht es ist, ein Produkt erstmalig zu verstehen",
+        "correctPair3": "Ease of Use;Wie effizient ein Produkt bei regelmäßiger Nutzung ist",
+        "tip": "Bei Effektivität wird nach dem 'Was' gefragt, bei Effizienz nach dem 'Wie'."
+    },
+    {
+        "id": 2,
+        "type": "match",
+        "topic": "UX Grundlagen",
+        "question": "Ordne den Begriffen ihre korrekten Definitionen zu.",
+        "correctPair1": "Gebrauchstauglichkeit;Das Ausmaß, in dem ein System durch bestimmte Nutzer in einem bestimmten Nutzungskontext genutzt werden kann, um bestimmte Ziele effektiv, effizient und zufriedenstellend zu erreichen",
+        "correctPair2": "User Experience;Wahrnehmungen und Reaktionen einer Person, die aus der tatsächlichen und\/oder erwarteten Benutzung eines Produkts, eines Systems oder einer Dienstleistung resultieren",
+        "correctPair4": "Benutzerfreundlichkeit;Undefinierter, laienhafter Begriff für einfache Bedienbarkeit",
+        "correctPair3": "Zufriedenstellung;Freiheit von Beeinträchtigungen und positive Einstellung gegenüber der Produktnutzung",
+        "tip": "Zufriedenstellung ist ein Kriterium für Gebrauchstauglichkeit. Benutzerfreundlichkeit wird häufig statt Gebrauchstauglichkeit verwendet."
+    },
+    {
+        "id": 3,
+        "type": "sort",
+        "topic": "UX Grundlagen",
+        "question": "Sind folgende Elemente Teil des Nutzungskontexts?",
+        "firstContainer": "Ja",
+        "secondContainer": "Nein",
+        "belongsInFirst": "Benutzer;Arbeitsaufgaben;Arbeitsmittel;physische und soziale Umgebung",
+        "belongsInSecond": "Entwicklungsprozess;Implementierungsdetails;Designentscheidungen;Methodenwahl",
+        "tip": "Teil des Nutzungskontexts sind Elemente, die sich direkt auf die Interaktion mit der Anwendung beziehen."
+    },
+    {
+        "id": 5,
+        "type": "sort",
+        "topic": "UX Grundlagen",
+        "question": "Ist folgendes Kriterium (per Definition) notwendig für Gebrauchstauglichkeit?",
+        "firstContainer": "Ja",
+        "secondContainer": "Nein",
+        "belongsInFirst": "Effektivität;Effizienz;Zufriedenstellung",
+        "belongsInSecond": "Ease of Learning;Einfachheit;Originalität;Attraktivität;Ease of Use",
+        "tip": "Drei Kriterien machen per Definition Gebrauchstauglichkeit aus."
+    },
+    {
+        "id": 6,
+        "type": "question",
+        "topic": "UX Grundlagen",
+        "question": "Wie kann summative UX-Evaluation beschrieben werden?",
+        "correctAnswer": "Bewertung der Anwendung hinsichtlich ihrer Gebrauchstauglichkeit",
+        "wrongAnswers": "Auffinden und Beheben von Problemen mit der Gebrauchstauglichkeit;Testen im Vergleich zu anderen Anwendungen;Addieren der verschiedenen Task Performances",
+        "tip": "Eine summative Evaluation wird am Ende des Entwicklungszyklus bei vollständig entwickelten Systemen angewandt."
+    },
+    {
+        "id": 7,
+        "type": "question",
+        "topic": "UX Grundlagen",
+        "question": "Was sind die beiden besten Methoden, um Usability-Probleme zu priorisieren?",
+        "correctAnswer": "Problemhäufigkeit und Problemschwere",
+        "wrongAnswers": "Problemschwere und Problemlänge;Erstes und letztes Auftreten;Am verwirrendsten und am wenigsten verwirrend",
+        "tip": "Denk darüber nach, welche dieser Aspekte ein Problem wirklich relevant machen."
+    },
+    {
+        "id": 8,
+        "type": "question",
+        "topic": "UX Grundlagen",
+        "question": "Welche Aussage beschreibt Fitt's Law?",
+        "correctAnswer": "Die Bewegungszeit zu einem Ziel hängt von der Entfernung zum Ziel und von der Größe des Ziels ab",
+        "wrongAnswers": "Die Zeit für die Auswahl eines Elements in einer Liste hängt von der Anzahl der Elemente in dieser Liste ab;Die Zeit zum Bewegen eines Cursors auf einem Pfad hängt von der Länge und Breite des Pfades ab;Die Zeit, um eine Aufgabe auszuführen, hängt von der Anzahl der Übungsversuche ab",
+        "tip": "Fitt's Law wird verwendet, um die Dauer einer Bewegung zu einem Ziel zu bestimen."
+    },
+    {
+        "id": 9,
+        "type": "question",
+        "topic": "UX Grundlagen",
+        "question": "Sie sollen ein Usability-Problem in Bezug auf ein Software-Interface lösen. Was müssen Sie zunächst verstehen, bevor Sie Lösungen anbieten können?",
+        "correctAnswer": "Wie User die Software nutzen?",
+        "wrongAnswers": "Wie Freunde die Software nutzen?;Wie Entwickler die Software nutzen?;Wie Sie die Software nutzen?",
+        "tip": "Wer sollte bei der Entwicklung eines Produkts immer im Fokus stehen?"
+    },
+    {
+        "id": 10,
+        "type": "question",
+        "topic": "UX Grundlagen",
+        "question": "Warum ist Gebrauchstauglichkeit wichtig?",
+        "correctAnswer": "Erhöht die Zufriedenheit der Nutzer",
+        "wrongAnswers": "Das Endprodukt sieht ansprechend aus;Das System besteht alle Softwaretests;Verringert die Anzahl benötigter Schulungen für Mitarbeitende",
+        "tip": "Gebrauchstauglichkeit geht über das bloße Design des Systems hinaus."
+    },
+    {
+        "id": 11,
+        "type": "sort",
+        "topic": "UX Grundlagen",
+        "question": "Welche Aussagen sind richtig, welche sind falsch?",
+        "firstContainer": "Richtig",
+        "secondContainer": "Falsch",
+        "belongsInFirst": "Guidelines allein reichen nicht aus für gutes Interface Design",
+        "belongsInSecond": "Usability ist subjektiv und nicht objektivierbar;Das Design des Interfaces geschieht in einer Phase des Prozesses;Usability kostet viel Zeit und Geld",
+        "tip": "Usability ist nicht rein subjektiv."
+    },
+    {
+        "id": 12,
+        "type": "question",
+        "topic": "UCD Prozess",
+        "question": "Was trifft bei Fokusgruppen zu? ",
+        "correctAnswer": "Sie können durch Gruppendenken beeinflusst werden",
+        "wrongAnswers": "Sie werden verwendet, um A\/B-Tests mit verschiedenen Prototypen durchzuführen;Sie sind eine Methode, die Benutzerfreundlichkeit eines Produkts zu testen;Sie zeigen, wie Nutzer mit einem Produkt in einer natürlichen Umgebung interagieren",
+        "tip": "Eine Fokusgruppe ist eine Gruppe von Nutzern oder Experten, die über Anforderungen, Ziele oder Nutzungsprobloeme eines Systems spricht."
+    },
+    {
+        "id": 13,
+        "type": "match",
+        "topic": "UCD Prozess",
+        "question": "Welche Fragen passen zu welchen Design-Prinzipien von Don Norman?",
+        "correctPair1": "Constraints;Werde ich an falschen Handlungen gehindert?",
+        "correctPair2": "Affordance;Erkenne ich, wie und wozu ich das Element bediene?",
+        "correctPair4": "Mapping;Weiß ich, was passiert, wenn ich das Element verwende?",
+        "correctPair3": "Consistency;Hab ich dieses Element schon einmal gesehen?",
+        "tip": "Ein Constraint ist eine Einschränkung. Mapping steht für die Beziehung zwischen dem Design eines Bedienelements und seiner Wirkung."
+    },
+    {
+        "id": 14,
+        "type": "sort",
+        "topic": "UCD Prozess",
+        "question": "Ist das Prinzip eines von Jakob Nielsens Design-Prinzipien?",
+        "firstContainer": "Ja",
+        "secondContainer": "Nein",
+        "belongsInFirst": "Error Prevention;Visibility of System Status;User Control and Freedom;Aesthetic and Minimalist Design;Help and Documentation;Consistency and Standards",
+        "belongsInSecond": "Task Efficiency;Adaptability and Customization;Intuitive Navigation;Engagement and Delight;Responsive Design",
+        "tip": "Nielsens Design Prinzipien fördern eine klare und konsistente Gestaltung, die auf die Bedürfnisse der Nutzer eingeht."
+    },
+    {
+        "id": 15,
+        "type": "sort",
+        "topic": "UCD Prozess",
+        "question": "Ordne zu: Was trifft für vertikale, was für horizontale Prototypen zu?",
+        "firstContainer": "Vertikal",
+        "secondContainer": "Horizontal",
+        "belongsInFirst": "Interface und dahinterstehende Funktionalität;Teilmenge von Funktionen, die in gesamter Tiefe abgebildet werden;Evaluierung komplexer Funktionen",
+        "belongsInSecond": "Abbildung des gesamten Systems durch ein User Interface;Funktionalität kaum oder nur limitiert vorhanden;Evaluieren von Zusammenhängen und Abhängigkeiten",
+        "tip": "Horizontal geht in die Breite. Vertikal geht in die Tiefe."
+    },
+    {
+        "id": 16,
+        "type": "sort",
+        "topic": "UCD Prozess",
+        "question": "Welche Methoden bieten sich in der Analyse-, welche in der Designphase an?",
+        "firstContainer": "Analysephase",
+        "secondContainer": "Designphase",
+        "belongsInFirst": "Interviews;Szenarien;Personas;Use Cases;Hierarchische Aufgabenanalyse;Fragebogen",
+        "belongsInSecond": "Prototypen;Sketching;Storyboards;Card Sorting",
+        "tip": "In der Analysephase möchte man Nutzungsanforderungen spezifizieren, während die Designphase die Entwicklung des Interfaces und die konkreten Interaktionen behandelt."
+    },
+    {
+        "id": 17,
+        "type": "question",
+        "topic": "UCD Prozess",
+        "question": "Was ist KEIN Beispiel für eine Methode in der Kontextforschung?",
+        "correctAnswer": "Usability Test",
+        "wrongAnswers": "Contextual Inquiry;Feldbeobachtung;Tagebuch-Studie",
+        "tip": "Bei der Kontextforschung geht es darum, einen Einblick in die natürliche Arbeitsumgebung des Nutzers zu erhalten."
+    },
+    {
+        "id": 18,
+        "type": "question",
+        "topic": "UCD Prozess",
+        "question": "Was ist die empfohlene Teilnehmer-Anzahl für ein exploratives UX-Interview?",
+        "correctAnswer": "Hängt von der Breite der Forschungsziele ab",
+        "wrongAnswers": "Hängt von der Größe des Zielpublikums ab;Ist die gleiche wie bei Usability-Tests (5);Ist die gleiche wie bei quantitativen Studien (40)",
+        "tip": "Die ideale Teilnehmerzahl kann nicht einfach pauschal festgesetzt werden, sondern hängt von anderen Aspekten ab."
+    },
+    {
+        "id": 19,
+        "type": "question",
+        "topic": "UCD Prozess",
+        "question": "Zu Beginn des Interface-Designs sollten, wenn möglich:",
+        "correctAnswer": "Keine Farben verwendet werden",
+        "wrongAnswers": "Keine gesättigten Rot- und Blau-Töne verwendet werden;Keine grellen Farben verwendet werden;So viele Farben wie möglich verwendet werden",
+        "tip": "Denk daran, dass man am besten mit einfachen Skizzen beginnt. Sie sollen wegwerfbar sein, also weniger ist mehr."
+    },
+    {
+        "id": 20,
+        "type": "sort",
+        "topic": "Evaluation",
+        "question": "Bei welchen Methoden handelt es sich um subjektive, bei welchen um objektive Evaluationsmethoden?",
+        "firstContainer": "Subjektiv",
+        "secondContainer": "Objektiv",
+        "belongsInFirst": "Fragebogen;Interview;Fokusgruppe;Cognitive Walkthrough;Heuristische Evaluation;Thinking Aloud",
+        "belongsInSecond": "Eye-Tracking;LogFile-Analyse;Physiologische Maße;Beobachtung",
+        "tip": "Objektiv sind Methoden, bei denen konkrete Messungen vorgenommen werden. Subjektive Methoden basieren auf Eindrücken."
+    },
+    {
+        "id": 21,
+        "type": "question",
+        "topic": "UCD Prozess",
+        "question": "Eine Persona:",
+        "correctAnswer": "Repräsentiert einen bestimmten Nutzertyp",
+        "wrongAnswers": "Ist eine reale Person, die für Werbekampagnen eingestellt wird;Soll einen durchschnittlichen Nutzer repräsentieren;Ist ein zufällig erstellter Charakter, der das Design interessanter gestalten soll",
+        "tip": "Personas werden für die Zielgruppenanalyse verwendet."
+    },
+    {
+        "id": 22,
+        "type": "question",
+        "topic": "UCD Prozess",
+        "question": "Wann sollte ein Entwickler Usability Prinzipien anwenden?",
+        "correctAnswer": "Früh im Entwicklungszyklus",
+        "wrongAnswers": "Nach erster Veröffentlichung des Systems;In der Evaluationsphase;Keine der angegebenen Lösungen trifft zu",
+        "tip": "Je später man damit anfängt, desto höher ist der Änderungsaufwand."
+    },
+    {
+        "id": 23,
+        "type": "question",
+        "topic": "UCD Prozess",
+        "question": "Was ist ein Cognitive Walkthrough?",
+        "correctAnswer": "Eine Methode, bei der ein Team von Evaluatoren die verschiedenen Schritte einer Aufgabe aus der Sicht des Benutzers durchläuft",
+        "wrongAnswers": "Eine Methode der Nutzerforschung, bei der ein Teilnehmer einen Prototyp benutzt, um die verschiedenen Schritte einer Aufgabe zu durchlaufen;Eine Methode zur Bewertung der Benutzerfreundlichkeit, bei der ein Experte jedem Schritt eines Entwurfs eine oder mehrere quantitative Bewertungen zuweist;Eine Methode, bei der ein Usability-Spezialist jeden Schritt einer Interaktion anhand etablierter Usability-Prinzipien bewertet",
+        "tip": "Ein Cognitive Walkthrough ist ein Evaluationsverfahren."
+    },
+    {
+        "id": 24,
+        "type": "question",
+        "topic": "Evaluation",
+        "question": "Post-test-Fragebögen werden nach dem Usability-Test durchgeführt und sind nützlich für die Messung von:",
+        "correctAnswer": "Nutzerzufriedenheit",
+        "wrongAnswers": "Sicherheit;Effizienz;Erlernbarkeit",
+        "tip": "Effizienz kann schlecht im Nachhinein getestet werden."
+    },
+    {
+        "id": 25,
+        "type": "sort",
+        "topic": "Evaluation",
+        "question": "Ordne zu, ob folgende Aussagen richtig oder falsch sind.",
+        "firstContainer": "Richtig",
+        "secondContainer": "Falsch",
+        "belongsInFirst": "Fragebögen sind aufwändiger als Interviews;bei Interviews entsteht eine große Datenmenge",
+        "belongsInSecond": "für Interviews benötigt man eine größere Stichprobe als für Fragebögen;Interviews sind reliabler als Fragebögen",
+        "tip": "Fragebögen sind in jedem Fall aufwändiger als Interviews."
+    },
+    {
+        "id": 26,
+        "type": "question",
+        "topic": "Evaluation",
+        "question": "Was ist der wesentliche Punkt der 'Wizard-of-Oz'-Methode?",
+        "correctAnswer": "Verwendung eines menschlichen Stellvertreters zur Simulation eines Computersystems",
+        "wrongAnswers": "Testen eines voll funktionsfähigen Prototyps mit Benutzern;Erstellen eines realistischen Mockups;Durchführung von Nutzerforschung, um Designentscheidungen zu treffen",
+        "tip": "Bei der Wizard-of-Oz-Methode sollen Reaktionen auf ein System gesammelt werden, das sich noch in der Entwicklung befindet."
+    },
+    {
+        "id": 27,
+        "type": "question",
+        "topic": "Evaluation",
+        "question": "Bei welcher Technik evaluiert ein Experte mit einer Reihe von Guidelines ein Interface?",
+        "correctAnswer": "Heuristische Evaluation",
+        "wrongAnswers": "Usability Test;Erfahrungsbericht;Cognitive Walkthrough",
+        "tip": "Denk daran, dass es bei dieser Methode um Experten geht, bei einem Usability Test wird mit echten Nutzern interagiert."
+    },
+    {
+        "id": 28,
+        "type": "question",
+        "topic": "Evaluation",
+        "question": "Welche Methode wird bei einem Usability Test häufig verwendet, um Probleme zu entdecken?",
+        "correctAnswer": "Thinking Aloud",
+        "wrongAnswers": "Speaking Slowly;Retrospektive Analyse;Abgestufter Intervallabruf",
+        "tip": "Bei einem Usability Test möchte man wissen, was dem Nutzer während der Interaktion mit der Anwendung auffällt."
+    },
+    {
+        "id": 29,
+        "type": "sort",
+        "topic": "Evaluation",
+        "question": "Ist das eine mögliche Klassifikation für Evaluationsmethoden?",
+        "firstContainer": "Ja",
+        "secondContainer": "Nein",
+        "belongsInFirst": "Formativ\/Summativ;Objektiv\/Subjektiv;Labor-\/Feldstudie",
+        "belongsInSecond": "Ex ante\/Ex post;Quick\/Slow",
+        "tip": "Von zwei dieser Klassifikationen habe ich noch nie gehört."
+    },
+    {
+        "id": 30,
+        "type": "question",
+        "topic": "Evaluation",
+        "question": "Wie kann eine formative UX-Evaluation beschrieben werden?",
+        "correctAnswer": "Qualitative Tests der Benutzerfreundlichkeit eines Prototypen, um herauszufinden, welche Änderungen vorgenommen werden müssen",
+        "wrongAnswers": "Usability-Tests auf einer Online-Website, um zu verstehen, wie sie im Vergleich zu ihren Mitbewerbern abschneidet;Quantitative Usability-Tests an der aktuellen Version der Website, um eine Ausgangsbasis für weiteres Benchmarking zu schaffen;Durchführung einer Fokusgruppe, um die Bedürfnisse der Zielgruppen zu verstehen",
+        "tip": "Eine formative Evaluation wird während des Entwicklungsprozesses durchgeführt."
+    },
+    {
+        "id": 31,
+        "type": "question",
+        "topic": "Evaluation",
+        "question": "Eine Stichprobengröße von 5 Nutzer in einem Usability-Test wird:",
+        "correctAnswer": "85% der Probleme aufdecken, die wahrscheinlich mind. 31% der Nutzer betreffen",
+        "wrongAnswers": "85% aller Probleme aufdecken;15% aller Probleme aufdecken;85% der Probleme aufdecken, die wahrscheinlich mind. 68% der Nutzer betreffen",
+        "tip": "15% aller Probleme ist auf jeden Fall nicht richtig."
+    },
+    {
+        "id": 32,
+        "type": "question",
+        "topic": "Evaluation",
+        "question": "Als Evaluator Effect bezeichnet man:",
+        "correctAnswer": "Die Tendenz verschiedener Evaluations-Teilnehmer, unterschiedliche Probleme zu identifizieren, wenn sie dasselbe Interface testen",
+        "wrongAnswers": "Die Wirkung, die ein Evaluator auf einen Teilnehmer bei einer Studie hat;Die Tendenz verschiedener Evaluatoren, beim Testen desselben Interfaces dieselben Probleme zu erkennen;Die Auswirkungen auf den Leiter des Usability-Tests, wenn er von Stakeholdern beobachtet wird",
+        "tip": "Der Evaluator Effect bezieht sich auf die Auswirkung verschiedener Evaluatoren auf die Testergebnisse."
+    },
+    {
+        "id": 33,
+        "type": "question",
+        "topic": "Evaluation",
+        "question": "Welche der folgenden Metriken ist der beste Maßstab für Effizienz?",
+        "correctAnswer": "Task Time",
+        "wrongAnswers": "Anzahl der Klicks;Task Completion Rate;Task Level Satisfaction",
+        "tip": "Effizienz hängt mit Geschwindigkeit und aufgewendeten Ressourcen zusammen."
+    }
+]

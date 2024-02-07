@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import check_logo_yes from '../data/images/check-bl.png';
 import check_logo_no from '../data/images/check-light.png';
 
-const topic1 = 'easy';
-const topic2 = 'medium';
-const topic3 = 'hard';
+const topic1 = 'UX Grundlagen';
+const topic2 = 'UCD Prozess';
+const topic3 = 'Evaluation';
 
 const correctColor = '#7AD177';
 const wrongColor = '#D24141';
@@ -25,7 +25,7 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
     useEffect(() => {
         randomizeAnswers(exercise);
 
-        switch (exercise.difficulty) {
+        switch (exercise.topic) {
             case topic1:
                 setColor('#D177B3');
                 break;

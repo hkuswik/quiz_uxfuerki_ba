@@ -25,14 +25,14 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
         setTip(exercise.tip);
 
         // set correct avatar (with correct color elements) depending on exercise topic
-        switch (exercise.difficulty) {
-            case 'easy':
+        switch (exercise.topic) {
+            case 'UX Grundlagen':
                 setTipAvatar(avatarPink);
                 break;
-            case 'medium':
+            case 'UCD Prozess':
                 setTipAvatar(avatarLila);
                 break;
-            case 'hard':
+            case 'Evaluation':
                 setTipAvatar(avatarTürkis);
                 break;
             default:
@@ -152,7 +152,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
                             </div>
                             <div className="flex flex-col h-full justify-center">
                                 <div className="speech-bubble mb-36 -ml-6">
-                                    <div className="text-center">{tip}</div>
+                                    <p className="text-center sm">{tip}</p>
                                 </div>
                             </div>
                         </div>

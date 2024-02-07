@@ -4,9 +4,9 @@ import resetBtn from '../data/images/reset-btn.png';
 import allQuestionsBtn from '../data/images/AlleFragen.png';
 import Popup from './Popup';
 
-const topic1 = 'easy';
-const topic2 = 'medium';
-const topic3 = 'hard';
+const topic1 = 'UX Grundlagen';
+const topic2 = 'UCD Prozess';
+const topic3 = 'Evaluation';
 
 // the header displays the quiz' name, progressBar, reset button and allQuestions button
 const Header = ({ onReset, doneInTopic, correctInTopic }) => {

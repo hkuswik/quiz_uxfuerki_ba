@@ -5,6 +5,10 @@ import Start from './Start';
 import Szenario from './Szenario';
 import Disclaimer from './Disclaimer';
 
+const topic1 = 'UX Grundlagen';
+const topic2 = 'UCD Prozess';
+const topic3 = 'Evaluation';
+
 // empty popup component that renders all popup types
 const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat,
     onJoker, jokerUsed, correctAmount, jokerAmount, completedAtLeastOnce, onReset }) => {
@@ -14,14 +18,14 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
 
     // set (lighter) background color depending on topic
     useEffect(() => {
-        switch (content.difficulty) {
-            case 'easy':
+        switch (content.topic) {
+            case topic1:
                 setBgColor('#E8BBD9');
                 break;
-            case 'medium':
+            case topic2:
                 setBgColor('#C1BBE8');
                 break;
-            case 'hard':
+            case topic3:
                 setBgColor('#BBE8E5');
                 break;
             default:

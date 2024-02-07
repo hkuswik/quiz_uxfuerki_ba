@@ -4,9 +4,9 @@ import starten_logo from '../data/images/Quiz_starten.png';
 import bulbIcon from '../data/images/bulb.png';
 import swapIcon from '../data/images/swap.png';
 
-const topic1 = 'Vertrauen';
-const topic2 = 'Diskriminierung';
-const topic3 = 'Autonomie';
+const topic1 = 'UX Grundlagen';
+const topic2 = 'UCD Prozess';
+const topic3 = 'Evaluation';
 
 // popup content when start circle is clicked; displays welcome text and explains some main features
 const Start = ({ onUpdate, popup_type }) => {

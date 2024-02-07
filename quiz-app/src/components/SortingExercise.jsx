@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import check_logo_yes from '../data/images/check-bl.png';
 import check_logo_no from '../data/images/check-light.png';
 
+const topic1 = 'UX Grundlagen';
+const topic2 = 'UCD Prozess';
+const topic3 = 'Evaluation';
+
 const correctColor = '#7AD177';
 const wrongColor = '#D24141';
 
@@ -30,14 +34,14 @@ const SortingExercise = ({ exercise, onAnswer }) => {
         setFirstCategory(exercise.firstContainer);
         setSecondCategory(exercise.secondContainer);
 
-        switch (exercise.difficulty) {
-            case 'easy':
+        switch (exercise.topic) {
+            case topic1:
                 setColor('#D177B3');
                 break;
-            case 'medium':
+            case topic2:
                 setColor('#8377D1');
                 break;
-            case 'hard':
+            case topic3:
                 setColor('#77D1CB');
                 break;
             default:

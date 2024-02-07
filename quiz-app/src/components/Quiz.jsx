@@ -1,6 +1,6 @@
 import '../css/Quiz.css';
 import { useState, useEffect } from 'react';
-import quizData from '../data/questions_onlyUX.json';
+import quizData from '../data/exercises_UX_byTopic.json';
 import feedbackImg from '../data/images/feedback.png';
 import goalImg from '../data/images/feedback_ende.png';
 import Header from './Header';
@@ -8,9 +8,9 @@ import Popup from './Popup';
 import swapIcon from '../data/images/swap.png';
 import bulbIcon from '../data/images/bulb.png';
 
-const topic1 = 'easy';
-const topic2 = 'medium';
-const topic3 = 'hard';
+const topic1 = 'UX Grundlagen';
+const topic2 = 'UCD Prozess';
+const topic3 = 'Evaluation';
 
 // save all circles in a graph-like structure (directed); with their topic, x and y position (in svg) and what circle is reachable
 const pathGraph = {
@@ -95,7 +95,7 @@ const Quiz = () => {
             // save exercises according to topic and randomize order for each topic
             const topicExercises = {};
             [topic1, topic2, topic3].forEach(topic => {
-                const currExercises = quizData.filter(q => q.difficulty === topic);
+                const currExercises = quizData.filter(q => q.topic === topic);
                 shuffleArray(currExercises);
                 topicExercises[topic] = currExercises;
             });
@@ -157,6 +157,15 @@ const Quiz = () => {
         return circle === activeCircle || possibleCircles.includes(circle);
     };
 
+    useEffect(() => {
+        console.log('active: ', activeCircle);
+        console.log('possible: ', possibleCircles);
+    }, [activeCircle, possibleCircles]);
+
+    useEffect(() => {
+        console.log('exercise: ', currentExercise);
+    }, [currentExercise]);
+
     // sets a new exercise from given topic
     const setNewExercise = (topic) => {
         // which topic pool to choose exercises from
@@ -168,7 +177,7 @@ const Quiz = () => {
         } else {
             console.log('reset exercise pool of topic: ', topic);
             // reshuffle exercise pool for exhausted topic
-            const newExercisePool = quizData.filter((exercise) => exercise.difficulty === topic);
+            const newExercisePool = quizData.filter((exercise) => exercise.topic === topic);
             shuffleArray(newExercisePool);
             // get new exercise from reshuffled pool
             getExercise(newExercisePool, topic);
@@ -321,11 +330,11 @@ const Quiz = () => {
     // renders board with all circles, icons and text elements
     const renderBoard = () => {
         const circleColors = {
-            easy: '#D177B3', medium: '#8377D1', hard: '#77D1CB',
+            [topic1]: '#D177B3', [topic2]: '#8377D1', [topic3]: '#77D1CB',
             szenario1: '#D177B3', szenario2: '#8377D1', szenario3: '#77D1CB',
             start: '#817C9C', feedback: '#817C9C'
         };
-        const circleTexts = {szenario1: 'Vertrauen', szenario2: 'Diskriminierung', szenario3: 'Autonomie', start: 'Start'}
+        const circleTexts = {szenario1: [topic1], szenario2: [topic2], szenario3: [topic3], start: 'Start'}
 
         const handleCircleHover = (circle) => {
             setHoveredCircle(circle);
@@ -458,9 +467,9 @@ const Quiz = () => {
             <Header onReset={handleReset} doneInTopic={doneInTopic} correctInTopic={correctInTopic}></Header>
             <div className='svg-container'>
                 <svg id='board' viewBox="0 0 1470 820">
-                    <text x={248} y={50} textAnchor="middle" fill='#D177B3' className='h3'>Vertrauen</text>
-                    <text x={744} y={50} textAnchor="middle" fill='#8377D1' className='h3'>Diskriminierung</text>
-                    <text x={1240} y={50} textAnchor="middle" fill='#77D1CB' className='h3'>Autonomie</text>
+                    <text x={248} y={50} textAnchor="middle" fill='#D177B3' className='h3'>{topic1}</text>
+                    <text x={744} y={50} textAnchor="middle" fill='#8377D1' className='h3'>{topic2}</text>
+                    <text x={1240} y={50} textAnchor="middle" fill='#77D1CB' className='h3'>{topic3}</text>
                     <line x1={496} y1={0} x2={496} y2={1000} style={{ stroke: '#2D2C36', strokeWidth: '5px' }} />
                     <line x1={992} y1={0} x2={992} y2={1000} style={{ stroke: '#2D2C36', strokeWidth: '5px' }} />
                     {renderBoard()}

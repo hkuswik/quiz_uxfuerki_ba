@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import quizData from '../data/questions_onlyUX.json';
 
-const topic1 = 'easy';
-const topic2 = 'medium';
-const topic3 = 'hard';
+const topic1 = 'UX Grundlagen';
+const topic2 = 'UCD Prozess';
+const topic3 = 'Evaluation';
 
 const correctColor = '#7AD177';
 
 // popup content that displays all exercises with their correct solutions
 const AllQuestions = () => {
     // save exercies according to topic
-    const firstTopic = quizData.filter((q) => q.difficulty === topic1);
-    const secondTopic = quizData.filter((q) => q.difficulty === topic2);
-    const thirdTopic = quizData.filter((q) => q.difficulty === topic3);
+    const firstTopic = quizData.filter((q) => q.topic === topic1);
+    const secondTopic = quizData.filter((q) => q.topic === topic2);
+    const thirdTopic = quizData.filter((q) => q.topic === topic3);
 
     // save all exercises in one array in topic order, start with first
     const allExercises = firstTopic.concat(secondTopic).concat(thirdTopic);
@@ -20,7 +20,7 @@ const AllQuestions = () => {
 
     // render exercise depending on exercise type
     const renderExercise = (exercise) => {
-        const color = getColor(exercise.difficulty); // color for design elements depending on topic
+        const color = getColor(exercise.topic); // color for design elements depending on topic
 
         switch (exercise.type) {
             case 'question':
@@ -111,9 +111,9 @@ const AllQuestions = () => {
     // helper function: returns color depending on topic
     const getColor = (topic) => {
         switch (topic) {
-            case 'easy':
+            case topic1:
                 return '#D177B3';
-            case 'medium':
+            case topic2:
                 return '#8377D1';
             default:
                 return '#77D1CB';
@@ -146,7 +146,7 @@ const AllQuestions = () => {
             {renderExercise(exercise)}
             <div className="flex row justify-between items-end justify-self-end">
                 <div className='flex w-14 justify-start'>
-                    <h5 style={{ color: getColor(exercise.difficulty) }}>{exercise.difficulty}</h5>
+                    <h5 style={{ color: getColor(exercise.topic) }}>{exercise.topic}</h5>
                 </div>
                 <div className='flex row justify-self-center'>
                     <div onClick={() => handleLeftClick()} id='left-arrow' className='hover:opacity-70'></div>

@@ -3,6 +3,10 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import check_logo_yes from '../data/images/check-bl.png';
 import check_logo_no from '../data/images/check-light.png';
 
+const topic1 = 'UX Grundlagen';
+const topic2 = 'UCD Prozess';
+const topic3 = 'Evaluation';
+
 const correctColor = '#7AD177';
 const wrongColor = '#D24141';
 
@@ -17,16 +21,16 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
 
     // set design colors depending on topic
     useEffect(() => {
-        switch (exercise.difficulty) {
-            case 'easy':
+        switch (exercise.topic) {
+            case topic1:
                 setColor('#D177B3');
                 setContainerColor('#EECCE3');
                 break;
-            case 'medium':
+            case topic2:
                 setColor('#8377D1');
                 setContainerColor('#D1CCEE');
                 break;
-            case 'hard':
+            case topic3:
                 setColor('#77D1CB');
                 setContainerColor('#CCEEEC');
                 break;
