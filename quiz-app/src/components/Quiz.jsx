@@ -157,15 +157,6 @@ const Quiz = () => {
         return circle === activeCircle || possibleCircles.includes(circle);
     };
 
-    useEffect(() => {
-        console.log('active: ', activeCircle);
-        console.log('possible: ', possibleCircles);
-    }, [activeCircle, possibleCircles]);
-
-    useEffect(() => {
-        console.log('exercise: ', currentExercise);
-    }, [currentExercise]);
-
     // sets a new exercise from given topic
     const setNewExercise = (topic) => {
         // which topic pool to choose exercises from
