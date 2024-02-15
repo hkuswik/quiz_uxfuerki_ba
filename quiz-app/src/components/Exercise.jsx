@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import QuestionExercise from "./QuestionExercise";
 import MatchingExercise from "./MatchingExercise";
 import SortingExercise from "./SortingExercise";
@@ -7,7 +8,8 @@ import fortfahrenIcon from '../data/images/continue_logo.png';
 import avatarLila from '../data/images/avatar_lila.png';
 import avatarTürkis from '../data/images/avatar_türkis.png';
 import avatarPink from '../data/images/avatar_pink.png';
-import { useEffect, useState } from "react";
+import correctSound from '../data/sound/correct_answer.wav';
+import wrongSound from '../data/sound/wrong_answer.wav';
 
 // popup content for exercises; displays joker row, exercise number and renders specific exercise type
 const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) => {
@@ -17,6 +19,10 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
     const [tip, setTip] = useState(null);
     const [tipAvatar, setTipAvatar] = useState(null);
     const [showTipPopup, setShowTipPopup] = useState(false);
+
+    // audio for correct and wrong sounds
+    const correctAudio = new Audio(correctSound);
+    const wrongAudio = new Audio(wrongSound);
 
     useEffect(() => {
         // set checkClicked to false for every new exercise
@@ -69,7 +75,13 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
     // when answers is logged in, set checkClicked to true and forward it
     const handleAnswer = (isCorrect) => {
         setCheckClicked(true);
-        onAnswer(isCorrect);
+        // play sound based on correctness
+        if (isCorrect) {
+            correctAudio.play();
+        } else {
+            wrongAudio.play();
+        }
+        onAnswer(isCorrect); // forward answer to parent component
     };
 
     // logic for clicking a joker (only 1 joker is allowed per exercise)

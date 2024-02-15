@@ -325,7 +325,7 @@ const Quiz = () => {
             szenario1: '#D177B3', szenario2: '#8377D1', szenario3: '#77D1CB',
             start: '#817C9C', feedback: '#817C9C'
         };
-        const circleTexts = {szenario1: [topic1], szenario2: [topic2], szenario3: [topic3], start: 'Start'}
+        const circleTexts = { szenario1: [topic1], szenario2: [topic2], szenario3: [topic3], start: 'Start' };
 
         const handleCircleHover = (circle) => {
             setHoveredCircle(circle);
