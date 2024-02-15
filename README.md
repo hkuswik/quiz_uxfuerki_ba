@@ -16,7 +16,7 @@
                 * QuestionExercise.jsx
                 * SortingExercise.jsx
                 * MatchingExercise.jsx
-                    * DroppableContainer.jsx
+                    * DropContainer.jsx
                     * Definition.jsx
             * Disclaimer.jsx
                 * AllQuestions.jsx

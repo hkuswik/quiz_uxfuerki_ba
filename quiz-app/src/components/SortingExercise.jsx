@@ -16,15 +16,15 @@ const SortingExercise = ({ exercise, onAnswer }) => {
     const [firstItems, setFirstItems] = useState([]);
     const [secondItems, setSecondItems] = useState([]);
 
-    const [userSelections, setUserSelections] = useState(new Map());
+    const [userSelections, setUserSelections] = useState({});
     const [allSelected, setAllSelected] = useState(false);
     const [checkClicked, setCheckClicked] = useState(false);
 
     const [isClickable, setIsClickable] = useState(true);
     const [showWarning, setShowWarning] = useState(false);
 
-    const [firstBtnHover, setFirstBtnHover] = useState(null);
-    const [secondBtnHover, setSecondBtnHover] = useState(null);
+    const [firstBtnHover, setFirstBtnHover] = useState('');
+    const [secondBtnHover, setSecondBtnHover] = useState('');
 
     const [color, setColor] = useState('#817C9C');
 
@@ -92,14 +92,14 @@ const SortingExercise = ({ exercise, onAnswer }) => {
     };
 
     // checks if selections were correct after check button is clicked
-    const checkAnswer = (selected) => {
+    const checkAnswer = () => {
         if (!allSelected) {
             console.log('not all answers selected :(');
         } else {
             setCheckClicked(true);
             setIsClickable(false); // disable clicking functionality
             // iterate through selected map and check if selected category for item corresponds to correct category
-            for (const [item, category] of Object.entries(selected)) {
+            for (const [item, category] of Object.entries(userSelections)) {
                 if (category === firstCategory && !firstItems.includes(item)) {
                     onAnswer(false);
                     return; // set false and return as soon as an item is sorted wrongly
@@ -185,7 +185,7 @@ const SortingExercise = ({ exercise, onAnswer }) => {
                     </div>
                 }
                 {(allSelected && !checkClicked) &&
-                    <div onClick={() => checkAnswer(userSelections)} className="img-container hover:opacity-85 cursor-pointer">
+                    <div onClick={() => checkAnswer()} className="img-container hover:opacity-85 cursor-pointer">
                         <img src={check_logo_yes} className="w-9" alt="Check Logo" />
                     </div>
                 }
