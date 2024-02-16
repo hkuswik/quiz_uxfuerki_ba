@@ -1,7 +1,8 @@
 {
   "files": {
     "main.css": "/quiz_uxfuerki_ba/static/css/main.77562aa8.css",
-    "main.js": "/quiz_uxfuerki_ba/static/js/main.d3915268.js",
+    "main.js": "/quiz_uxfuerki_ba/static/js/main.996277a5.js",
+    "static/media/correct_answer.wav": "/quiz_uxfuerki_ba/static/media/correct_answer.a673b70c68f18f662b4c.wav",
     "static/media/feedback_ende.png": "/quiz_uxfuerki_ba/static/media/feedback_ende.4e1a3c9df95e615673db.png",
     "static/media/feedback.png": "/quiz_uxfuerki_ba/static/media/feedback.1302d0725fc7b98a963d.png",
     "static/media/lernplattform_button.png": "/quiz_uxfuerki_ba/static/media/lernplattform_button.4fffb215f0caeb8e7532.png",
@@ -24,12 +25,13 @@
     "static/media/fortfahren.png": "/quiz_uxfuerki_ba/static/media/fortfahren.d496bdaf519b60955d58.png",
     "static/media/avatar_lila.png": "/quiz_uxfuerki_ba/static/media/avatar_lila.99f4eced41fa67165cce.png",
     "static/media/weiter_topic2.png": "/quiz_uxfuerki_ba/static/media/weiter_topic2.7b0864260e0699bfabcc.png",
+    "static/media/wrong_answer.mp3": "/quiz_uxfuerki_ba/static/media/wrong_answer.836d44bdeb10a3b2315b.mp3",
     "index.html": "/quiz_uxfuerki_ba/index.html",
     "main.77562aa8.css.map": "/quiz_uxfuerki_ba/static/css/main.77562aa8.css.map",
-    "main.d3915268.js.map": "/quiz_uxfuerki_ba/static/js/main.d3915268.js.map"
+    "main.996277a5.js.map": "/quiz_uxfuerki_ba/static/js/main.996277a5.js.map"
   },
   "entrypoints": [
     "static/css/main.77562aa8.css",
-    "static/js/main.d3915268.js"
+    "static/js/main.996277a5.js"
   ]
 }
