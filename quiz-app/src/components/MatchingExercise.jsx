@@ -315,7 +315,7 @@ const term_style = {
 const defaultContainer_style = {
     width: '100%',
     height: 'auto',
-    minHeight: '20vh',
+    minHeight: '5vh',
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',

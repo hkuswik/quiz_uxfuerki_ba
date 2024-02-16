@@ -9,7 +9,7 @@ import avatarLila from '../data/images/avatar_lila.png';
 import avatarTürkis from '../data/images/avatar_türkis.png';
 import avatarPink from '../data/images/avatar_pink.png';
 import correctSound from '../data/sound/correct_answer.wav';
-import wrongSound from '../data/sound/wrong_answer.wav';
+import wrongSound from '../data/sound/wrong_answer.mp3';
 
 // popup content for exercises; displays joker row, exercise number and renders specific exercise type
 const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) => {
@@ -22,6 +22,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
 
     // audio for correct and wrong sounds
     const correctAudio = new Audio(correctSound);
+    correctAudio.volume = 0.8;
     const wrongAudio = new Audio(wrongSound);
 
     useEffect(() => {
