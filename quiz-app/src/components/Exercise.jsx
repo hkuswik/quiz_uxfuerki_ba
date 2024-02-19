@@ -87,6 +87,8 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
 
     // logic for clicking a joker (only 1 joker is allowed per exercise)
     const handleJokerClick = (joker) => {
+        if (checkClicked) return; // can't use joker after logging answers
+
         if (jokerUsed === 'swap') { // if already used 'swap', nothing happens onClick
             return;
         } else if (jokerUsed === 'tip') {
