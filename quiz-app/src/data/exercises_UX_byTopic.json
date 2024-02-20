@@ -26,8 +26,8 @@
         "type": "match",
         "topic": "UX Grundlagen",
         "question": "Ordne den Begriffen ihre korrekten Definitionen zu.",
-        "correctPair1": "Gebrauchstauglichkeit;Das Ausmaß, in dem ein System durch bestimmte Nutzer in einem bestimmten Nutzungskontext genutzt werden kann, um bestimmte Ziele effektiv, effizient und zufriedenstellend zu erreichen",
-        "correctPair2": "User Experience;Wahrnehmungen und Reaktionen einer Person, die aus der tatsächlichen und\/oder erwarteten Benutzung eines Produkts, eines Systems oder einer Dienstleistung resultieren",
+        "correctPair1": "Gebrauchstauglichkeit;Das Ausmaß, in dem ein System durch bestimmte Nutzer in einem bestimmten Kontext genutzt werden kann, um bestimmte Ziele effektiv, effizient und zufriedenstellend zu erreichen",
+        "correctPair2": "User Experience;Wahrnehmungen und Reaktionen einer Person, die aus der tatsächlichen oder erwarteten Benutzung eines Systems resultieren",
         "correctPair4": "Benutzerfreundlichkeit;Undefinierter, laienhafter Begriff für einfache Bedienbarkeit",
         "correctPair3": "Zufriedenstellung;Freiheit von Beeinträchtigungen und positive Einstellung gegenüber der Produktnutzung",
         "tip": "Zufriedenstellung ist ein Kriterium für Gebrauchstauglichkeit. Benutzerfreundlichkeit wird häufig statt Gebrauchstauglichkeit verwendet."
