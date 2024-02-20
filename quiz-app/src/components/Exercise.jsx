@@ -5,9 +5,9 @@ import SortingExercise from "./SortingExercise";
 import bulbIcon from '../data/images/bulb.png';
 import swapIcon from '../data/images/swap.png';
 import fortfahrenIcon from '../data/images/continue_logo.png';
-import avatarLila from '../data/images/Avatar2_lila.png';
-import avatarTürkis from '../data/images/Avatar2_lila.png';
-import avatarPink from '../data/images/Avatar2_lila.png';
+import avatarLila from '../data/images/avatar_lila.png';
+import avatarTürkis from '../data/images/avatar_türkis.png';
+import avatarPink from '../data/images/avatar_pink.png';
 import correctSound from '../data/sound/correct_answer.wav';
 import wrongSound from '../data/sound/wrong_answer.mp3';
 
@@ -22,7 +22,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
 
     // audio for correct and wrong sounds
     const correctAudio = new Audio(correctSound);
-    correctAudio.volume = 0.8;
+    correctAudio.volume = 0.6;
     const wrongAudio = new Audio(wrongSound);
 
     useEffect(() => {

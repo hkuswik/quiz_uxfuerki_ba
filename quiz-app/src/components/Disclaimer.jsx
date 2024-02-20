@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import fortfahrenBtn from '../data/images/fortfahren.png';
 import AllQuestions from './AllQuestions';
-import avatar from '../data/images/Avatar1.png';
+import avatar from '../data/images/avatar_girl.png';
 
 // dislaimer content for popup; displays a warning before resetting or seeing all exercises with solutions
 const Disclaimer = ({ content, onReset }) => {
