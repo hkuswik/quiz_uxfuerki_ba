@@ -5,9 +5,9 @@ import SortingExercise from "./SortingExercise";
 import bulbIcon from '../data/images/bulb.png';
 import swapIcon from '../data/images/swap.png';
 import fortfahrenIcon from '../data/images/continue_logo.png';
-import avatarLila from '../data/images/avatar_lila.png';
-import avatarTürkis from '../data/images/avatar_türkis.png';
-import avatarPink from '../data/images/avatar_pink.png';
+import avatarLila from '../data/images/Avatar2_lila.png';
+import avatarTürkis from '../data/images/Avatar2_lila.png';
+import avatarPink from '../data/images/Avatar2_lila.png';
 import correctSound from '../data/sound/correct_answer.wav';
 import wrongSound from '../data/sound/wrong_answer.mp3';
 
@@ -163,10 +163,10 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
                         </div>
                         <div className="flex row justify-center h-full">
                             <div className="img-container flex flex-col h-full justify-center">
-                                <img src={tipAvatar} className="h-30 mt-20" alt="Avatar Tipp Joker" />
+                                <img src={tipAvatar} className="h-64 mt-20" alt="Avatar Tipp Joker" />
                             </div>
                             <div className="flex flex-col h-full justify-center">
-                                <div className="speech-bubble mb-36 -ml-6">
+                                <div className="speech-bubble mb-40 -ml-12">
                                     <p className="text-center sm">{tip}</p>
                                 </div>
                             </div>

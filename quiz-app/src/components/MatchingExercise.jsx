@@ -16,11 +16,17 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
     const [checkClicked, setCheckClicked] = useState(false);
     const [showWarning, setShowWarning] = useState(false);
 
+    const [containers, setContainers] = useState({});
     const [color, setColor] = useState('#817C9C');
     const [containerColor, setContainerColor] = useState('#F1F0F4');
 
-    // set design colors depending on topic
+    const [correctPairs, setCorrectPairs] = useState([]);
+    const [terms, setTerms] = useState([]);
+    const [selected, setSelected] = useState({});
+
+    // set all variables when new exercise is given as prop
     useEffect(() => {
+        // set design colors depending on topic
         switch (exercise.topic) {
             case topic1:
                 setColor('#D177B3');
@@ -36,34 +42,33 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
                 break;
             default:
                 setColor('#817C9C');
-        }
+        };
+
+        // split correct pairs and save them
+        const newCorrectPairs = Object.values(exercise)
+            .filter(value => typeof value === 'string' && value.includes(';'))
+            .map(pair => pair.split(';'));
+        // save terms
+        const newTerms = newCorrectPairs.map(pair => pair[0]);
+        // shuffle definitions
+        const shuffledDefinitions = newCorrectPairs.map(pair => pair[1]).sort(() => Math.random() - 0.5);
+        // save initial assignment of containers (all elements in default)
+        const initialContainers = {
+            containerDefault: { id: 'default', list: shuffledDefinitions },
+            container1: { id: newTerms[0], list: [] },
+            container2: { id: newTerms[1], list: [] },
+            container3: { id: newTerms[2], list: [] },
+            container4: { id: newTerms[3], list: [] }
+        };
+
+        // create Object to save which definition is matched with which term and save in State
+        setSelected(newTerms.reduce((t, term) => ({ ...t, [term]: null }), {}));
+
+        // save all other variables in State as well
+        setContainers(initialContainers);
+        setTerms(newTerms);
+        setCorrectPairs(newCorrectPairs);
     }, [exercise]);
-
-    // split correct pairs and save them
-    const correctPairs = Object.values(exercise)
-        .filter(value => typeof value === 'string' && value.includes(';'))
-        .map(pair => pair.split(';'));
-
-    // save shuffled definitions
-    const shuffledDefinitions = correctPairs.map(pair => pair[1]).sort(() => Math.random() - 0.5);
-
-    // save terms
-    const terms = correctPairs.map(pair => pair[0]);
-
-    // create Object to save which definition is matched with which term
-    const [selected, setSelected] = useState(
-        terms.reduce((t, term) => ({ ...t, [term]: null }), {})
-    );
-
-    // save initial assignment of containers (all in default)
-    const initialContainers = {
-        containerDefault: { id: 'default', list: shuffledDefinitions },
-        container1: { id: terms[0], list: [] },
-        container2: { id: terms[1], list: [] },
-        container3: { id: terms[2], list: [] },
-        container4: { id: terms[3], list: [] }
-    }
-    const [containers, setContainers] = useState(initialContainers);
 
     // functionality for dragging an item
     const handleOnDragEnd = (result) => {
@@ -169,32 +174,35 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         <div className='flex flex-col h-full w-full justify-around'>
             <div className="font-semibold mb-4">{exercise.question}</div>
             <DragDropContext onDragEnd={handleOnDragEnd}>
-                <div className='flex flex-col h-full w-full justify-around'>
-                    <div className='flex row flex-wrap w-full justify-around'>
-                        {Object.values(containers).filter((container, index) => index > 0).map(filteredContainer => (
+                {Object.keys(containers).length > 0 &&
+                    <div className='flex flex-col h-full w-full justify-around'>
+                        <div className='flex row flex-wrap w-full justify-around'>
+                            {Object.values(containers).filter((container, index) => index > 0).map(filteredContainer => (
+                                <DropContainer
+                                    key={filteredContainer.id}
+                                    exercise={exercise}
+                                    container={filteredContainer}
+                                    color={color}
+                                    selected={selected}
+                                    correctPairs={correctPairs}
+                                    checkClicked={checkClicked}
+                                />
+                            ))}
+                        </div>
+                        <div>
                             <DropContainer
-                                key={filteredContainer.id}
-                                container={filteredContainer}
+                                key={Object.values(containers)[0].id}
+                                exercise={exercise}
+                                container={Object.values(containers)[0]}
                                 color={color}
+                                containerColor={containerColor}
                                 selected={selected}
-                                correct={correctPairs}
+                                correctPairs={correctPairs}
                                 checkClicked={checkClicked}
                             />
-                        ))}
+                        </div>
                     </div>
-                    <div>
-                        <DropContainer
-                            key={Object.values(containers)[0].id}
-                            container={Object.values(containers)[0]}
-                            color={color}
-                            containerColor={containerColor}
-                            selected={selected}
-                            correct={correctPairs}
-                            checkClicked={checkClicked}
-                            correctPairs={correctPairs}
-                        />
-                    </div>
-                </div>
+                }
             </DragDropContext>
             <div className="flex row justify-between items-end">
                 <div></div>
@@ -217,11 +225,11 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
 };
 
 // component for draggable definitions
-const Definition = ({ defText, index, color, selected, correct, checkClicked, isDefault }) => {
+const Definition = ({ defText, index, color, selected, correctPairs, checkClicked }) => {
     // check if match was correct (to have correctColor after clicking on check)
     const matchIsCorrect = () => {
         const matchedTerm = Object.keys(selected).find(term => selected[term] === defText);
-        const correctDef = correct.find(pair => pair[0] === matchedTerm)[1];
+        const correctDef = correctPairs.find(pair => pair[0] === matchedTerm)[1];
         return correctDef === defText;
     };
 
@@ -249,14 +257,14 @@ const Definition = ({ defText, index, color, selected, correct, checkClicked, is
 };
 
 // component for droppable container
-const DropContainer = ({ container: { list, id }, color, containerColor, selected, correct, checkClicked, correctPairs }) => {
+const DropContainer = ({ container: { list, id }, color, containerColor, selected, checkClicked, correctPairs }) => {
     // check if container is defaultContainer (has different style)
     const isDefault = id === 'default';
 
     return (
         <Droppable droppableId={id}>
             {provided => (
-                <div className='drop-container flex flex-col items-center' style={isDefault ? {width: '100%'} : {width: '45%'}}>
+                <div className='drop-container flex flex-col items-center' style={isDefault ? { width: '100%' } : { width: '45%' }}>
                     <p style={!isDefault ? { ...term_style, background: color } : {}}>{!isDefault && id}</p>
                     <div
                         style={isDefault ? { ...defaultContainer_style, background: containerColor } : dropContainer_style}
@@ -270,9 +278,8 @@ const DropContainer = ({ container: { list, id }, color, containerColor, selecte
                                 index={index}
                                 color={color}
                                 selected={selected}
-                                correct={correct}
+                                correctPairs={correctPairs}
                                 checkClicked={checkClicked}
-                                isDefault={isDefault}
                             />
                         ))}
                         {isDefault && checkClicked &&

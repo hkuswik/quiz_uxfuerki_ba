@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import fortfahrenBtn from '../data/images/fortfahren.png';
 import AllQuestions from './AllQuestions';
+import avatar from '../data/images/Avatar1.png';
 
 // dislaimer content for popup; displays a warning before resetting or seeing all exercises with solutions
 const Disclaimer = ({ content, onReset }) => {
@@ -16,9 +17,14 @@ const Disclaimer = ({ content, onReset }) => {
                 <div className='flex flex-col justify-between'>
                     <div></div>
                     <div className='flex flex-col items-center text-center'>
-                        <h2 className='mb-8'><b>Achtung!</b></h2>
+                        <div className='flex row items-center'>
+                            <div className="img-container flex flex-col h-full justify-center">
+                                <img src={avatar} className="h-64" alt="Avatar Disclaimer" />
+                            </div>
+                            <h2 className='mb-8'><b>Achtung!</b></h2>
+                        </div>
                         {isAllQuest &&
-                            <h4 className='w-3/4 mb-7'>Wenn du fortfährst, siehst du eine Übersicht aller Fragen mitsamt ihrer Lösungen.</h4>
+                            <h4 className='w-3/4'>Wenn du fortfährst, siehst du eine Übersicht aller Fragen mitsamt ihrer Lösungen.</h4>
                         }
                         {!isAllQuest &&
                             <div className='flex flex-col items-center'>
