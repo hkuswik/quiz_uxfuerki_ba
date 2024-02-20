@@ -1,9 +1,11 @@
 {
   "files": {
     "main.css": "/quiz_uxfuerki_ba/static/css/main.fac85ab2.css",
-    "main.js": "/quiz_uxfuerki_ba/static/js/main.c71e2d70.js",
-    "static/media/Avatar1.png": "/quiz_uxfuerki_ba/static/media/Avatar1.c7c8954e8eaf39296cda.png",
-    "static/media/Avatar2_lila.png": "/quiz_uxfuerki_ba/static/media/Avatar2_lila.fc064a6ffd1f73266a96.png",
+    "main.js": "/quiz_uxfuerki_ba/static/js/main.b4574ca6.js",
+    "static/media/avatar_girl.png": "/quiz_uxfuerki_ba/static/media/avatar_girl.7601c71f27f447ccb627.png",
+    "static/media/avatar_pink.png": "/quiz_uxfuerki_ba/static/media/avatar_pink.7433c8a70377d696fb6d.png",
+    "static/media/avatar_türkis.png": "/quiz_uxfuerki_ba/static/media/avatar_türkis.5faca530f00e489244f9.png",
+    "static/media/avatar_lila.png": "/quiz_uxfuerki_ba/static/media/avatar_lila.df83d9538dcabc8ab1c1.png",
     "static/media/correct_answer.wav": "/quiz_uxfuerki_ba/static/media/correct_answer.a673b70c68f18f662b4c.wav",
     "static/media/feedback_ende.png": "/quiz_uxfuerki_ba/static/media/feedback_ende.4e1a3c9df95e615673db.png",
     "static/media/feedback.png": "/quiz_uxfuerki_ba/static/media/feedback.1302d0725fc7b98a963d.png",
@@ -29,10 +31,10 @@
     "static/media/wrong_answer.mp3": "/quiz_uxfuerki_ba/static/media/wrong_answer.836d44bdeb10a3b2315b.mp3",
     "index.html": "/quiz_uxfuerki_ba/index.html",
     "main.fac85ab2.css.map": "/quiz_uxfuerki_ba/static/css/main.fac85ab2.css.map",
-    "main.c71e2d70.js.map": "/quiz_uxfuerki_ba/static/js/main.c71e2d70.js.map"
+    "main.b4574ca6.js.map": "/quiz_uxfuerki_ba/static/js/main.b4574ca6.js.map"
   },
   "entrypoints": [
     "static/css/main.fac85ab2.css",
-    "static/js/main.c71e2d70.js"
+    "static/js/main.b4574ca6.js"
   ]
 }
