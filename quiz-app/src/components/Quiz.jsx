@@ -68,7 +68,6 @@ const Quiz = () => {
     const [correctCircles, setCorrectCircles] = useState([]); // correctly answered
 
     const [currentTopic, setCurrentTopic] = useState(topic1);
-    const [szenariosDone, setSzenariosDone] = useState(0);
     const [currentContent, setCurrentContent] = useState(null); // current content for popup
     const [currentExercise, setCurrentExercise] = useState(null); // currently selected exercise
 
@@ -107,9 +106,11 @@ const Quiz = () => {
     }, []);
 
     // logic for clicking on a circle
-    const handleCircleClick = (circle) => {
-        // check if clicked circle is currently possible
-        if (!isCircleReachable(circle)) return;
+    const handleCircleClick = (circle, isSectionStart = false) => {
+        if (!isSectionStart) {
+            // if it's not section-start, check if clicked circle is currently possible
+            if (!isCircleReachable(circle)) return;
+        };
 
         const topic = pathGraph[circle].topic;
         const isExercise = [topic1, topic2, topic3].includes(topic);
@@ -121,6 +122,7 @@ const Quiz = () => {
                 switch (state) {
                     case 'DEFAULT':
                         setNewExercise(topic); // if it is a new circle, select a new exercise
+                        console.log("should be set");
                         break;
                     case 'REENTER':
                         // check which topic was selected and save as new current topic; select exercise of this topic
@@ -243,7 +245,6 @@ const Quiz = () => {
                     setCurrentTopic(currentTopic === topic1 ? topic2 : topic3);
                 }
             } else if (topic.includes('szenario')) {
-                setSzenariosDone(szenariosDone + 1);
                 setActiveCircle(pathGraph[lastClicked].next);
                 !(possibleCircles.includes(lastClicked)) && setPossibleCircles(possibleCircles => [...possibleCircles, lastClicked]);
             } else { //start
@@ -252,6 +253,13 @@ const Quiz = () => {
             // update completed circles
             setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
         }
+
+        // directly render first exercise after active szenario was updated
+        if (activeCircle.includes('szenario')) {
+            handleCircleClick(pathGraph[activeCircle].next, true);
+            return;
+        };
+
         setShowPopup(false);
     };
 
@@ -306,7 +314,6 @@ const Quiz = () => {
         setCompletedCircles([]);
         setPossibleCircles([]);
         setCompletedAtLeastOnce(false);
-        setSzenariosDone(0);
         setCurrentTopic(topic1);
         setActiveCircle('start');
         setCorrectCircles([]);

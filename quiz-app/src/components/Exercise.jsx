@@ -22,7 +22,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
 
     // audio for correct and wrong sounds
     const correctAudio = new Audio(correctSound);
-    correctAudio.volume = 0.6;
+    correctAudio.volume = 0.5;
     const wrongAudio = new Audio(wrongSound);
 
     useEffect(() => {
