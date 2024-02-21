@@ -107,9 +107,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
     };
 
     // prevent popup from closing when popup itself is clicked
-    const handleTipClick = (event) => {
-        event.stopPropagation();
-    };
+    const handleTipClick = (event) => { event.stopPropagation(); };
 
     // styles for tip and swap joker (inside scope because needs to know if check was clicked)
     const tip_joker = {

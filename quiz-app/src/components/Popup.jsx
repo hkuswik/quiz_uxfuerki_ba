@@ -80,9 +80,7 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
     };
 
     // prevent popup from closing when popup itself is clicked
-    const handlePopupClick = (event) => {
-        event.stopPropagation();
-    };
+    const handlePopupClick = (event) => { event.stopPropagation(); };
 
     return (
         <div style={popupContainer} onClick={onClose}>

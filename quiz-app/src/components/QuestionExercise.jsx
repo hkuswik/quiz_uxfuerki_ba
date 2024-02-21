@@ -64,27 +64,17 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
     };
 
     // save which answer is currently hovered over
-    const handleAnswerHover = (answer_box) => {
-        isClickable && setHovered(answer_box);
-    };
-
+    const handleAnswerHover = (answer_box) => { isClickable && setHovered(answer_box); };
     // resets hovered answer
-    const handleAnswerLeave = () => {
-        isClickable && setHovered(null);
-    };
+    const handleAnswerLeave = () => { isClickable && setHovered(null); };
 
     // logic for selecting an answer
     const handleAnswerSelect = (selected) => {
         isClickable && setSelected(selected);
-
-        // hide warning again when an answer was clicked
-        showWarning && setShowWarning(false);
+        showWarning && setShowWarning(false); // hide warning again when an answer was clicked
     };
-
     // unselects answer by re-click on selected answer
-    const handleAnswerUnselect = () => {
-        isClickable && setSelected(null);
-    };
+    const handleAnswerUnselect = () => { isClickable && setSelected(null); };
 
     return (
         <div className='flex flex-col h-full justify-between m-5'>

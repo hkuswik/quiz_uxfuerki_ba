@@ -16,7 +16,7 @@ const Header = ({ onReset, doneInTopic, correctInTopic }) => {
         setShowPopup(true);
     };
 
-    // close popup automatically if quiz is reset and forward reset call to Quiz.jsx
+    // close popup automatically if quiz is reset and forward reset call to parent
     const handleReset = () => {
         setShowPopup(false);
         onReset();

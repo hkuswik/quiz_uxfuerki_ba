@@ -17,9 +17,7 @@ const Feedback = ({ currentTopic, completedAtLeastOnce, onUpdate, correctAmount,
     const [topic, setTopic] = useState('Topic');
     const [classColor, setClassColor] = useState('');
 
-    useEffect(() => {
-        selectButtons(currentTopic); 
-    });
+    useEffect(() => { selectButtons(currentTopic); });
 
     // display correct buttons depending on current topic
     const selectButtons = (currentTopic) => {
@@ -39,9 +37,7 @@ const Feedback = ({ currentTopic, completedAtLeastOnce, onUpdate, correctAmount,
         }
 
         // 'new topic' button after quiz has been completed at least once (can always choose next topic now)
-        if (completedAtLeastOnce) {
-            setButton2(new_topic);
-        }
+        if (completedAtLeastOnce) setButton2(new_topic);
     }
 
     return (

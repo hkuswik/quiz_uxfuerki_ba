@@ -49,7 +49,6 @@ const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
                     "Du bekommst nun einige Aufgaben zur letzten Phase des User-Centered Design Prozesses."
                 );
         };
-
     }, [whichSzenario]);
 
     return (

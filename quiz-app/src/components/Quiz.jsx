@@ -234,10 +234,7 @@ const Quiz = () => {
         // execute behaviour depending on what type of circle (if exercise, board has already been updated)
         if (!isExercise) {
             if (topic === 'feedback') {
-                if (completedAtLeastOnce) {
-                    setState('REENTER');
-                    setPossibleCircles(possibleCircles => [...possibleCircles, ...['circle1', 'circle9', 'circle17']]);
-                } else if (currentTopic === topic3) {
+                if (completedAtLeastOnce || currentTopic === topic3) {
                     setState('REENTER');
                     setPossibleCircles(possibleCircles => [...possibleCircles, ...['circle1', 'circle9', 'circle17']]);
                 } else {
