@@ -50,9 +50,7 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
 
     // checks if selected answer is correct
     const checkAnswer = () => {
-        if (selected === null) {
-            console.log('no answer selected :(');
-        } else {
+        if (selected !== "") {
             setCheckClicked(true);
             setIsClickable(false); // can't change answer anymore
             if (selected === exercise.correctAnswer) {
@@ -66,7 +64,7 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
     // save which answer is currently hovered over
     const handleAnswerHover = (answerBox) => { isClickable && setHovered(answerBox); };
     // resets hovered answer
-    const handleAnswerLeave = () => { isClickable && setHovered(null); };
+    const handleAnswerLeave = () => { isClickable && setHovered(""); };
 
     // logic for selecting an answer
     const handleAnswerSelect = (selected) => {
@@ -74,7 +72,7 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
         showWarning && setShowWarning(false); // hide warning again when an answer was clicked
     };
     // unselects answer by re-click on selected answer
-    const handleAnswerUnselect = () => { isClickable && setSelected(null); };
+    const handleAnswerUnselect = () => { isClickable && setSelected(""); };
 
     return (
         <div className='flex flex-col h-full justify-between m-5'>
@@ -104,7 +102,7 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
                             onMouseOver={() => handleAnswerHover(answer)}
                             onMouseLeave={handleAnswerLeave}
                             onClick={() =>
-                                selected === null ? handleAnswerSelect(answer)
+                                selected === "" ? handleAnswerSelect(answer)
                                     : selected === answer ? handleAnswerUnselect(answer)
                                         : handleAnswerSelect(answer)}
                         >
@@ -118,12 +116,12 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
                 {showWarning &&
                     <div className="font-bold" style={{ color: wrongColor }}>Bitte wähle eine Antwort aus</div>
                 }
-                {(selected === null) &&
+                {(selected === "") &&
                     <div onClick={() => setShowWarning(true)} className="img-container flex">
                         <img src={check_logo_no} className="w-9" alt="Check Logo" />
                     </div>
                 }
-                {(selected !== null && !checkClicked) &&
+                {(selected !== "" && !checkClicked) &&
                     <div onClick={() => checkAnswer(selected)} className="img-container hover:opacity-85 cursor-pointer">
                         <img src={check_logo_yes} className="w-9" alt="Check Logo" />
                     </div>

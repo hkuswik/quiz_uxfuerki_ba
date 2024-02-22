@@ -23,8 +23,8 @@ const SortingExercise = ({ exercise, onAnswer }) => {
     const [isClickable, setIsClickable] = useState(true);
     const [showWarning, setShowWarning] = useState(false);
 
-    const [firstBtnHover, setFirstBtnHover] = useState('');
-    const [secondBtnHover, setSecondBtnHover] = useState('');
+    const [firstBtnHover, setFirstBtnHover] = useState("");
+    const [secondBtnHover, setSecondBtnHover] = useState("");
 
     const [color, setColor] = useState('#817C9C');
 
@@ -126,9 +126,9 @@ const SortingExercise = ({ exercise, onAnswer }) => {
     // resets the hovered button
     const handleBtnLeave = (selectedCategory) => {
         if (selectedCategory === firstCategory) {
-            setFirstBtnHover(null);
+            setFirstBtnHover("");
         } else {
-            setSecondBtnHover(null);
+            setSecondBtnHover("");
         };
     };
 

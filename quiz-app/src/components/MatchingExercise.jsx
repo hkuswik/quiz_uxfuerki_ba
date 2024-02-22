@@ -17,7 +17,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
     const [showWarning, setShowWarning] = useState(false);
 
     const [containers, setContainers] = useState({});
-    const [color, setColor] = useState('#817C9C');
+    const [color, setColor] = useState('');
     const [containerColor, setContainerColor] = useState('');
 
     const [correctPairs, setCorrectPairs] = useState([]);

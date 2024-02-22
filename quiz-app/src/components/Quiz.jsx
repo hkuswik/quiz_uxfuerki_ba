@@ -335,7 +335,7 @@ const Quiz = () => {
             setHoveredCircle(circle);
         };
         const handleCircleLeave = () => {
-            setHoveredCircle(null);
+            setHoveredCircle("");
         };
 
         const circles = Object.keys(pathGraph);
