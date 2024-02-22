@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import quizData from '../data/exercises_UX_byTopic.json';
+import arrow_left from '../data/images/arrow_left.png';
+import arrow_right from '../data/images/arrow_right.png';
 
 const topic1 = 'UX Grundlagen';
 const topic2 = 'UCD Prozess';
@@ -149,8 +151,16 @@ const AllQuestions = () => {
                     <h5 style={{ color: getColor(exercise.topic) }}>{exercise.topic}</h5>
                 </div>
                 <div className='flex row justify-self-center'>
-                    <div onClick={() => handleLeftClick()} id='left-arrow' className='hover:opacity-70'></div>
-                    <div onClick={() => handleRightClick()} id='right-arrow' className='hover:opacity-70'></div>
+                    <div className="img-container flex flex-col h-full justify-center">
+                        <img src={arrow_left} onClick={() => handleLeftClick()}
+                            className="h-10 hover:opacity-70 cursor-pointer mr-3" alt="Pfeil nach links"
+                        />
+                    </div>
+                    <div className="img-container flex flex-col h-full justify-center">
+                        <img src={arrow_right} onClick={() => handleRightClick()}
+                            className="h-10 hover:opacity-70 cursor-pointer" alt="Pfeil nach rechts"
+                        />
+                    </div>
                 </div>
                 <div className='flex w-1/3 justify-end'>
                     <h5>{allExercises.indexOf(exercise) + 1}/{allExercises.length}</h5>

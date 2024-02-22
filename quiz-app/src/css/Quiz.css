@@ -56,25 +56,6 @@ img {
     stroke-dasharray: none;
 }
 
-#left-arrow {
-    width: 0;
-    height: 0;
-    border-top: 25px solid transparent;
-    border-bottom: 25px solid transparent;
-    border-right: 30px solid #21202B;
-    cursor: pointer;
-}
-
-#right-arrow {
-    width: 0;
-    height: 0;
-    border-top: 25px solid transparent;
-    border-bottom: 25px solid transparent;
-    border-left: 30px solid #21202B;
-    cursor: pointer;
-    margin-left: 20px;
-}
-
 /* Header */
 .header {
     width: 100%;
@@ -161,18 +142,6 @@ img {
     #all-quest {
         height: 60px;
         border-width: 1px;
-    }
-
-    #left-arrow {
-        border-top: 15px solid transparent;
-        border-bottom: 15px solid transparent;
-        border-left: 20px solid #21202B;
-    }
-
-    #right-arrow {
-        border-top: 15px solid transparent;
-        border-bottom: 15px solid transparent;
-        border-left: 20px solid #21202B;
     }
     
     .svg-container {

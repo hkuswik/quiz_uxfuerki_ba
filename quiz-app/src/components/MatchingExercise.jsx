@@ -18,7 +18,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
 
     const [containers, setContainers] = useState({});
     const [color, setColor] = useState('#817C9C');
-    const [containerColor, setContainerColor] = useState('#F1F0F4');
+    const [containerColor, setContainerColor] = useState('');
 
     const [correctPairs, setCorrectPairs] = useState([]);
     const [terms, setTerms] = useState([]);
@@ -257,7 +257,7 @@ const Definition = ({ defText, index, color, selected, correctPairs, checkClicke
 };
 
 // component for droppable container
-const DropContainer = ({ container: { list, id }, color, containerColor, selected, checkClicked, correctPairs }) => {
+const DropContainer = ({ container: { list, id }, color, containerColor, selected, correctPairs, checkClicked }) => {
     // check if container is defaultContainer (has different style)
     const isDefault = id === 'default';
 

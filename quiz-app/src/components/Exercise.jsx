@@ -14,9 +14,9 @@ import wrongSound from '../data/sound/wrong_answer.mp3';
 // popup content for exercises; displays joker row, exercise number and renders specific exercise type
 const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) => {
     const [checkClicked, setCheckClicked] = useState(false);
-    const [exerciseNr, setExerciseNr] = useState(null);
+    const [exerciseNr, setExerciseNr] = useState("");
 
-    const [tip, setTip] = useState(null);
+    const [tip, setTip] = useState("");
     const [tipAvatar, setTipAvatar] = useState(null);
     const [showTipPopup, setShowTipPopup] = useState(false);
 

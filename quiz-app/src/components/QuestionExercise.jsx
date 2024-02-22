@@ -12,14 +12,14 @@ const wrongColor = '#D24141';
 // popup content when exercise is of type 'question'
 const QuestionExercise = ({ exercise, onAnswer }) => {
     const [answers, setAnswers] = useState([]);
-    const [hovered, setHovered] = useState(null);
-    const [selected, setSelected] = useState(null);
+    const [hovered, setHovered] = useState("");
+    const [selected, setSelected] = useState("");
 
     const [checkClicked, setCheckClicked] = useState(false);
     const [isClickable, setIsClickable] = useState(true);
     const [showWarning, setShowWarning] = useState(false);
 
-    const [color, setColor] = useState('#817C9C');
+    const [color, setColor] = useState('');
 
     // prepare answers and set design color depending on topic
     useEffect(() => {
@@ -64,7 +64,7 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
     };
 
     // save which answer is currently hovered over
-    const handleAnswerHover = (answer_box) => { isClickable && setHovered(answer_box); };
+    const handleAnswerHover = (answerBox) => { isClickable && setHovered(answerBox); };
     // resets hovered answer
     const handleAnswerLeave = () => { isClickable && setHovered(null); };
 

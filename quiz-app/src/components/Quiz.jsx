@@ -64,15 +64,15 @@ const Quiz = () => {
     const [lastClicked, setLastClicked] = useState('start');
     const [possibleCircles, setPossibleCircles] = useState([]); // which circles can also be clicked currently
     const [completedCircles, setCompletedCircles] = useState([]);
-    const [hoveredCircle, setHoveredCircle] = useState(null);
+    const [hoveredCircle, setHoveredCircle] = useState("");
     const [correctCircles, setCorrectCircles] = useState([]); // correctly answered
 
     const [currentTopic, setCurrentTopic] = useState(topic1);
     const [currentContent, setCurrentContent] = useState(null); // current content for popup
     const [currentExercise, setCurrentExercise] = useState(null); // currently selected exercise
 
+    const [jokerMap, setJokerMap] = useState({}); // which joker was used at which circle
     const [jokerUsed, setJokerUsed] = useState(null); // which type of joker was just used
-    const [jokerMap, setJokerMap] = useState(new Map()); // which joker was used at which circle
 
     const [jokerInTopic, setJokerInTopic] = useState({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
     const [doneInTopic, setDoneInTopic] = useState({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
