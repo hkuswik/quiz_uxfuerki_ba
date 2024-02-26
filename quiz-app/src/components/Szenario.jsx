@@ -8,12 +8,13 @@ const topic2 = 'UCD Prozess';
 const topic3 = 'Evaluation';
 
 // popup content when szenario circles are clicked; displays szenario text for current topic
-const Szenario = ({ whichSzenario, onUpdate, showBtn }) => {
+const Szenario = ({ whichSzenario, onUpdate, activeSzenario }) => {
     const [color, setColor] = useState('');
     const [szenario, setSzenario] = useState('');
     const [szenarioNr, setSzenarioNr] = useState(1);
     const [szenarioText, setSzenarioText] = useState(":)");
     const [button, setButton] = useState(null);
+    const showBtn = activeSzenario === whichSzenario;
 
     useEffect(() => {
         switch (whichSzenario) {

@@ -64,11 +64,10 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                 case 'szenario1':
                 case 'szenario2':
                 case 'szenario3':
-                    const isSzenarioActive = (active === 'szenario1' || active === 'szenario2' || active === 'szenario3');
                     return <Szenario
                         whichSzenario={content}
                         onUpdate={onUpdate}
-                        showBtn={isSzenarioActive}
+                        activeSzenario={active}
                     />;
                 case 'alleFragen':
                 case 'reset':
