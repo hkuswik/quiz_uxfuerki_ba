@@ -1,3 +1,5 @@
+import { Tooltip } from "react-tooltip";
+
 const topic1 = 'UX Grundlagen';
 const topic2 = 'UCD Prozess';
 const topic3 = 'Evaluation';
@@ -17,7 +19,9 @@ const ProgressBar = ({ doneInTopic, correctInTopic }) => {
     };
 
     return (
-        <div className='progress-bar'>
+        <div className='progress-bar' data-tooltip-id="progress-tooltip"
+            data-tooltip-content="zeigt, wieviele Aufgaben du (korrekt) beantwortet hast"
+        >
             <div className='progress-section'>
                 <div className='progress'
                     style={{
@@ -62,6 +66,7 @@ const ProgressBar = ({ doneInTopic, correctInTopic }) => {
                     }}
                 ></div>
             </div>
+            <Tooltip id="progress-tooltip" style={{backgroundColor: '#F6F5FC', color: '#21202B'}}/>
         </div>
     );
 };

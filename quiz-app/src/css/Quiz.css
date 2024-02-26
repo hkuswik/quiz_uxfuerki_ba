@@ -27,6 +27,20 @@ svg#board {
     height: 100%;
 }
 
+.help-btn {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+    border-radius: 100%;
+    background-color: #D4D2DD;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
 /* general styles, reusable */
 img {
     max-width: 100%;
@@ -143,7 +157,7 @@ img {
         height: 60px;
         border-width: 1px;
     }
-    
+
     .svg-container {
         margin-top: 69px;
     }

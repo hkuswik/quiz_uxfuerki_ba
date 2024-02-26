@@ -8,7 +8,7 @@ import ProgressBar from './ProgressBar';
 // the header displays the quiz' name, progressBar, reset button and allQuestions button
 const Header = ({ onReset, doneInTopic, correctInTopic }) => {
     const [showPopup, setShowPopup] = useState(false);
-    const [popupContent, setPopupContent] = useState(null);
+    const [popupContent, setPopupContent] = useState('');
 
     // open popup with content depending on which button was clicked
     const handleBtnClick = (content) => {
@@ -27,13 +27,10 @@ const Header = ({ onReset, doneInTopic, correctInTopic }) => {
             <div className='header'>
                 <div className='flex row w-1/3 justify-start'>
                     <h1>Das</h1>
-                    <div id='header-logo' className='img-container cursor-pointer'>
+                    <div id='header-logo' className='img-container'>
                         <img src={logo} alt="Wegweiser.UX-für-KI Logo" />
                     </div>
                     <h1>Quiz</h1>
-                    <div onClick={() => handleBtnClick('help')} style={help_button} className='hover:opacity-80'>
-                        <h4>?</h4>
-                    </div>
                 </div>
                 <div className='flex row justify-around items-center'>
                     <p className='text-white mr-4'>Fortschritt:</p>
@@ -54,19 +51,5 @@ const Header = ({ onReset, doneInTopic, correctInTopic }) => {
         </div>
     );
 };
-
-// styles
-const help_button = {
-    width: '24px',
-    height: '24px',
-    borderRadius: '100%',
-    backgroundColor: '#D4D2DD',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    cursor: 'pointer',
-    marginLeft: '10px',
-    marginTop: '5px'
-}
 
 export default Header;

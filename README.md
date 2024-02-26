@@ -25,12 +25,12 @@
 #### 2. Iteration (TODOs zur Verbesserung):
 
 * [ ] Abschnitt über 'Szenario' neu starten
-* [ ] Tooltips: Fortschrittsbalken
-* [ ] Tooltips: Joker
+* [x] Tooltips: Fortschrittsbalken
+* [x] Tooltips: Joker
 * [x] wieviele Joker noch verfügbar?
 * [x] Start-Button weg: 1. Popup automatisch
 * [x] nach 'Start' automatisch 1. Szenario starten
-* [ ] ?-Button lieber unten links
+* [x] ?-Button lieber unten links
 * [ ] Fragen erneut angucken
 * [ ] DnD: Switchbar machen (wenn möglich?)
 * [ ] Ton auch ausstellen können

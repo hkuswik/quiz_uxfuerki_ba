@@ -10,6 +10,7 @@ import avatarTürkis from '../data/images/avatar_türkis.png';
 import avatarPink from '../data/images/avatar_pink.png';
 import correctSound from '../data/sound/correct_answer.wav';
 import wrongSound from '../data/sound/wrong_answer.mp3';
+import { Tooltip } from 'react-tooltip';
 
 // popup content for exercises; displays joker row, exercise number and renders specific exercise type
 const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) => {
@@ -133,14 +134,20 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
             <div className="flex row mr-3 justify-between" style={{ height: '92%' }}>
                 <div className="flex row text-center">
                     <div style={joker_row}>
-                        <h4 className="mb-2">Joker:</h4>
-                        <p className="mb-4 sm italic" style={{color: '#696485'}}>1 Joker pro Aufgabe</p>
-                        <div onClick={() => handleJokerClick('tip')} style={tip_joker} className={(!(jokerUsed === 'swap') && !checkClicked ? 'hover:opacity-85 cursor-pointer' : '')}>
+                        <h4 className="mb-1">Joker:</h4>
+                        <p className="mb-4 sm italic" style={{ color: '#696485' }}>1 Joker pro Aufgabe</p>
+                        <div data-tooltip-id="joker-tooltip" data-tooltip-content="Erhalte einen Tipp"
+                            onClick={() => handleJokerClick('tip')} style={tip_joker}
+                            className={(!(jokerUsed === 'swap') && !checkClicked ? 'hover:opacity-85 cursor-pointer' : '')}
+                        >
                             <img src={bulbIcon} className="h-16" alt="Glühbirnen Icon" />
                         </div>
-                        <div onClick={() => handleJokerClick('swap')} style={swap_joker} className={((jokerUsed === null) && !checkClicked ? 'hover:opacity-85 cursor-pointer' : '')}>
+                        <div data-tooltip-id="joker-tooltip" data-tooltip-content="Erhalte eine neue Frage"
+                            onClick={() => handleJokerClick('swap')} style={swap_joker}
+                            className={((jokerUsed === null) && !checkClicked ? 'hover:opacity-85 cursor-pointer' : '')}>
                             <img src={swapIcon} className="h-12" alt="Frage wechseln Icon" />
                         </div>
+                        <Tooltip id="joker-tooltip" style={{ backgroundColor: '#21202B' }} />
                     </div>
                     <div style={line}></div>
                 </div>

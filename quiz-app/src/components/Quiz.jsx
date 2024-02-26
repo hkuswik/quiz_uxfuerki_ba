@@ -315,6 +315,11 @@ const Quiz = () => {
         };
     };
 
+    const handleHelpClick = () => {
+        setCurrentContent('help');
+        setShowPopup(true);
+    }
+
     // resets everything back to start state
     const handleReset = () => {
         setCompletedCircles([]);
@@ -477,6 +482,9 @@ const Quiz = () => {
                     <line x1={992} y1={0} x2={992} y2={1000} style={{ stroke: '#2D2C36', strokeWidth: '5px' }} />
                     {renderBoard()}
                 </svg>
+            </div>
+            <div onClick={() => handleHelpClick()} className='help-btn hover:opacity-80'>
+                <h2>?</h2>
             </div>
             {showPopup &&
                 <Popup
