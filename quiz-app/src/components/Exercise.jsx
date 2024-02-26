@@ -131,9 +131,10 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
     return (
         <div style={exerciseContainer}>
             <div className="flex row mr-3 justify-between" style={{ height: '92%' }}>
-                <div className="flex row">
+                <div className="flex row text-center">
                     <div style={joker_row}>
-                        <h4 className="pb-4">Joker:</h4>
+                        <h4 className="mb-2">Joker:</h4>
+                        <p className="mb-4 sm italic" style={{color: '#696485'}}>1 Joker pro Aufgabe</p>
                         <div onClick={() => handleJokerClick('tip')} style={tip_joker} className={(!(jokerUsed === 'swap') && !checkClicked ? 'hover:opacity-85 cursor-pointer' : '')}>
                             <img src={bulbIcon} className="h-16" alt="Glühbirnen Icon" />
                         </div>
@@ -145,7 +146,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
                 </div>
                 <div className="flex flex-col ml-3 w-5/6">{renderExerciseType(exercise)}</div>
             </div>
-            <div className="flex row justify-between items-end h-12 relative bottom-0">
+            <div className="flex row justify-between items-end ml-2 h-12 relative bottom-0">
                 <h4>{exerciseNr}/24</h4>
                 {checkClicked &&
                     <div className="img-container">
@@ -189,12 +190,12 @@ const joker_row = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '150px'
+    width: '153px'
 };
 
 const joker = {
-    height: '15vh',
-    width: '15vh',
+    height: '12vh',
+    width: '12vh',
     margin: '10px',
     borderRadius: '80px',
     display: 'flex',

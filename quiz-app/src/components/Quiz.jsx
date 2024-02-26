@@ -49,6 +49,7 @@ const pathGraph = {
 // main component that handles quiz state and renders quiz board
 const Quiz = () => {
     const [state, setState] = useState('DEFAULT');
+    const [hasStarted, setHasStarted] = useState(false);
     const [completedAtLeastOnce, setCompletedAtLeastOnce] = useState(false);
 
     const [exercises, setExercises] = useState({
@@ -110,6 +111,7 @@ const Quiz = () => {
             // if it's not section-start, check if clicked circle is currently possible
             if (!isCircleReachable(circle)) return;
         };
+        if (hasStarted === false) setHasStarted(true); // start quiz anyway if user ignores start popup
 
         const topic = pathGraph[circle].topic;
         const isExercise = [topic1, topic2, topic3].includes(topic);
@@ -121,7 +123,6 @@ const Quiz = () => {
                 switch (state) {
                     case 'DEFAULT':
                         setNewExercise(topic); // if it is a new circle, select a new exercise
-                        console.log("should be set");
                         break;
                     case 'REENTER':
                         // check which topic was selected and save as new current topic; select exercise of this topic
@@ -226,6 +227,13 @@ const Quiz = () => {
 
     // updating board when user closes popup
     const handleUpdate = () => {
+        // start 1st szenario automatically after quiz start
+        if (hasStarted === false) {
+            setHasStarted(true);
+            handleCircleClick('szenario1', true);
+            return;
+        };
+
         // check what type of circle was clicked
         const topic = pathGraph[lastClicked].topic;
         const isExercise = (topic === topic1 || topic === topic2 || topic === topic3);
@@ -235,22 +243,24 @@ const Quiz = () => {
             if (topic === 'feedback') {
                 if (completedAtLeastOnce || currentTopic === topic3) {
                     setState('REENTER');
+                    // add 1st circle of each topic to possible (can now start any topic)
                     setPossibleCircles(possibleCircles => [...possibleCircles, ...['circle1', 'circle9', 'circle17']]);
                 } else {
                     setActiveCircle(pathGraph[lastClicked].next);
-                    setCurrentTopic(currentTopic === topic1 ? topic2 : topic3);
+                    setCurrentTopic(currentTopic === topic1 ? topic2 : topic3); // next topic
                 }
             } else if (topic.includes('szenario')) {
                 setActiveCircle(pathGraph[lastClicked].next);
+                // add szenario to (now always) possible (if it isn't already)
                 !(possibleCircles.includes(lastClicked)) && setPossibleCircles(possibleCircles => [...possibleCircles, lastClicked]);
-            } else { //start
-                setActiveCircle(pathGraph[lastClicked].next);
+            } else {
+                console.log("some error in handleUpdate");
             }
             // update completed circles
             setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
-        }
+        };
 
-        // directly render first exercise after active szenario was updated
+        // directly render 1st exercise after active szenario was updated
         if (activeCircle.includes('szenario')) {
             handleCircleClick(pathGraph[activeCircle].next, true);
             return;
@@ -378,7 +388,7 @@ const Quiz = () => {
                                     : '#21202B'
                             : '#21202B'}
                         stroke={isReachable ? 'white' : color}
-                        className={`${isReachableHovered ? 'circle-active-hover' : ''} ${isSzenarioHovered ? 'opacity-80' : ''}`}
+                        className={`${isReachableHovered ? 'circle-active-hover' : ''} ${isCompleted && isSzenarioHovered ? 'opacity-80' : ''}`}
                         strokeWidth='2px'
                         strokeDasharray={isSzenario
                             ? isCompleted

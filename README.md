@@ -27,15 +27,16 @@
 * [ ] Abschnitt über 'Szenario' neu starten
 * [ ] Tooltips: Fortschrittsbalken
 * [ ] Tooltips: Joker
-* [ ] wieviele Joker noch verfügbar?
+* [x] wieviele Joker noch verfügbar?
 * [x] Start-Button weg: 1. Popup automatisch
-* [ ] nach 'Start' automatisch 1. Szenario starten
+* [x] nach 'Start' automatisch 1. Szenario starten
 * [ ] ?-Button lieber unten links
 * [ ] Fragen erneut angucken
+* [ ] DnD: Switchbar machen (wenn möglich?)
 * [ ] Ton auch ausstellen können
-* [ ] Joker etw. kleiner
-* [ ] mehr Rand (Popup)
-* [ ] Szenario wird dunkler am Anfang onHover (?)
+* [x] Joker etw. kleiner
+* [x] mehr Rand (Popup)
+* [x] Szenario wird dunkler am Anfang onHover (?)
   
 * [ ] evtl.: "Überprüfen" statt Haken (Popup)
 * [ ] evtl.: Haken dazu bei korrekten Aufgaben (Weg-Übersicht)

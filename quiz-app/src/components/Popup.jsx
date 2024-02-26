@@ -84,7 +84,7 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
     return (
         <div style={popupContainer} onClick={onClose}>
             <div style={{ ...popupContent, background: bgColor }} className='popup-size' onClick={handlePopupClick}>
-                <div className='flex row justify-end'>
+                <div className='flex row justify-end mr-1'>
                     <div onClick={onClose} id='close-btn' className="font-medium cursor-pointer hover:opacity-80">X</div>
                 </div>
                 {renderPopupContent(content)}
