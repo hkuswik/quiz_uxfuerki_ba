@@ -131,9 +131,9 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
 
     return (
         <div style={exerciseContainer}>
-            <div className="flex row mr-3 justify-between" style={{ height: '92%' }}>
+            <div className="flex row justify-between" style={{ height: '92%' }}>
                 <div className="flex row text-center">
-                    <div style={joker_row}>
+                    <div style={joker_col}>
                         <h4 className="mb-1">Joker:</h4>
                         <p className="mb-4 sm italic" style={{ color: '#696485' }}>1 Joker pro Aufgabe</p>
                         <div data-tooltip-id="joker-tooltip" data-tooltip-content="Erhalte einen Tipp"
@@ -153,11 +153,11 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
                 </div>
                 <div className="flex flex-col ml-3 w-5/6">{renderExerciseType(exercise)}</div>
             </div>
-            <div className="flex row justify-between items-end ml-2 h-12 relative bottom-0">
+            <div className="flex row justify-between items-end ml-2 relative bottom-0">
                 <h4>{exerciseNr}/24</h4>
                 {checkClicked &&
                     <div className="img-container">
-                        <img src={fortfahrenIcon} className=" h-11 hover:opacity-85 cursor-pointer" onClick={onUpdate} alt="mit Quiz fortfahren" />
+                        <img src={fortfahrenIcon} className="h-10 hover:opacity-85 cursor-pointer mb-1 mr-2" onClick={onUpdate} alt="mit Quiz fortfahren" />
                     </div>
                 }
             </div>
@@ -192,7 +192,7 @@ const exerciseContainer = {
     justifyContent: 'space-between'
 };
 
-const joker_row = {
+const joker_col = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',

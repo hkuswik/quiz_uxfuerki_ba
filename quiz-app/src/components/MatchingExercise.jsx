@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import check_logo_yes from '../data/images/check-bl.png';
-import check_logo_no from '../data/images/check-light.png';
+import check_btn from '../data/images/überprüfen_btn.png';
 
 const topic1 = 'UX Grundlagen';
 const topic2 = 'UCD Prozess';
@@ -155,6 +154,11 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
 
     // checks if all definitions are matched with corresponding terms
     const checkAnswers = () => {
+        if (!allMatched) {
+            setShowWarning(true);
+            return;
+        }
+
         const selectedPairs = Object.entries(selected);
 
         let isCorrect = true;
@@ -204,19 +208,16 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
                     </div>
                 }
             </DragDropContext>
-            <div className="flex row justify-between items-end">
-                <div></div>
+            <div className="flex row justify-between items-center">
+                <div className='w-28'></div>
                 {showWarning &&
-                    <div className="font-bold" style={{ color: wrongColor }}>Bitte wähle alle Antworten aus</div>
+                    <div className="font-bold" style={{ color: wrongColor }}>Bitte ordne alle Antworten zu</div>
                 }
-                {!allMatched &&
-                    <div onClick={() => setShowWarning(true)} className="img-container flex">
-                        <img src={check_logo_no} className="w-9" alt="Check Logo" />
-                    </div>
-                }
-                {(allMatched && !checkClicked) &&
-                    <div onClick={() => checkAnswers()} className="img-container hover:opacity-80 cursor-pointer">
-                        <img src={check_logo_yes} className="w-9" alt="Check Logo" />
+                {!checkClicked &&
+                    <div onClick={() => checkAnswers()}
+                        className={allMatched ? "img-container cursor-pointer hover:opacity-80" : "img-container opacity-40"}
+                    >
+                        <img src={check_btn} className="w-28" alt="Überprüfen Button" />
                     </div>
                 }
             </div>

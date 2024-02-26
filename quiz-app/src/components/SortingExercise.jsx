@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import check_logo_yes from '../data/images/check-bl.png';
-import check_logo_no from '../data/images/check-light.png';
+import check_btn from '../data/images/überprüfen_btn.png';
 
 const topic1 = 'UX Grundlagen';
 const topic2 = 'UCD Prozess';
@@ -94,7 +93,7 @@ const SortingExercise = ({ exercise, onAnswer }) => {
     // checks if selections were correct after check button is clicked
     const checkAnswer = () => {
         if (!allSelected) {
-            console.log('not all answers selected :(');
+            setShowWarning(true);
         } else {
             setCheckClicked(true);
             setIsClickable(false); // disable clicking functionality
@@ -174,19 +173,16 @@ const SortingExercise = ({ exercise, onAnswer }) => {
                     </div>
                 ))}
             </div>
-            <div className="flex row justify-between items-end h-8">
-                <div></div>
+            <div className="flex row justify-between items-center">
+                <div className="w-28"></div>
                 {showWarning &&
                     <div className="font-bold" style={{ color: wrongColor }}>Bitte wähle alle Antworten aus</div>
                 }
-                {!allSelected &&
-                    <div onClick={() => setShowWarning(true)} className="img-container flex">
-                        <img src={check_logo_no} className="w-9" alt="Check Logo" />
-                    </div>
-                }
-                {(allSelected && !checkClicked) &&
-                    <div onClick={() => checkAnswer()} className="img-container hover:opacity-85 cursor-pointer">
-                        <img src={check_logo_yes} className="w-9" alt="Check Logo" />
+                {!checkClicked &&
+                    <div onClick={() => checkAnswer()}
+                        className={allSelected ? "img-container cursor-pointer hover:opacity-80" : "img-container opacity-40"}
+                    >
+                        <img src={check_btn} className="w-28" alt="Überprüfen Button" />
                     </div>
                 }
             </div>

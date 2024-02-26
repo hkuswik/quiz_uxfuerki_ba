@@ -38,7 +38,7 @@
 * [x] mehr Rand (Popup)
 * [x] Szenario wird dunkler am Anfang onHover (?)
   
-* [ ] evtl.: "Überprüfen" statt Haken (Popup)
+* [x] evtl.: "Überprüfen" statt Haken (Popup)
 * [ ] evtl.: Haken dazu bei korrekten Aufgaben (Weg-Übersicht)
 
 * [ ] Safari macht Probleme (???)
