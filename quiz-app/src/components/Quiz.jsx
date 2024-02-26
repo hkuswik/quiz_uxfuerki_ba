@@ -14,10 +14,9 @@ const topic3 = 'Evaluation';
 
 // save all circles in a graph-like structure (directed); with their topic, x and y position (in svg) and what circle is reachable
 const pathGraph = {
-    start: { next: 'szenario1', topic: 'start', x: '40', y: '140' },
-    szenario1: { next: 'circle1', topic: 'szenario1', x: '200', y: '135' },
-    circle1: { next: 'circle2', topic: topic1, x: '345', y: '180' },
-    circle2: { next: 'circle3', topic: topic1, x: '390', y: '280' },
+    szenario1: { next: 'circle1', topic: 'szenario1', x: '150', y: '140' },
+    circle1: { next: 'circle2', topic: topic1, x: '305', y: '170' },
+    circle2: { next: 'circle3', topic: topic1, x: '370', y: '270' },
     circle3: { next: 'circle4', topic: topic1, x: '290', y: '350' },
     circle4: { next: 'circle5', topic: topic1, x: '170', y: '390' },
     circle5: { next: 'circle6', topic: topic1, x: '110', y: '500' },
@@ -58,17 +57,17 @@ const Quiz = () => {
         [topic3]: [],
     });
 
-    const [showPopup, setShowPopup] = useState(false);
+    const [showPopup, setShowPopup] = useState(true);
 
-    const [activeCircle, setActiveCircle] = useState('start'); // which circle is next
-    const [lastClicked, setLastClicked] = useState('start');
+    const [activeCircle, setActiveCircle] = useState('szenario1'); // which circle is next
+    const [lastClicked, setLastClicked] = useState('szenario1');
     const [possibleCircles, setPossibleCircles] = useState([]); // which circles can also be clicked currently
     const [completedCircles, setCompletedCircles] = useState([]);
     const [hoveredCircle, setHoveredCircle] = useState("");
     const [correctCircles, setCorrectCircles] = useState([]); // correctly answered
 
     const [currentTopic, setCurrentTopic] = useState(topic1);
-    const [currentContent, setCurrentContent] = useState(null); // current content for popup
+    const [currentContent, setCurrentContent] = useState('start'); // current content for popup
     const [currentExercise, setCurrentExercise] = useState(null); // currently selected exercise
 
     const [jokerMap, setJokerMap] = useState({}); // which joker was used at which circle
@@ -312,7 +311,7 @@ const Quiz = () => {
         setPossibleCircles([]);
         setCompletedAtLeastOnce(false);
         setCurrentTopic(topic1);
-        setActiveCircle('start');
+        setActiveCircle('szenario1');
         setCorrectCircles([]);
         setCorrectInTopic({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
         setJokerInTopic({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
@@ -326,10 +325,9 @@ const Quiz = () => {
     const renderBoard = () => {
         const circleColors = {
             [topic1]: '#D177B3', [topic2]: '#8377D1', [topic3]: '#77D1CB',
-            szenario1: '#D177B3', szenario2: '#8377D1', szenario3: '#77D1CB',
-            start: '#817C9C', feedback: '#817C9C'
+            szenario1: '#D177B3', szenario2: '#8377D1', szenario3: '#77D1CB', feedback: '#817C9C'
         };
-        const circleTexts = { szenario1: [topic1], szenario2: [topic2], szenario3: [topic3], start: 'Start' };
+        const circleTexts = { szenario1: [topic1], szenario2: [topic2], szenario3: [topic3] };
 
         const handleCircleHover = (circle) => {
             setHoveredCircle(circle);
