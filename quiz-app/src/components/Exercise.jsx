@@ -157,7 +157,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
                 <h4>{exerciseNr}/24</h4>
                 {checkClicked &&
                     <div className="img-container">
-                        <img src={fortfahrenIcon} className="h-10 hover:opacity-85 cursor-pointer mb-1 mr-2" onClick={onUpdate} alt="mit Quiz fortfahren" />
+                        <img src={fortfahrenIcon} className="h-10 hover:opacity-85 cursor-pointer mb-1 mr-2" onClick={() => onUpdate()} alt="mit Quiz fortfahren" />
                     </div>
                 }
             </div>

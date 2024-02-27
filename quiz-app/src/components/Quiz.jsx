@@ -2,7 +2,6 @@ import '../css/Quiz.css';
 import { useState, useEffect } from 'react';
 import quizData from '../data/exercises_UX_byTopic.json';
 import feedbackImg from '../data/images/feedback.png';
-import goalImg from '../data/images/feedback_ende.png';
 import Header from './Header';
 import Popup from './Popup';
 import swapIcon from '../data/images/swap.png';
@@ -61,8 +60,8 @@ const Quiz = () => {
     const [showPopup, setShowPopup] = useState(true);
 
     const [activeCircle, setActiveCircle] = useState('szenario1'); // which circle is next
-    const [lastClicked, setLastClicked] = useState('szenario1');
-    const [possibleCircles, setPossibleCircles] = useState([]); // which circles can also be clicked currently
+    const [lastClicked, setLastClicked] = useState('');
+    const [possibleCircles, setPossibleCircles] = useState(['szenario1', 'szenario2', 'szenario3']); // which circles can also be clicked currently
     const [completedCircles, setCompletedCircles] = useState([]);
     const [hoveredCircle, setHoveredCircle] = useState("");
     const [correctCircles, setCorrectCircles] = useState([]); // correctly answered
@@ -111,7 +110,7 @@ const Quiz = () => {
             // if it's not section-start, check if clicked circle is currently possible
             if (!isCircleReachable(circle)) return;
         };
-        if (hasStarted === false) setHasStarted(true); // start quiz anyway if user ignores start popup
+        if (hasStarted === false) setHasStarted(true); // start quiz here if user ignored start popup
 
         const topic = pathGraph[circle].topic;
         const isExercise = [topic1, topic2, topic3].includes(topic);
@@ -168,7 +167,6 @@ const Quiz = () => {
             // if there are still exercises left, get a new exercise 
             getExercise(currentTopicExercises, topic);
         } else {
-            console.log('reset exercise pool of topic: ', topic);
             // reshuffle exercise pool for exhausted topic
             const newExercisePool = quizData.filter((exercise) => exercise.topic === topic);
             shuffleArray(newExercisePool);
@@ -221,16 +219,42 @@ const Quiz = () => {
         }))
         // make joker available again for new exercise
         setJokerUsed(null);
-        // if it was last answer, quiz has been completed at least once
-        if (lastClicked === 'circle24') setCompletedAtLeastOnce(true);
+        // check if quiz has been completed at least once
+        setCompletedAtLeastOnce(isQuizFinished());
+    };
+
+    // helper function: checks if quiz is finished
+    const isQuizFinished = () => {
+        let isFinished = false;
+        switch (activeCircle) {
+            case 'circle8':
+                if (doneInTopic[topic2] === 8 && doneInTopic[topic3] === 8) isFinished = true;
+                break;
+            case 'circle16':
+                if (doneInTopic[topic1] === 8 && doneInTopic[topic3] === 8) isFinished = true;
+                break;
+            case 'circle24':
+                if (doneInTopic[topic1] === 8 && doneInTopic[topic2] === 8) isFinished = true;
+                break;
+            default:
+                return isFinished;
+        }
+        return isFinished;
     };
 
     // updating board when user closes popup
-    const handleUpdate = () => {
+    const handleUpdate = (szenario = null, szenarioTopic) => {
         // start 1st szenario automatically after quiz start
         if (hasStarted === false) {
             setHasStarted(true);
-            handleCircleClick('szenario1', true);
+            handleCircleClick('szenario1');
+            return;
+        };
+
+        // if update was called via szneario, new topic starts
+        if (szenario !== null) {
+            // reset status of started topic
+            handleTopicRepeat(szenarioTopic, true);
             return;
         };
 
@@ -238,41 +262,34 @@ const Quiz = () => {
         const topic = pathGraph[lastClicked].topic;
         const isExercise = (topic === topic1 || topic === topic2 || topic === topic3);
 
-        // execute behaviour depending on what type of circle (if exercise, board has already been updated)
-        if (!isExercise) {
-            if (topic === 'feedback') {
-                if (completedAtLeastOnce || currentTopic === topic3) {
-                    setState('REENTER');
-                    // add 1st circle of each topic to possible (can now start any topic)
-                    setPossibleCircles(possibleCircles => [...possibleCircles, ...['circle1', 'circle9', 'circle17']]);
-                } else {
-                    setActiveCircle(pathGraph[lastClicked].next);
-                    setCurrentTopic(currentTopic === topic1 ? topic2 : topic3); // next topic
-                }
-            } else if (topic.includes('szenario')) {
-                setActiveCircle(pathGraph[lastClicked].next);
-                // add szenario to (now always) possible (if it isn't already)
-                !(possibleCircles.includes(lastClicked)) && setPossibleCircles(possibleCircles => [...possibleCircles, lastClicked]);
-            } else {
-                console.log("some error in handleUpdate");
-            }
-            // update completed circles
-            setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
+        if (!isExercise) { // if exercise, board has already been updated
+            // update completed circles (if circle isn't already in it)
+            !completedCircles.includes(lastClicked) && setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
         };
 
-        // directly render 1st exercise after active szenario was updated
-        if (activeCircle.includes('szenario')) {
-            handleCircleClick(pathGraph[activeCircle].next, true);
-            return;
+        if (topic === 'feedback') {
+            if (completedAtLeastOnce || currentTopic === topic3) {
+                setState('REENTER');
+                // add 1st circle of each topic to possible (can now start any topic)
+                setPossibleCircles(possibleCircles => [...possibleCircles, ...['circle1', 'circle9', 'circle17']]);
+            } else {
+                handleCircleClick(pathGraph[lastClicked].next, true); // automatically render next szenario
+                setActiveCircle(pathGraph[pathGraph[lastClicked].next].next); // 1st circle of new topic will be active
+                setCurrentTopic(currentTopic === topic1 ? topic2 : topic3); // next topic
+                return;
+            }
         };
 
         setShowPopup(false);
     };
 
     // resets all relevant information for given topic
-    const handleTopicRepeat = (repeatTopic) => {
+    const handleTopicRepeat = (repeatTopic, isSzenario = false) => {
         // if repeat is clicked after quiz was completed at least once, reset possible circles to only szenarios
         if (completedAtLeastOnce) setPossibleCircles(possibleCircles.filter(circle => pathGraph[circle].topic.includes('szenario')));
+
+        // repeated topic is now current topic
+        setCurrentTopic(repeatTopic);
 
         // reset topic state for repeated topic
         setCorrectInTopic(prevCorrectInTopic => ({ ...prevCorrectInTopic, [repeatTopic]: 0, }));
@@ -287,6 +304,7 @@ const Quiz = () => {
         setCompletedCircles(completedCircles.filter(circle => pathGraph[circle].topic !== repeatTopic));
         setCorrectCircles(correctCircles.filter(circle => pathGraph[circle].topic !== repeatTopic));
 
+        // update joker map by removing jokers of repeated topic
         const updatedJokerMap = Object.fromEntries(Object.entries(jokerMap).map(([circle, value]) => {
             // look at number of circle (subsstring that comes after 'e') to reset joker depending on topic
             return (parseInt(circle.substring(circle.indexOf('e') + 1)) >= (getTopicNumber(repeatTopic) - 1) * 8 + 1 &&
@@ -295,6 +313,9 @@ const Quiz = () => {
                 : [circle, value]; // else, keep value from before (don't reset)
         }));
         setJokerMap(updatedJokerMap);
+
+        // directly render 1st exercise if update was called via 'szenario'
+        isSzenario && handleCircleClick(initialCircle, true);
 
         // close popup automatically if topic repeat was triggered by feedback popup
         if (pathGraph[lastClicked].topic === 'feedback') setShowPopup(false);
@@ -323,7 +344,7 @@ const Quiz = () => {
     // resets everything back to start state
     const handleReset = () => {
         setCompletedCircles([]);
-        setPossibleCircles([]);
+        setPossibleCircles(['szenario1', 'szenario2', 'szenario3']);
         setCompletedAtLeastOnce(false);
         setCurrentTopic(topic1);
         setActiveCircle('szenario1');
@@ -363,8 +384,7 @@ const Quiz = () => {
             const isExerciseOrSzenario = topic !== 'start' && topic !== 'feedback';
             const isSzenario = topic === 'szenario1' || topic === 'szenario2' || topic === 'szenario3';
             const isExercise = isExerciseOrSzenario && !isSzenario;
-            const isFeedback = topic === 'feedback' && circle !== 'feedback3';
-            const isGoal = circle === 'feedback3';
+            const isFeedback = topic === 'feedback';
 
             const isSzenarioHovered = isSzenario && circle === hoveredCircle;
             const color = circleColors[topic];
@@ -388,17 +408,13 @@ const Quiz = () => {
                                     : isCompleted
                                         ? color
                                         : '#21202B'
-                                : isCompleted
-                                    ? color
-                                    : '#21202B'
+                                : color
                             : '#21202B'}
                         stroke={isReachable ? 'white' : color}
-                        className={`${isReachableHovered ? 'circle-active-hover' : ''} ${isCompleted && isSzenarioHovered ? 'opacity-80' : ''}`}
+                        className={`${isReachableHovered ? 'circle-active-hover' : ''} ${isSzenarioHovered ? 'opacity-80' : ''}`}
                         strokeWidth='2px'
                         strokeDasharray={isSzenario
-                            ? isCompleted
-                                ? 'none'
-                                : '6'
+                            ? 'none'
                             : isReachable
                                 ? '6'
                                 : isCompleted
@@ -448,15 +464,6 @@ const Quiz = () => {
                             style={{ cursor: isReachable ? 'pointer' : 'default' }}
                         />
                     }
-                    {isGoal &&
-                        <image
-                            x={pathGraph[circle].x - 48}
-                            y={pathGraph[circle].y - 109}
-                            href={goalImg}
-                            height='120'
-                            style={{ cursor: isReachable ? 'pointer' : 'default' }}
-                        />
-                    }
                     {(joker === 'tip' || joker === 'swap') &&
                         <image
                             x={pathGraph[circle].x - (joker === 'tip' ? 30 : 24)}
@@ -495,7 +502,7 @@ const Quiz = () => {
                     onAnswer={handleAnswer}
                     onUpdate={handleUpdate}
                     onJoker={handleJoker}
-                    onRepeat={() => handleTopicRepeat(currentTopic)}
+                    onRepeat={handleTopicRepeat}
                     jokerUsed={jokerUsed}
                     correctAmount={correctInTopic[currentTopic]}
                     jokerAmount={jokerInTopic[currentTopic]}

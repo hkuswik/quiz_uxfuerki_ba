@@ -112,7 +112,7 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
                     );
                 })}
             </div>
-            <div className="flex row justify-between items-center">
+            <div className="flex row justify-between h-12 items-center">
                 <div className="w-28"></div>
                 {showWarning &&
                     <div className="font-bold" style={{ color: wrongColor }}>Bitte wähle eine Antwort aus</div>

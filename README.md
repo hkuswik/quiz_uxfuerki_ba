@@ -24,7 +24,7 @@
 
 #### 2. Iteration (TODOs zur Verbesserung):
 
-* [ ] Abschnitt über 'Szenario' neu starten
+* [x] Abschnitt über 'Szenario' neu starten
 * [x] Tooltips: Fortschrittsbalken
 * [x] Tooltips: Joker
 * [x] wieviele Joker noch verfügbar?
@@ -32,13 +32,18 @@
 * [x] nach 'Start' automatisch 1. Szenario starten
 * [x] ?-Button lieber unten links
 * [ ] Fragen erneut angucken
-* [ ] DnD: Switchbar machen (wenn möglich?)
+* [ ] -> dann auch schneller durchklicken können?
+* [x] bei allen Themen starten können (über Szenario)
+* [ ] DnD: switchbar machen (wenn möglich?)
 * [ ] Ton auch ausstellen können
 * [x] Joker etw. kleiner
 * [x] mehr Rand (Popup)
-* [x] Szenario wird dunkler am Anfang onHover (?)
+* [x] Sorting: Buttons weit weg
+* [ ] Matching: Box unten sollte Größe behalten + Größe Begriffe auto (?)
+* [x] Szenario wird dunkler am Anfang onHover
   
 * [x] evtl.: "Überprüfen" statt Haken (Popup)
 * [ ] evtl.: Haken dazu bei korrekten Aufgaben (Weg-Übersicht)
+* [ ] alle Fragen Button unnötig (?)
 
 * [ ] Safari macht Probleme (???)

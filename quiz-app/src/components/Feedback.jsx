@@ -49,13 +49,13 @@ const Feedback = ({ currentTopic, completedAtLeastOnce, onUpdate, correctAmount,
             <h2 className={classColor}>{topic}</h2>
             <h4 className='w-10/12 mt-4'>hast du <b>{correctAmount}/8 Fragen</b> richtig beantwortet und <b>{jokerAmount} Joker</b> verwendet.</h4>
             <div className="flex row justify-between w-10/12 items-center mt-16">
-                <div onClick={onRepeat} className="img-container hover:opacity-85 cursor-pointer">
+                <div onClick={() => onRepeat(currentTopic)} className="img-container hover:opacity-85 cursor-pointer">
                     <img src={button1} className="h-16" alt="Abschnitt wiederholen Button" />
                 </div>
                 <div className="img-container hover:opacity-85 cursor-pointer">
                     <img src={zurück_plattform} className="h-44" alt="zurück zur Plattform Button" />
                 </div>
-                <div onClick={onUpdate} className="img-container hover:opacity-85 cursor-pointer">
+                <div onClick={() => onUpdate()} className="img-container hover:opacity-85 cursor-pointer">
                     <img src={button2} className="h-16" alt="weiter Button" />
                 </div>
             </div>

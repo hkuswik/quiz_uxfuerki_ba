@@ -173,7 +173,7 @@ const SortingExercise = ({ exercise, onAnswer }) => {
                     </div>
                 ))}
             </div>
-            <div className="flex row justify-between items-center">
+            <div className="flex row justify-between h-12 items-center">
                 <div className="w-28"></div>
                 {showWarning &&
                     <div className="font-bold" style={{ color: wrongColor }}>Bitte wähle alle Antworten aus</div>
@@ -204,8 +204,8 @@ const item_style = {
     borderRadius: '10px',
     display: 'flex',
     alignItems: 'center',
-    width: '65%',
-    padding: '5px 10px 5px 10px',
+    width: '80%',
+    padding: '5px 10px 5px 15px',
 };
 
 const button_style = {
