@@ -88,12 +88,12 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
         <div style={popupContainer} onClick={onClose}>
             <div style={{ ...popupContent, background: bgColor }} className='popup-size' onClick={handlePopupClick}>
                 <div className='flex row justify-between mr-1 ml-1'>
-                    {soundOn &&
+                    {soundOn && isExercise &&
                         <div onClick={onSoundClick} className="img-container hover:opacity-80 cursor-pointer">
                             <img src={soundOnIcon} className="h-5 mt-1" alt="Sound ist an Button" />
                         </div>
                     }
-                    {!soundOn &&
+                    {!soundOn && isExercise &&
                         <div onClick={onSoundClick} className="img-container hover:opacity-80 cursor-pointer">
                             <img src={soundOffIcon} className="h-5 mt-1" alt="Sound ist aus Button" />
                         </div>
