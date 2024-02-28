@@ -78,7 +78,10 @@ const Quiz = () => {
     const [doneInTopic, setDoneInTopic] = useState({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
     const [correctInTopic, setCorrectInTopic] = useState({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
 
-    // save circle names in Map (as keys) to save where joker were used (as values)
+    const [completedExercises, setCompletedExercises] = useState({});
+    const [reviewContent, setReviewContent] = useState({exercise: null, answer: null});
+
+    // save circle names as keys and joker as values to save which were used where
     const initializeJokerMap = () => {
         const circleMap = Object.keys(pathGraph)
             .filter(key => key.includes('circle'))
@@ -88,6 +91,22 @@ const Quiz = () => {
             }, {});
         setJokerMap(circleMap);
     };
+
+    // save circle names as keys and exercise ids as well as user's answers as values
+    const initializeCompletedExercises = () => {
+        const circleMap = Object.keys(pathGraph)
+            .filter(key => key.includes('circle'))
+            .reduce((acc, key) => { // acc = accumulator
+                acc[key] = {id: null, answers: []}
+                return acc;
+            }, {});
+        setCompletedExercises(circleMap);
+    };
+
+    useEffect(() => {
+        console.log('completed exercises: ', completedExercises);
+        console.log('review: ', reviewContent);
+    }, [completedExercises, reviewContent]);
 
     useEffect(() => {
         const initializeExercises = () => {
@@ -103,10 +122,23 @@ const Quiz = () => {
 
         initializeExercises();
         initializeJokerMap();
+        initializeCompletedExercises();
     }, []);
 
     // logic for clicking on a circle
     const handleCircleClick = (circle, isSectionStart = false) => {
+        if (completedCircles.includes(circle)) {
+            // search for exercise completed at this circle by using stored exercise id
+            const exercise = quizData.find(exercise => exercise.id === completedExercises[circle].id);
+            const answer = completedExercises[circle].answers;
+            console.log('exercise: ', exercise);
+            console.log('answers: ', answer);
+            setReviewContent({exercise: exercise, answer: answer});
+            setCurrentContent('review');
+            setShowPopup(true);
+            return;
+        }
+
         if (!isSectionStart) {
             // if it's not section-start, check if clicked circle is currently possible
             if (!isCircleReachable(circle)) return;
@@ -201,7 +233,7 @@ const Quiz = () => {
     };
 
     // updating state and board after exercise answer has been locked in
-    const handleAnswer = (isCorrect) => {
+    const handleAnswer = (isCorrect, usersAnswers) => {
         // add circle to correctCircles if answer was correct & update correctInTopic
         if (isCorrect) {
             setCorrectCircles(correctCircles => [...correctCircles, lastClicked]);
@@ -209,15 +241,19 @@ const Quiz = () => {
                 ...prevCorrectInTopic,
                 [currentTopic]: prevCorrectInTopic[currentTopic] + 1,
             }));
-        }
+        };
         // make next circle active
         setActiveCircle(pathGraph[lastClicked].next);
-        // update completed circles and doneInTopic
+        // update completed circles, completed exercises and doneInTopic
         setCompletedCircles(completedCircles => [...completedCircles, lastClicked]);
         setDoneInTopic(prevDoneInTopic => ({
             ...prevDoneInTopic,
             [currentTopic]: prevDoneInTopic[currentTopic] + 1,
-        }))
+        }));
+        setCompletedExercises(prevComplEx => ({
+            ...prevComplEx,
+            [lastClicked]: {id: currentExercise.id, answers: usersAnswers} // save id of completed exercise
+        }));
         // make joker available again for new exercise
         setJokerUsed(null);
         // check if quiz has been completed at least once
@@ -514,6 +550,7 @@ const Quiz = () => {
                     completedAtLeastOnce={completedAtLeastOnce}
                     soundOn={soundOn}
                     onSoundClick={handleSoundClick}
+                    reviewContent={reviewContent}
                 />
             }
         </div>

@@ -9,7 +9,7 @@ const correctColor = '#7AD177';
 const wrongColor = '#D24141';
 
 // popup content when exercise is of type 'question'
-const QuestionExercise = ({ exercise, onAnswer }) => {
+const QuestionExercise = ({ exercise, onAnswer, answerUser = null }) => {
     const [answers, setAnswers] = useState([]);
     const [hovered, setHovered] = useState("");
     const [selected, setSelected] = useState("");
@@ -39,6 +39,18 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
         };
     }, [exercise]);
 
+    useEffect(() => {
+        if (answerUser !== null) {
+            setCheckClicked(true);
+            setIsClickable(false);
+        }
+    }, [answerUser]);
+
+    useEffect(() => {
+        console.log('check: ', checkClicked);
+        console.log('clickable: ', isClickable);
+    }, [checkClicked, isClickable]);
+
     // saves all answers and randomizes them
     const randomizeAnswers = (exercise) => {
         const allAnswers = exercise.wrongAnswers.split(';');
@@ -53,9 +65,9 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
             setCheckClicked(true);
             setIsClickable(false); // can't change answer anymore
             if (selected === exercise.correctAnswer) {
-                onAnswer(true);
+                onAnswer(true, selected);
             } else {
-                onAnswer(false);
+                onAnswer(false, selected);
             };
         } else {
             setShowWarning(true);
@@ -84,15 +96,24 @@ const QuestionExercise = ({ exercise, onAnswer }) => {
                     const answerStyles = {
                         ...(answer === selected ? { ...answer_style, background: color } : answer_style),
                         ...(answer === hovered ? { ...hover_style, outlineColor: color } : {}),
-                        ...(checkClicked ?
-                            {
-                                background:
-                                    selected === answer
+                        ...(checkClicked
+                            ? answerUser === null
+                                ? {
+                                    background: selected === answer
                                         ? answer === exercise.correctAnswer ? correctColor : wrongColor
                                         : answer === exercise.correctAnswer ? correctColor : '#F6F5FC'
-                            }
+                                }
+                                : {
+                                    background: answerUser === answer
+                                        ? answer === exercise.correctAnswer ? correctColor : wrongColor
+                                        : answer === exercise.correctAnswer ? correctColor : '#F6F5FC'
+                                }
                             : {}),
-                        ...(checkClicked ? answer === selected ? { outline: '2px dashed white' } : {} : {})
+                        ...(checkClicked
+                            ? answerUser === null
+                                ? answer === selected ? { outline: '2px dashed white' } : {}
+                                : answer === answerUser ? { outline: '2px dashed white' } : {}
+                            : {})
                     };
 
                     return (

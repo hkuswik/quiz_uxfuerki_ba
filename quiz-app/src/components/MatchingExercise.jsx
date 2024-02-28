@@ -10,7 +10,7 @@ const correctColor = '#7AD177';
 const wrongColor = '#D24141';
 
 // popup content when exercise is of type 'match'
-const MatchingExercise = ({ exercise, onAnswer }) => {
+const MatchingExercise = ({ exercise, onAnswer, answersUser = null }) => {
     const [allMatched, setAllMatched] = useState(false);
     const [checkClicked, setCheckClicked] = useState(false);
     const [showWarning, setShowWarning] = useState(false);
@@ -171,7 +171,7 @@ const MatchingExercise = ({ exercise, onAnswer }) => {
         };
 
         setCheckClicked(true);
-        onAnswer(isCorrect);
+        onAnswer(isCorrect, selected);
     };
 
     return (

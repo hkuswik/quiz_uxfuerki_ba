@@ -33,7 +33,6 @@
 * [x] nach 'Szenario' automatisch 1. Frage starten
 * [x] ?-Button lieber unten links
 * [ ] Fragen erneut angucken können
-* [ ] -> dann auch schneller durchklicken können (?)
 * [x] bei allen Themen starten können (über Szenario-Buttons)
 * [x] Ton auch ausstellen können
 * [x] Joker etw. kleiner
@@ -46,5 +45,4 @@
 * [x] evtl.: "Überprüfen" statt Haken (Popup)
 * [ ] evtl.: Haken dazu bei korrekten Aufgaben (Weg-Übersicht)
 * [ ] alle Fragen Button unnötig (?)
-
 * [ ] Safari macht Probleme (???)

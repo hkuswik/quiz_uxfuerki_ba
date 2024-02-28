@@ -6,21 +6,24 @@ import Szenario from './Szenario';
 import Disclaimer from './Disclaimer';
 import soundOnIcon from '../data/images/soundOn.png';
 import soundOffIcon from '../data/images/soundOff.png';
+import Review from './Review';
 
 const topic1 = 'UX Grundlagen';
 const topic2 = 'UCD Prozess';
 const topic3 = 'Evaluation';
 
 // empty popup component that renders all popup types
-const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat, onJoker,
-    jokerUsed, correctAmount, jokerAmount, completedAtLeastOnce, onReset, soundOn, onSoundClick }) => {
+const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat, onJoker, jokerUsed,
+    correctAmount, jokerAmount, completedAtLeastOnce, onReset, soundOn, onSoundClick, reviewContent = null }) => {
 
     const [bgColor, setBgColor] = useState('#F6F5FC');
     const isExercise = (content.type === 'question' || content.type === 'match' || content.type === 'sort');
 
     // set (lighter) background color depending on topic
     useEffect(() => {
-        switch (content.topic) {
+        // use topic of review exercise (if review popup) or topic of exercise (if exercise), else just stay default
+        const topic = reviewContent !== null ? reviewContent.exercise.topic : content.topic;
+        switch (topic) {
             case topic1:
                 setBgColor('#E8BBD9');
                 break;
@@ -33,7 +36,7 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
             default:
                 setBgColor('#F6F5FC');
         };
-    }, [content]);
+    }, [content, reviewContent]);
 
     // renders popup content depending on popup type
     const renderPopupContent = (content) => {
@@ -75,6 +78,8 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                 case 'alleFragen':
                 case 'reset':
                     return <Disclaimer content={content} onReset={onReset} />
+                case 'review':
+                    return <Review reviewContent={reviewContent}/>
                 default:
                     return <div> error non-exercise type </div>;
             };
@@ -98,6 +103,7 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                             <img src={soundOffIcon} className="h-5 mt-1" alt="Sound ist aus Button" />
                         </div>
                     }
+                    {!isExercise && <div></div>}
                     <div onClick={onClose} id='close-btn' className="font-medium cursor-pointer hover:opacity-80">X</div>
                 </div>
                 {renderPopupContent(content)}

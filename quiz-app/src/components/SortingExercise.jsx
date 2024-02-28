@@ -9,7 +9,7 @@ const correctColor = '#7AD177';
 const wrongColor = '#D24141';
 
 // popup content when exercise is of type 'sort'
-const SortingExercise = ({ exercise, onAnswer }) => {
+const SortingExercise = ({ exercise, onAnswer, answersUser = null }) => {
     const [firstCategory, setFirstCategory] = useState('');
     const [secondCategory, setSecondCategory] = useState('');
     const [firstItems, setFirstItems] = useState([]);
@@ -100,14 +100,14 @@ const SortingExercise = ({ exercise, onAnswer }) => {
             // iterate through selected map and check if selected category for item corresponds to correct category
             for (const [item, category] of Object.entries(userSelections)) {
                 if (category === firstCategory && !firstItems.includes(item)) {
-                    onAnswer(false);
+                    onAnswer(false, userSelections);
                     return; // set false and return as soon as an item is sorted wrongly
                 } else if (category === secondCategory && !secondItems.includes(item)) {
-                    onAnswer(false);
+                    onAnswer(false, userSelections);
                     return;
                 }
             };
-            onAnswer(true); // true if no item was sorted wrong
+            onAnswer(true, userSelections); // true if no item was sorted wrong
         };
     };
 

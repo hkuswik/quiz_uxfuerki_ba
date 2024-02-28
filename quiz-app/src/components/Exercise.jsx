@@ -75,7 +75,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed, so
     };
 
     // when answers is logged in, set checkClicked to true and forward it
-    const handleAnswer = (isCorrect) => {
+    const handleAnswer = (isCorrect, usersAnswers) => {
         setCheckClicked(true);
         // play sound based on correctness, if sound is on
         if (soundOn) {
@@ -85,7 +85,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed, so
                 wrongAudio.play();
             }
         };
-        onAnswer(isCorrect); // forward answer to parent component
+        onAnswer(isCorrect, usersAnswers); // forward answer to parent component
     };
 
     // logic for clicking a joker (only 1 joker is allowed per exercise)
