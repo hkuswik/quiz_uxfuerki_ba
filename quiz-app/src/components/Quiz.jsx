@@ -58,6 +58,7 @@ const Quiz = () => {
     });
 
     const [showPopup, setShowPopup] = useState(true);
+    const [soundOn, setSoundOn] = useState(true);
 
     const [activeCircle, setActiveCircle] = useState('szenario1'); // which circle is next
     const [lastClicked, setLastClicked] = useState('');
@@ -336,6 +337,10 @@ const Quiz = () => {
         };
     };
 
+    // switch sound on/off (globally) if sound button is clicked in Popup component
+    const handleSoundClick = () => { setSoundOn(prevSoundOn => !prevSoundOn); }
+
+    // opening help popup when help button is clicked
     const handleHelpClick = () => {
         setCurrentContent('help');
         setShowPopup(true);
@@ -507,6 +512,8 @@ const Quiz = () => {
                     correctAmount={correctInTopic[currentTopic]}
                     jokerAmount={jokerInTopic[currentTopic]}
                     completedAtLeastOnce={completedAtLeastOnce}
+                    soundOn={soundOn}
+                    onSoundClick={handleSoundClick}
                 />
             }
         </div>

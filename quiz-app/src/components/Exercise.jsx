@@ -13,7 +13,7 @@ import wrongSound from '../data/sound/wrong_answer.mp3';
 import { Tooltip } from 'react-tooltip';
 
 // popup content for exercises; displays joker row, exercise number and renders specific exercise type
-const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) => {
+const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed, soundOn }) => {
     const [checkClicked, setCheckClicked] = useState(false);
     const [exerciseNr, setExerciseNr] = useState("");
 
@@ -77,12 +77,14 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed }) 
     // when answers is logged in, set checkClicked to true and forward it
     const handleAnswer = (isCorrect) => {
         setCheckClicked(true);
-        // play sound based on correctness
-        if (isCorrect) {
-            correctAudio.play();
-        } else {
-            wrongAudio.play();
-        }
+        // play sound based on correctness, if sound is on
+        if (soundOn) {
+            if (isCorrect) {
+                correctAudio.play();
+            } else {
+                wrongAudio.play();
+            }
+        };
         onAnswer(isCorrect); // forward answer to parent component
     };
 

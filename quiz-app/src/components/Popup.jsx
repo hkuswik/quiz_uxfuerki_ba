@@ -4,14 +4,16 @@ import Feedback from './Feedback';
 import Start from './Start';
 import Szenario from './Szenario';
 import Disclaimer from './Disclaimer';
+import soundOnIcon from '../data/images/soundOn.png';
+import soundOffIcon from '../data/images/soundOff.png';
 
 const topic1 = 'UX Grundlagen';
 const topic2 = 'UCD Prozess';
 const topic3 = 'Evaluation';
 
 // empty popup component that renders all popup types
-const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat,
-    onJoker, jokerUsed, correctAmount, jokerAmount, completedAtLeastOnce, onReset }) => {
+const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat, onJoker,
+    jokerUsed, correctAmount, jokerAmount, completedAtLeastOnce, onReset, soundOn, onSoundClick }) => {
 
     const [bgColor, setBgColor] = useState('#F6F5FC');
     const isExercise = (content.type === 'question' || content.type === 'match' || content.type === 'sort');
@@ -43,6 +45,7 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                 onUpdate={onUpdate}
                 onJoker={onJoker}
                 jokerUsed={jokerUsed}
+                soundOn={soundOn}
             />
         } else {
             switch (content) {
@@ -84,7 +87,17 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
     return (
         <div style={popupContainer} onClick={onClose}>
             <div style={{ ...popupContent, background: bgColor }} className='popup-size' onClick={handlePopupClick}>
-                <div className='flex row justify-end mr-1'>
+                <div className='flex row justify-between mr-1 ml-1'>
+                    {soundOn &&
+                        <div onClick={onSoundClick} className="img-container hover:opacity-80 cursor-pointer">
+                            <img src={soundOnIcon} className="h-5 mt-1" alt="Sound ist an Button" />
+                        </div>
+                    }
+                    {!soundOn &&
+                        <div onClick={onSoundClick} className="img-container hover:opacity-80 cursor-pointer">
+                            <img src={soundOffIcon} className="h-5 mt-1" alt="Sound ist aus Button" />
+                        </div>
+                    }
                     <div onClick={onClose} id='close-btn' className="font-medium cursor-pointer hover:opacity-80">X</div>
                 </div>
                 {renderPopupContent(content)}

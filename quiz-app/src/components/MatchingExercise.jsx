@@ -315,15 +315,14 @@ const dropContainer_style = {
 
 const term_style = {
     borderRadius: '10px 10px 0 0',
-    width: '80%',
     textAlign: 'center',
-    padding: '3px',
+    padding: '3px 10px 3px 10px',
 };
 
 const defaultContainer_style = {
     width: '100%',
     height: 'auto',
-    minHeight: '5vh',
+    minHeight: '20vh',
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
