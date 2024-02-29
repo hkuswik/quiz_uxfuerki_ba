@@ -195,7 +195,7 @@ const question_style = {
 const answer_style = {
     height: 'auto',
     minHeight: '150px',
-    width: '45%',
+    width: '40%',
     padding: '10px',
     display: 'flex',
     alignItems: 'center',

@@ -48,6 +48,13 @@ const SortingExercise = ({ exercise, onAnswer, answersUser = null }) => {
         };
     }, [exercise]);
 
+    useEffect(() => {
+        if (answersUser !== null) {
+            setCheckClicked(true);
+            setIsClickable(false);
+        }
+    }, [answersUser]);
+
     // save all items that have to be sorted and shuffle them
     const prepareItems = (exercise) => {
         const first = exercise.belongsInFirst.split(';');
@@ -147,7 +154,9 @@ const SortingExercise = ({ exercise, onAnswer, answersUser = null }) => {
                                     ...button_style,
                                     ...(userSelections[item] === firstCategory ? {} : firstBtnHover === item ? { ...hover_style, outlineColor: color } : {}),
                                     ...(checkClicked
-                                        ? { background: userSelections[item] === firstCategory ? firstItems.includes(item) ? correctColor : wrongColor : '#F6F5FC' }
+                                        ? answersUser !== null
+                                            ? { background: answersUser[item] === firstCategory ? firstItems.includes(item) ? correctColor : wrongColor : '#F6F5FC' }
+                                            : { background: userSelections[item] === firstCategory ? firstItems.includes(item) ? correctColor : wrongColor : '#F6F5FC' }
                                         : { background: userSelections[item] === firstCategory ? color : '#F6F5FC' }
                                     ),
                                 }}
@@ -162,7 +171,9 @@ const SortingExercise = ({ exercise, onAnswer, answersUser = null }) => {
                                     ...button_style,
                                     ...(userSelections[item] === secondCategory ? {} : secondBtnHover === item ? { ...hover_style, outlineColor: color } : {}),
                                     ...(checkClicked
-                                        ? { background: userSelections[item] === secondCategory ? secondItems.includes(item) ? correctColor : wrongColor : '#F6F5FC' }
+                                        ? answersUser !== null
+                                            ? { background: answersUser[item] === secondCategory ? secondItems.includes(item) ? correctColor : wrongColor : '#F6F5FC' }
+                                            : { background: userSelections[item] === secondCategory ? secondItems.includes(item) ? correctColor : wrongColor : '#F6F5FC' }
                                         : { background: userSelections[item] === secondCategory ? color : '#F6F5FC' }
                                     ),
                                 }}

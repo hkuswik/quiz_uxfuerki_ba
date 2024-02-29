@@ -46,11 +46,6 @@ const QuestionExercise = ({ exercise, onAnswer, answerUser = null }) => {
         }
     }, [answerUser]);
 
-    useEffect(() => {
-        console.log('check: ', checkClicked);
-        console.log('clickable: ', isClickable);
-    }, [checkClicked, isClickable]);
-
     // saves all answers and randomizes them
     const randomizeAnswers = (exercise) => {
         const allAnswers = exercise.wrongAnswers.split(';');
@@ -176,7 +171,7 @@ const question_style = {
 const answer_style = {
     background: '#F6F5FC',
     height: 'auto',
-    minHeight: '20vh',
+    minHeight: '15vh',
     width: '45%',
     padding: '10px',
     display: 'flex',

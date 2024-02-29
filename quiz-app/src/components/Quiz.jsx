@@ -79,7 +79,7 @@ const Quiz = () => {
     const [correctInTopic, setCorrectInTopic] = useState({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
 
     const [completedExercises, setCompletedExercises] = useState({});
-    const [reviewContent, setReviewContent] = useState({exercise: null, answer: null});
+    const [reviewContent, setReviewContent] = useState(null);
 
     // save circle names as keys and joker as values to save which were used where
     const initializeJokerMap = () => {
@@ -97,16 +97,11 @@ const Quiz = () => {
         const circleMap = Object.keys(pathGraph)
             .filter(key => key.includes('circle'))
             .reduce((acc, key) => { // acc = accumulator
-                acc[key] = {id: null, answers: []}
+                acc[key] = { id: null, answers: [] }
                 return acc;
             }, {});
         setCompletedExercises(circleMap);
     };
-
-    useEffect(() => {
-        console.log('completed exercises: ', completedExercises);
-        console.log('review: ', reviewContent);
-    }, [completedExercises, reviewContent]);
 
     useEffect(() => {
         const initializeExercises = () => {
@@ -127,17 +122,11 @@ const Quiz = () => {
 
     // logic for clicking on a circle
     const handleCircleClick = (circle, isSectionStart = false) => {
-        if (completedCircles.includes(circle)) {
-            // search for exercise completed at this circle by using stored exercise id
-            const exercise = quizData.find(exercise => exercise.id === completedExercises[circle].id);
-            const answer = completedExercises[circle].answers;
-            console.log('exercise: ', exercise);
-            console.log('answers: ', answer);
-            setReviewContent({exercise: exercise, answer: answer});
-            setCurrentContent('review');
-            setShowPopup(true);
+        // when its not reenter state or sectionstart, clicking on completed circles opens review popup
+        if (completedCircles.includes(circle) && !isSectionStart && state !== 'REENTER') {
+            prepareReviewContent(circle);
             return;
-        }
+        };
 
         if (!isSectionStart) {
             // if it's not section-start, check if clicked circle is currently possible
@@ -191,6 +180,16 @@ const Quiz = () => {
         return circle === activeCircle || possibleCircles.includes(circle);
     };
 
+    // helper function: set review content
+    const prepareReviewContent = (circle) => {
+        // search for exercise completed at this circle by using stored exercise id
+        const exercise = quizData.find(exercise => exercise.id === completedExercises[circle].id);
+        const answer = completedExercises[circle].answers;
+        setReviewContent({ exercise: exercise, answer: answer, circle: circle });
+        setCurrentContent('review');
+        setShowPopup(true);
+    };
+
     // sets a new exercise from given topic
     const setNewExercise = (topic) => {
         // which topic pool to choose exercises from
@@ -200,6 +199,7 @@ const Quiz = () => {
             // if there are still exercises left, get a new exercise 
             getExercise(currentTopicExercises, topic);
         } else {
+            console.log('reshuffled exercise pool of topic: ', topic);
             // reshuffle exercise pool for exhausted topic
             const newExercisePool = quizData.filter((exercise) => exercise.topic === topic);
             shuffleArray(newExercisePool);
@@ -252,7 +252,7 @@ const Quiz = () => {
         }));
         setCompletedExercises(prevComplEx => ({
             ...prevComplEx,
-            [lastClicked]: {id: currentExercise.id, answers: usersAnswers} // save id of completed exercise
+            [lastClicked]: { id: currentExercise.id, answers: usersAnswers } // save id of completed exercise
         }));
         // make joker available again for new exercise
         setJokerUsed(null);
@@ -291,7 +291,9 @@ const Quiz = () => {
         // if update was called via szneario, new topic starts
         if (szenario !== null) {
             // reset status of started topic
-            handleTopicRepeat(szenarioTopic, true);
+            handleTopicRepeat(szenarioTopic);
+            // directly render 1st exercise if update was called via 'szenario'
+            handleCircleClick(pathGraph[szenario].next, true);
             return;
         };
 
@@ -321,7 +323,7 @@ const Quiz = () => {
     };
 
     // resets all relevant information for given topic
-    const handleTopicRepeat = (repeatTopic, isSzenario = false) => {
+    const handleTopicRepeat = (repeatTopic) => {
         // if repeat is clicked after quiz was completed at least once, reset possible circles to only szenarios
         if (completedAtLeastOnce) setPossibleCircles(possibleCircles.filter(circle => pathGraph[circle].topic.includes('szenario')));
 
@@ -341,6 +343,17 @@ const Quiz = () => {
         setCompletedCircles(completedCircles.filter(circle => pathGraph[circle].topic !== repeatTopic));
         setCorrectCircles(correctCircles.filter(circle => pathGraph[circle].topic !== repeatTopic));
 
+        // update completed exercises by removing entries of circles that belong to repeated topic
+        const updatedCompletedExercises = Object.fromEntries(Object.entries(completedExercises).map(([circle, value]) => {
+            // look at number of circle (subsstring that comes after 'e') to reset depending on topic
+            return (parseInt(circle.substring(circle.indexOf('e') + 1)) >= (getTopicNumber(repeatTopic) - 1) * 8 + 1 &&
+                parseInt(circle.substring(circle.indexOf('e') + 1)) <= getTopicNumber(repeatTopic) * 8)
+                ? [circle, { id: null, answers: [] }] // if number is between first and last circle of topic, reset value
+                : [circle, value]; // else, keep value from before (don't reset)
+        }));
+        setCompletedExercises(updatedCompletedExercises);
+        setReviewContent(null);
+
         // update joker map by removing jokers of repeated topic
         const updatedJokerMap = Object.fromEntries(Object.entries(jokerMap).map(([circle, value]) => {
             // look at number of circle (subsstring that comes after 'e') to reset joker depending on topic
@@ -350,9 +363,6 @@ const Quiz = () => {
                 : [circle, value]; // else, keep value from before (don't reset)
         }));
         setJokerMap(updatedJokerMap);
-
-        // directly render 1st exercise if update was called via 'szenario'
-        isSzenario && handleCircleClick(initialCircle, true);
 
         // close popup automatically if topic repeat was triggered by feedback popup
         if (pathGraph[lastClicked].topic === 'feedback') setShowPopup(false);
@@ -374,13 +384,29 @@ const Quiz = () => {
     };
 
     // switch sound on/off (globally) if sound button is clicked in Popup component
-    const handleSoundClick = () => { setSoundOn(prevSoundOn => !prevSoundOn); }
+    const handleSoundClick = () => { setSoundOn(prevSoundOn => !prevSoundOn); };
 
     // opening help popup when help button is clicked
     const handleHelpClick = () => {
         setCurrentContent('help');
         setShowPopup(true);
-    }
+    };
+
+    // enable clicking through already completed (review) content
+    const handleReviewClick = (direction) => {
+        const currCircle = reviewContent.circle;
+        // save circle before/after current circle by using number in circle name
+        const numberCircle = parseInt(currCircle.substring(currCircle.indexOf('e') + 1));
+        // can't go left if circle is first or right if circle is last circle
+        if (numberCircle === (direction === 'left' ? 1 : 24)) return;
+        // save new circle
+        const newNumber = (direction === 'left') ? numberCircle - 1 : numberCircle + 1;
+        const circleNext = `circle${newNumber}`;
+        // render new content if next circle was already completed as well
+        if (completedExercises[circleNext].id !== null) {
+            prepareReviewContent(circleNext);
+        };
+    };
 
     // resets everything back to start state
     const handleReset = () => {
@@ -392,10 +418,15 @@ const Quiz = () => {
         setCorrectCircles([]);
         setCorrectInTopic({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
         setJokerInTopic({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
+        setJokerUsed(null);
         setDoneInTopic({ [topic1]: 0, [topic2]: 0, [topic3]: 0 });
         Object.keys(jokerMap).forEach((circle) => {
             jokerMap[circle] = '';
         });
+        Object.keys(completedExercises).forEach((circle) => {
+            completedExercises[circle] = { id: null, answers: [] };
+        });
+        setReviewContent(null);
     };
 
     // renders board with all circles, icons and text elements
@@ -406,19 +437,15 @@ const Quiz = () => {
         };
         const circleTexts = { szenario1: [topic1], szenario2: [topic2], szenario3: [topic3] };
 
-        const handleCircleHover = (circle) => {
-            setHoveredCircle(circle);
-        };
-        const handleCircleLeave = () => {
-            setHoveredCircle("");
-        };
+        const handleCircleHover = (circle) => { setHoveredCircle(circle); };
+        const handleCircleLeave = () => { setHoveredCircle(""); };
 
         const circles = Object.keys(pathGraph);
 
         return circles.map((circle) => {
             const isReachable = isCircleReachable(circle);
             const isCompleted = completedCircles.includes(circle);
-            const isReachableHovered = isReachable && circle === hoveredCircle;
+            const isHovered = circle === hoveredCircle;
             const wasCorrect = correctCircles.includes(circle);
 
             const topic = pathGraph[circle].topic;
@@ -427,7 +454,6 @@ const Quiz = () => {
             const isExercise = isExerciseOrSzenario && !isSzenario;
             const isFeedback = topic === 'feedback';
 
-            const isSzenarioHovered = isSzenario && circle === hoveredCircle;
             const color = circleColors[topic];
             const text = circleTexts[topic];
 
@@ -452,7 +478,7 @@ const Quiz = () => {
                                 : color
                             : '#21202B'}
                         stroke={isReachable ? 'white' : color}
-                        className={`${isReachableHovered ? 'circle-active-hover' : ''} ${isSzenarioHovered ? 'opacity-80' : ''}`}
+                        className={`${(isReachable && isHovered) ? 'circle-active-hover' : ''} ${(isSzenario && isHovered) ? 'opacity-80' : ''}`}
                         strokeWidth='2px'
                         strokeDasharray={isSzenario
                             ? 'none'
@@ -462,12 +488,14 @@ const Quiz = () => {
                                     ? 'none'
                                     : '6'}
                         style={{
-                            ...({ cursor: isReachable ? 'pointer' : 'default' }),
+                            ...({ cursor: isExercise ? (isCompleted || isReachable) ? 'pointer' : 'default' : isReachable ? 'pointer' : 'default' }),
                             ...(isExercise
                                 ? isReachable
                                     ? { opacity: '100%' }
                                     : isCompleted
-                                        ? { opacity: wasCorrect ? '100%' : '30%' }
+                                        ? isHovered
+                                            ? { opacity: wasCorrect ? '75%' : '20%' }
+                                            : { opacity: wasCorrect ? '100%' : '30%' }
                                         : {}
                                 : {})
                         }}
@@ -511,6 +539,7 @@ const Quiz = () => {
                             y={pathGraph[circle].y - (joker === 'tip' ? 29 : 22)}
                             href={joker === 'tip' ? bulbIcon : swapIcon}
                             height={joker === 'tip' ? 60 : 45}
+                            className='cursor-pointer'
                         />
                     }
                 </g>
@@ -551,6 +580,7 @@ const Quiz = () => {
                     soundOn={soundOn}
                     onSoundClick={handleSoundClick}
                     reviewContent={reviewContent}
+                    onReviewClick={handleReviewClick}
                 />
             }
         </div>

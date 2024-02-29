@@ -69,6 +69,27 @@ const MatchingExercise = ({ exercise, onAnswer, answersUser = null }) => {
         setCorrectPairs(newCorrectPairs);
     }, [exercise]);
 
+    // for review, create containers with answers user has selected
+    useEffect(() => {
+        // make sure saved answers aren't null
+        if (answersUser !== null) {
+            const containerKeys = ['container1', 'container2', 'container3', 'container4',];
+            const reviewContainers = { containerDefault: { id: 'default', list: [] } };
+            // iterate through user answers and save terms (keys) as ids and definitions (values) in lists
+            Object.keys(answersUser).forEach((key, index) => {
+                const containerKey = containerKeys[index];
+                reviewContainers[containerKey] = {
+                    id: key,
+                    list: [answersUser[key]]
+                };
+            });
+            // set selected to saved users answers and update state
+            setSelected(answersUser);
+            setContainers(reviewContainers);
+            setCheckClicked(true);
+        };
+    }, [answersUser]);
+
     // functionality for dragging an item
     const handleOnDragEnd = (result) => {
         const source = result.source;
@@ -157,7 +178,7 @@ const MatchingExercise = ({ exercise, onAnswer, answersUser = null }) => {
         if (!allMatched) {
             setShowWarning(true);
             return;
-        }
+        };
 
         const selectedPairs = Object.entries(selected);
 

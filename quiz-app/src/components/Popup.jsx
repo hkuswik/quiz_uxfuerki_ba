@@ -13,16 +13,22 @@ const topic2 = 'UCD Prozess';
 const topic3 = 'Evaluation';
 
 // empty popup component that renders all popup types
-const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat, onJoker, jokerUsed,
-    correctAmount, jokerAmount, completedAtLeastOnce, onReset, soundOn, onSoundClick, reviewContent = null }) => {
+const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat, onJoker, jokerUsed, correctAmount,
+    jokerAmount, completedAtLeastOnce, onReset, soundOn, onSoundClick, reviewContent = null, onReviewClick }) => {
 
     const [bgColor, setBgColor] = useState('#F6F5FC');
     const isExercise = (content.type === 'question' || content.type === 'match' || content.type === 'sort');
 
     // set (lighter) background color depending on topic
     useEffect(() => {
-        // use topic of review exercise (if review popup) or topic of exercise (if exercise), else just stay default
-        const topic = reviewContent !== null ? reviewContent.exercise.topic : content.topic;
+        // use topic of review exercise (if review popup) or topic of exercise (if exercise), else just default color
+        let topic = content.topic;
+        if (!isExercise && (reviewContent !== null)) {
+            if ((content !== 'feedback') && (!content.includes('szenario')) && (content !== 'help')) {
+                topic = reviewContent.exercise.topic;
+            }
+        };
+
         switch (topic) {
             case topic1:
                 setBgColor('#E8BBD9');
@@ -36,7 +42,7 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
             default:
                 setBgColor('#F6F5FC');
         };
-    }, [content, reviewContent]);
+    }, [content, reviewContent, isExercise]);
 
     // renders popup content depending on popup type
     const renderPopupContent = (content) => {
@@ -63,10 +69,7 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                     />;
                 case 'start':
                 case 'help':
-                    return <Start
-                        popup_type={content}
-                        onUpdate={onUpdate}
-                    />
+                    return <Start popup_type={content} onUpdate={onUpdate} />
                 case 'szenario1':
                 case 'szenario2':
                 case 'szenario3':
@@ -79,7 +82,7 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
                 case 'reset':
                     return <Disclaimer content={content} onReset={onReset} />
                 case 'review':
-                    return <Review reviewContent={reviewContent}/>
+                    return <Review reviewContent={reviewContent} onReviewClick={onReviewClick} />
                 default:
                     return <div> error non-exercise type </div>;
             };
