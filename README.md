@@ -40,9 +40,5 @@
 * [x] mehr Rand (Popup)
 * [x] Sorting: Buttons weit weg vom Text
 * [x] Matching: Box unten sollte Größe behalten + Größe Begriffe auto (?)
-* [ ] Matching: DnD switchbar machen (wenn möglich?)
 * [x] Szenario wird dunkler am Anfang onHover
-  
 * [x] evtl.: "Überprüfen" statt Haken (Popup)
-* [ ] alle Fragen Button unnötig (?)
-* [ ] Safari macht Probleme (???)
