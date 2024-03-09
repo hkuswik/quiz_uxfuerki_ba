@@ -5,13 +5,13 @@ import weiter_topic2 from '../data/images/weiter_topic2.png';
 import weiter_topic3 from '../data/images/weiter_topic3.png';
 import new_topic from '../data/images/new_topic.png';
 import zurück_plattform from '../data/images/lernplattform_button.png';
-import { useState, useEffect } from 'react';
-
-const topic1 = 'UX Grundlagen';
-const topic2 = 'UCD Prozess';
+import { useContext, useState, useEffect } from 'react';
+import QuizContext from './QuizContext';
 
 // popup content for feedback circles; displays what topic was finished, how many exercises were correct and how many jokers were used
 const Feedback = ({ currentTopic, completedAtLeastOnce, onUpdate, correctAmount, jokerAmount, onRepeat }) => {
+    const { topics } = useContext(QuizContext); // get static topic variables
+
     const [button1, setButton1] = useState(null);
     const [button2, setButton2] = useState(null);
     const [topic, setTopic] = useState('Topic');
@@ -22,11 +22,11 @@ const Feedback = ({ currentTopic, completedAtLeastOnce, onUpdate, correctAmount,
     // display correct buttons depending on current topic
     const selectButtons = (currentTopic) => {
         setTopic(currentTopic); // set displayed topic
-        if (currentTopic === topic1) {
+        if (currentTopic === topics[0]) {
             setButton1(wdh_topic1);
             setButton2(weiter_topic2);
             setClassColor('pink');
-        } else if (currentTopic === topic2) {
+        } else if (currentTopic === topics[1]) {
             setButton1(wdh_topic2);
             setButton2(weiter_topic3);
             setClassColor('lila');

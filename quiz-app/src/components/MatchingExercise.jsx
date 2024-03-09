@@ -1,16 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import QuizContext from './QuizContext';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import check_btn from '../data/images/überprüfen_btn.png';
 
-const topic1 = 'UX Grundlagen';
-const topic2 = 'UCD Prozess';
-const topic3 = 'Evaluation';
-
-const correctColor = '#7AD177';
-const wrongColor = '#D24141';
-
 // popup content when exercise is of type 'match'
 const MatchingExercise = ({ exercise, onAnswer, answersUser = null }) => {
+    const { topics, colors } = useContext(QuizContext); // get static topic and color variables
+
     const [allMatched, setAllMatched] = useState(false);
     const [checkClicked, setCheckClicked] = useState(false);
     const [showWarning, setShowWarning] = useState(false);
@@ -27,20 +23,20 @@ const MatchingExercise = ({ exercise, onAnswer, answersUser = null }) => {
     useEffect(() => {
         // set design colors depending on topic
         switch (exercise.topic) {
-            case topic1:
-                setColor('#D177B3');
+            case topics[0]:
+                setColor(colors.pink);
                 setContainerColor('#EECCE3');
                 break;
-            case topic2:
-                setColor('#8377D1');
+            case topics[1]:
+                setColor(colors.purple);
                 setContainerColor('#D1CCEE');
                 break;
-            case topic3:
-                setColor('#77D1CB');
+            case topics[2]:
+                setColor(colors.turquoise);
                 setContainerColor('#CCEEEC');
                 break;
             default:
-                setColor('#817C9C');
+                setColor(colors.grey);
         };
 
         // split correct pairs and save them
@@ -67,7 +63,7 @@ const MatchingExercise = ({ exercise, onAnswer, answersUser = null }) => {
         setContainers(initialContainers);
         setTerms(newTerms);
         setCorrectPairs(newCorrectPairs);
-    }, [exercise]);
+    }, [exercise, topics, colors]);
 
     // for review, create containers with answers user has selected
     useEffect(() => {
@@ -232,7 +228,7 @@ const MatchingExercise = ({ exercise, onAnswer, answersUser = null }) => {
             <div className="flex row justify-between items-center">
                 <div className='w-28'></div>
                 {showWarning &&
-                    <div className="font-bold" style={{ color: wrongColor }}>Bitte ordne alle Antworten zu</div>
+                    <div className="font-bold" style={{ color: colors.wrong }}>Bitte ordne alle Antworten zu</div>
                 }
                 {!checkClicked &&
                     <div onClick={() => checkAnswers()}
@@ -248,6 +244,8 @@ const MatchingExercise = ({ exercise, onAnswer, answersUser = null }) => {
 
 // component for draggable definitions
 const Definition = ({ defText, index, color, selected, correctPairs, checkClicked }) => {
+    const { colors } = useContext(QuizContext); // get static color variables
+
     // check if match was correct (to have correctColor after clicking on check)
     const matchIsCorrect = () => {
         const matchedTerm = Object.keys(selected).find(term => selected[term] === defText);
@@ -264,8 +262,8 @@ const Definition = ({ defText, index, color, selected, correctPairs, checkClicke
                             ...draggable_style,
                             ...(checkClicked
                                 ? matchIsCorrect()
-                                    ? { background: correctColor }
-                                    : { background: wrongColor }
+                                    ? { background: colors.correct }
+                                    : { background: colors.wrong }
                                 : { outlineColor: color }
                             )
                         }}

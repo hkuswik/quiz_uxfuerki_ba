@@ -4,7 +4,7 @@
 
 #### Main component structure:
 
-* App.js -> *App.css*
+* App.jsx -> *App.css*
     * Quiz.jsx -> *Quiz.css*
         * Header.jsx
             * ProgressBar.jsx
@@ -42,3 +42,7 @@
 * [x] Matching: Box unten sollte Größe behalten + Größe Begriffe auto (?)
 * [x] Szenario wird dunkler am Anfang onHover
 * [x] evtl.: "Überprüfen" statt Haken (Popup)
+
+##### for better maintainability and reducing redundancy:
+
+* [x] add React Context (for static variables that are needed often)

@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useState, useEffect } from 'react';
+import QuizContext from './QuizContext';
 import check_btn from '../data/images/überprüfen_btn.png';
-
-const topic1 = 'UX Grundlagen';
-const topic2 = 'UCD Prozess';
-const topic3 = 'Evaluation';
-
-const correctColor = '#7AD177';
-const wrongColor = '#D24141';
 
 // popup content when exercise is of type 'sort'
 const SortingExercise = ({ exercise, onAnswer, answersUser = null }) => {
+    const { topics, colors } = useContext(QuizContext); // get static topic and color variables
+
     const [firstCategory, setFirstCategory] = useState('');
     const [secondCategory, setSecondCategory] = useState('');
     const [firstItems, setFirstItems] = useState([]);
@@ -25,7 +21,7 @@ const SortingExercise = ({ exercise, onAnswer, answersUser = null }) => {
     const [firstBtnHover, setFirstBtnHover] = useState("");
     const [secondBtnHover, setSecondBtnHover] = useState("");
 
-    const [color, setColor] = useState('#817C9C');
+    const [color, setColor] = useState(colors.grey);
 
     // save categories, call prepare function and set design color according to topic
     useEffect(() => {
@@ -34,19 +30,19 @@ const SortingExercise = ({ exercise, onAnswer, answersUser = null }) => {
         setSecondCategory(exercise.secondContainer);
 
         switch (exercise.topic) {
-            case topic1:
-                setColor('#D177B3');
+            case topics[0]:
+                setColor(colors.pink);
                 break;
-            case topic2:
-                setColor('#8377D1');
+            case topics[1]:
+                setColor(colors.purple);
                 break;
-            case topic3:
-                setColor('#77D1CB');
+            case topics[2]:
+                setColor(colors.turquoise);
                 break;
             default:
-                setColor('#817C9C');
+                setColor(colors.grey);
         };
-    }, [exercise]);
+    }, [exercise, topics, colors]);
 
     useEffect(() => {
         if (answersUser !== null) {
@@ -155,8 +151,8 @@ const SortingExercise = ({ exercise, onAnswer, answersUser = null }) => {
                                     ...(userSelections[item] === firstCategory ? {} : firstBtnHover === item ? { ...hover_style, outlineColor: color } : {}),
                                     ...(checkClicked
                                         ? answersUser !== null
-                                            ? { background: answersUser[item] === firstCategory ? firstItems.includes(item) ? correctColor : wrongColor : '#F6F5FC' }
-                                            : { background: userSelections[item] === firstCategory ? firstItems.includes(item) ? correctColor : wrongColor : '#F6F5FC' }
+                                            ? { background: answersUser[item] === firstCategory ? firstItems.includes(item) ? colors.correct : colors.wrong : '#F6F5FC' }
+                                            : { background: userSelections[item] === firstCategory ? firstItems.includes(item) ? colors.correct : colors.wrong : '#F6F5FC' }
                                         : { background: userSelections[item] === firstCategory ? color : '#F6F5FC' }
                                     ),
                                 }}
@@ -172,8 +168,8 @@ const SortingExercise = ({ exercise, onAnswer, answersUser = null }) => {
                                     ...(userSelections[item] === secondCategory ? {} : secondBtnHover === item ? { ...hover_style, outlineColor: color } : {}),
                                     ...(checkClicked
                                         ? answersUser !== null
-                                            ? { background: answersUser[item] === secondCategory ? secondItems.includes(item) ? correctColor : wrongColor : '#F6F5FC' }
-                                            : { background: userSelections[item] === secondCategory ? secondItems.includes(item) ? correctColor : wrongColor : '#F6F5FC' }
+                                            ? { background: answersUser[item] === secondCategory ? secondItems.includes(item) ? colors.correct : colors.wrong : '#F6F5FC' }
+                                            : { background: userSelections[item] === secondCategory ? secondItems.includes(item) ? colors.correct : colors.wrong : '#F6F5FC' }
                                         : { background: userSelections[item] === secondCategory ? color : '#F6F5FC' }
                                     ),
                                 }}
@@ -187,7 +183,7 @@ const SortingExercise = ({ exercise, onAnswer, answersUser = null }) => {
             <div className="flex row justify-between h-12 items-center">
                 <div className="w-28"></div>
                 {showWarning &&
-                    <div className="font-bold" style={{ color: wrongColor }}>Bitte wähle alle Antworten aus</div>
+                    <div className="font-bold" style={{ color: colors.wrong }}>Bitte wähle alle Antworten aus</div>
                 }
                 {!checkClicked &&
                     <div onClick={() => checkAnswer()}

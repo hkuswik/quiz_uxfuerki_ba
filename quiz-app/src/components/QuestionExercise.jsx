@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useState, useEffect } from 'react';
+import QuizContext from './QuizContext';
 import check_btn from '../data/images/überprüfen_btn.png';
-
-const topic1 = 'UX Grundlagen';
-const topic2 = 'UCD Prozess';
-const topic3 = 'Evaluation';
-
-const correctColor = '#7AD177';
-const wrongColor = '#D24141';
 
 // popup content when exercise is of type 'question'
 const QuestionExercise = ({ exercise, onAnswer, answerUser = null }) => {
+    const { topics, colors } = useContext(QuizContext); // get static topic and color variables
+
     const [answers, setAnswers] = useState([]);
     const [hovered, setHovered] = useState("");
     const [selected, setSelected] = useState("");
@@ -25,19 +21,19 @@ const QuestionExercise = ({ exercise, onAnswer, answerUser = null }) => {
         randomizeAnswers(exercise);
 
         switch (exercise.topic) {
-            case topic1:
-                setColor('#D177B3');
+            case topics[0]:
+                setColor(colors.pink);
                 break;
-            case topic2:
-                setColor('#8377D1');
+            case topics[1]:
+                setColor(colors.purple);
                 break;
-            case topic3:
-                setColor('#77D1CB');
+            case topics[2]:
+                setColor(colors.turquoise);
                 break;
             default:
-                setColor('#817C9C');
+                setColor(colors.grey);
         };
-    }, [exercise]);
+    }, [exercise, topics, colors]);
 
     useEffect(() => {
         if (answerUser !== null) {
@@ -95,13 +91,13 @@ const QuestionExercise = ({ exercise, onAnswer, answerUser = null }) => {
                             ? answerUser === null
                                 ? {
                                     background: selected === answer
-                                        ? answer === exercise.correctAnswer ? correctColor : wrongColor
-                                        : answer === exercise.correctAnswer ? correctColor : '#F6F5FC'
+                                        ? answer === exercise.correctAnswer ? colors.correct : colors.wrong
+                                        : answer === exercise.correctAnswer ? colors.correct : '#F6F5FC'
                                 }
                                 : {
                                     background: answerUser === answer
-                                        ? answer === exercise.correctAnswer ? correctColor : wrongColor
-                                        : answer === exercise.correctAnswer ? correctColor : '#F6F5FC'
+                                        ? answer === exercise.correctAnswer ? colors.correct : colors.wrong
+                                        : answer === exercise.correctAnswer ? colors.correct : '#F6F5FC'
                                 }
                             : {}),
                         ...(checkClicked
@@ -131,7 +127,7 @@ const QuestionExercise = ({ exercise, onAnswer, answerUser = null }) => {
             <div className="flex row justify-between h-12 items-center">
                 <div className="w-28"></div>
                 {showWarning &&
-                    <div className="font-bold" style={{ color: wrongColor }}>Bitte wähle eine Antwort aus</div>
+                    <div className="font-bold" style={{ color: colors.wrong }}>Bitte wähle eine Antwort aus</div>
                 }
                 {!checkClicked &&
                     <div onClick={() => checkAnswer(selected)}

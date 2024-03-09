@@ -1,20 +1,17 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import QuizContext from './QuizContext';
 import quizData from '../data/exercises_UX_byTopic.json';
 import arrow_left from '../data/images/arrow_left.png';
 import arrow_right from '../data/images/arrow_right.png';
 
-const topic1 = 'UX Grundlagen';
-const topic2 = 'UCD Prozess';
-const topic3 = 'Evaluation';
-
-const correctColor = '#7AD177';
-
 // popup content that displays all exercises with their correct solutions
 const AllQuestions = () => {
+    const { topics, colors } = useContext(QuizContext); // get static topic and color variables
+
     // save exercies according to topic
-    const firstTopic = quizData.filter((q) => q.topic === topic1);
-    const secondTopic = quizData.filter((q) => q.topic === topic2);
-    const thirdTopic = quizData.filter((q) => q.topic === topic3);
+    const firstTopic = quizData.filter((q) => q.topic === topics[0]);
+    const secondTopic = quizData.filter((q) => q.topic === topics[1]);
+    const thirdTopic = quizData.filter((q) => q.topic === topics[2]);
 
     // save all exercises in one array in topic order, start with first
     const allExercises = firstTopic.concat(secondTopic).concat(thirdTopic);
@@ -39,7 +36,7 @@ const AllQuestions = () => {
                                 return (
                                     <div key={index} style={{
                                         ...answer_style,
-                                        background: answer === exercise.correctAnswer ? correctColor : '#D4D2DD'
+                                        background: answer === exercise.correctAnswer ? colors.correct : colors.lightgrey
                                     }}>
                                         {answer}
                                     </div>
@@ -88,13 +85,13 @@ const AllQuestions = () => {
                                     <div className="flex row">
                                         <div style={{
                                             ...button_style,
-                                            background: exercise.belongsInFirst.includes(item) ? correctColor : '#D4D2DD'
+                                            background: exercise.belongsInFirst.includes(item) ? colors.correct : colors.lightgrey
                                         }}>
                                             {firstCategory}
                                         </div>
                                         <div style={{
                                             ...button_style,
-                                            background: exercise.belongsInSecond.includes(item) ? correctColor : '#D4D2DD'
+                                            background: exercise.belongsInSecond.includes(item) ? colors.correct : colors.lightgrey
                                         }}>
                                             {secondCategory}
                                         </div>
@@ -113,12 +110,12 @@ const AllQuestions = () => {
     // helper function: returns color depending on topic
     const getColor = (topic) => {
         switch (topic) {
-            case topic1:
-                return '#D177B3';
-            case topic2:
-                return '#8377D1';
+            case topics[0]:
+                return colors.pink;
+            case topics[1]:
+                return colors.purple;
             default:
-                return '#77D1CB';
+                return colors.turquoise;
         };
     };
 

@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useState, useEffect } from 'react';
+import QuizContext from './QuizContext';
 import start_topic1 from '../data/images/start_topic1.png';
 import start_topic2 from '../data/images/start_topic2.png';
 import start_topic3 from '../data/images/start_topic3.png';
 
-const topic1 = 'UX Grundlagen';
-const topic2 = 'UCD Prozess';
-const topic3 = 'Evaluation';
-
 // popup content when szenario circles are clicked; displays szenario text for current topic
 const Szenario = ({ whichSzenario, onUpdate }) => {
+    const { topics, colors } = useContext(QuizContext); // get static topic and color variables
     const [color, setColor] = useState('');
     const [topic, setTopic] = useState('');
     const [szenarioNr, setSzenarioNr] = useState(1);
@@ -18,9 +16,9 @@ const Szenario = ({ whichSzenario, onUpdate }) => {
     useEffect(() => {
         switch (whichSzenario) {
             case 'szenario1':
-                setTopic(topic1);
+                setTopic(topics[0]);
                 setSzenarioNr('1');
-                setColor('#D177B3');
+                setColor(colors.pink);
                 setButton(start_topic1);
                 setSzenarioText(
                     "Du möchtest eine App entwickeln, die deiner Zielgruppe gefällt.\n" +
@@ -28,9 +26,9 @@ const Szenario = ({ whichSzenario, onUpdate }) => {
                 );
                 break;
             case 'szenario2':
-                setTopic(topic2);
+                setTopic(topics[1]);
                 setSzenarioNr('2');
-                setColor('#8377D1');
+                setColor(colors.purple);
                 setButton(start_topic2);
                 setSzenarioText(
                     "Um eine möglichst gebrauchstaugliche App zu gewährleisten,\n" +
@@ -40,16 +38,16 @@ const Szenario = ({ whichSzenario, onUpdate }) => {
                 );
                 break;
             default:
-                setTopic(topic3);
+                setTopic(topics[2]);
                 setSzenarioNr('3');
-                setColor('#77D1CB');
+                setColor(colors.turquoise);
                 setButton(start_topic3);
                 setSzenarioText(
                     "Du möchtest noch etwas mehr zum Thema Evaluation lernen.\n" +
                     "Du bekommst nun einige Aufgaben zur letzten Phase des User-Centered Design Prozesses."
                 );
         };
-    }, [whichSzenario]);
+    }, [whichSzenario, topics, colors]);
 
     return (
         <div className="flex flex-col items-center justify-between" style={{ height: '80vh' }}>

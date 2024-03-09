@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import QuizContext from './QuizContext';
 import Exercise from './Exercise';
 import Feedback from './Feedback';
 import Start from './Start';
@@ -8,13 +9,10 @@ import soundOnIcon from '../data/images/soundOn.png';
 import soundOffIcon from '../data/images/soundOff.png';
 import Review from './Review';
 
-const topic1 = 'UX Grundlagen';
-const topic2 = 'UCD Prozess';
-const topic3 = 'Evaluation';
-
 // empty popup component that renders all popup types
 const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onRepeat, onJoker, jokerUsed, correctAmount,
     jokerAmount, completedAtLeastOnce, onReset, soundOn, onSoundClick, reviewContent = null, onReviewClick }) => {
+    const { topics } = useContext(QuizContext); // get static topic variables
 
     const [bgColor, setBgColor] = useState('#F6F5FC');
     const isExercise = (content.type === 'question' || content.type === 'match' || content.type === 'sort');
@@ -30,19 +28,19 @@ const Popup = ({ onClose, content, active, currentTopic, onAnswer, onUpdate, onR
         };
 
         switch (topic) {
-            case topic1:
+            case topics[0]:
                 setBgColor('#E8BBD9');
                 break;
-            case topic2:
+            case topics[1]:
                 setBgColor('#C1BBE8');
                 break;
-            case topic3:
+            case topics[2]:
                 setBgColor('#BBE8E5');
                 break;
             default:
                 setBgColor('#F6F5FC');
         };
-    }, [content, reviewContent, isExercise]);
+    }, [content, reviewContent, isExercise, topics]);
 
     // renders popup content depending on popup type
     const renderPopupContent = (content) => {
