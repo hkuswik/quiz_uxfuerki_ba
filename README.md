@@ -5,7 +5,7 @@
 #### Main component structure:
 
 * App.jsx -> *App.css*
-    * Quiz.jsx -> *Quiz.css*
+    * Quiz.jsx -> *Quiz.css* && *provides Context: QuizContext.jsx*
         * Header.jsx
             * ProgressBar.jsx
         * Popup.jsx
@@ -13,6 +13,12 @@
             * Feedback.jsx
             * Szenario.jsx
             * Exercise.jsx
+                * QuestionExercise.jsx
+                * SortingExercise.jsx
+                * MatchingExercise.jsx
+                    * DropContainer.jsx
+                    * Definition.jsx
+            * Review.jsx
                 * QuestionExercise.jsx
                 * SortingExercise.jsx
                 * MatchingExercise.jsx

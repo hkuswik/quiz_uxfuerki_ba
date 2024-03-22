@@ -242,40 +242,6 @@ const MatchingExercise = ({ exercise, onAnswer, answersUser = null }) => {
     );
 };
 
-// component for draggable definitions
-const Definition = ({ defText, index, color, selected, correctPairs, checkClicked }) => {
-    const { colors } = useContext(QuizContext); // get static color variables
-
-    // check if match was correct (to have correctColor after clicking on check)
-    const matchIsCorrect = () => {
-        const matchedTerm = Object.keys(selected).find(term => selected[term] === defText);
-        const correctDef = correctPairs.find(pair => pair[0] === matchedTerm)[1];
-        return correctDef === defText;
-    };
-
-    return (
-        <Draggable draggableId={defText} index={index} isDragDisabled={checkClicked}>
-            {provided => (
-                <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                    <div
-                        style={{
-                            ...draggable_style,
-                            ...(checkClicked
-                                ? matchIsCorrect()
-                                    ? { background: colors.correct }
-                                    : { background: colors.wrong }
-                                : { outlineColor: color }
-                            )
-                        }}
-                        className={checkClicked ? '' : 'hover:outline-dashed hover:outline-2'}>
-                        {defText}
-                    </div>
-                </div>
-            )}
-        </Draggable>
-    );
-};
-
 // component for droppable container
 const DropContainer = ({ container: { list, id }, color, containerColor, selected, correctPairs, checkClicked }) => {
     // check if container is defaultContainer (has different style)
@@ -317,6 +283,40 @@ const DropContainer = ({ container: { list, id }, color, containerColor, selecte
                 </div>
             )}
         </Droppable>
+    );
+};
+
+// component for draggable definitions
+const Definition = ({ defText, index, color, selected, correctPairs, checkClicked }) => {
+    const { colors } = useContext(QuizContext); // get static color variables
+
+    // check if match was correct (to have correctColor after clicking on check)
+    const matchIsCorrect = () => {
+        const matchedTerm = Object.keys(selected).find(term => selected[term] === defText);
+        const correctDef = correctPairs.find(pair => pair[0] === matchedTerm)[1];
+        return correctDef === defText;
+    };
+
+    return (
+        <Draggable draggableId={defText} index={index} isDragDisabled={checkClicked}>
+            {provided => (
+                <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                    <div
+                        style={{
+                            ...draggable_style,
+                            ...(checkClicked
+                                ? matchIsCorrect()
+                                    ? { background: colors.correct }
+                                    : { background: colors.wrong }
+                                : { outlineColor: color }
+                            )
+                        }}
+                        className={checkClicked ? '' : 'hover:outline-dashed hover:outline-2'}>
+                        {defText}
+                    </div>
+                </div>
+            )}
+        </Draggable>
     );
 };
 

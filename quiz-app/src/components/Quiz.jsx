@@ -75,7 +75,7 @@ const Quiz = () => {
     const [currentExercise, setCurrentExercise] = useState(null); // currently selected exercise
 
     const [jokerMap, setJokerMap] = useState({}); // which joker was used at which circle
-    const [jokerUsed, setJokerUsed] = useState(null); // which type of joker was just used
+    const [jokerUsed, setJokerUsed] = useState(""); // which type of joker was just used
 
     const [jokerInTopic, setJokerInTopic] = useState({ [topics[0]]: 0, [topics[1]]: 0, [topics[2]]: 0 });
     const [doneInTopic, setDoneInTopic] = useState({ [topics[0]]: 0, [topics[1]]: 0, [topics[2]]: 0 });
@@ -258,7 +258,7 @@ const Quiz = () => {
             [lastClicked]: { id: currentExercise.id, answers: usersAnswers } // save id of completed exercise
         }));
         // make joker available again for new exercise
-        setJokerUsed(null);
+        setJokerUsed("");
         // check if quiz has been completed at least once
         setCompletedAtLeastOnce(isQuizFinished());
     };
@@ -421,7 +421,7 @@ const Quiz = () => {
         setCorrectCircles([]);
         setCorrectInTopic({ [topics[0]]: 0, [topics[1]]: 0, [topics[2]]: 0 });
         setJokerInTopic({ [topics[0]]: 0, [topics[1]]: 0, [topics[2]]: 0 });
-        setJokerUsed(null);
+        setJokerUsed("");
         setDoneInTopic({ [topics[0]]: 0, [topics[1]]: 0, [topics[2]]: 0 });
         Object.keys(jokerMap).forEach((circle) => {
             jokerMap[circle] = '';

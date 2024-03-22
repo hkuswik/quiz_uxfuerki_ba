@@ -119,7 +119,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed, so
             backgroundColor:
                 checkClicked
                     ? '#D4D2DD'
-                    : jokerUsed !== null
+                    : jokerUsed !== ""
                         ? jokerUsed === 'swap'
                             ? '#D4D2DD'
                             : 'white'
@@ -128,7 +128,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed, so
     };
     const swap_joker = {
         ...joker,
-        ...({ backgroundColor: checkClicked || jokerUsed !== null ? '#D4D2DD' : 'white' })
+        ...({ backgroundColor: checkClicked || jokerUsed !== "" ? '#D4D2DD' : 'white' })
     };
 
     return (
@@ -146,7 +146,7 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed, so
                         </div>
                         <div data-tooltip-id="joker-tooltip" data-tooltip-content="Erhalte eine neue Frage"
                             onClick={() => handleJokerClick('swap')} style={swap_joker}
-                            className={((jokerUsed === null) && !checkClicked ? 'hover:opacity-85 cursor-pointer' : '')}>
+                            className={((jokerUsed === "") && !checkClicked ? 'hover:opacity-85 cursor-pointer' : '')}>
                             <img src={swapIcon} className="h-12" alt="Frage wechseln Icon" />
                         </div>
                         <Tooltip id="joker-tooltip" style={{ backgroundColor: '#21202B' }} />
