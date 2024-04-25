@@ -7,7 +7,6 @@
     height: 100%;
     width: 100%;
     max-width: 95%;
-    cursor: default;
 }
 
 .svg-container {
@@ -79,6 +78,7 @@ img {
     justify-self: center;
     padding: 10px;
     align-items: center;
+    cursor: default;
 }
 
 .header-bg {

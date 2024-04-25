@@ -4,7 +4,7 @@ import check_btn from '../data/images/überprüfen_btn.png';
 
 // popup content when exercise is of type 'question'
 const QuestionExercise = ({ exercise, onAnswer, answerUser = null }) => {
-    const { topics, colors } = useContext(QuizContext); // get static topic and color variables
+    const { topics, colors } = useContext(QuizContext); // get static topic and color variables from context
 
     const [answers, setAnswers] = useState([]);
     const [hovered, setHovered] = useState("");
@@ -35,6 +35,7 @@ const QuestionExercise = ({ exercise, onAnswer, answerUser = null }) => {
         };
     }, [exercise, topics, colors]);
 
+    // check if it's review content, if so mark exercise as completed
     useEffect(() => {
         if (answerUser !== null) {
             setCheckClicked(true);
@@ -161,7 +162,8 @@ const question_style = {
     alignItems: 'center',
     textAlign: 'center',
     justifyContent: 'center',
-    borderRadius: '8px'
+    borderRadius: '8px',
+    cursor: 'default'
 };
 
 const answer_style = {
@@ -175,7 +177,8 @@ const answer_style = {
     justifyContent: 'center',
     textAlign: 'center',
     borderRadius: '8px',
-    margin: '10px'
+    margin: '10px',
+    cursor: 'default'
 };
 
 const hover_style = {

@@ -77,6 +77,7 @@ const Quiz = () => {
     const [jokerMap, setJokerMap] = useState({}); // which joker was used at which circle
     const [jokerUsed, setJokerUsed] = useState(""); // which type of joker was just used
 
+    // save amount of used joker, completed exercises and correctly completed exercises per topic
     const [jokerInTopic, setJokerInTopic] = useState({ [topics[0]]: 0, [topics[1]]: 0, [topics[2]]: 0 });
     const [doneInTopic, setDoneInTopic] = useState({ [topics[0]]: 0, [topics[1]]: 0, [topics[2]]: 0 });
     const [correctInTopic, setCorrectInTopic] = useState({ [topics[0]]: 0, [topics[1]]: 0, [topics[2]]: 0 });
@@ -282,7 +283,7 @@ const Quiz = () => {
         return isFinished;
     };
 
-    // updating board when user closes popup
+    // updating board when user clicks update-button on popup
     const handleUpdate = (szenario = null, szenarioTopic) => {
         // start 1st szenario automatically after quiz start
         if (hasStarted === false) {
@@ -565,7 +566,7 @@ const Quiz = () => {
                     </svg>
                 </div>
                 <div onClick={() => handleHelpClick()} className='help-btn hover:opacity-80'>
-                    <h2>?</h2>
+                    <h2 className='cursor-pointer'>?</h2>
                 </div>
                 {showPopup &&
                     <Popup

@@ -12,6 +12,7 @@
   font-family: 'Montserrat';
   font-weight: 400;
   color: #21202b;
+  user-select: none;
 }
 
 h1 {
@@ -23,6 +24,7 @@ h1 {
 
 h2 {
   font-size: calc(35px + 1vmin);
+  cursor: default;
 }
 
 h2 b {
@@ -37,10 +39,12 @@ h3 {
 .h3 {
   font-size: calc(22px + 1vmin);
   font-weight: 500;
+  cursor: default;
 }
 
 h4 {
   font-size: calc(17px + 1vmin);
+  cursor: default;
 }
 
 h5 {
@@ -60,6 +64,7 @@ p b {
 
 p.sm {
   font-size: calc(6px + 1vmin);
+  cursor: default;
 }
 
 .sm {

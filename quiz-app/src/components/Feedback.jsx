@@ -10,10 +10,10 @@ import QuizContext from './QuizContext';
 
 // popup content for feedback circles; displays what topic was finished, how many exercises were correct and how many jokers were used
 const Feedback = ({ currentTopic, completedAtLeastOnce, onUpdate, correctAmount, jokerAmount, onRepeat }) => {
-    const { topics } = useContext(QuizContext); // get static topic variables
+    const { topics } = useContext(QuizContext); // get static topic variables from context
 
-    const [button1, setButton1] = useState(null);
-    const [button2, setButton2] = useState(null);
+    const [button1, setButton1] = useState(null); // button on the left
+    const [button2, setButton2] = useState(null); // button on the right
     const [topic, setTopic] = useState('Topic');
     const [classColor, setClassColor] = useState('');
 

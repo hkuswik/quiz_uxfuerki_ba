@@ -4,12 +4,12 @@ import check_btn from '../data/images/überprüfen_btn.png';
 
 // popup content when exercise is of type 'sort'
 const SortingExercise = ({ exercise, onAnswer, answersUser = null }) => {
-    const { topics, colors } = useContext(QuizContext); // get static topic and color variables
+    const { topics, colors } = useContext(QuizContext); // get static topic and color variables from context
 
     const [firstCategory, setFirstCategory] = useState('');
     const [secondCategory, setSecondCategory] = useState('');
-    const [firstItems, setFirstItems] = useState([]);
-    const [secondItems, setSecondItems] = useState([]);
+    const [firstItems, setFirstItems] = useState([]); // items that belong in 1st category
+    const [secondItems, setSecondItems] = useState([]); // items that belong in 2nd category
 
     const [userSelections, setUserSelections] = useState({});
     const [allSelected, setAllSelected] = useState(false);
@@ -44,6 +44,7 @@ const SortingExercise = ({ exercise, onAnswer, answersUser = null }) => {
         };
     }, [exercise, topics, colors]);
 
+    // check if it's review content, if so mark exercise as completed
     useEffect(() => {
         if (answersUser !== null) {
             setCheckClicked(true);
@@ -136,7 +137,7 @@ const SortingExercise = ({ exercise, onAnswer, answersUser = null }) => {
 
     return (
         <div className='flex flex-col h-full w-full justify-around'>
-            <div className="font-semibold">{exercise.question}</div>
+            <div className="font-semibold cursor-default">{exercise.question}</div>
             <div className="flex flex-col">
                 {Object.keys(userSelections).map((item) => (
                     <div key={item} className="flex row justify-between mb-2 items-center">
@@ -225,7 +226,8 @@ const button_style = {
     height: '30px',
     marginLeft: '10px',
     fontSize: 'calc(6px + 1vmin)',
-    fontWeight: '600'
+    fontWeight: '600',
+    cursor: 'default'
 };
 
 const hover_style = {

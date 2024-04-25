@@ -6,7 +6,7 @@ import start_topic3 from '../data/images/start_topic3.png';
 
 // popup content when szenario circles are clicked; displays szenario text for current topic
 const Szenario = ({ whichSzenario, onUpdate }) => {
-    const { topics, colors } = useContext(QuizContext); // get static topic and color variables
+    const { topics, colors } = useContext(QuizContext); // get static topic and color variables from context
     const [color, setColor] = useState('');
     const [topic, setTopic] = useState('');
     const [szenarioNr, setSzenarioNr] = useState(1);
@@ -50,7 +50,7 @@ const Szenario = ({ whichSzenario, onUpdate }) => {
     }, [whichSzenario, topics, colors]);
 
     return (
-        <div className="flex flex-col items-center justify-between" style={{ height: '80vh' }}>
+        <div className="flex flex-col items-center justify-between cursor-default" style={{ height: '80vh' }}>
             <div></div>
             <div className="flex flex-col items-center">
                 <h2>Szenario {szenarioNr}:</h2>

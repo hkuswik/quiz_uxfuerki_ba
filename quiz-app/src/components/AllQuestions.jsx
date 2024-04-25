@@ -4,11 +4,11 @@ import quizData from '../data/exercises_UX_byTopic.json';
 import arrow_left from '../data/images/arrow_left.png';
 import arrow_right from '../data/images/arrow_right.png';
 
-// popup content that displays all exercises with their correct solutions
+// popup content that displays all exercises with their solutions
 const AllQuestions = () => {
-    const { topics, colors } = useContext(QuizContext); // get static topic and color variables
+    const { topics, colors } = useContext(QuizContext); // get static topic and color variables from context
 
-    // save exercies according to topic
+    // save exercises according to topic
     const firstTopic = quizData.filter((q) => q.topic === topics[0]);
     const secondTopic = quizData.filter((q) => q.topic === topics[1]);
     const thirdTopic = quizData.filter((q) => q.topic === topics[2]);
@@ -140,7 +140,7 @@ const AllQuestions = () => {
     };
 
     return (
-        <div className='flex flex-col h-full w-full ml-4 mr-4 justify-between'>
+        <div className='flex flex-col cursor-default h-full w-full ml-4 mr-4 justify-between'>
             <div></div>
             {renderExercise(exercise)}
             <div className="flex row justify-between items-end justify-self-end">
@@ -187,8 +187,7 @@ const question_style = {
     textAlign: 'center',
     justifyContent: 'center',
     borderRadius: '8px',
-}
-
+};
 const answer_style = {
     height: 'auto',
     minHeight: '150px',
@@ -200,7 +199,7 @@ const answer_style = {
     textAlign: 'center',
     borderRadius: '8px',
     margin: '8px',
-}
+};
 
 // sorting exercise styles
 const item_style = {
@@ -210,8 +209,7 @@ const item_style = {
     alignItems: 'center',
     width: '65%',
     padding: '5px 10px 5px 10px',
-}
-
+};
 const button_style = {
     borderRadius: '10px',
     display: 'flex',
@@ -223,9 +221,9 @@ const button_style = {
     marginLeft: '10px',
     fontSize: 'calc(6px + 1vmin)',
     fontWeight: '600',
-}
+};
 
-// matching exercise style
+// matching exercise styles
 const term_style = {
     borderRadius: '10px',
     width: '24vw',
@@ -234,8 +232,7 @@ const term_style = {
     padding: '3px',
     background: '#D4D2DD',
     boxShadow: '2px 2px 7px #999',
-}
-
+};
 const definition_style = {
     background: 'white',
     width: '24vw',
@@ -249,6 +246,6 @@ const definition_style = {
     borderRadius: '10px',
     fontSize: '16px',
     boxShadow: '2px 2px 7px #999',
-}
+};
 
 export default AllQuestions;

@@ -5,7 +5,7 @@ import check_btn from '../data/images/überprüfen_btn.png';
 
 // popup content when exercise is of type 'match'
 const MatchingExercise = ({ exercise, onAnswer, answersUser = null }) => {
-    const { topics, colors } = useContext(QuizContext); // get static topic and color variables
+    const { topics, colors } = useContext(QuizContext); // get static topic and color variables from context
 
     const [allMatched, setAllMatched] = useState(false);
     const [checkClicked, setCheckClicked] = useState(false);
@@ -86,11 +86,12 @@ const MatchingExercise = ({ exercise, onAnswer, answersUser = null }) => {
         };
     }, [answersUser]);
 
-    // functionality for dragging an item
+    // functionality for dragging an item (is called when drag event ends)
+    // result parameter contains information regarding involved Draggables and Droppables
     const handleOnDragEnd = (result) => {
-        const source = result.source;
-        const destination = result.destination;
-        const draggedDefId = result.draggableId;
+        const source = result.source; // Droppable item was dragged from
+        const destination = result.destination; // Droppable item was dragged to
+        const draggedDefId = result.draggableId; // id of Draggable item
 
         // make sure destination is valid
         if (destination === undefined || destination === null) return;
@@ -107,7 +108,7 @@ const MatchingExercise = ({ exercise, onAnswer, answersUser = null }) => {
         const startContainer = containers[startName];
         const endContainer = containers[endName];
 
-        // if start and end ids are equal, container is the same
+        // if start and end IDs are equal, container is the same
         if (startName === endName) {
             // move item within list
             const itemsList = startContainer.list;
@@ -193,7 +194,7 @@ const MatchingExercise = ({ exercise, onAnswer, answersUser = null }) => {
 
     return (
         <div className='flex flex-col h-full w-full justify-around'>
-            <div className="font-semibold mb-4">{exercise.question}</div>
+            <div className="font-semibold mb-4 cursor-default">{exercise.question}</div>
             <DragDropContext onDragEnd={handleOnDragEnd}>
                 {Object.keys(containers).length > 0 &&
                     <div className='flex flex-col h-full w-full justify-around'>
@@ -270,7 +271,7 @@ const DropContainer = ({ container: { list, id }, color, containerColor, selecte
                         ))}
                         {isDefault && checkClicked &&
                             <div>
-                                <div className='text-center font-semibold text-sm'>Lösungen:</div>
+                                <div className='text-center font-semibold text-sm cursor-default'>Lösungen:</div>
                                 {correctPairs.map((pair, index) => (
                                     <div key={index}>
                                         <p className='sm p-1'><b>{pair[0]}:</b> {pair[1]}</p>
@@ -288,9 +289,9 @@ const DropContainer = ({ container: { list, id }, color, containerColor, selecte
 
 // component for draggable definitions
 const Definition = ({ defText, index, color, selected, correctPairs, checkClicked }) => {
-    const { colors } = useContext(QuizContext); // get static color variables
+    const { colors } = useContext(QuizContext); // get static color variables from context
 
-    // check if match was correct (to have correctColor after clicking on check)
+    // check if match was correct (to have "correct" color after clicking on check)
     const matchIsCorrect = () => {
         const matchedTerm = Object.keys(selected).find(term => selected[term] === defText);
         const correctDef = correctPairs.find(pair => pair[0] === matchedTerm)[1];
@@ -305,9 +306,12 @@ const Definition = ({ defText, index, color, selected, correctPairs, checkClicke
                         style={{
                             ...draggable_style,
                             ...(checkClicked
-                                ? matchIsCorrect()
-                                    ? { background: colors.correct }
-                                    : { background: colors.wrong }
+                                ? {
+                                    ...matchIsCorrect()
+                                        ? { background: colors.correct }
+                                        : { background: colors.wrong },
+                                    cursor: 'default'
+                                }
                                 : { outlineColor: color }
                             )
                         }}
@@ -336,6 +340,7 @@ const term_style = {
     borderRadius: '10px 10px 0 0',
     textAlign: 'center',
     padding: '3px 10px 3px 10px',
+    cursor: 'default'
 };
 
 const defaultContainer_style = {
@@ -361,7 +366,7 @@ const draggable_style = {
     display: 'flex',
     justifyContent: 'center',
     borderRadius: '10px',
-    fontSize: '12px',
+    fontSize: '12px'
 };
 
 export default MatchingExercise;

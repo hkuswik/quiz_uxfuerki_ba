@@ -5,7 +5,7 @@
 #### Main component structure:
 
 * App.jsx -> *App.css*
-    * Quiz.jsx -> *Quiz.css* && *provides Context: QuizContext.jsx*
+    * Quiz.jsx -> *Quiz.css* & *provides Context: QuizContext.jsx*
         * Header.jsx
             * ProgressBar.jsx
         * Popup.jsx

@@ -3,7 +3,7 @@ import fortfahrenBtn from '../data/images/fortfahren.png';
 import AllQuestions from './AllQuestions';
 import avatar from '../data/images/avatar_girl.png';
 
-// dislaimer content for popup; displays a warning before resetting or seeing all exercises with solutions
+// dislaimer content for popup; displays a warning before resetting or seeing AllQuestions
 const Disclaimer = ({ content, onReset }) => {
     const [renderAllQuest, setRenderAllQuest] = useState(false);
     const isAllQuest = content === 'alleFragen'; // else: disclaimer before resetting
@@ -30,7 +30,7 @@ const Disclaimer = ({ content, onReset }) => {
                             <div className='flex flex-col items-center'>
                                 <h4 className='w-3/4 mb-7 mt-3'>Wenn du fortfährst, wird dein gesamter Fortschritt zurückgesetzt - das Quiz beginnt von vorne.</h4>
                                 <div className='flex row items-center rounded-lg'>
-                                    <p className='mr-3'>Fortschritt:</p>
+                                    <p className='mr-3 cursor-default'>Fortschritt:</p>
                                     <div className='progress-bar'>
                                         <div className='progress-section'></div>
                                         <div className='progress-section'></div>

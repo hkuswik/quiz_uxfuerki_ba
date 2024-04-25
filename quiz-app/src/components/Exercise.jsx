@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import QuizContext from './QuizContext';
 import QuestionExercise from "./QuestionExercise";
 import MatchingExercise from "./MatchingExercise";
 import SortingExercise from "./SortingExercise";
@@ -12,12 +13,14 @@ import correctSound from '../data/sound/correct_answer.wav';
 import wrongSound from '../data/sound/wrong_answer.mp3';
 import { Tooltip } from 'react-tooltip';
 
-// popup content for exercises; displays joker row, exercise number and renders specific exercise type
+// popup content for exercises; displays joker column and exercise number and renders specific exercise type
 const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed, soundOn }) => {
+    const { topics } = useContext(QuizContext); // get static topic and color variables from context
+
     const [checkClicked, setCheckClicked] = useState(false);
     const [exerciseNr, setExerciseNr] = useState("");
 
-    const [tip, setTip] = useState("");
+    const [tip, setTip] = useState(""); // state variable for tip joker content
     const [tipAvatar, setTipAvatar] = useState(null);
     const [showTipPopup, setShowTipPopup] = useState(false);
 
@@ -34,19 +37,19 @@ const Exercise = ({ exercise, active, onAnswer, onUpdate, onJoker, jokerUsed, so
 
         // set correct avatar (with correct color elements) depending on exercise topic
         switch (exercise.topic) {
-            case 'UX Grundlagen':
+            case topics[0]:
                 setTipAvatar(avatarPink);
                 break;
-            case 'UCD Prozess':
+            case topics[1]:
                 setTipAvatar(avatarLila);
                 break;
-            case 'Evaluation':
+            case topics[2]:
                 setTipAvatar(avatarTürkis);
                 break;
             default:
                 console.log('error setting avatar');
         };
-    }, [exercise]);
+    }, [exercise, topics]);
 
     useEffect(() => {
         // exerciseNr only possible if active circle is an exercise
@@ -191,7 +194,7 @@ const exerciseContainer = {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
 };
 
 const joker_col = {

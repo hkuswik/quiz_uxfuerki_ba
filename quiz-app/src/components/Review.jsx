@@ -4,11 +4,13 @@ import SortingExercise from "./SortingExercise";
 import arrow_left from '../data/images/arrow_left.png';
 import arrow_right from '../data/images/arrow_right.png';
 
+// component that displays an already answered exercise and uses respective component of current exercise type
 const Review = ({ reviewContent, onReviewClick }) => {
     const exercise = reviewContent.exercise;
     const answersUser = reviewContent.answer;
-    const exerciseNr = reviewContent.circle.substring(reviewContent.circle.indexOf('e') + 1);
+    const exerciseNr = reviewContent.circle.substring(reviewContent.circle.indexOf('e') + 1); // to display current exercise's number
 
+    // render content depending on exercise type
     const renderContent = () => {
         switch (exercise.type) {
             case 'question':
@@ -51,7 +53,7 @@ const Review = ({ reviewContent, onReviewClick }) => {
                 <div className="w-20"></div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Review;

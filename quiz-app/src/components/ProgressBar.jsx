@@ -3,7 +3,7 @@ import QuizContext from './QuizContext';
 
 // displays how many exercises are done in each topic and how many of those were correct
 const ProgressBar = ({ doneInTopic, correctInTopic }) => {
-    const { topics, colors } = useContext(QuizContext); // get static topic and color variables
+    const { topics, colors } = useContext(QuizContext); // get static topic and color variables from context
     const exercisesPerTopic = 8;
 
     // calculate percentage of completion (for topic)
