@@ -52,7 +52,7 @@ const Feedback = ({ currentTopic, completedAtLeastOnce, onUpdate, correctAmount,
                 <div onClick={() => onRepeat(currentTopic)} className="img-container hover:opacity-85 cursor-pointer">
                     <img src={button1} className="h-16" alt="Abschnitt wiederholen Button" />
                 </div>
-                <div className="img-container hover:opacity-85 cursor-pointer">
+                <div className="img-container opacity-30">
                     <img src={zurück_plattform} className="h-44" alt="zurück zur Plattform Button" />
                 </div>
                 <div onClick={() => onUpdate()} className="img-container hover:opacity-85 cursor-pointer">

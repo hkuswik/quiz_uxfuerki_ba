@@ -1,0 +1,251 @@
+[
+ {
+  "id": 0,
+  "type": "match",
+  "topic": "Der EU AI Act",
+  "question": "Ordne folgende Risikokategorien des EU AI Acts korrekt zu.",
+  "correctPair1": "Hohes Risiko;KI-Anwendungen, die besonderen rechtlichen Anforderungen unterliegen, da sie ein Risiko für Gesundheit\/Sicherheit\/Grundrechte von Personen darstellen",
+  "correctPair2": "Unakzeptables Risiko;KI-Anwendungen, die verboten werden, da sie erhebliches Potential zur Verletzung von Menschen-\/Grundrechten bergen",
+  "correctPair4": "Begrenztes Risiko;KI-Anwendungen, die mit Menschen interagieren und über die Verwendung von KI informieren müssen",
+  "correctPair3": "Minimales Risiko;KI-Anwendungen ohne rechtliche Anforderungen",
+  "tip": "Die Kategorisierung von KI-Systemen laut dem EU AI Act folgt folgender Abstufung: Minimal < Begrenzt < Hoch < Unakzeptabel (hoch)"
+ },
+ {
+  "id": 8,
+  "type": "match",
+  "topic": "Der EU AI Act",
+  "question": "Ordne die Ereignisse den jeweiligen Daten zu.",
+  "correctPair1": "Erster Vorschlag zur Regulierung von KI;2021",
+  "correctPair2": "Einreichung von Änderungsanträgen;1. Juni 2022",
+  "correctPair4": "Große Abstimmung im EU-Parlament;14. Juni 2023",
+  "correctPair3": "Vorläufige Einigung zwischen Rat und Parlament;9. Dezember 2023",
+  "tip": "Überlege, welche Reihenfolge die Elemente im Prozess haben."
+ },
+ {
+  "id": 23,
+  "type": "match",
+  "topic": "In der Praxis",
+  "question": "Ordne die Begriffe den entsprechenden Verpflichtungen zu.",
+  "correctPair1": "Transparenzpflicht;Offenlegung von Informationen über die Funktionsweise von KI-Systemen",
+  "correctPair2": "Sicherheitsüberprüfung;Überprüfung der Konformität und Sicherheit eines KI-Systems vor Markteinführung",
+  "correctPair4": "Risikoabschätzung;Analyse und Bewertung der potenziellen Risiken eines KI-Systems",
+  "correctPair3": "Audit;Regelmäßige Kontrolle und Bewertung von Hochrisiko-KI-Systemen",
+  "tip": "Ein \"Audit\" ist eine systematische Überprüfung, ob bestimmte Standards eingehalten werden."
+ },
+ {
+  "id": 9,
+  "type": "match",
+  "topic": "International",
+  "question": "Ordne folgenden Begriffen ihre korrekten Definitionen zu.",
+  "correctPair1": "Bletchley Declaration;Vereinbarung zur internat. Zusammenarbeit bei Bewältigung von KI-Herausforderungen",
+  "correctPair2": "National AI Initiative Act;Fördert und koordiniert die Forschung und Entwicklung von KI",
+  "correctPair4": "Blueprint for an AI Bill of Rights;Schlägt Prinzipien zum Schutz von Bürgerrechten im Zusammenhang mit KI vor",
+  "correctPair3": "AI and Data Act;Soll KI-Systeme regulieren, die ein Risiko für die Sicherheit von Menschen oder ihrer Grundrechte darstellen",
+  "tip": "Die Bletchley Declaration wurde von 28 Ländern unterzeichnet."
+ },
+ {
+  "id": 10,
+  "type": "match",
+  "topic": "International",
+  "question": "In welchem Land wurden folgende Vereinbarungen unterzeichnet\/veröffentlicht?",
+  "correctPair1": "Bletchley Declaration;Vereinigtes Königreich",
+  "correctPair2": "National AI Initiative Act;Vereinigte Staaten",
+  "correctPair4": "EU AI Act;EU",
+  "correctPair3": "AI and Data Act;Kanada",
+  "tip": "Der National AI Initiative Act wurde in den USA unterzeichnet."
+ },
+ {
+  "id": 1,
+  "type": "question",
+  "topic": "Der EU AI Act",
+  "question": "Was ist das Hauptziel des EU AI Acts?",
+  "correctAnswer": "Schaffung eines umfassenden Regulariums für den Umgang mit KI-Systemen",
+  "wrongAnswers": "Förderung von KI-Innovationen ohne Einschränkungen;Verbot aller KI-Systeme in der EU;Reduzierung der Kosten für KI-Projekte",
+  "tip": "Bei dem EU AI Act steht die Regulation im Vordergrund."
+ },
+ {
+  "id": 2,
+  "type": "question",
+  "topic": "Der EU AI Act",
+  "question": "Wann wurde der erste Vorschlag zur KI-Regulierung durch die EU-Kommission gemacht?",
+  "correctAnswer": 2021,
+  "wrongAnswers": "2019;2020;2022",
+  "tip": "Es war nicht 2019."
+ },
+ {
+  "id": 3,
+  "type": "question",
+  "topic": "Der EU AI Act",
+  "question": "Welche Art von KI-Systemen unterliegt den strengsten Regelungen gemäß dem EU AI Act?",
+  "correctAnswer": "Hochrisiko-Systeme",
+  "wrongAnswers": "Niedrigrisiko-Systeme;Systeme ohne Risiko;Systeme mit unakzeptablem Risiko",
+  "tip": "Denk an die Kategorien für KI-Systeme und deren mögliche Auswirkungen."
+ },
+ {
+  "id": 4,
+  "type": "question",
+  "topic": "Der EU AI Act",
+  "question": "Was beinhaltet der EU AI Act in Bezug auf Transparenz?",
+  "correctAnswer": "Transparenzpflicht für alle KI-Systeme",
+  "wrongAnswers": "Keine spezifischen Anforderungen;Transparenzpflicht für Niedrigrisiko-Systeme;Transparenzpflicht für Systeme mit minimalem Risiko",
+  "tip": "Denk daran, für welche Systeme Transparenz besonders wichtig ist."
+ },
+ {
+  "id": 18,
+  "type": "question",
+  "topic": "In der Praxis",
+  "question": "Welche Strafe droht bei Verstößen gegen den EU AI Act?",
+  "correctAnswer": "Bis zu 35 Mio. Euro oder 7% des Jahresumsatzes",
+  "wrongAnswers": "Bis zu 10 Mio. Euro oder 5% des Jahresumsatzes;Bis zu 25 Mio. Euro;Keine Strafen, nur Verwarnungen",
+  "tip": "10 Mio. Euro ist auf jeden Fall nicht die Grenze."
+ },
+ {
+  "id": 19,
+  "type": "question",
+  "topic": "In der Praxis",
+  "question": "Welche Art von KI-Systemen umfasst der EU AI Act?",
+  "correctAnswer": "Alle KI-Systeme, abhängig von ihrem Risiko",
+  "wrongAnswers": "Nur Hochrisiko-Systeme;Nur Niedrigrisiko-Systeme;Nur Systeme im Gesundheitswesen",
+  "tip": "Überlege, ob der EU AI Act eher spezifisch oder umfassend ist."
+ },
+ {
+  "id": 20,
+  "type": "question",
+  "topic": "In der Praxis",
+  "question": "Welche der folgenden Anwendungen ist gemäß dem EU AI Act verboten?",
+  "correctAnswer": "Ein staatlich betriebenes Social Scoring",
+  "wrongAnswers": "Ein Tool zum Scannen von Lebensläufen;Ein Chatbot für Kundenservice;Ein KI-basiertes Spiel",
+  "tip": "Welche Anwendung stellt ein erhebliches Risiko für die Rechte\/Freiheiten der Bürger dar?"
+ },
+ {
+  "id": 24,
+  "type": "question",
+  "topic": "In der Praxis",
+  "question": "Welches Beispiel gilt unter dem EU AI Act als Hochrisiko-System?",
+  "correctAnswer": "Ein KI-System zur medizinischen Diagnostik",
+  "wrongAnswers": "Ein KI-gestütztes Spielzeug;Eine einfache Textverarbeitungssoftware;Ein Musikempfehlungssystem",
+  "tip": "Überlege, welche Anwendung direkten Einfluss auf das Leben\/die Sicherheit von Menschen hat."
+ },
+ {
+  "id": 11,
+  "type": "question",
+  "topic": "International",
+  "question": "Welches Land/welcher Verbund hat ein umfassendes Regelwerk zur Regulierung von KI entwickelt?",
+  "correctAnswer": "EU",
+  "wrongAnswers": "Vereinigte Staaten;Kanada;Japan",
+  "tip": "Auf jeden Fall nicht die USA."
+ },
+ {
+  "id": 12,
+  "type": "question",
+  "topic": "International",
+  "question": "Was war ein Zentraler Begriff in der Bletchley Declaration?",
+  "correctAnswer": "\"Frontier\"-Systeme",
+  "wrongAnswers": "KI-basierte Spiele;Ethischer Umgang mit KI;KI-Prinzipien der OECD",
+  "tip": "Überlege, welche Themen für internationale Vereinbarungen besonders relevant sind."
+ },
+ {
+  "id": 15,
+  "type": "question",
+  "topic": "International",
+  "question": "Welches Land\/welcher Verbund verfolgt einen kooperativen und flexiblen Ansatz zur Regulierung von KI?",
+  "correctAnswer": "Kanada",
+  "wrongAnswers": "EU;Vereinigte Staaten;Vereinigtes Königreich",
+  "tip": "Auf jeden Fall nicht die EU."
+ },
+ {
+  "id": 16,
+  "type": "question",
+  "topic": "International",
+  "question": "Welches Land setzt auf sektorale Vorgaben wie die KI-Prinzipien der OECD zur Regulierung von KI?",
+  "correctAnswer": "Vereinigtes Königreich",
+  "wrongAnswers": "Vereinigte Staaten;Kanada;China",
+  "tip": "Auf jeden Fall nicht die USA."
+ },
+ {
+  "id": 17,
+  "type": "question",
+  "topic": "International",
+  "question": "Welches Land\/welcher Verbund hat noch kein umfassendes nationales Regelwerk für KI, sondern fragmentierte Richtlinien?",
+  "correctAnswer": "Vereinigte Staaten",
+  "wrongAnswers": "Kanada;EU;Vereinigtes Königreich",
+  "tip": "Auf jeden Fall nicht Kanada."
+ },
+ {
+  "id": 5,
+  "type": "sort",
+  "topic": "Der EU AI Act",
+  "question": "Ordne folgende Aussagen in \"Richtig\" oder \"Falsch\" ein.",
+  "firstContainer": "Richtig",
+  "secondContainer": "Falsch",
+  "belongsInFirst": "Der EU AI Act hat das Ziel, weltweit als Standard zu gelten;Hochrisiko-KI-Systeme müssen strenge Transparenzanforderungen erfüllen",
+  "belongsInSecond": "Der EU AI Act soll ausschließlich in der EU geltende Regeln schaffen;KI-Systeme mit minimalem Risiko unterliegen den strengsten Regelungen",
+  "tip": "Der EU AI Act verfolgt das Ziel, auch außerhalb der EU Auswirkungen zu haben."
+ },
+ {
+  "id": 6,
+  "type": "sort",
+  "topic": "Der EU AI Act",
+  "question": "Werden folgende Aspekte durch den EU AI Act mit einbezogen?",
+  "firstContainer": "Ja",
+  "secondContainer": "Nein",
+  "belongsInFirst": "Sicherheit;Ethik;Datenschutz",
+  "belongsInSecond": "Handel",
+  "tip": "Überlege, welche Themen besonders relevant für die Regulierung von KI sind."
+ },
+ {
+  "id": 7,
+  "type": "sort",
+  "topic": "Der EU AI Act",
+  "question": "Gehören folgende Elemente zu den primären Inhalten des EU AI Acts?",
+  "firstContainer": "Ja",
+  "secondContainer": "Nein",
+  "belongsInFirst": "Transparenzanforderungen;Einrichtung eines Überwachungssystems;Sicherheitsanforderungen",
+  "belongsInSecond": "Verbot aller KI-Anwendungen in der EU;Qualität von KI-Anwendungen",
+  "tip": "Welche Elemente sind für ein Regelwerk für KI notwendig?"
+ },
+ {
+  "id": 21,
+  "type": "sort",
+  "topic": "In der Praxis",
+  "question": "Welche Aussagen zum EU AI Act sind richtig?",
+  "firstContainer": "Richtig",
+  "secondContainer": "Falsch",
+  "belongsInFirst": "Das Gesetz ordnet KI-Anwendungen in vier Risikokategorien;Anwendungen mit \"unakzeptablem\" Risiko werden verboten",
+  "belongsInSecond": "Anwendungen mit \"hohem\" Risiko unterliegen keinen rechtlichen Anforderungen;Alle KI-Anwendungen bleiben weitegehend unreguliert;Das Gesetz ordnet KI-Anwendung in fünf Risikokategorien",
+  "tip": "Der EU AI Act teilt Systeme in vier Kategorien ein."
+ },
+ {
+  "id": 22,
+  "type": "sort",
+  "topic": "In der Praxis",
+  "question": "Sind diese Maßnahmen zur Sicherstellung der Einhaltung des EU AI Acts vorgesehen?",
+  "firstContainer": "Ja",
+  "secondContainer": "Nein",
+  "belongsInFirst": "Einrichtung nationaler Überwachungsbehörden;Regelmäßige unabhängige Audits;Meldepflichten für kritische Vorfälle",
+  "belongsInSecond": "Selbstzertifizierung ohne Kontrolle",
+  "tip": "Überlege, welche Maßnahmen typisch bei strengen Regulierungen sind."
+ },
+ {
+  "id": 25,
+  "type": "sort",
+  "topic": "In der Praxis",
+  "question": "Ordne die folgenden KI-Systeme den entsprechenden Kategorien gemäß des EU AI Acts zu.",
+  "firstContainer": "Hochrisiko",
+  "secondContainer": "Niedrigrisiko",
+  "belongsInFirst": "Ein KI-gestütztes Bewerbungsauswahlverfahren;Ein selbstfahrendes Auto;Ein KI-gestütztes Überwachungssystem zur biometrischen Gesichtserkennung",
+  "belongsInSecond": "Ein KI-Tool zur Textübersetzung;Eine KI-gestützte Chatbot-Anwendung für Kundensupport",
+  "tip": "Überlege, welche KI-Systeme potenziell hohe Risiken für die Gesellschaft haben."
+ },
+ {
+  "id": 14,
+  "type": "sort",
+  "topic": "International",
+  "question": "Haben folgende Organisationen Richtlinien zur Regulierung von KI in den USA veröffentlicht?",
+  "firstContainer": "Ja",
+  "secondContainer": "Nein",
+  "belongsInFirst": "Federal Trade Commission (FTC);Weißes Haus",
+  "belongsInSecond": "NASA;Deparetment of Defence",
+  "tip": "Überlege, welche Organisationen mit Verbraucher- und Technologieregulierung zutun haben."
+ }
+]

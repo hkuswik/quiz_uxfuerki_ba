@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import QuizContext from './QuizContext';
-import quizData from '../data/exercises_UX_byTopic.json';
+import quizData from '../data/Quizinhalte_Testseminar.json';
 import arrow_left from '../data/images/arrow_left.png';
 import arrow_right from '../data/images/arrow_right.png';
 
@@ -226,7 +226,7 @@ const button_style = {
 // matching exercise styles
 const term_style = {
     borderRadius: '10px',
-    width: '24vw',
+    width: '23vw',
     maxWidth: '370px',
     textAlign: 'center',
     padding: '3px',
@@ -235,7 +235,7 @@ const term_style = {
 };
 const definition_style = {
     background: 'white',
-    width: '24vw',
+    width: '23vw',
     maxWidth: '370px',
     height: '150px',
     padding: '7px',

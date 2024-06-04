@@ -1,14 +1,14 @@
 import '../css/Quiz.css';
 import { useState, useEffect } from 'react';
 import QuizContext from './QuizContext';
-import quizData from '../data/exercises_UX_byTopic.json';
+import quizData from '../data/Quizinhalte_Testseminar.json';
 import feedbackImg from '../data/images/feedback.png';
 import Header from './Header';
 import Popup from './Popup';
 import swapIcon from '../data/images/swap.png';
 import bulbIcon from '../data/images/bulb.png';
 
-const topics = ['UX Grundlagen', 'UCD Prozess', 'Evaluation'];
+const topics = ['Der EU AI Act', 'International', 'In der Praxis'];
 const colors = {
     pink: '#D177B3', purple: '#8377D1', turquoise: '#77D1CB',
     correct: '#7AD177', wrong: '#D24141', lightgrey: '#D4D2DD', grey: '#817C9C'
