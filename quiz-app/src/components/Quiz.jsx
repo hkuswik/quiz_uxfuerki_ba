@@ -1,14 +1,14 @@
 import '../css/Quiz.css';
 import { useState, useEffect } from 'react';
 import QuizContext from './QuizContext';
-import quizData from '../data/Quizinhalte_Testseminar.json';
+import quizData from '../data/exercises_UX_byTopic.json';
 import feedbackImg from '../data/images/feedback.png';
 import Header from './Header';
 import Popup from './Popup';
 import swapIcon from '../data/images/swap.png';
 import bulbIcon from '../data/images/bulb.png';
 
-const topics = ['Der EU AI Act', 'International', 'In der Praxis'];
+const topics = ['UX Grundlagen', 'UCD Prozess', 'Evaluation'];
 const colors = {
     pink: '#D177B3', purple: '#8377D1', turquoise: '#77D1CB',
     correct: '#7AD177', wrong: '#D24141', lightgrey: '#D4D2DD', grey: '#817C9C'
@@ -123,6 +123,10 @@ const Quiz = () => {
         initializeJokerMap();
         initializeCompletedExercises();
     }, []);
+
+    useEffect(() => {
+        console.log("joker: ", jokerUsed);
+    }, [jokerUsed]);
 
     // logic for clicking on a circle
     const handleCircleClick = (circle, isSectionStart = false) => {
@@ -367,6 +371,7 @@ const Quiz = () => {
                 : [circle, value]; // else, keep value from before (don't reset)
         }));
         setJokerMap(updatedJokerMap);
+        setJokerUsed("");
 
         // close popup automatically if topic repeat was triggered by feedback popup
         if (pathGraph[lastClicked].topic === 'feedback') setShowPopup(false);

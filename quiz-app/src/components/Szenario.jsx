@@ -21,10 +21,8 @@ const Szenario = ({ whichSzenario, onUpdate }) => {
                 setColor(colors.pink);
                 setButton(start_topic1);
                 setSzenarioText(
-                    "Der EU AI Act ist ein umfassendes Regelwerk der Europäischen Union, das den Umgang mit Künstlicher Intelligenz (KI) regelt.\n" +
-                    "Ziel ist es, die Sicherheit, Transparenz und Verantwortlichkeit von KI-Systemen zu gewährleisten und gleichzeitig Innovationen zu fördern.\n" +
-                    "Der EU AI Act kategorisiert KI-Systeme nach ihrem Risikopotential und legt spezifische Anforderungen und Pflichten für die verschiedenen Kategorien fest.\n" +
-                    "Du erhältst nun einige Aufgaben dazu, um dein Wissen über die Grundlagen des EU AI Acts zu testen."
+                    "Du möchtest eine App entwickeln, die deiner Zielgruppe gefällt.\n" +
+                    "In diesem Abschnitt übst du einige Grundlagen des User Experience Designs."
                 );
                 break;
             case 'szenario2':
@@ -33,9 +31,10 @@ const Szenario = ({ whichSzenario, onUpdate }) => {
                 setColor(colors.purple);
                 setButton(start_topic2);
                 setSzenarioText(
-                    "In diesem Bereich betrachten wir, wie verschiedene Länder und Regionen die Regulierung von Künstlicher Intelligenz angehen.\n" +
-                    "Jedes Land hat unterschiedliche Ansätze und Prioritäten, um die Chancen und Risiken von KI zu managen. Der Vergleich hilft, die Stärken und Schwächen der verschiedenen Regulierungsansätze zu verstehen.\n" +
-                    "Du erhältst nun einige Aufgaben dazu, um dein Wissen über die internationalen Unterschiede in der KI-Regulierung zu testen."
+                    "Um eine möglichst gebrauchstaugliche App zu gewährleisten,\n" +
+                    "möchtest du den User-Centered Design (UCD) Prozess anwenden,\n" +
+                    "der sich aus Analyse, Konzeption, Entwicklung und Evaluation zusammensetzt.\n" +
+                    "Im Folgenden übst du, was es in den einzelnen Phasen zu beachten gilt."
                 );
                 break;
             default:
@@ -44,8 +43,8 @@ const Szenario = ({ whichSzenario, onUpdate }) => {
                 setColor(colors.turquoise);
                 setButton(start_topic3);
                 setSzenarioText(
-                    "Dieser Bereich bezieht sich auf die konkreten Maßnahmen und Verfahren, die zur Einhaltung des Gesetzes erforderlich sind.\n" +
-                    "Du erhältst nun einige Aufgaben dazu, um dein Wissen über die praktischen Aspekte der Implementierung und Überwachung des EU AI Acts zu testen."
+                    "Du möchtest noch etwas mehr zum Thema Evaluation lernen.\n" +
+                    "Du bekommst nun einige Aufgaben zur letzten Phase des User-Centered Design Prozesses."
                 );
         };
     }, [whichSzenario, topics, colors]);
@@ -56,7 +55,7 @@ const Szenario = ({ whichSzenario, onUpdate }) => {
             <div className="flex flex-col items-center">
                 <h2>Szenario {szenarioNr}:</h2>
                 <h2 style={{ color: color }} className="font-bold">{topic}</h2>
-                {/* <p className="font-medium w-11/12 text-lg mt-16">Versetze dich in folgendes Szenario:</p> */}
+                <p className="font-medium w-11/12 text-lg mt-16">Versetze dich in folgendes Szenario:</p>
                 <p className="w-11/12 mt-3">
                     {szenarioText}
                 </p>
